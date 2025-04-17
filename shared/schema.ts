@@ -16,6 +16,7 @@ export const spots = pgTable("spots", {
   localAttractions: text("local_attractions").notNull(),
   tags: text("tags").array().notNull(), // Array of tags
   windguruCode: text("windguru_code"), // Windguru spot code for direct linking
+  kiteSchools: text("kite_schools").array(), // Array of kite school names and their Google Maps links
 });
 
 // Monthly wind conditions for each spot
@@ -40,6 +41,7 @@ export const insertSpotSchema = createInsertSchema(spots).pick({
   localAttractions: true,
   tags: true,
   windguruCode: true,
+  kiteSchools: true,
 });
 
 export const insertWindConditionSchema = createInsertSchema(windConditions).pick({
