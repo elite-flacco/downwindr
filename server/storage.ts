@@ -192,7 +192,12 @@ export class MemStorage implements IStorage {
       bestMonths: "Apr-Oct",
       localAttractions: "Maui offers incredible natural beauty with the Road to Hana, Haleakala National Park for sunrise views, and the famous Seven Sacred Pools. Experience authentic Hawaiian culture through luaus, visit the historic whaling town of Lahaina, or go snorkeling in Molokini Crater, a partially submerged volcanic crater home to vibrant marine life.",
       tags: ["Advanced", "Waves", "Scenic Views"],
-      windguruCode: "226"
+      windguruCode: "226",
+      kiteSchools: [
+        "HST Windsurfing & Kitesurfing School|https://maps.google.com/maps?cid=7018811138901521443",
+        "Action Sports Maui|https://maps.google.com/maps?cid=14999410322423969558",
+        "Kiteboarding School of Maui|https://maps.google.com/maps?cid=4390272951247276118"
+      ]
     });
 
     // 5. Zanzibar, Tanzania
@@ -207,7 +212,12 @@ export class MemStorage implements IStorage {
       bestMonths: "Dec-Mar, Jun-Sep",
       localAttractions: "Zanzibar's Stone Town is a UNESCO World Heritage site with a rich history of Swahili, Arab, Persian, and European influences. Explore spice plantations, visit the former slave market, or take a boat trip to see dolphins. The island also offers pristine beaches, excellent snorkeling in coral reefs, and a chance to visit Jozani Forest to see the rare Red Colobus monkeys.",
       tags: ["Warm Water", "Cultural Experience", "Beginner Friendly"],
-      windguruCode: "1133"
+      windguruCode: "1133",
+      kiteSchools: [
+        "Zanzibar Kite Paradise|https://maps.google.com/maps?cid=10046944852400555969",
+        "Kite Centre Paje|https://maps.google.com/maps?cid=14557586088856125633",
+        "Aquaholics Zanzibar|https://maps.google.com/maps?cid=9450883969741128811"
+      ]
     });
 
     // 6. Essaouira, Morocco
@@ -222,7 +232,12 @@ export class MemStorage implements IStorage {
       bestMonths: "Apr-Sep",
       localAttractions: "Essaouira's medina (old town) is a UNESCO World Heritage site with blue and white buildings, narrow streets, and vibrant markets. The city has a laid-back artistic vibe with many galleries and workshops. Visit the ramparts for ocean views, explore the busy fishing port, or experience traditional Gnawa music. Day trips to nearby argan oil cooperatives or the Atlas Mountains are also popular.",
       tags: ["Cultural Experience", "Historic City", "Consistent Winds"],
-      windguruCode: "269"
+      windguruCode: "269",
+      kiteSchools: [
+        "Essaouira Kitesurfing|https://maps.google.com/maps?cid=3583446324805989002",
+        "Explora Morocco|https://maps.google.com/maps?cid=16231288534362533599",
+        "Kite Paradise Morocco|https://maps.google.com/maps?cid=6624767784441822246"
+      ]
     });
 
     // Add wind conditions for all spots
