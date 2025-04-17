@@ -156,9 +156,12 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
             ref={mapRef as any}
           >
             <TileLayer
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>'
-              url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            
+            {/* Add a styled background for the map */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-cyan-50 -z-10" />
             
             {spots.map(spot => {
               // Get wind quality using our helper function
