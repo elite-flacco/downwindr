@@ -95,15 +95,38 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
   // Generate a "month quality" for each spot based on current month
   const getSpotQuality = (spot: Spot): WindQuality => {
     const currentMonth = new Date().getMonth() + 1; // 1-12
-    if (spot.bestMonths?.includes(currentMonth)) {
-      return "Excellent";
-    } else if (spot.bestMonths?.some(m => Math.abs(m - currentMonth) <= 1)) {
-      return "Good";
-    } else if (spot.bestMonths?.some(m => Math.abs(m - currentMonth) <= 3)) {
-      return "Moderate";
-    } else {
-      return "Poor";
+    const currentMonthName = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date());
+    
+    // Check if best months text includes the current month name
+    if (spot.bestMonths && spot.bestMonths.includes(currentMonthName)) {
+      return WindQuality.Excellent;
     }
+    
+    // For simplicity in this demo, determine quality based on current selection
+    // In a real app, you'd parse the month range properly
+    const monthRange = spot.bestMonths?.split('-') || [];
+    if (monthRange.length >= 2) {
+      // If we're within 1 month of the range
+      if (spot.bestMonths && (
+          spot.bestMonths.includes(currentMonthName) || 
+          spot.bestMonths.includes(new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(new Date().setMonth(new Date().getMonth() - 1))))
+      )) {
+        return WindQuality.Good;
+      }
+    }
+    
+    // For demo purposes, give coastal spots better quality
+    if (spot.tags && (
+        spot.tags.includes('beach') || 
+        spot.tags.includes('coastal') ||
+        spot.name.includes('Beach') || 
+        spot.name.includes('Coast')
+    )) {
+      return WindQuality.Moderate;
+    }
+    
+    // Otherwise it's poor for this demo
+    return WindQuality.Poor;
   };
 
   return (
@@ -138,29 +161,52 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
             />
             
             {spots.map(spot => {
-              // Determine wind quality for the current month
-              // Using a default if specific quality not available
-              const quality = spot.bestMonths?.includes(new Date().getMonth() + 1) 
-                ? "Excellent" 
-                : "Moderate";
+              // Get wind quality using our helper function
+              const quality = getSpotQuality(spot);
               
               return (
                 <Marker 
                   key={spot.id}
                   position={[spot.latitude, spot.longitude]}
-                  icon={createCustomMarker(quality as WindQuality)}
+                  icon={createCustomMarker(quality)}
+                  eventHandlers={{
+                    click: () => {
+                      // Add a subtle animation when clicked
+                      const element = document.querySelector(`.marker-${spot.id}`);
+                      if (element) {
+                        element.classList.add('marker-pulse');
+                        setTimeout(() => element.classList.remove('marker-pulse'), 500);
+                      }
+                    }
+                  }}
                 >
                   <Popup className="spot-popup">
-                    <div className="text-center p-1">
-                      <h3 className="font-bold text-ocean-dark text-lg mb-1">{spot.name}</h3>
-                      <div className="text-xs text-ocean-dark/70 mb-2 flex items-center justify-center">
-                        <MapPin className="w-3 h-3 mr-1" />
-                        {spot.country}
+                    <div className="p-2 max-w-[250px]">
+                      <div className="mb-3 pb-2 border-b border-gray-200">
+                        <h3 className="font-bold text-ocean-dark text-lg">{spot.name}</h3>
+                        <div className="text-xs text-ocean-dark/70 flex items-center">
+                          <MapPin className="w-3 h-3 mr-1" />
+                          {spot.country}
+                        </div>
                       </div>
-                      <p className="text-sm mb-3 text-gray-600">{spot.description.substring(0, 80)}...</p>
+                      
+                      <div className="flex items-center mb-2">
+                        <div className={`w-3 h-3 rounded-full mr-2 ${
+                          quality === WindQuality.Excellent ? 'bg-tropical-green' : 
+                          quality === WindQuality.Good ? 'bg-teal' : 
+                          quality === WindQuality.Moderate ? 'bg-sunny-yellow' : 
+                          'bg-red-500'
+                        }`}></div>
+                        <span className="text-sm font-medium">{quality} conditions this month</span>
+                      </div>
+                      
+                      <p className="text-sm mb-3 text-gray-600 max-h-[80px] overflow-y-auto">
+                        {spot.description.substring(0, 120)}...
+                      </p>
+                      
                       <Button 
                         size="sm"
-                        className="bg-ocean-blue hover:bg-ocean-dark"
+                        className="w-full bg-ocean-blue hover:bg-ocean-dark"
                         onClick={() => onSpotSelect(spot.id)}
                       >
                         <Compass className="w-4 h-4 mr-1" /> View Details
