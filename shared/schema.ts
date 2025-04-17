@@ -15,6 +15,7 @@ export const spots = pgTable("spots", {
   bestMonths: text("best_months").notNull(), // e.g. "Dec-Mar"
   localAttractions: text("local_attractions").notNull(),
   tags: text("tags").array().notNull(), // Array of tags
+  windguruCode: text("windguru_code"), // Windguru spot code for direct linking
 });
 
 // Monthly wind conditions for each spot
@@ -38,6 +39,7 @@ export const insertSpotSchema = createInsertSchema(spots).pick({
   bestMonths: true,
   localAttractions: true,
   tags: true,
+  windguruCode: true,
 });
 
 export const insertWindConditionSchema = createInsertSchema(windConditions).pick({

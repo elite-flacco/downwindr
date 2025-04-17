@@ -88,7 +88,11 @@ export class MemStorage implements IStorage {
 
   async createSpot(insertSpot: InsertSpot): Promise<Spot> {
     const id = this.currentSpotId++;
-    const spot: Spot = { ...insertSpot, id };
+    const spot: Spot = { 
+      ...insertSpot, 
+      id,
+      windguruCode: insertSpot.windguruCode || null 
+    };
     this.spots.set(id, spot);
     return spot;
   }
@@ -126,7 +130,8 @@ export class MemStorage implements IStorage {
       tempRange: "16-20°C",
       bestMonths: "Dec-Mar",
       localAttractions: "Beyond kitesurfing, Tarifa offers a charming old town with narrow streets and Moorish architecture. Don't miss the Castle of Guzmán el Bueno. The area is known for its vibrant nightlife with beach bars, restaurants serving fresh seafood, and clubs that stay open late. Nearby day trips include Gibraltar, Tangier in Morocco (accessible by ferry), and the beautiful white villages of Andalusia.",
-      tags: ["Beginner Friendly", "Sandy Beach", "Rentals Available"]
+      tags: ["Beginner Friendly", "Sandy Beach", "Rentals Available"],
+      windguruCode: "49"
     });
 
     // 2. Cape Town, South Africa
@@ -140,7 +145,8 @@ export class MemStorage implements IStorage {
       tempRange: "22-28°C",
       bestMonths: "Nov-Feb",
       localAttractions: "Cape Town offers world-class restaurants, vibrant nightlife, and cultural attractions. Visit the iconic Table Mountain by cable car, explore the historic Robben Island where Nelson Mandela was imprisoned, or take a drive to the Cape of Good Hope. The city is also surrounded by renowned wine regions like Stellenbosch and Franschhoek, perfect for day trips.",
-      tags: ["Advanced", "Waves", "Scenic Views"]
+      tags: ["Advanced", "Waves", "Scenic Views"],
+      windguruCode: "78"
     });
 
     // 3. Cabarete, Dominican Republic
@@ -154,7 +160,8 @@ export class MemStorage implements IStorage {
       tempRange: "24-30°C",
       bestMonths: "Dec-Aug",
       localAttractions: "Cabarete is known for its laid-back Caribbean vibe and excellent nightlife. Enjoy fresh seafood at beachfront restaurants, explore nearby waterfalls like Damajagua's 27 Charcos, or take a day trip to Puerto Plata. Adventure seekers can also explore caves, go mountain biking, or try canyoning in the lush surroundings.",
-      tags: ["Caribbean", "Nightlife", "All Levels"]
+      tags: ["Caribbean", "Nightlife", "All Levels"],
+      windguruCode: "389"
     });
 
     // 4. Maui, Hawaii
@@ -211,7 +218,11 @@ export class MemStorage implements IStorage {
   // Helper to create initial spots
   private createInitialSpot(data: InsertSpot): Spot {
     const id = this.currentSpotId++;
-    const spot: Spot = { ...data, id };
+    const spot: Spot = { 
+      ...data, 
+      id,
+      windguruCode: data.windguruCode || null 
+    };
     this.spots.set(id, spot);
     return spot;
   }
