@@ -105,5 +105,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get Mapbox access token
+  app.get("/api/mapbox-token", (req, res) => {
+    if (!process.env.MAPBOX_ACCESS_TOKEN) {
+      return res.status(500).json({ message: 'Mapbox token not configured' });
+    }
+    res.json({ token: process.env.MAPBOX_ACCESS_TOKEN });
+  });
+
   return httpServer;
 }

@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Wind, MapPin, Compass, Waves, Anchor } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 // Import Mapbox GL CSS
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -32,6 +34,18 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
     spot: Spot;
     quality: WindQuality;
   } | null>(null);
+  
+  // Fetch Mapbox token
+  const { data: mapboxData, isLoading: isTokenLoading } = useQuery({
+    queryKey: ['mapbox-token'],
+    queryFn: async () => {
+      const response = await fetch('/api/mapbox-token');
+      if (!response.ok) {
+        throw new Error('Failed to fetch Mapbox token');
+      }
+      return response.json();
+    }
+  });
   
   // Handle map movement
   const onMove = useCallback(({ viewState }: ViewStateChangeEvent) => {
@@ -131,15 +145,16 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
           </div>
           
           {/* Main map component */}
-          <Map
-            {...viewState}
-            mapStyle="mapbox://styles/mapbox/outdoors-v12" // Colorful outdoor style
-            onMove={onMove}
-            mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
-            reuseMaps
-            attributionControl={false}
-            style={{ width: '100%', height: '100%' }}
-          >
+          {mapboxData && mapboxData.token && (
+            <Map
+              {...viewState}
+              mapStyle="mapbox://styles/mapbox/outdoors-v12" // Colorful outdoor style
+              onMove={onMove}
+              mapboxAccessToken={mapboxData.token}
+              reuseMaps
+              attributionControl={false}
+              style={{ width: '100%', height: '100%' }}
+            >
             {/* Navigation controls */}
             <NavigationControl position="bottom-right" showCompass={false} />
             
@@ -258,6 +273,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
               </div>
             </div>
           </Map>
+          )}
         </div>
       )}
     </Card>
