@@ -1,57 +1,15 @@
-import { useState, useEffect, useRef } from "react";
-import { 
-  MapContainer, 
-  TileLayer, 
-  Marker, 
-  Popup, 
-  useMap,
-  ZoomControl
-} from "react-leaflet";
-import L from "leaflet";
+import { useState, useEffect, useRef, useCallback } from "react";
+import Map, { Marker, Popup, NavigationControl, FullscreenControl, ViewStateChangeEvent } from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { Spot, WindQuality } from "@shared/schema";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Wind, MapPin, Compass, Plus, Minus } from "lucide-react";
-import { motion } from "framer-motion";
+import { Wind, MapPin, Compass, Waves, Anchor } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// SVG Marker for kitesurfing spots
-const createCustomMarker = (quality: WindQuality) => {
-  // Define color based on wind quality
-  let color = "#38bdf8"; // Default turquoise
-  
-  switch(quality) {
-    case "Excellent":
-      color = "#10b981"; // Green
-      break;
-    case "Good":
-      color = "#22c55e"; // Green
-      break;
-    case "Moderate":
-      color = "#f59e0b"; // Amber
-      break;
-    case "Poor":
-      color = "#ef4444"; // Red
-      break;
-  }
-  
-  // Create an SVG icon
-  const svgIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
-      <circle cx="12" cy="12" r="10" fill="white" stroke="${color}" stroke-width="2" />
-      <circle cx="12" cy="12" r="6" fill="${color}" />
-      <path d="M12 6 L12 18 M6 12 L18 12" stroke="white" stroke-width="1.5" />
-    </svg>
-  `;
-  
-  return L.divIcon({
-    html: svgIcon,
-    className: "custom-marker-icon",
-    iconSize: [36, 36],
-    iconAnchor: [18, 18],
-    popupAnchor: [0, -20]
-  });
-};
+// Import Mapbox GL CSS
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface KiteMapProps {
   spots: Spot[];
@@ -59,38 +17,43 @@ interface KiteMapProps {
   isLoading: boolean;
 }
 
-function MapRecenter({ spots }: { spots: Spot[] }) {
-  const map = useMap();
-  
-  useEffect(() => {
-    if (spots.length > 0) {
-      // Create bounds that include all markers
-      const bounds = L.latLngBounds(
-        spots.map(spot => [spot.latitude, spot.longitude])
-      );
-      map.fitBounds(bounds, { padding: [30, 30] });
-    }
-  }, [spots, map]);
-  
-  return null;
-}
-
 export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps) {
-  // Default center position (middle of the world)
-  const defaultCenter: [number, number] = [20, 0];
-  const mapRef = useRef<L.Map | null>(null);
+  // State for the map
+  const [viewState, setViewState] = useState({
+    longitude: 0,
+    latitude: 25,
+    zoom: 1.8,
+    bearing: 0,
+    pitch: 0
+  });
   
-  const handleZoomIn = () => {
-    if (mapRef.current) {
-      mapRef.current.zoomIn();
-    }
-  };
+  // State for popup
+  const [popupInfo, setPopupInfo] = useState<{
+    spot: Spot;
+    quality: WindQuality;
+  } | null>(null);
   
-  const handleZoomOut = () => {
-    if (mapRef.current) {
-      mapRef.current.zoomOut();
+  // Handle map movement
+  const onMove = useCallback(({ viewState }: ViewStateChangeEvent) => {
+    setViewState(viewState);
+  }, []);
+  
+  // Fit map to show all spots
+  useEffect(() => {
+    if (spots.length > 0 && !isLoading) {
+      // Calculate bounds to fit all spots
+      const minLng = Math.min(...spots.map(spot => spot.longitude)) - 10;
+      const maxLng = Math.max(...spots.map(spot => spot.longitude)) + 10;
+      const minLat = Math.min(...spots.map(spot => spot.latitude)) - 10;
+      const maxLat = Math.max(...spots.map(spot => spot.latitude)) + 10;
+      
+      // Update view state with new bounds
+      setViewState(prev => ({
+        ...prev,
+        bounds: [minLng, minLat, maxLng, maxLat]
+      }));
     }
-  };
+  }, [spots, isLoading]);
   
   // Generate a "month quality" for each spot based on current month
   const getSpotQuality = (spot: Spot): WindQuality => {
@@ -103,7 +66,6 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
     }
     
     // For simplicity in this demo, determine quality based on current selection
-    // In a real app, you'd parse the month range properly
     const monthRange = spot.bestMonths?.split('-') || [];
     if (monthRange.length >= 2) {
       // If we're within 1 month of the range
@@ -129,123 +91,173 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
     return WindQuality.Poor;
   };
 
+  // Get pin color based on wind quality
+  const getPinColor = (quality: WindQuality) => {
+    switch(quality) {
+      case WindQuality.Excellent:
+        return '#10b981'; // Green
+      case WindQuality.Good:
+        return '#06b6d4'; // Cyan
+      case WindQuality.Moderate:
+        return '#f59e0b'; // Amber
+      case WindQuality.Poor:
+        return '#ef4444'; // Red
+      default:
+        return '#3b82f6'; // Blue
+    }
+  };
+
   return (
-    <Card className="w-full md:w-2/3 overflow-hidden rounded-2xl shadow-lg">
+    <Card className="w-full md:w-2/3 overflow-hidden rounded-2xl shadow-xl border-0">
       {isLoading ? (
-        <div className="map-container bg-gray-100 flex items-center justify-center">
+        <div className="map-container bg-slate-50 flex items-center justify-center">
           <div className="flex flex-col items-center justify-center">
-            <Skeleton className="w-12 h-12 rounded-full mb-4" />
+            <Wind className="w-12 h-12 text-ocean-blue animate-pulse mb-4" />
             <Skeleton className="w-48 h-6 mb-2" />
             <Skeleton className="w-36 h-4" />
           </div>
         </div>
       ) : (
         <div className="map-container relative">
-          <div className="absolute top-4 left-4 z-[400] bg-white/80 backdrop-blur-sm px-3 py-2 rounded-lg shadow-md">
-            <div className="flex items-center">
-              <Wind className="text-ocean-blue w-5 h-5 mr-2" />
-              <span className="font-medium text-ocean-dark text-sm">KiteSpotter Map</span>
+          {/* Header overlay */}
+          <div className="absolute top-4 left-4 z-[9] bg-white px-4 py-3 rounded-xl shadow-lg flex items-center space-x-3">
+            <div className="bg-ocean-blue rounded-full p-2">
+              <Wind className="text-white w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="font-bold text-ocean-dark text-sm">KiteSpotter</h3>
+              <p className="text-xs text-gray-500">Discover the perfect winds</p>
             </div>
           </div>
           
-          <MapContainer
-            center={defaultCenter}
-            zoom={2}
-            className="h-full w-full"
-            zoomControl={false}
-            ref={mapRef as any}
+          {/* Main map component */}
+          <Map
+            {...viewState}
+            mapStyle="mapbox://styles/mapbox/outdoors-v12" // Colorful outdoor style
+            onMove={onMove}
+            mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
+            reuseMaps
+            attributionControl={false}
+            style={{ width: '100%', height: '100%' }}
           >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            {/* Navigation controls */}
+            <NavigationControl position="bottom-right" showCompass={false} />
             
-            {/* Add a styled background for the map */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-cyan-50 -z-10" />
-            
+            {/* Interactive markers */}
             {spots.map(spot => {
-              // Get wind quality using our helper function
               const quality = getSpotQuality(spot);
+              const pinColor = getPinColor(quality);
               
               return (
-                <Marker 
+                <Marker
                   key={spot.id}
-                  position={[spot.latitude, spot.longitude]}
-                  icon={createCustomMarker(quality)}
-                  eventHandlers={{
-                    click: () => {
-                      // Add a subtle animation when clicked
-                      const element = document.querySelector(`.marker-${spot.id}`);
-                      if (element) {
-                        element.classList.add('marker-pulse');
-                        setTimeout(() => element.classList.remove('marker-pulse'), 500);
-                      }
-                    }
+                  longitude={spot.longitude}
+                  latitude={spot.latitude}
+                  anchor="bottom"
+                  onClick={e => {
+                    // Prevent map click event
+                    e.originalEvent.stopPropagation();
+                    setPopupInfo({ spot, quality });
                   }}
                 >
-                  <Popup className="spot-popup">
-                    <div className="p-2 max-w-[250px]">
-                      <div className="mb-3 pb-2 border-b border-gray-200">
-                        <h3 className="font-bold text-ocean-dark text-lg">{spot.name}</h3>
-                        <div className="text-xs text-ocean-dark/70 flex items-center">
-                          <MapPin className="w-3 h-3 mr-1" />
-                          {spot.country}
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center mb-2">
-                        <div className={`w-3 h-3 rounded-full mr-2 ${
-                          quality === WindQuality.Excellent ? 'bg-tropical-green' : 
-                          quality === WindQuality.Good ? 'bg-teal' : 
-                          quality === WindQuality.Moderate ? 'bg-sunny-yellow' : 
-                          'bg-red-500'
-                        }`}></div>
-                        <span className="text-sm font-medium">{quality} conditions this month</span>
-                      </div>
-                      
-                      <p className="text-sm mb-3 text-gray-600 max-h-[80px] overflow-y-auto">
-                        {spot.description.substring(0, 120)}...
-                      </p>
-                      
-                      <Button 
-                        size="sm"
-                        className="w-full bg-ocean-blue hover:bg-ocean-dark"
-                        onClick={() => onSpotSelect(spot.id)}
-                      >
-                        <Compass className="w-4 h-4 mr-1" /> View Details
-                      </Button>
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", damping: 10 }}
+                    whileHover={{ scale: 1.2, y: -5 }}
+                    className="marker-container"
+                  >
+                    <svg
+                      height="40"
+                      viewBox="0 0 24 36"
+                      style={{ fill: pinColor, stroke: 'white', strokeWidth: 2, cursor: 'pointer' }}
+                    >
+                      <path d="M12 0C5.383 0 0 5.383 0 12c0 3.912 1.983 7.475 5.207 9.75L12 36l6.793-14.25C22.017 19.475 24 15.912 24 12c0-6.617-5.383-12-12-12z" />
+                    </svg>
+                    <div 
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white"
+                      style={{ marginTop: '-6px' }}
+                    >
+                      <Wind className="w-3 h-3" />
                     </div>
-                  </Popup>
+                  </motion.div>
                 </Marker>
               );
             })}
             
-            <MapRecenter spots={spots} />
-          </MapContainer>
-          
-          {/* Map controls */}
-          <div className="absolute bottom-4 right-4 flex flex-col gap-2">
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              <Button
-                size="icon"
-                variant="outline"
-                className="w-10 h-10 bg-white rounded-full shadow-md"
-                onClick={handleZoomIn}
+            {/* Popup for selected spot */}
+            {popupInfo && (
+              <Popup
+                longitude={popupInfo.spot.longitude}
+                latitude={popupInfo.spot.latitude}
+                anchor="bottom"
+                onClose={() => setPopupInfo(null)}
+                closeOnClick={false}
+                className="custom-popup"
+                offset={[0, -10]}
               >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              <Button
-                size="icon"
-                variant="outline"
-                className="w-10 h-10 bg-white rounded-full shadow-md"
-                onClick={handleZoomOut}
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-            </motion.div>
-          </div>
+                <div className="p-2 max-w-[280px]">
+                  <div className="mb-3 pb-2 border-b border-gray-100">
+                    <h3 className="font-bold text-ocean-dark text-lg">{popupInfo.spot.name}</h3>
+                    <div className="text-xs text-ocean-dark/70 flex items-center">
+                      <MapPin className="w-3 h-3 mr-1" />
+                      {popupInfo.spot.country}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <div 
+                        className="w-3 h-3 rounded-full mr-2"
+                        style={{ backgroundColor: getPinColor(popupInfo.quality) }}
+                      ></div>
+                      <span className="text-sm font-medium">{popupInfo.quality} wind</span>
+                    </div>
+                    <div className="flex items-center text-xs text-ocean-dark/70">
+                      <Waves className="w-3 h-3 mr-1" />
+                      {popupInfo.spot.waveSize}
+                    </div>
+                  </div>
+                  
+                  <div className="text-sm mb-3 text-gray-600 max-h-[80px] overflow-y-auto">
+                    {popupInfo.spot.description.substring(0, 120)}...
+                  </div>
+                  
+                  <Button 
+                    size="sm"
+                    className="w-full bg-ocean-blue hover:bg-ocean-dark"
+                    onClick={() => {
+                      onSpotSelect(popupInfo.spot.id);
+                      setPopupInfo(null);
+                    }}
+                  >
+                    <Compass className="w-4 h-4 mr-1" /> View Details
+                  </Button>
+                </div>
+              </Popup>
+            )}
+            
+            {/* Legend */}
+            <div className="absolute bottom-8 left-4 z-[9] bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-md text-xs">
+              <div className="font-medium mb-1">Wind Quality</div>
+              <div className="flex items-center mb-1">
+                <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Excellent) }}></div>
+                <span>Excellent</span>
+              </div>
+              <div className="flex items-center mb-1">
+                <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Good) }}></div>
+                <span>Good</span>
+              </div>
+              <div className="flex items-center mb-1">
+                <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Moderate) }}></div>
+                <span>Moderate</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Poor) }}></div>
+                <span>Poor</span>
+              </div>
+            </div>
+          </Map>
         </div>
       )}
     </Card>

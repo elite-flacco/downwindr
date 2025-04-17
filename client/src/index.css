@@ -196,3 +196,37 @@
   --teal: 184, 77%, 39%;
   --tropical-green: 163, 94%, 43%;
 }
+
+/* Custom Mapbox GL styles */
+.mapboxgl-popup-content {
+  padding: 12px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(209, 213, 219, 0.4) !important;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 20px !important;
+  color: #64748b !important;
+  padding: 5px !important;
+  right: 5px !important;
+  top: 5px !important;
+}
+
+/* Map controls styling */
+.mapboxgl-ctrl-group {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden !important;
+}
+
+.mapboxgl-ctrl button {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+/* Fix map container for Mapbox GL */
+.map-container {
+  height: 550px !important;
+  width: 100% !important;
+}
