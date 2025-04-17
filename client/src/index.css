@@ -47,8 +47,14 @@
     display: none;
   }
 
+  /* Set leaflet map base z-index */
   .leaflet-container {
     z-index: 10;
+  }
+  
+  /* Make sure modal is above leaflet map and controls */
+  .spot-detail-modal {
+    z-index: 1000 !important; /* Higher than leaflet's highest layers */
   }
 
   .wind-quality-excellent {
