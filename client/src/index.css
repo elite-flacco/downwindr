@@ -153,10 +153,13 @@
   --neutral-light: 210, 20%, 96%;
   --neutral-dark: 210, 60%, 26%;
 
-  /* Fun new colors */
-  --ocean-blue: 198, 95%, 46%;
-  --ocean-dark: 200, 90%, 28%;
-  --sunny-yellow: 40, 100%, 60%;
-  --beach-sand: 35, 80%, 90%;
-  --tropical-green: 160, 84%, 39%;
+  /* Vibrant new color palette */
+  --ocean-blue: 203, 89%, 53%;
+  --ocean-dark: 207, 85%, 35%;
+  --turquoise: 174, 80%, 45%;
+  --coral: 16, 95%, 66%;
+  --deep-purple: 263, 60%, 48%;
+  --sunny-yellow: 42, 100%, 65%;
+  --teal: 184, 77%, 39%;
+  --tropical-green: 163, 94%, 43%;
 }

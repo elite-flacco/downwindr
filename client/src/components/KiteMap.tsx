@@ -5,28 +5,53 @@ import {
   Marker, 
   Popup, 
   useMap,
-  ZoomControl 
+  ZoomControl
 } from "react-leaflet";
 import L from "leaflet";
-import { Spot } from "@shared/schema";
+import { Spot, WindQuality } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MapPin, Plus, Minus } from "lucide-react";
+import { Wind, MapPin, Compass, Plus, Minus } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Custom marker icon
-const iconUrl = "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png";
-const shadowUrl = "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png";
-
-const customIcon = L.icon({
-  iconUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
+// SVG Marker for kitesurfing spots
+const createCustomMarker = (quality: WindQuality) => {
+  // Define color based on wind quality
+  let color = "#38bdf8"; // Default turquoise
+  
+  switch(quality) {
+    case "Excellent":
+      color = "#10b981"; // Green
+      break;
+    case "Good":
+      color = "#22c55e"; // Green
+      break;
+    case "Moderate":
+      color = "#f59e0b"; // Amber
+      break;
+    case "Poor":
+      color = "#ef4444"; // Red
+      break;
+  }
+  
+  // Create an SVG icon
+  const svgIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
+      <circle cx="12" cy="12" r="10" fill="white" stroke="${color}" stroke-width="2" />
+      <circle cx="12" cy="12" r="6" fill="${color}" />
+      <path d="M12 6 L12 18 M6 12 L18 12" stroke="white" stroke-width="1.5" />
+    </svg>
+  `;
+  
+  return L.divIcon({
+    html: svgIcon,
+    className: "custom-marker-icon",
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    popupAnchor: [0, -20]
+  });
+};
 
 interface KiteMapProps {
   spots: Spot[];
@@ -67,46 +92,84 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
     }
   };
   
+  // Generate a "month quality" for each spot based on current month
+  const getSpotQuality = (spot: Spot): WindQuality => {
+    const currentMonth = new Date().getMonth() + 1; // 1-12
+    if (spot.bestMonths?.includes(currentMonth)) {
+      return "Excellent";
+    } else if (spot.bestMonths?.some(m => Math.abs(m - currentMonth) <= 1)) {
+      return "Good";
+    } else if (spot.bestMonths?.some(m => Math.abs(m - currentMonth) <= 3)) {
+      return "Moderate";
+    } else {
+      return "Poor";
+    }
+  };
+
   return (
-    <Card className="w-full md:w-2/3 overflow-hidden">
+    <Card className="w-full md:w-2/3 overflow-hidden rounded-2xl shadow-lg">
       {isLoading ? (
         <div className="map-container bg-gray-100 flex items-center justify-center">
-          <Skeleton className="w-full h-full" />
+          <div className="flex flex-col items-center justify-center">
+            <Skeleton className="w-12 h-12 rounded-full mb-4" />
+            <Skeleton className="w-48 h-6 mb-2" />
+            <Skeleton className="w-36 h-4" />
+          </div>
         </div>
       ) : (
         <div className="map-container relative">
+          <div className="absolute top-4 left-4 z-[400] bg-white/80 backdrop-blur-sm px-3 py-2 rounded-lg shadow-md">
+            <div className="flex items-center">
+              <Wind className="text-ocean-blue w-5 h-5 mr-2" />
+              <span className="font-medium text-ocean-dark text-sm">KiteSpotter Map</span>
+            </div>
+          </div>
+          
           <MapContainer
             center={defaultCenter}
             zoom={2}
             className="h-full w-full"
             zoomControl={false}
-            ref={mapRef}
+            ref={mapRef as any}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>'
+              url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
             />
             
-            {spots.map(spot => (
-              <Marker 
-                key={spot.id}
-                position={[spot.latitude, spot.longitude]}
-                icon={customIcon}
-              >
-                <Popup>
-                  <div className="text-center">
-                    <h3 className="font-semibold mb-1">{spot.name}</h3>
-                    <p className="text-sm mb-2">{spot.description.substring(0, 100)}...</p>
-                    <Button 
-                      size="sm"
-                      onClick={() => onSpotSelect(spot.id)}
-                    >
-                      View Details
-                    </Button>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+            {spots.map(spot => {
+              // Determine wind quality for the current month
+              // Using a default if specific quality not available
+              const quality = spot.bestMonths?.includes(new Date().getMonth() + 1) 
+                ? "Excellent" 
+                : "Moderate";
+              
+              return (
+                <Marker 
+                  key={spot.id}
+                  position={[spot.latitude, spot.longitude]}
+                  icon={createCustomMarker(quality as WindQuality)}
+                >
+                  <Popup className="spot-popup">
+                    <div className="text-center p-1">
+                      <h3 className="font-bold text-ocean-dark text-lg mb-1">{spot.name}</h3>
+                      <div className="text-xs text-ocean-dark/70 mb-2 flex items-center justify-center">
+                        <MapPin className="w-3 h-3 mr-1" />
+                        {spot.country}
+                      </div>
+                      <p className="text-sm mb-3 text-gray-600">{spot.description.substring(0, 80)}...</p>
+                      <Button 
+                        size="sm"
+                        className="bg-ocean-blue hover:bg-ocean-dark"
+                        onClick={() => onSpotSelect(spot.id)}
+                      >
+                        <Compass className="w-4 h-4 mr-1" /> View Details
+                      </Button>
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
             
             <MapRecenter spots={spots} />
           </MapContainer>
