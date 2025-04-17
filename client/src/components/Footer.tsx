@@ -3,82 +3,200 @@ import {
   Wind, 
   Mail, 
   Phone, 
-  MapPin 
+  MapPin,
+  Compass,
+  Sun,
+  ShieldCheck,
+  Globe
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  };
+
   return (
-    <footer className="bg-neutral-dark text-white py-8 mt-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center mb-2">
-              <Wind className="w-6 h-6 mr-2" />
-              <h3 className="text-xl font-bold font-heading">KiteSpotter</h3>
+    <footer className="relative bg-gradient-to-b from-ocean-dark to-ocean-blue text-white py-12 mt-12 overflow-hidden">
+      {/* Wave decoration at the top */}
+      <div className="absolute top-0 left-0 w-full z-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="transform rotate-180">
+          <path fill="#F4F0E8" fillOpacity="1" d="M0,32L48,58.7C96,85,192,139,288,144C384,149,480,107,576,90.7C672,75,768,85,864,122.7C960,160,1056,224,1152,229.3C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-4 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <motion.div variants={itemVariants}>
+            <div className="bg-white p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 shadow-lg">
+              <Wind className="w-8 h-8 text-ocean-blue" />
             </div>
-            <p className="text-gray-300 mb-4">Connecting kitesurfing enthusiasts with the best spots worldwide.</p>
+            <h3 className="text-2xl font-bold font-heading mb-2">KiteSpotter</h3>
+            <p className="text-white text-opacity-80 mb-6">Find the perfect wind for your next kitesurfing adventure!</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-secondary transition">
+              <a href="#" className="h-10 w-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
                 <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
-              <a href="#" className="text-white hover:text-secondary transition">
+              <a href="#" className="h-10 w-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
                 <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                 </svg>
               </a>
-              <a href="#" className="text-white hover:text-secondary transition">
+              <a href="#" className="h-10 w-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition-all duration-300">
                 <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                 </svg>
               </a>
-              <a href="#" className="text-white hover:text-secondary transition">
-                <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.945-.266-1.687-1.04-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.945.266 1.687 1.04 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z" />
-                </svg>
-              </a>
             </div>
-          </div>
+          </motion.div>
           
-          <div>
-            <h4 className="text-lg font-semibold font-heading mb-4">Explore</h4>
-            <ul className="space-y-2">
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Find Spots</a></Link></li>
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Spot Map</a></Link></li>
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Community</a></Link></li>
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Events</a></Link></li>
+          <motion.div variants={itemVariants}>
+            <h4 className="text-xl font-bold font-heading mb-5 flex items-center">
+              <Compass className="w-5 h-5 mr-2 text-sunny-yellow" />
+              Explore
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Find Spots
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Spot Map
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Community
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Events
+                  </a>
+                </Link>
+              </li>
             </ul>
-          </div>
+          </motion.div>
           
-          <div>
-            <h4 className="text-lg font-semibold font-heading mb-4">Resources</h4>
-            <ul className="space-y-2">
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Kitesurfing Guide</a></Link></li>
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Weather Conditions</a></Link></li>
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Equipment Reviews</a></Link></li>
-              <li><Link href="/"><a className="text-gray-300 hover:text-secondary transition">Travel Tips</a></Link></li>
+          <motion.div variants={itemVariants}>
+            <h4 className="text-xl font-bold font-heading mb-5 flex items-center">
+              <Sun className="w-5 h-5 mr-2 text-tropical-green" />
+              Resources
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Kitesurfing Guide
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Weather Conditions
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Equipment Reviews
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a className="text-white text-opacity-80 hover:text-opacity-100 hover:translate-x-1 transition-all duration-200 flex items-center">
+                    <span className="bg-white bg-opacity-20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Travel Tips
+                  </a>
+                </Link>
+              </li>
             </ul>
-          </div>
+          </motion.div>
           
-          <div>
-            <h4 className="text-lg font-semibold font-heading mb-4">Contact Us</h4>
-            <ul className="space-y-2">
-              <li className="text-gray-300 flex items-center">
-                <Mail className="w-4 h-4 mr-2" /> info@kitespotter.com
+          <motion.div variants={itemVariants}>
+            <h4 className="text-xl font-bold font-heading mb-5 flex items-center">
+              <Globe className="w-5 h-5 mr-2 text-sunny-yellow" />
+              Contact Us
+            </h4>
+            <ul className="space-y-4">
+              <li className="text-white text-opacity-80 flex items-center bg-white bg-opacity-10 p-3 rounded-lg">
+                <Mail className="w-5 h-5 mr-3 text-tropical-green" /> 
+                <span>info@kitespotter.com</span>
               </li>
-              <li className="text-gray-300 flex items-center">
-                <Phone className="w-4 h-4 mr-2" /> +1 (123) 456-7890
+              <li className="text-white text-opacity-80 flex items-center bg-white bg-opacity-10 p-3 rounded-lg">
+                <Phone className="w-5 h-5 mr-3 text-tropical-green" /> 
+                <span>+1 (123) 456-7890</span>
               </li>
-              <li className="text-gray-300 flex items-center">
-                <MapPin className="w-4 h-4 mr-2" /> Worldwide
+              <li className="text-white text-opacity-80 flex items-center bg-white bg-opacity-10 p-3 rounded-lg">
+                <MapPin className="w-5 h-5 mr-3 text-tropical-green" /> 
+                <span>Worldwide</span>
               </li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         
-        <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} KiteSpotter. All rights reserved.</p>
+        <div className="mt-12 pt-6 text-center text-white text-opacity-80 text-sm relative">
+          <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-20"></div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row justify-between items-center"
+          >
+            <p>&copy; {new Date().getFullYear()} KiteSpotter. All rights reserved.</p>
+            <div className="flex space-x-4 mt-4 md:mt-0">
+              <Link href="/">
+                <a className="hover:text-white transition-colors">Privacy Policy</a>
+              </Link>
+              <Link href="/">
+                <a className="hover:text-white transition-colors">Terms of Service</a>
+              </Link>
+              <Link href="/">
+                <a className="hover:text-white transition-colors">Cookie Policy</a>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </div>
     </footer>
