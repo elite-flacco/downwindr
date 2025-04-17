@@ -12,20 +12,42 @@
   }
 
   body {
-    @apply font-sans antialiased bg-white text-foreground;
-    background: linear-gradient(to bottom, #f8f9fa, #edf2f7);
+    @apply antialiased bg-white text-foreground;
+    font-family: var(--font-body);
+    background: linear-gradient(to bottom, #f8f9fa, #e7f0fa);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold text-ocean-dark;
+  h1 {
+    font-family: var(--font-title);
+    @apply font-bold text-ocean-dark tracking-wide;
+    letter-spacing: 1.5px;
+  }
+
+  h2, h3 {
+    font-family: var(--font-heading);
+    @apply text-ocean-dark;
+    letter-spacing: 0.5px;
+  }
+
+  h4, h5, h6 {
+    font-family: var(--font-fun);
+    @apply font-bold text-ocean-dark;
   }
 
   .font-heading {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-heading);
+  }
+
+  .font-title {
+    font-family: var(--font-title);
+  }
+  
+  .font-fun {
+    font-family: var(--font-fun);
   }
 
   .font-body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-body);
   }
 }
 
@@ -180,21 +202,28 @@
 }
 
 :root {
-  --wind-good: 142, 82%, 46%;
-  --wind-moderate: 38, 96%, 50%;
-  --wind-poor: 0, 84%, 60%;
+  /* More vibrant wind quality colors */
+  --wind-good: 142, 92%, 50%;
+  --wind-moderate: 38, 100%, 55%;
+  --wind-poor: 0, 94%, 65%;
   --neutral-light: 210, 20%, 96%;
-  --neutral-dark: 210, 60%, 26%;
+  --neutral-dark: 210, 70%, 30%;
 
-  /* Vibrant new color palette */
-  --ocean-blue: 203, 89%, 53%;
-  --ocean-dark: 207, 85%, 35%;
-  --turquoise: 174, 80%, 45%;
-  --coral: 16, 95%, 66%;
-  --deep-purple: 263, 60%, 48%;
-  --sunny-yellow: 42, 100%, 65%;
-  --teal: 184, 77%, 39%;
-  --tropical-green: 163, 94%, 43%;
+  /* Super vibrant fun color palette */
+  --ocean-blue: 203, 95%, 58%;
+  --ocean-dark: 207, 90%, 40%;
+  --turquoise: 174, 90%, 50%;
+  --coral: 16, 100%, 70%;
+  --deep-purple: 263, 80%, 55%;
+  --sunny-yellow: 42, 100%, 68%;
+  --teal: 184, 87%, 45%;
+  --tropical-green: 163, 100%, 48%;
+  
+  /* Font families */
+  --font-fun: 'Kalam', cursive;
+  --font-heading: 'Permanent Marker', cursive;
+  --font-title: 'Bangers', cursive;
+  --font-body: 'Quicksand', sans-serif;
 }
 
 /* Custom Mapbox GL styles */
