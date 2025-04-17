@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { X, Wind, Waves, Thermometer, Calendar, Heart } from "lucide-react";
+import { X, Wind, Waves, Thermometer, Calendar, Heart, ExternalLink } from "lucide-react";
 import { MonthNames, WindQuality } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -175,6 +175,17 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <div className="flex items-center bg-tropical-green bg-opacity-10 text-ocean-dark px-4 py-2 rounded-full text-sm font-medium shadow">
                       <Calendar className="mr-2 h-4 w-4 text-tropical-green" /> Best: {spotDetails.spot.bestMonths}
                     </div>
+                    
+                    {spotDetails.spot.windguruCode && (
+                      <a 
+                        href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-purple-700 transition-colors"
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" /> Windguru Forecast
+                      </a>
+                    )}
                   </motion.div>
                   
                   {/* Two column info section */}

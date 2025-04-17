@@ -5,7 +5,7 @@ import { Spot, WindQuality } from "@shared/schema";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Wind, MapPin, Compass, Waves, Anchor } from "lucide-react";
+import { Wind, MapPin, Compass, Waves, Anchor, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -250,16 +250,29 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                     {popupInfo.spot.description.substring(0, 120)}...
                   </div>
                   
-                  <Button 
-                    size="sm"
-                    className="w-full bg-gradient-to-r from-ocean-blue to-teal text-white font-fun hover:opacity-90 shadow-md"
-                    onClick={() => {
-                      onSpotSelect(popupInfo.spot.id);
-                      setPopupInfo(null);
-                    }}
-                  >
-                    <Compass className="w-4 h-4 mr-1" /> View Details
-                  </Button>
+                  <div className="flex gap-2 mb-3">
+                    <Button 
+                      size="sm"
+                      className="flex-1 bg-gradient-to-r from-ocean-blue to-teal text-white font-fun hover:opacity-90 shadow-md"
+                      onClick={() => {
+                        onSpotSelect(popupInfo.spot.id);
+                        setPopupInfo(null);
+                      }}
+                    >
+                      <Compass className="w-4 h-4 mr-1" /> View Details
+                    </Button>
+                    
+                    {popupInfo.spot.windguruCode && (
+                      <a 
+                        href={`https://www.windguru.cz/${popupInfo.spot.windguruCode}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center bg-purple-600 text-white px-3 py-1 rounded-md text-sm font-medium shadow hover:bg-purple-700 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" /> Windguru
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Popup>
             )}
