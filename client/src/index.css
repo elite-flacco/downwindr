@@ -12,11 +12,12 @@
   }
 
   body {
-    @apply font-sans antialiased bg-neutral-light text-foreground;
+    @apply font-sans antialiased bg-beach-sand text-foreground;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='hsl(198, 95%, 80%, 0.05)' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold;
+    @apply font-heading font-semibold text-ocean-dark;
   }
 
   .font-heading {
@@ -29,8 +30,12 @@
 }
 
 @layer utilities {
+  /* Map container styling */
   .map-container {
     height: calc(100vh - 5rem);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   @media (max-width: 768px) {
@@ -39,12 +44,56 @@
     }
   }
 
+  /* Month selector styling */
   .month-selector {
     scrollbar-width: none;
+    @apply bg-gradient-to-r from-ocean-blue to-tropical-green text-white rounded-xl my-4 shadow-lg;
   }
 
   .month-selector::-webkit-scrollbar {
     display: none;
+  }
+  
+  /* Month button styles */
+  .month-button {
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105;
+  }
+  
+  .month-button.active {
+    @apply bg-white font-bold text-ocean-dark shadow-md;
+  }
+  
+  .month-button.active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-1 bg-sunny-yellow;
+    animation: slide-in 0.3s ease-out;
+  }
+  
+  @keyframes slide-in {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+  
+  /* Card hover effects */
+  .spot-card {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    background: linear-gradient(135deg, white 0%, #f9f9f9 100%);
+  }
+  
+  /* Animated wind indicator */
+  .wind-indicator {
+    @apply relative overflow-hidden;
+  }
+  
+  .wind-indicator::before {
+    content: '';
+    @apply absolute inset-0 opacity-20 bg-white;
+    animation: wind-wave 3s infinite ease-in-out;
+  }
+  
+  @keyframes wind-wave {
+    0%, 100% { transform: translateX(-50%); }
+    50% { transform: translateX(0); }
   }
 
   /* Set leaflet map base z-index */
@@ -57,20 +106,43 @@
     z-index: 1000 !important; /* Higher than leaflet's highest layers */
   }
 
+  /* Wind quality indicators with improved styling */
   .wind-quality-excellent {
-    @apply bg-wind-good text-white;
+    @apply bg-gradient-to-r from-wind-good to-tropical-green text-white relative overflow-hidden;
   }
 
   .wind-quality-good {
-    @apply bg-wind-good text-white;
+    @apply bg-gradient-to-r from-wind-good to-tropical-green text-white relative overflow-hidden;
   }
 
   .wind-quality-moderate {
-    @apply bg-wind-moderate text-white;
+    @apply bg-gradient-to-r from-wind-moderate to-sunny-yellow text-white relative overflow-hidden;
   }
 
   .wind-quality-poor {
-    @apply bg-wind-poor text-white;
+    @apply bg-gradient-to-r from-wind-poor to-red-500 text-white relative overflow-hidden;
+  }
+  
+  /* Fun wave animation */
+  .wave-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .wave-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+    animation: wave 2s infinite linear;
+  }
+  
+  @keyframes wave {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 }
 
@@ -78,6 +150,13 @@
   --wind-good: 142, 82%, 46%;
   --wind-moderate: 38, 96%, 50%;
   --wind-poor: 0, 84%, 60%;
-  --neutral-light: 0, 0%, 96%;
-  --neutral-dark: 222, 47%, 31%;
+  --neutral-light: 210, 20%, 96%;
+  --neutral-dark: 210, 60%, 26%;
+
+  /* Fun new colors */
+  --ocean-blue: 198, 95%, 46%;
+  --ocean-dark: 200, 90%, 28%;
+  --sunny-yellow: 40, 100%, 60%;
+  --beach-sand: 35, 80%, 90%;
+  --tropical-green: 160, 84%, 39%;
 }

@@ -67,6 +67,13 @@ export default {
         "wind-good": "hsl(var(--wind-good))",
         "wind-moderate": "hsl(var(--wind-moderate))",
         "wind-poor": "hsl(var(--wind-poor))",
+        
+        // Fun ocean/beach themed colors
+        "ocean-blue": "hsl(var(--ocean-blue))",
+        "ocean-dark": "hsl(var(--ocean-dark))",
+        "sunny-yellow": "hsl(var(--sunny-yellow))",
+        "beach-sand": "hsl(var(--beach-sand))",
+        "tropical-green": "hsl(var(--tropical-green))",
       },
       keyframes: {
         "accordion-down": {
