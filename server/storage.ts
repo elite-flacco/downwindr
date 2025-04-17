@@ -134,9 +134,9 @@ export class MemStorage implements IStorage {
       tags: ["Beginner Friendly", "Sandy Beach", "Rentals Available"],
       windguruCode: "49",
       kiteSchools: [
-        "Dragon Tarifa Kite School|https://maps.google.com/maps?cid=13866010850051988642",
-        "ION Club Tarifa|https://maps.google.com/maps?cid=14806290270589082059",
-        "Rebel Tarifa|https://maps.google.com/maps?cid=9870977445894907991"
+        "Dragon Tarifa Kite School|https://maps.google.com/maps?cid=13866010850051988642|4.8|127",
+        "ION Club Tarifa|https://maps.google.com/maps?cid=14806290270589082059|4.7|94",
+        "Rebel Tarifa|https://maps.google.com/maps?cid=9870977445894907991|4.9|68"
       ]
     });
 
@@ -154,9 +154,9 @@ export class MemStorage implements IStorage {
       tags: ["Advanced", "Waves", "Scenic Views"],
       windguruCode: "78",
       kiteSchools: [
-        "High Five Kitesurfing School|https://maps.google.com/maps?cid=17825071904597267949",
-        "Cabrinha Kiteboarding|https://maps.google.com/maps?cid=5959338275045810135",
-        "Best Kiteboarding South Africa|https://maps.google.com/maps?cid=8782497832221212255"
+        "High Five Kitesurfing School|https://maps.google.com/maps?cid=17825071904597267949|4.9|103",
+        "Cabrinha Kiteboarding|https://maps.google.com/maps?cid=5959338275045810135|4.8|85",
+        "Best Kiteboarding South Africa|https://maps.google.com/maps?cid=8782497832221212255|4.7|77"
       ]
     });
 
@@ -174,9 +174,9 @@ export class MemStorage implements IStorage {
       tags: ["Caribbean", "Nightlife", "All Levels"],
       windguruCode: "389",
       kiteSchools: [
-        "Kite Club Cabarete|https://maps.google.com/maps?cid=10726341777331495804",
-        "Cabarete Kite School|https://maps.google.com/maps?cid=8345246767243116914",
-        "Laurel Eastman Kiteboarding|https://maps.google.com/maps?cid=11000888324115506309"
+        "Kite Club Cabarete|https://maps.google.com/maps?cid=10726341777331495804|4.8|156",
+        "Cabarete Kite School|https://maps.google.com/maps?cid=8345246767243116914|4.9|93",
+        "Laurel Eastman Kiteboarding|https://maps.google.com/maps?cid=11000888324115506309|4.7|134"
       ]
     });
 
@@ -194,9 +194,9 @@ export class MemStorage implements IStorage {
       tags: ["Advanced", "Waves", "Scenic Views"],
       windguruCode: "226",
       kiteSchools: [
-        "HST Windsurfing & Kitesurfing School|https://maps.google.com/maps?cid=7018811138901521443",
-        "Action Sports Maui|https://maps.google.com/maps?cid=14999410322423969558",
-        "Kiteboarding School of Maui|https://maps.google.com/maps?cid=4390272951247276118"
+        "HST Windsurfing & Kitesurfing School|https://maps.google.com/maps?cid=7018811138901521443|4.9|112",
+        "Action Sports Maui|https://maps.google.com/maps?cid=14999410322423969558|4.8|89",
+        "Kiteboarding School of Maui|https://maps.google.com/maps?cid=4390272951247276118|4.7|143"
       ]
     });
 
@@ -214,9 +214,9 @@ export class MemStorage implements IStorage {
       tags: ["Warm Water", "Cultural Experience", "Beginner Friendly"],
       windguruCode: "1133",
       kiteSchools: [
-        "Zanzibar Kite Paradise|https://maps.google.com/maps?cid=10046944852400555969",
-        "Kite Centre Paje|https://maps.google.com/maps?cid=14557586088856125633",
-        "Aquaholics Zanzibar|https://maps.google.com/maps?cid=9450883969741128811"
+        "Zanzibar Kite Paradise|https://maps.google.com/maps?cid=10046944852400555969|4.9|87",
+        "Kite Centre Paje|https://maps.google.com/maps?cid=14557586088856125633|4.7|105",
+        "Aquaholics Zanzibar|https://maps.google.com/maps?cid=9450883969741128811|4.8|74"
       ]
     });
 
@@ -234,9 +234,9 @@ export class MemStorage implements IStorage {
       tags: ["Cultural Experience", "Historic City", "Consistent Winds"],
       windguruCode: "269",
       kiteSchools: [
-        "Essaouira Kitesurfing|https://maps.google.com/maps?cid=3583446324805989002",
-        "Explora Morocco|https://maps.google.com/maps?cid=16231288534362533599",
-        "Kite Paradise Morocco|https://maps.google.com/maps?cid=6624767784441822246"
+        "Essaouira Kitesurfing|https://maps.google.com/maps?cid=3583446324805989002|4.8|97",
+        "Explora Morocco|https://maps.google.com/maps?cid=16231288534362533599|4.9|82",
+        "Kite Paradise Morocco|https://maps.google.com/maps?cid=6624767784441822246|4.7|65"
       ]
     });
 
