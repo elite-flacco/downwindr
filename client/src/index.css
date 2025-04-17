@@ -12,26 +12,26 @@
   }
 
   body {
-    @apply antialiased bg-white text-foreground;
+    @apply antialiased text-foreground;
     font-family: var(--font-body);
-    background: linear-gradient(to bottom, #f8f9fa, #e7f0fa);
+    background: linear-gradient(135deg, #f9fafb 0%, #f0fdfa 100%);
   }
 
   h1 {
     font-family: var(--font-title);
-    @apply font-bold text-ocean-dark tracking-wide;
-    letter-spacing: 1.5px;
+    @apply font-bold tracking-wide text-primary;
+    letter-spacing: 1px;
   }
 
   h2, h3 {
     font-family: var(--font-heading);
-    @apply text-ocean-dark;
+    @apply text-primary;
     letter-spacing: 0.5px;
   }
 
   h4, h5, h6 {
     font-family: var(--font-fun);
-    @apply font-bold text-ocean-dark;
+    @apply font-bold text-primary;
   }
 
   .font-heading {
@@ -69,7 +69,7 @@
   /* Month selector styling */
   .month-selector {
     scrollbar-width: none;
-    @apply bg-gradient-to-r from-ocean-blue to-tropical-green text-white rounded-xl my-4 shadow-lg;
+    @apply bg-white text-primary rounded-xl my-4 shadow-md border border-slate-100;
   }
 
   .month-selector::-webkit-scrollbar {
@@ -78,16 +78,16 @@
   
   /* Month button styles */
   .month-button {
-    @apply relative overflow-hidden transition-all duration-300 hover:scale-105;
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105 text-slate-500;
   }
   
   .month-button.active {
-    @apply bg-white font-bold text-ocean-dark shadow-md;
+    @apply bg-primary/10 font-bold text-primary shadow-sm;
   }
   
   .month-button.active::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-1 bg-sunny-yellow;
+    @apply absolute bottom-0 left-0 w-full h-1 bg-primary;
     animation: slide-in 0.3s ease-out;
   }
   
@@ -163,19 +163,19 @@
 
   /* Wind quality indicators with improved styling */
   .wind-quality-excellent {
-    @apply bg-gradient-to-r from-wind-good to-tropical-green text-white relative overflow-hidden;
+    @apply bg-primary text-white relative overflow-hidden;
   }
 
   .wind-quality-good {
-    @apply bg-gradient-to-r from-wind-good to-tropical-green text-white relative overflow-hidden;
+    @apply bg-primary/80 text-white relative overflow-hidden;
   }
 
   .wind-quality-moderate {
-    @apply bg-gradient-to-r from-wind-moderate to-sunny-yellow text-white relative overflow-hidden;
+    @apply bg-amber-500 text-white relative overflow-hidden;
   }
 
   .wind-quality-poor {
-    @apply bg-gradient-to-r from-wind-poor to-red-500 text-white relative overflow-hidden;
+    @apply bg-red-500 text-white relative overflow-hidden;
   }
   
   /* Fun wave animation */
