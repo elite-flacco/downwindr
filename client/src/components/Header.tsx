@@ -14,61 +14,47 @@ export default function Header() {
     <header className="bg-gradient-to-r from-ocean-blue to-ocean-dark shadow-lg">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/">
-          <motion.div 
-            className="flex items-center cursor-pointer" 
-            whileHover={{ scale: 1.05 }} 
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="bg-white p-2 rounded-full mr-3 shadow-md">
-              <Wind className="w-8 h-8 text-ocean-blue" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold font-heading text-white">KiteSpotter</h1>
-              <p className="text-xs text-white text-opacity-80">Find Your Perfect Wind</p>
-            </div>
-          </motion.div>
+          <a className="flex items-center">
+            <motion.div 
+              className="flex items-center cursor-pointer" 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="bg-white p-2 rounded-full mr-3 shadow-md">
+                <Wind className="w-8 h-8 text-ocean-blue" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold font-heading text-white">KiteSpotter</h1>
+                <p className="text-xs text-white text-opacity-80">Find Your Perfect Wind</p>
+              </div>
+            </motion.div>
+          </a>
         </Link>
         
         <nav className="hidden md:flex space-x-1">
           <Link href="/">
-            <motion.a 
-              className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <a className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center">
               <Wind className="w-4 h-4 mr-2" />
               Home
-            </motion.a>
+            </a>
           </Link>
           <Link href="/">
-            <motion.a 
-              className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <a className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center">
               <Compass className="w-4 h-4 mr-2" />
               Spots
-            </motion.a>
+            </a>
           </Link>
           <Link href="/">
-            <motion.a 
-              className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <a className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center">
               <Users className="w-4 h-4 mr-2" />
               Community
-            </motion.a>
+            </a>
           </Link>
           <Link href="/">
-            <motion.a 
-              className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <a className="font-medium text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-md transition-colors duration-200 flex items-center">
               <Info className="w-4 h-4 mr-2" />
               About
-            </motion.a>
+            </a>
           </Link>
         </nav>
         

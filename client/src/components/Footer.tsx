@@ -31,12 +31,8 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-b from-ocean-dark to-ocean-blue text-white py-12 mt-12 overflow-hidden">
-      {/* Wave decoration at the top */}
-      <div className="absolute top-0 left-0 w-full z-0">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="transform rotate-180">
-          <path fill="#F4F0E8" fillOpacity="1" d="M0,32L48,58.7C96,85,192,139,288,144C384,149,480,107,576,90.7C672,75,768,85,864,122.7C960,160,1056,224,1152,229.3C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-      </div>
+      {/* Subtle wave pattern overlay */}
+      <div className="absolute inset-0 opacity-10 bg-white/10"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
