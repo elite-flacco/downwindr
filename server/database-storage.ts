@@ -476,8 +476,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteReview(id: number): Promise<boolean> {
-    const result = await db.delete(reviews).where(eq(reviews.id, id));
-    return result.count > 0;
+    await db.delete(reviews).where(eq(reviews.id, id));
+    return true;
   }
 
   // Rating operations
@@ -517,8 +517,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteRating(id: number): Promise<boolean> {
-    const result = await db.delete(ratings).where(eq(ratings.id, id));
-    return result.count > 0;
+    await db.delete(ratings).where(eq(ratings.id, id));
+    return true;
   }
 
   // Combined operations
