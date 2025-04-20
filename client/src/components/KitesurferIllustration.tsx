@@ -40,25 +40,26 @@ export default function KitesurferIllustration({ className = "w-full h-auto" }: 
     
     // Randomize occasional animations
     const triggerRandomAnimations = (timestamp: number) => {
-      // Random waving - every 8-12 seconds
-      if (timestamp - lastWaveTime > (8000 + Math.random() * 4000)) {
+      // Random waving - every 12-18 seconds (reduced frequency)
+      if (timestamp - lastWaveTime > (12000 + Math.random() * 6000)) {
         setDoWave(true);
-        setTimeout(() => setDoWave(false), 2000);
+        setTimeout(() => setDoWave(false), 2500);
         lastWaveTime = timestamp;
       }
       
-      // Random trick - every 10-15 seconds
-      if (timestamp - lastTrickTime > (10000 + Math.random() * 5000)) {
+      // Random trick - every 15-25 seconds (reduced frequency)
+      if (timestamp - lastTrickTime > (15000 + Math.random() * 10000)) {
         setDoTrick(true);
-        setTimeout(() => setDoTrick(false), 3000);
+        setTimeout(() => setDoTrick(false), 3500);
         lastTrickTime = timestamp;
       }
     };
     
     // Animation function
     const animate = (timestamp: number) => {
-      angle += 0.01;
-      wave += 0.02;
+      // Slowed down animation speeds by 40%
+      angle += 0.006;
+      wave += 0.012;
       
       // Trigger random fun animations
       triggerRandomAnimations(timestamp);
@@ -242,18 +243,20 @@ export default function KitesurferIllustration({ className = "w-full h-auto" }: 
         kite2Ref.current.setAttribute('transform', `rotate(${baseRotation + trickBoost}, 200, 150)`);
       }
       
-      // Water splashes animation - more active during tricks
+      // Water splashes animation - much gentler now
       splashesRef.current.forEach((splash, i) => {
         if (splash) {
-          const baseScale = 1 + Math.sin(angle * 3 + i) * 0.1;
-          // More splashing during tricks
-          const trickSplash = doTrick ? 0.5 + Math.sin(angle * 10 + i) * 0.5 : 0;
-          splash.setAttribute('transform', `scale(${baseScale + trickSplash}) translate(0, ${trickSplash * -5})`);
+          // Reduced scale variation and slower movement
+          const baseScale = 1 + Math.sin(angle * 1.5 + i) * 0.05;
           
-          // Increased opacity during tricks
-          const baseOpacity = 0.7 + Math.sin(angle * 2 + i) * 0.3;
-          const trickOpacity = doTrick ? 0.2 : 0;
-          splash.setAttribute('opacity', `${Math.min(1, baseOpacity + trickOpacity)}`);
+          // Less dramatic splash effect during tricks
+          const trickSplash = doTrick ? 0.2 + Math.sin(angle * 5 + i) * 0.2 : 0;
+          splash.setAttribute('transform', `scale(${baseScale + trickSplash}) translate(0, ${trickSplash * -2})`);
+          
+          // Lower opacity for more subtle effect
+          const baseOpacity = 0.5 + Math.sin(angle * 1.2 + i) * 0.2;
+          const trickOpacity = doTrick ? 0.1 : 0;
+          splash.setAttribute('opacity', `${Math.min(0.8, baseOpacity + trickOpacity)}`);
         }
       });
       
