@@ -110,7 +110,29 @@ export class DatabaseStorage implements IStorage {
 
   private async initializeData() {
     try {
-      // 1. Tarifa, Spain
+      // Import seed data from external file
+      const { kiteSpotsData } = await import("./data/seed-data");
+      
+      console.log(`Initializing database with ${kiteSpotsData.length} spots...`);
+      
+      // Insert each spot and its wind conditions
+      for (const spotData of kiteSpotsData) {
+        const spot = await this.createSpot(spotData.spot);
+        
+        // Add wind conditions for each month
+        for (const condition of spotData.windConditions) {
+          await this.createWindCondition({
+            ...condition,
+            spotId: spot.id
+          });
+        }
+        
+        console.log(`Added spot: ${spot.name} with ${spotData.windConditions.length} wind conditions`);
+      }
+      
+      /* 
+      // Original implementation below - now replaced with seed data
+      // 1. Tarifa, Spain 
       const tarifa = await this.createSpot({
         name: "Tarifa, Spain",
         country: "Spain",
@@ -157,6 +179,7 @@ export class DatabaseStorage implements IStorage {
         numberOfSchools: 45,
       });
 
+      */
       const conditions = [
         {
           spotId: tarifa.id,
