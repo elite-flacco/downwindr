@@ -25,13 +25,13 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   const getWindQualityClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-emerald-600 text-white";
+        return "bg-blue-700 text-white";
       case WindQuality.Good:
-        return "bg-teal-600 text-white";
+        return "bg-blue-600 text-white";
       case WindQuality.Moderate:
-        return "bg-amber-600 text-white";
+        return "bg-slate-600 text-white";
       case WindQuality.Poor:
-        return "bg-rose-600 text-white";
+        return "bg-slate-500 text-white";
       default:
         return "bg-slate-500 text-white";
     }
@@ -109,11 +109,11 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
             ) : (
               // Spot details with fun beach theme
               <div>
-                {/* Header section with gradient and waves */}
+                {/* Header section with gradient */}
                 <div className="relative">
-                  <div className="w-full h-72 bg-gradient-to-br from-ocean-blue via-ocean-dark to-tropical-green">
+                  <div className="w-full h-72 bg-gradient-to-br from-blue-600 to-blue-800">
                     {/* Wave patterns */}
-                    <div className="absolute inset-0 opacity-20">
+                    <div className="absolute inset-0 opacity-30">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="absolute bottom-0">
                         <path fill="#fff" fillOpacity="0.3" d="M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,197.3C672,213,768,203,864,170.7C960,139,1056,85,1152,69.3C1248,53,1344,75,1392,85.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" className="animate-pulse" />
                       </svg>
@@ -123,7 +123,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <Button
                     size="icon"
                     variant="outline"
-                    className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md hover:bg-ocean-blue hover:text-white transition-colors duration-300"
+                    className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-sm hover:bg-blue-700 hover:text-white transition-colors duration-300"
                     onClick={handleClose}
                   >
                     <X className="h-4 w-4" />
@@ -164,16 +164,16 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   >
                     {renderCurrentWindBadge()}
                     
-                    <div className="flex items-center bg-sky-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow">
+                    <div className="flex items-center bg-slate-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm">
                       <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves
                     </div>
                     
-                    <div className="flex items-center bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow">
-                      <Thermometer className="mr-2 h-4 w-4" /> {spotDetails.spot.tempRange}
+                    <div className="flex items-center border border-slate-300 text-slate-800 bg-white px-4 py-2 rounded-full text-sm font-medium">
+                      <Thermometer className="mr-2 h-4 w-4 text-slate-600" /> {spotDetails.spot.tempRange}
                     </div>
                     
-                    <div className="flex items-center bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow">
-                      <Calendar className="mr-2 h-4 w-4" /> Best: {spotDetails.spot.bestMonths}
+                    <div className="flex items-center border border-slate-300 text-slate-800 bg-white px-4 py-2 rounded-full text-sm font-medium">
+                      <Calendar className="mr-2 h-4 w-4 text-slate-600" /> Best: {spotDetails.spot.bestMonths}
                     </div>
                     
                     {spotDetails.spot.windguruCode && (
@@ -181,7 +181,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-indigo-700 transition-colors"
+                        className="flex items-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-blue-800 transition-colors"
                       >
                         <ExternalLink className="mr-2 h-4 w-4" /> Windguru Forecast
                       </a>
@@ -196,8 +196,8 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ delay: 0.4 }}
                       className="bg-white rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="text-xl font-bold font-heading mb-3 text-ocean-dark flex items-center">
-                        <svg className="w-5 h-5 mr-2 text-ocean-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <h3 className="text-xl font-bold font-heading mb-3 text-slate-800 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Kitesurfing Info
@@ -209,7 +209,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                           {spotDetails.spot.tags.map((tag: string, index: number) => (
                             <div 
                               key={index} 
-                              className="text-sm border border-sky-600 px-3 py-1 rounded-full bg-sky-100 text-sky-800"
+                              className="text-sm border border-slate-300 px-3 py-1 rounded-full bg-white text-slate-700"
                             >
                               {tag}
                             </div>
@@ -224,8 +224,8 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ delay: 0.4 }}
                       className="bg-white rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="text-xl font-bold font-heading mb-3 text-ocean-dark flex items-center">
-                        <svg className="w-5 h-5 mr-2 text-ocean-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <h3 className="text-xl font-bold font-heading mb-3 text-slate-800 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Local Attractions
@@ -236,9 +236,9 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       
                       {/* Kite Schools Section */}
                       {spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
-                        <div className="mt-6 pt-6 border-t border-gray-200">
-                          <h4 className="font-bold text-ocean-dark mb-3 flex items-center">
-                            <svg className="w-4 h-4 mr-2 text-ocean-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <div className="mt-6 pt-6 border-t border-slate-200">
+                          <h4 className="font-bold text-slate-800 mb-3 flex items-center">
+                            <svg className="w-4 h-4 mr-2 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                             Kite Schools
@@ -258,20 +258,20 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                                       href={mapLink}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      className="text-ocean-blue hover:text-ocean-dark transition-colors duration-300 flex items-center"
+                                      className="text-blue-700 hover:text-blue-900 transition-colors duration-300 flex items-center"
                                     >
                                       <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                                       </svg>
                                       <span className="font-medium">{name}</span>
-                                      <svg className="w-3 h-3 ml-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                      <svg className="w-3 h-3 ml-1 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                       </svg>
                                     </a>
                                   </div>
                                   
                                   {rating && reviews && (
-                                    <div className="ml-6 mt-1 flex items-center text-sm text-gray-600">
+                                    <div className="ml-6 mt-1 flex items-center text-sm text-slate-600">
                                       <div className="flex items-center">
                                         <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -293,13 +293,13 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   
                   {/* Wind conditions table */}
                   <motion.div 
-                    className="mb-8 bg-gray-50 rounded-xl p-5 shadow-md"
+                    className="mb-8 bg-white rounded-xl p-5 shadow-md border border-slate-200"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                   >
-                    <h3 className="text-xl font-bold font-heading mb-4 text-ocean-dark flex items-center">
-                      <svg className="w-5 h-5 mr-2 text-ocean-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <h3 className="text-xl font-bold font-heading mb-4 text-slate-800 flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
                       Wind Conditions by Month
@@ -310,7 +310,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         .map((condition, idx) => (
                           <div 
                             key={condition.id} 
-                            className={`p-3 rounded-lg shadow-sm ${getWindQualityClass(condition.windQuality)} wind-indicator`}
+                            className={`p-3 rounded-lg shadow-sm ${getWindQualityClass(condition.windQuality)}`}
                           >
                             <div className="font-bold text-white">{MonthNames[condition.month - 1].substring(0, 3)}</div>
                             <div className="text-xs text-white font-medium">{condition.windSpeed} knots</div>
