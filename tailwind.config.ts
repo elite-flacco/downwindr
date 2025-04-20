@@ -61,19 +61,45 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Custom KiteSpotter colors
-        "neutral-light": "hsl(var(--neutral-light))",
-        "neutral-dark": "hsl(var(--neutral-dark))",
-        "wind-good": "hsl(var(--wind-good))",
-        "wind-moderate": "hsl(var(--wind-moderate))",
-        "wind-poor": "hsl(var(--wind-poor))",
+        // Theme color system
+        "theme-primary": "hsl(var(--theme-primary))",
+        "theme-primary-hover": "hsl(var(--theme-primary-hover))",
+        "theme-secondary": "hsl(var(--theme-secondary))",
+        "theme-accent": "hsl(var(--theme-accent))",
+        "theme-action": "hsl(var(--theme-action))",
+        "theme-success": "hsl(var(--theme-success))",
+        "theme-warning": "hsl(var(--theme-warning))",
+        "theme-info": "hsl(var(--theme-info))",
+        "theme-background": "hsl(var(--theme-background))",
+        "theme-surface": "hsl(var(--theme-surface))",
+        "theme-text": "hsl(var(--theme-text))",
+        "theme-text-light": "hsl(var(--theme-text-light))",
+        "theme-border": "hsl(var(--theme-border))",
         
-        // Fun ocean/beach themed colors
-        "ocean-blue": "hsl(var(--ocean-blue))",
-        "ocean-dark": "hsl(var(--ocean-dark))",
-        "sunny-yellow": "hsl(var(--sunny-yellow))",
-        "beach-sand": "hsl(var(--beach-sand))",
-        "tropical-green": "hsl(var(--tropical-green))",
+        // Wind quality indicators
+        "theme-wind-excellent": "hsl(var(--theme-wind-excellent))",
+        "theme-wind-good": "hsl(var(--theme-wind-good))",
+        "theme-wind-moderate": "hsl(var(--theme-wind-moderate))",
+        "theme-wind-poor": "hsl(var(--theme-wind-poor))",
+        
+        // Vibrant Blues
+        "electric": "hsl(var(--color-electric-blue))",
+        "cerulean": "hsl(var(--color-cerulean))",
+        "azure": "hsl(var(--color-azure))",
+        "yellow": "hsl(var(--color-yellow))",
+        "coral": "hsl(var(--color-coral))",
+        "lime": "hsl(var(--color-lime))",
+        "navy": "hsl(var(--color-navy))",
+        "sky": "hsl(var(--color-light-blue))",
+        
+        // Legacy colors (for backward compatibility)
+        "neutral-light": "hsl(var(--theme-background))",
+        "neutral-dark": "hsl(var(--theme-text))",
+        "wind-good": "hsl(var(--theme-wind-good))",
+        "wind-moderate": "hsl(var(--theme-wind-moderate))",
+        "wind-poor": "hsl(var(--theme-wind-poor))",
+        "ocean-blue": "hsl(var(--color-electric-blue))",
+        "ocean-dark": "hsl(var(--color-navy))",
       },
       keyframes: {
         "accordion-down": {

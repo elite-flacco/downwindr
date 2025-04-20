@@ -8,36 +8,42 @@
 @tailwind utilities;
 
 :root {
-  /* Vibrant Blues */
-  --electric-blue: 204 100% 50%;  /* #0096FF */
-  --cerulean: 190 100% 42%;       /* #00B4D8 */
-  --azure: 217 100% 62%;          /* #3A86FF */
+  /* Base color palette - These are the raw color values */
+  --color-electric-blue: 204 100% 50%;  /* #0096FF */
+  --color-cerulean: 190 100% 42%;       /* #00B4D8 */
+  --color-azure: 217 100% 62%;          /* #3A86FF */
+  --color-yellow: 49 100% 52%;          /* #FFD60A */
+  --color-coral: 1 100% 68%;            /* #FF5E5B */
+  --color-lime: 157 100% 50%;           /* #00FF7F */
+  --color-white: 0 0% 100%;             /* #FFFFFF */
+  --color-light-blue: 187 91% 94%;      /* #E0FBFC */
+  --color-navy: 202 100% 18%;           /* #003459 */
   
-  /* Fun Accent Colors */
-  --sunshine-yellow: 49 100% 52%; /* #FFD60A */
-  --coral: 1 100% 68%;            /* #FF5E5B */
-  --lime-green: 157 100% 50%;     /* #00FF7F */
+  /* Semantic color roles - Use these in components */
+  /* Primary UI elements */
+  --theme-primary: var(--color-electric-blue);
+  --theme-primary-hover: var(--color-azure);
+  --theme-secondary: var(--color-cerulean);
+  --theme-accent: var(--color-yellow);
   
-  /* Supporting Colors */
-  --white: 0 0% 100%;             /* #FFFFFF */
-  --light-blue: 187 91% 94%;      /* #E0FBFC */
-  --deep-navy: 202 100% 18%;      /* #003459 */
+  /* Actions and status indicators */
+  --theme-action: var(--color-coral);
+  --theme-success: var(--color-lime);
+  --theme-warning: var(--color-yellow);
+  --theme-info: var(--color-cerulean);
   
-  /* Core colors aliases for consistent usage */
-  --color-primary: var(--electric-blue);
-  --color-secondary: var(--cerulean);
-  --color-accent: var(--sunshine-yellow);
-  --color-action: var(--coral);
-  --color-success: var(--lime-green);
-  --color-background: var(--white);
-  --color-section: var(--light-blue);
-  --color-text: var(--deep-navy);
+  /* Content and backgrounds */
+  --theme-background: var(--color-white);
+  --theme-surface: var(--color-light-blue);
+  --theme-text: var(--color-navy);
+  --theme-text-light: var(--color-navy)/70%;
+  --theme-border: var(--color-light-blue)/50%;
   
   /* Wind quality indicators */
-  --color-wind-excellent: 177 55% 70%; /* Seafoam Green */
-  --color-wind-good: 197 69% 73%;      /* Sky Blue */
-  --color-wind-moderate: 39 60% 93%;   /* Sandy Beige */
-  --color-wind-poor: 16 100% 65%;      /* Sunset Orange */
+  --theme-wind-excellent: var(--color-lime);
+  --theme-wind-good: var(--color-azure);
+  --theme-wind-moderate: var(--color-light-blue);
+  --theme-wind-poor: var(--color-coral);
   
   /* Legacy color naming for compatibility */
   --ocean-blue: 200, 100%, 37%;        /* Bright Azure */
@@ -64,35 +70,35 @@
   }
 
   body {
-    color: hsl(var(--deep-navy));
+    color: hsl(var(--theme-text));
     font-family: 'Montserrat', var(--font-body);
-    background: linear-gradient(135deg, hsl(var(--white)) 0%, hsl(var(--light-blue) / 30%) 100%);
+    background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 30%) 100%);
   }
 
   h1 {
     font-family: var(--font-title);
-    color: hsl(var(--electric-blue));
+    color: hsl(var(--theme-primary));
     @apply font-bold tracking-wide text-4xl md:text-5xl;
     letter-spacing: 1px;
   }
 
   h2 {
     font-family: var(--font-heading);
-    color: hsl(var(--electric-blue));
+    color: hsl(var(--theme-primary));
     @apply text-2xl md:text-3xl font-bold;
     letter-spacing: 0.5px;
   }
 
   h3 {
     font-family: var(--font-heading);
-    color: hsl(var(--cerulean));
+    color: hsl(var(--theme-secondary));
     @apply text-xl md:text-2xl font-bold;
     letter-spacing: 0.5px;
   }
 
   h4, h5, h6 {
     font-family: var(--font-fun);
-    color: hsl(var(--azure));
+    color: hsl(var(--theme-primary-hover));
     @apply font-bold;
   }
 
@@ -101,12 +107,12 @@
   }
 
   a {
-    color: hsl(var(--cerulean));
+    color: hsl(var(--theme-secondary));
     @apply transition-colors duration-200;
   }
 
   a:hover {
-    color: hsl(var(--electric-blue));
+    color: hsl(var(--theme-primary));
   }
 
   .font-heading {
@@ -145,7 +151,7 @@
 @layer components {
   /* Card styling */
   .card {
-    @apply bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden transition-all duration-300;
+    @apply bg-white rounded-lg border border-border shadow-sm overflow-hidden transition-all duration-300;
   }
   
   .card:hover {
@@ -162,15 +168,15 @@
   }
   
   .badge-success {
-    @apply bg-green-100 text-green-700;
+    @apply bg-success/10 text-success;
   }
   
   .badge-warning {
-    @apply bg-amber-100 text-amber-700;
+    @apply bg-warning/10 text-warning;
   }
   
   .badge-danger {
-    @apply bg-red-100 text-red-700;
+    @apply bg-action/10 text-action;
   }
   
   /* Active tab styling */
@@ -179,11 +185,16 @@
   }
   
   .tab.active {
-    @apply bg-primary text-white;
+    background-color: hsl(var(--theme-primary));
+    color: hsl(var(--theme-background));
   }
   
   .tab:not(.active) {
-    @apply text-slate-600 hover:bg-slate-100;
+    color: hsl(var(--theme-text-light));
+  }
+  
+  .tab:not(.active):hover {
+    background-color: hsl(var(--theme-surface));
   }
   
   /* Interactive elements */
@@ -213,36 +224,40 @@
   
   /* Background gradients */
   .bg-ocean-gradient {
-    background: linear-gradient(135deg, hsl(var(--deep-navy)) 0%, hsl(var(--electric-blue)) 100%);
+    background: linear-gradient(135deg, hsl(var(--theme-text)) 0%, hsl(var(--theme-primary)) 100%);
   }
   
   .bg-sky-gradient {
-    background: linear-gradient(135deg, hsl(var(--electric-blue)) 0%, hsl(var(--cerulean)) 100%);
+    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-secondary)) 100%);
   }
   
   .bg-sunset-gradient {
-    background: linear-gradient(135deg, hsl(var(--coral)) 0%, hsl(var(--sunshine-yellow)) 100%);
+    background: linear-gradient(135deg, hsl(var(--theme-action)) 0%, hsl(var(--theme-accent)) 100%);
   }
   
   /* Wind quality classes */
   .wind-excellent {
-    @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--lime-green));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-excellent));
+    color: hsl(var(--theme-background));
   }
   
   .wind-good {
-    @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--azure));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-good));
+    color: hsl(var(--theme-background));
   }
   
   .wind-moderate {
-    @apply text-deep-navy relative overflow-hidden;
-    background-color: hsl(var(--light-blue));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-moderate));
+    color: hsl(var(--theme-text));
   }
   
   .wind-poor {
-    @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--coral));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-poor));
+    color: hsl(var(--theme-background));
   }
   
   /* Text colors */
@@ -349,7 +364,9 @@
   /* Month selector styling */
   .month-selector {
     scrollbar-width: none;
-    @apply bg-white text-primary rounded-xl my-4 shadow-md border border-slate-100;
+    background-color: hsl(var(--theme-background));
+    color: hsl(var(--theme-primary));
+    @apply rounded-xl my-4 shadow-md border border-border;
   }
 
   .month-selector::-webkit-scrollbar {
@@ -358,16 +375,20 @@
   
   /* Month button styles */
   .month-button {
-    @apply relative overflow-hidden transition-all duration-300 hover:scale-105 text-slate-500;
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105;
+    color: hsl(var(--theme-text-light));
   }
   
   .month-button.active {
-    @apply bg-primary/10 font-bold text-primary shadow-sm;
+    background-color: hsl(var(--theme-primary)/10%);
+    color: hsl(var(--theme-primary));
+    @apply font-bold shadow-sm;
   }
   
   .month-button.active::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-1 bg-primary;
+    @apply absolute bottom-0 left-0 w-full h-1;
+    background-color: hsl(var(--theme-primary));
     animation: slide-in 0.3s ease-out;
   }
   
@@ -379,7 +400,7 @@
   /* Card hover effects */
   .spot-card {
     @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
-    background: linear-gradient(135deg, white 0%, hsl(var(--light-blue) / 40%) 100%);
+    background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 40%) 100%);
   }
   
   /* Animated wind indicator */
@@ -443,24 +464,27 @@
 
   /* Wind quality indicators with improved styling */
   .wind-quality-excellent {
-    @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--lime-green));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-excellent));
+    color: hsl(var(--theme-background));
   }
 
   .wind-quality-good {
-    @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--azure));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-good));
+    color: hsl(var(--theme-background));
   }
 
   .wind-quality-moderate {
     @apply relative overflow-hidden;
-    background-color: hsl(var(--light-blue));
-    color: hsl(var(--deep-navy));
+    background-color: hsl(var(--theme-wind-moderate));
+    color: hsl(var(--theme-text));
   }
 
   .wind-quality-poor {
-    @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--coral));
+    @apply relative overflow-hidden;
+    background-color: hsl(var(--theme-wind-poor));
+    color: hsl(var(--theme-background));
   }
   
   /* Fun wave animation */
