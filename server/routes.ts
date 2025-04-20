@@ -1,8 +1,9 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage, UserPreferences } from "./storage";
 import { z } from "zod";
-import { MonthNames } from "@shared/schema";
+import { MonthNames, insertReviewSchema, insertRatingSchema } from "@shared/schema";
+import { setupAuth } from "./auth";
 
 // Define user preferences schema for validation
 const userPreferencesSchema = z.object({
@@ -19,7 +20,18 @@ const userPreferencesSchema = z.object({
   month: z.number().min(1).max(12)
 });
 
+// Middleware to check if user is authenticated
+function isAuthenticated(req: Request, res: Response, next: NextFunction) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ message: "Authentication required" });
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Set up authentication routes
+  setupAuth(app);
+  
   // HTTP server
   const httpServer = createServer(app);
 
@@ -185,6 +197,193 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error getting recommendations:", error);
       res.status(500).json({ message: "Error fetching spot recommendations" });
+    }
+  });
+
+  // Get spot with reviews and ratings
+  app.get("/api/spots/:id/details", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid spot ID" });
+      }
+      
+      const spotDetails = await storage.getSpotWithReviewsAndRatings(id);
+      if (!spotDetails) {
+        return res.status(404).json({ message: "Spot not found" });
+      }
+      
+      res.json(spotDetails);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching spot details with reviews and ratings" });
+    }
+  });
+
+  // Get reviews for a spot
+  app.get("/api/spots/:id/reviews", async (req, res) => {
+    try {
+      const spotId = parseInt(req.params.id, 10);
+      if (isNaN(spotId)) {
+        return res.status(400).json({ message: "Invalid spot ID" });
+      }
+      
+      const reviews = await storage.getReviewsForSpot(spotId);
+      res.json(reviews);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching reviews" });
+    }
+  });
+
+  // Create a review (requires authentication)
+  app.post("/api/reviews", isAuthenticated, async (req, res) => {
+    try {
+      const userId = (req.user as Express.User).id;
+      
+      // Create review schema with required userId
+      const reviewSchema = insertReviewSchema.extend({
+        spotId: z.number()
+      });
+      
+      // Parse request body
+      const parseResult = reviewSchema.safeParse({
+        ...req.body,
+        userId
+      });
+      
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          message: "Invalid review data", 
+          errors: parseResult.error.errors 
+        });
+      }
+      
+      // Check if user already has a review for this spot
+      const existingReview = await storage.getReviewByUserAndSpot(userId, parseResult.data.spotId);
+      if (existingReview) {
+        return res.status(400).json({ 
+          message: "You already reviewed this spot. Try updating your existing review." 
+        });
+      }
+      
+      const review = await storage.createReview(parseResult.data);
+      res.status(201).json(review);
+    } catch (error) {
+      console.error("Error creating review:", error);
+      res.status(500).json({ message: "Error creating review" });
+    }
+  });
+
+  // Update a review (requires authentication)
+  app.put("/api/reviews/:id", isAuthenticated, async (req, res) => {
+    try {
+      const reviewId = parseInt(req.params.id, 10);
+      if (isNaN(reviewId)) {
+        return res.status(400).json({ message: "Invalid review ID" });
+      }
+      
+      // Validate content
+      const { content } = req.body;
+      if (typeof content !== 'string' || content.trim().length === 0) {
+        return res.status(400).json({ message: "Review content is required" });
+      }
+      
+      const updatedReview = await storage.updateReview(reviewId, content);
+      if (!updatedReview) {
+        return res.status(404).json({ message: "Review not found" });
+      }
+      
+      res.json(updatedReview);
+    } catch (error) {
+      console.error("Error updating review:", error);
+      res.status(500).json({ message: "Error updating review" });
+    }
+  });
+
+  // Delete a review (requires authentication)
+  app.delete("/api/reviews/:id", isAuthenticated, async (req, res) => {
+    try {
+      const reviewId = parseInt(req.params.id, 10);
+      if (isNaN(reviewId)) {
+        return res.status(400).json({ message: "Invalid review ID" });
+      }
+      
+      const success = await storage.deleteReview(reviewId);
+      if (!success) {
+        return res.status(404).json({ message: "Review not found or already deleted" });
+      }
+      
+      res.status(204).end();
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      res.status(500).json({ message: "Error deleting review" });
+    }
+  });
+
+  // Create or update a rating (requires authentication)
+  app.post("/api/ratings", isAuthenticated, async (req, res) => {
+    try {
+      const userId = (req.user as Express.User).id;
+      
+      // Rating schema with required userId
+      const ratingSchema = insertRatingSchema.extend({
+        spotId: z.number(),
+        windReliability: z.number().min(1).max(5),
+        beginnerFriendly: z.number().min(1).max(5),
+        scenery: z.number().min(1).max(5),
+        uncrowded: z.number().min(1).max(5),
+        localVibe: z.number().min(1).max(5),
+        overall: z.number().min(1).max(5)
+      });
+      
+      // Parse request body
+      const parseResult = ratingSchema.safeParse({
+        ...req.body,
+        userId
+      });
+      
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          message: "Invalid rating data", 
+          errors: parseResult.error.errors 
+        });
+      }
+      
+      // Check if user already has a rating for this spot
+      const existingRating = await storage.getRatingByUserAndSpot(userId, parseResult.data.spotId);
+      
+      let rating;
+      if (existingRating) {
+        // Update existing rating
+        rating = await storage.updateRating(existingRating.id, parseResult.data);
+        res.json(rating);
+      } else {
+        // Create new rating
+        rating = await storage.createRating(parseResult.data);
+        res.status(201).json(rating);
+      }
+    } catch (error) {
+      console.error("Error creating/updating rating:", error);
+      res.status(500).json({ message: "Error saving rating" });
+    }
+  });
+
+  // Delete a rating (requires authentication)
+  app.delete("/api/ratings/:id", isAuthenticated, async (req, res) => {
+    try {
+      const ratingId = parseInt(req.params.id, 10);
+      if (isNaN(ratingId)) {
+        return res.status(400).json({ message: "Invalid rating ID" });
+      }
+      
+      const success = await storage.deleteRating(ratingId);
+      if (!success) {
+        return res.status(404).json({ message: "Rating not found or already deleted" });
+      }
+      
+      res.status(204).end();
+    } catch (error) {
+      console.error("Error deleting rating:", error);
+      res.status(500).json({ message: "Error deleting rating" });
     }
   });
 
