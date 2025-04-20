@@ -323,7 +323,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
                     <Button 
                       variant="outline" 
-                      className="w-full sm:w-auto px-5 py-3 bg-slate-600 text-white hover:bg-slate-700 transition-colors duration-300"
+                      className="w-full sm:w-auto px-5 py-3 border-slate-300 hover:bg-slate-100 text-slate-700 transition-colors duration-300"
                       onClick={handleClose}
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -333,7 +333,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     </Button>
                     
                     <Button 
-                      className="w-full sm:w-auto px-5 py-3 bg-teal-600 hover:bg-teal-700 text-white transition-colors duration-300 shadow-md"
+                      className="w-full sm:w-auto px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white transition-colors duration-300 shadow-sm"
                     >
                       Add to Favorites 
                       <Heart className="ml-2 h-5 w-5 animate-pulse" />

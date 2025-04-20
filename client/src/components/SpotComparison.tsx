@@ -28,13 +28,13 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
   const windQualityColor = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-emerald-600 text-white";
+        return "bg-blue-700 text-white";
       case WindQuality.Good:
-        return "bg-teal-600 text-white";
+        return "bg-blue-600 text-white";
       case WindQuality.Moderate:
-        return "bg-amber-600 text-white";
+        return "bg-slate-600 text-white";
       case WindQuality.Poor:
-        return "bg-rose-600 text-white";
+        return "bg-slate-500 text-white";
       default:
         return "bg-slate-500 text-white";
     }
@@ -44,13 +44,13 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
     if (!level) return <Badge variant="outline">Unknown</Badge>;
     
     if (level.includes("Beginner")) {
-      return <Badge className="bg-teal-600 text-white">Beginner Friendly</Badge>;
+      return <Badge className="bg-slate-500 text-white">Beginner Friendly</Badge>;
     } else if (level.includes("Intermediate")) {
-      return <Badge className="bg-amber-600 text-white">Intermediate</Badge>;
+      return <Badge className="bg-slate-600 text-white">Intermediate</Badge>;
     } else if (level.includes("Advanced")) {
-      return <Badge className="bg-rose-600 text-white">Advanced</Badge>;
+      return <Badge className="bg-slate-700 text-white">Advanced</Badge>;
     } else if (level.includes("All")) {
-      return <Badge className="bg-indigo-600 text-white">All Levels</Badge>;
+      return <Badge className="bg-blue-600 text-white">All Levels</Badge>;
     }
     
     return <Badge variant="outline">{level}</Badge>;
@@ -96,7 +96,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
   return (
     <Card className="w-full max-w-6xl mx-auto bg-white/95 shadow-lg backdrop-blur border rounded-lg">
       <CardHeader>
-        <CardTitle className="text-center text-xl md:text-2xl text-sky-700">
+        <CardTitle className="text-center text-xl md:text-2xl text-blue-700">
           Spot Comparison for {monthNames[selectedMonth - 1]}
         </CardTitle>
       </CardHeader>
@@ -115,7 +115,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
             </TableHeader>
             <TableBody>
               {/* Wind conditions */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">Wind Quality</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`wind-${spot.id}`} className="text-center">
@@ -141,7 +141,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               </TableRow>
 
               {/* Temperatures */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">
                   <div className="flex items-center">
                     <Thermometer className="mr-2 h-4 w-4" /> Air Temp
@@ -171,7 +171,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               </TableRow>
 
               {/* Schools */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">Number of Schools</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`schools-${spot.id}`} className="text-center">
@@ -191,7 +191,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               </TableRow>
 
               {/* Conditions */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">Conditions</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`cond-${spot.id}`} className="text-center">
@@ -241,7 +241,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               </TableRow>
 
               {/* Food */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">Food Options</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`food-${spot.id}`} className="text-center">
@@ -276,7 +276,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               </TableRow>
 
               {/* Costs */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">
                   <div className="flex items-center">
                     <DollarSign className="mr-2 h-4 w-4" /> School Cost (avg)
@@ -306,7 +306,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               </TableRow>
 
               {/* Notes */}
-              <TableRow className="bg-sky-50">
+              <TableRow className="bg-slate-50">
                 <TableCell className="font-medium">Seasonal Notes</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`notes-${spot.id}`} className="text-center">
