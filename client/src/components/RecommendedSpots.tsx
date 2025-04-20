@@ -25,7 +25,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   if (isLoading) {
     return (
       <Card className="w-full shadow-lg border-slate-200 p-0">
-        <CardHeader className="bg-gradient-to-r from-teal-600 to-teal-500 text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-t-lg">
           <CardTitle className="text-xl text-center flex items-center justify-center">
             <Navigation className="mr-2 h-5 w-5" /> Finding your perfect spots...
           </CardTitle>
@@ -57,7 +57,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   if (!spots || spots.length === 0) {
     return (
       <Card className="w-full shadow-lg border-slate-200 p-0">
-        <CardHeader className="bg-gradient-to-r from-teal-600 to-teal-500 text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-t-lg">
           <CardTitle className="text-xl text-center">No Matching Spots Found</CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-center">
@@ -72,13 +72,13 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   const getWindBadgeClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-teal-600 text-white";
+        return "bg-blue-700 text-white";
       case WindQuality.Good:
-        return "bg-teal-500 text-white";
+        return "bg-blue-600 text-white";
       case WindQuality.Moderate:
-        return "bg-slate-500 text-white";
+        return "bg-slate-600 text-white";
       case WindQuality.Poor:
-        return "bg-slate-400 text-white";
+        return "bg-slate-500 text-white";
       default:
         return "bg-slate-500 text-white";
     }
@@ -94,15 +94,15 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   // Progress bar color based on match score
   const getMatchColor = (score: number) => {
     const percent = getMatchPercent(score);
-    if (percent >= 95) return "bg-teal-600";
-    if (percent >= 90) return "bg-teal-500";
-    if (percent >= 85) return "bg-teal-400";
+    if (percent >= 95) return "bg-blue-700";
+    if (percent >= 90) return "bg-blue-600";
+    if (percent >= 85) return "bg-blue-500";
     return "bg-slate-500";
   };
 
   return (
     <Card className="w-full shadow-lg border-slate-200 p-0">
-      <CardHeader className="bg-gradient-to-r from-teal-600 to-teal-500 text-white rounded-t-lg">
+      <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-t-lg">
         <CardTitle className="text-xl text-center flex items-center justify-center">
           <Navigation className="mr-2 h-5 w-5" /> Recommended Spots For You
         </CardTitle>
@@ -116,9 +116,9 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
             >
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Spot Image/Preview Section */}
-                <div className="relative rounded-lg overflow-hidden h-40 md:w-48 bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white font-bold">
+                <div className="relative rounded-lg overflow-hidden h-40 md:w-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-bold">
                   {/* Match Percentage Circle */}
-                  <div className="absolute top-2 right-2 bg-teal-800 bg-opacity-80 rounded-full h-14 w-14 flex items-center justify-center">
+                  <div className="absolute top-2 right-2 bg-blue-900 bg-opacity-80 rounded-full h-14 w-14 flex items-center justify-center">
                     <div className="text-center">
                       <div className="text-xl font-bold">{getMatchPercent(spot.matchScore)}%</div>
                       <div className="text-xs -mt-1">match</div>
@@ -171,7 +171,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                     )}
                     
                     {spot.bestMonths && (
-                      <Badge variant="outline" className="border-teal-200 bg-teal-50 text-teal-700">
+                      <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700">
                         <Calendar className="mr-1 h-3 w-3" />
                         Best: {spot.bestMonths}
                       </Badge>
@@ -197,7 +197,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                   <div className="mb-3">
                     <button 
                       onClick={() => setSelectedMatchIndex(selectedMatchIndex === index ? null : index)}
-                      className="text-sm text-teal-700 hover:text-teal-900 font-medium flex items-center"
+                      className="text-sm text-blue-700 hover:text-blue-900 font-medium flex items-center"
                     >
                       {selectedMatchIndex === index ? 'Hide match details' : 'Why this matches you'} 
                       <svg 
@@ -216,10 +216,10 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                     </button>
                     
                     {selectedMatchIndex === index && (
-                      <div className="mt-2 pl-3 border-l-2 border-teal-200 text-sm text-slate-700 space-y-1">
+                      <div className="mt-2 pl-3 border-l-2 border-blue-200 text-sm text-slate-700 space-y-1">
                         {spot.reasons.map((reason, idx) => (
                           <div key={idx} className="flex items-start">
-                            <span className="text-teal-600 mr-2">✓</span>
+                            <span className="text-blue-700 mr-2">✓</span>
                             <span>{reason}</span>
                           </div>
                         ))}
@@ -231,7 +231,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                   <div className="flex justify-end">
                     <Button 
                       onClick={() => onSpotSelect(spot.id)}
-                      className="bg-teal-600 hover:bg-teal-700 text-white"
+                      className="bg-blue-700 hover:bg-blue-800 text-white"
                       size="sm"
                     >
                       View Details
