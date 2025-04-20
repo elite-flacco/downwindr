@@ -34,7 +34,7 @@ export default function SpotsList({
   onToggleCompare
 }: SpotsListProps) {
   return (
-    <Card className="w-full overflow-y-auto rounded-xl border border-theme-border shadow-sm" style={{ maxHeight: "calc(100vh - 16rem)" }}>
+    <Card className="w-full rounded-xl border border-theme-border shadow-sm">
       <CardContent className="p-6">
         <h3 className="text-lg font-semibold mb-4 text-theme-text flex items-center">
           <Sparkles className="w-5 h-5 mr-2 text-theme-primary" />
