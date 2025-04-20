@@ -193,80 +193,88 @@ export default function Spots() {
       <Header />
       
       <main className="container mx-auto px-4 py-6 flex-grow">
-        {/* Page Title */}
-        <div className="mb-6">
-          <h2 className="text-3xl font-bold text-primary">Find Perfect Kitesurfing Spots</h2>
-          <p className="text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions by month</p>
+        {/* Page Title with more compact styling */}
+        <div className="mb-3">
+          <h2 className="text-2xl font-bold text-primary">Find Perfect Kitesurfing Spots</h2>
+          <p className="text-sm text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions</p>
         </div>
         
-        {/* Month Selector + Personalized Recommendation Button */}
-        <div className="flex flex-wrap items-center justify-between mb-4">
-          <MonthSelector 
-            selectedMonth={selectedMonth} 
-            onMonthChange={handleMonthChange} 
-          />
-          
-          <Button 
-            onClick={handleShowPreferencesModal}
-            variant="default"
-            className="bg-blue-700 hover:bg-blue-800 text-white shadow-md"
-            size="sm"
-          >
-            <Sparkles className="h-4 w-4 mr-2" />
-            Get Personalized Recommendations
-          </Button>
-        </div>
-        
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-          {/* Filter Controls */}
-          <div className="flex-grow">
-            <FilterControls 
-              windQualityFilter={windQualityFilter}
-              onWindQualityFilterChange={handleWindQualityFilterChange}
-              searchQuery={searchQuery}
-              onSearchChange={handleSearchChange}
-            />
-          </div>
-          
-          {/* Compare Button */}
-          <div className="flex gap-2 items-center">
-            <div className="hidden sm:flex gap-1">
-              <Button
-                variant={viewMode === "both" ? "default" : "outline"}
+        {/* Compact filter bar with controls */}
+        <div className="bg-white rounded-lg border border-slate-100 shadow-sm p-3 mb-4">
+          <div className="flex flex-col md:flex-row justify-between gap-3 mb-3">
+            {/* Top row: Month Selector and Recommendation Button */}
+            <div className="flex items-center justify-between md:justify-start gap-2 flex-wrap">
+              <MonthSelector 
+                selectedMonth={selectedMonth} 
+                onMonthChange={handleMonthChange} 
+              />
+              
+              <Button 
+                onClick={handleShowPreferencesModal}
+                variant="default"
+                className="bg-blue-700 hover:bg-blue-800 text-white h-8 text-xs px-2"
                 size="sm"
-                onClick={() => setViewMode("both")}
-                className="w-10 h-8"
               >
-                <List className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === "map" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("map")}
-                className="w-10 h-8"
-              >
-                <Map className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("list")}
-                className="w-10 h-8"
-              >
-                <BarChart className="h-4 w-4" />
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
+                Get Personalized Recommendations
               </Button>
             </div>
             
-            <div className="flex gap-1">
+            {/* View Toggles */}
+            <div className="flex items-center gap-1">
+              <span className="text-xs text-slate-500 mr-1 hidden md:inline">View:</span>
+              <div className="flex gap-1 p-0.5 bg-slate-100 rounded-md">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setViewMode("both")}
+                  className={`w-8 h-7 p-0 ${viewMode === "both" ? "bg-white shadow-sm" : ""}`}
+                >
+                  <List className="h-3.5 w-3.5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setViewMode("map")}
+                  className={`w-8 h-7 p-0 ${viewMode === "map" ? "bg-white shadow-sm" : ""}`}
+                >
+                  <Map className="h-3.5 w-3.5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setViewMode("list")}
+                  className={`w-8 h-7 p-0 ${viewMode === "list" ? "bg-white shadow-sm" : ""}`}
+                >
+                  <BarChart className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom row: Filter Controls and Compare Buttons */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+            {/* Filter Controls */}
+            <div className="w-full sm:flex-grow">
+              <FilterControls 
+                windQualityFilter={windQualityFilter}
+                onWindQualityFilterChange={handleWindQualityFilterChange}
+                searchQuery={searchQuery}
+                onSearchChange={handleSearchChange}
+              />
+            </div>
+            
+            {/* Compare Buttons - More Compact */}
+            <div className="flex gap-1 items-center mt-2 sm:mt-0">
               <Button
                 onClick={handleShowComparison}
                 disabled={spotsToCompare.length < 2}
                 size="sm"
                 variant="secondary"
-                className="flex items-center"
+                className="h-8 text-xs px-2"
               >
-                <SplitSquareVertical className="h-4 w-4 mr-2" />
-                Compare Selected {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
+                <SplitSquareVertical className="h-3.5 w-3.5 mr-1" />
+                Compare {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
               </Button>
               
               <Button
@@ -280,40 +288,40 @@ export default function Spots() {
                 }}
                 size="sm"
                 variant="outline"
-                className="flex items-center"
+                className="h-8 text-xs px-2"
                 disabled={!filteredSpots || filteredSpots.length < 2}
               >
-                <SplitSquareVertical className="h-4 w-4 mr-2" />
+                <SplitSquareVertical className="h-3.5 w-3.5 mr-1" />
                 Compare All
               </Button>
+              
+              {spotsToCompare.length > 0 && (
+                <Button
+                  onClick={clearComparison}
+                  size="sm"
+                  variant="ghost"
+                  className="text-red-500 h-8 p-0 w-7"
+                >
+                  ✕
+                </Button>
+              )}
             </div>
-            
-            {spotsToCompare.length > 0 && (
-              <Button
-                onClick={clearComparison}
-                size="sm"
-                variant="ghost"
-                className="text-red-500 h-8 px-2"
-              >
-                Clear
-              </Button>
-            )}
           </div>
         </div>
         
-        {/* Spots to compare */}
+        {/* Spots to compare - More compact badges */}
         {spotsToCompare.length > 0 && !showComparison && (
-          <div className="mb-4 p-2 bg-sky-50 rounded-md border border-sky-100">
-            <div className="text-sm text-sky-700 font-medium mb-2">Selected for comparison:</div>
-            <div className="flex flex-wrap gap-2">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="text-xs text-slate-500">Selected:</span>
+            <div className="flex flex-wrap gap-1">
               {spotsToCompare.map(spot => (
-                <div key={spot.id} className="bg-white rounded-full px-3 py-1 text-sm flex items-center gap-1 border border-sky-200">
+                <div key={spot.id} className="bg-white rounded-full px-2 py-0.5 text-xs flex items-center gap-1 border border-sky-100 shadow-sm">
                   {spot.name}
                   <button 
                     onClick={() => toggleSpotComparison(spot)}
-                    className="text-gray-400 hover:text-red-500"
+                    className="text-gray-400 hover:text-red-500 w-3.5 h-3.5 flex items-center justify-center rounded-full hover:bg-red-50"
                   >
-                    ✕
+                    <span className="text-[10px]">✕</span>
                   </button>
                 </div>
               ))}
