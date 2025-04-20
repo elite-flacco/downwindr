@@ -102,25 +102,25 @@ export default function Header() {
               <Link href="/spots">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
                   <Map className="w-5 h-5 mr-3 text-primary" />
-                  Spots
+                  Spots 🌊
                 </div>
               </Link>
               <Link href="/community">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
                   <Users className="w-5 h-5 mr-3 text-primary" />
-                  Community
+                  Community 👥
                 </div>
               </Link>
               <Link href="/learn">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
                   <Activity className="w-5 h-5 mr-3 text-primary" />
-                  Learn
+                  Learn 📚
                 </div>
               </Link>
               <Link href="/about">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
                   <Info className="w-5 h-5 mr-3 text-primary" />
-                  About
+                  About ℹ️
                 </div>
               </Link>
             </nav>

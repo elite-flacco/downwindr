@@ -21,7 +21,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
     setTimeout(onClose, 300); // Wait for animation to complete
   };
   
-  // Get wind quality color class
+  // Get wind quality color class and emoji
   const getWindQualityClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
@@ -37,6 +37,22 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
     }
   };
   
+  // Get wind quality emoji
+  const getWindQualityEmoji = (quality: WindQuality) => {
+    switch (quality) {
+      case WindQuality.Excellent:
+        return "🚀";
+      case WindQuality.Good:
+        return "😎";
+      case WindQuality.Moderate:
+        return "😊";
+      case WindQuality.Poor:
+        return "😐";
+      default:
+        return "";
+    }
+  };
+  
   // Render wind info badge
   const renderCurrentWindBadge = () => {
     if (!spotDetails) return null;
@@ -49,7 +65,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
     return (
       <div className={`flex items-center ${getWindQualityClass(currentCondition.windQuality)} text-white px-4 py-2 rounded-full text-sm font-bold shadow-md wind-indicator`}>
         <Wind className="mr-2 h-4 w-4" /> 
-        {currentCondition.windSpeed} knots
+        {currentCondition.windSpeed} knots {getWindQualityEmoji(currentCondition.windQuality)}
       </div>
     );
   };
@@ -165,15 +181,15 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     {renderCurrentWindBadge()}
                     
                     <div className="flex items-center bg-slate-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm">
-                      <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves
+                      <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves 🌊
                     </div>
                     
                     <div className="flex items-center border border-slate-300 text-slate-800 bg-white px-4 py-2 rounded-full text-sm font-medium">
-                      <Thermometer className="mr-2 h-4 w-4 text-slate-600" /> {spotDetails.spot.tempRange}
+                      <Thermometer className="mr-2 h-4 w-4 text-slate-600" /> {spotDetails.spot.tempRange} 🌡️
                     </div>
                     
                     <div className="flex items-center border border-slate-300 text-slate-800 bg-white px-4 py-2 rounded-full text-sm font-medium">
-                      <Calendar className="mr-2 h-4 w-4 text-slate-600" /> Best: {spotDetails.spot.bestMonths}
+                      <Calendar className="mr-2 h-4 w-4 text-slate-600" /> Best: {spotDetails.spot.bestMonths} 📅
                     </div>
                     
                     {spotDetails.spot.windguruCode && (
