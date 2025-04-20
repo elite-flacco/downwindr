@@ -65,7 +65,7 @@ export const insertSpotSchema = createInsertSchema(spots).pick({
 });
 
 export const insertWindConditionSchema = createInsertSchema(windConditions).pick({
-  spotId: true,
+  // spotId: true,
   month: true,
   windSpeed: true,
   windQuality: true,
