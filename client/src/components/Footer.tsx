@@ -33,8 +33,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-sky/10 text-deep-ocean pt-16 pb-8 mt-12 bg-gradient-to-br from-white to-sky/10">      
-      <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-r from-azure/10 via-azure to-azure/10 opacity-40"></div>
+    <footer className="relative border-t border-theme-border text-theme-text pt-16 pb-8 mt-12 bg-gradient-to-br from-theme-background to-theme-surface/30">      
+      <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-r from-theme-primary-hover/10 via-theme-primary-hover to-theme-primary-hover/10 opacity-40"></div>
       
       <div className="container mx-auto px-4">
         <motion.div 
@@ -46,51 +46,51 @@ export default function Footer() {
         >
           <motion.div variants={itemVariants}>
             <div className="bg-ocean-gradient p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md">
-              <Wind className="w-8 h-8 text-white" />
+              <Wind className="w-8 h-8 text-theme-background" />
             </div>
-            <h3 className="text-2xl font-bold mb-2 text-azure" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
-            <p className="text-deep-ocean/80 mb-6 leading-relaxed">Discover the perfect kitesurfing destinations worldwide. Ride the perfect breeze!</p>
+            <h3 className="text-2xl font-bold mb-2 text-theme-primary-hover" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
+            <p className="text-theme-text-light mb-6 leading-relaxed">Discover the perfect kitesurfing destinations worldwide. Ride the perfect breeze!</p>
             <div className="flex space-x-4">
               <motion.a 
                 whileHover={{ y: -3 }}
                 whileTap={{ y: 0 }}
                 href="#" 
-                className="h-10 w-10 rounded-full bg-sky/20 flex items-center justify-center hover:bg-sky/30 transition-all duration-300 cursor-pointer shadow-sm"
+                className="h-10 w-10 rounded-full bg-theme-surface flex items-center justify-center hover:bg-theme-surface/80 transition-all duration-300 cursor-pointer shadow-sm"
               >
-                <Facebook className="w-5 h-5 text-azure" />
+                <Facebook className="w-5 h-5 text-theme-primary-hover" />
               </motion.a>
               <motion.a 
                 whileHover={{ y: -3 }}
                 whileTap={{ y: 0 }}
                 href="#" 
-                className="h-10 w-10 rounded-full bg-sky/20 flex items-center justify-center hover:bg-sky/30 transition-all duration-300 cursor-pointer shadow-sm"
+                className="h-10 w-10 rounded-full bg-theme-surface flex items-center justify-center hover:bg-theme-surface/80 transition-all duration-300 cursor-pointer shadow-sm"
               >
-                <Instagram className="w-5 h-5 text-azure" />
+                <Instagram className="w-5 h-5 text-theme-primary-hover" />
               </motion.a>
               <motion.a 
                 whileHover={{ y: -3 }}
                 whileTap={{ y: 0 }}
                 href="#" 
-                className="h-10 w-10 rounded-full bg-sky/20 flex items-center justify-center hover:bg-sky/30 transition-all duration-300 cursor-pointer shadow-sm"
+                className="h-10 w-10 rounded-full bg-theme-surface flex items-center justify-center hover:bg-theme-surface/80 transition-all duration-300 cursor-pointer shadow-sm"
               >
-                <Twitter className="w-5 h-5 text-azure" />
+                <Twitter className="w-5 h-5 text-theme-primary-hover" />
               </motion.a>
             </div>
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl mb-6 flex items-center text-deep-ocean font-bold">
-              <Compass className="w-5 h-5 mr-2 text-azure" />
+            <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
+              <Compass className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Explore
             </h4>
             <ul className="space-y-4">
               <li>
                 <Link href="/spots">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Find Spots
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -99,10 +99,10 @@ export default function Footer() {
               <li>
                 <Link href="/community">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Community
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -111,10 +111,10 @@ export default function Footer() {
               <li>
                 <Link href="/learn">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Weather Guide
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>

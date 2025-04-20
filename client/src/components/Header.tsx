@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header 
-      className={`bg-white border-b border-sky/10 w-full transition-all duration-300 ${
+      className={`bg-theme-background border-b border-theme-border w-full transition-all duration-300 ${
         scrolled ? "sticky top-0 z-50 shadow-md" : "shadow-sm"
       }`}
     >
@@ -41,13 +41,13 @@ export default function Header() {
             whileTap={{ scale: 0.95 }}
           >
             <div className="bg-sky-gradient p-2 rounded-full mr-3 shadow-md">
-              <Wind className="w-6 h-6 text-white" />
+              <Wind className="w-6 h-6 text-theme-background" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-electric" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+              <h1 className="text-xl font-bold text-theme-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>
                 Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
               </h1>
-              <p className="text-xs text-navy/70 font-medium">Ride the perfect breeze 💨</p>
+              <p className="text-xs text-theme-text-light font-medium">Ride the perfect breeze 💨</p>
             </div>
           </motion.div>
         </Link>
@@ -57,8 +57,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-electric text-white shadow-md" 
-                  : "text-navy hover:text-electric hover:bg-sky/10"
+                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -71,8 +71,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-electric text-white shadow-md" 
-                  : "text-navy hover:text-electric hover:bg-sky/10"
+                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -85,8 +85,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-electric text-white shadow-md" 
-                  : "text-navy hover:text-electric hover:bg-sky/10"
+                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -99,8 +99,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-electric text-white shadow-md" 
-                  : "text-navy hover:text-electric hover:bg-sky/10"
+                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -113,7 +113,7 @@ export default function Header() {
         
         <div className="md:hidden">
           <motion.button 
-            className="text-electric p-2 rounded-lg hover:bg-sky/10" 
+            className="text-theme-primary p-2 rounded-lg hover:bg-theme-surface" 
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
             whileTap={{ scale: 0.9 }}
@@ -131,7 +131,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="md:hidden bg-white w-full py-2 shadow-md border-t border-sky/10"
+            className="md:hidden bg-theme-background w-full py-2 shadow-md border-t border-theme-border"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -142,13 +142,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
-                      ? "bg-electric text-white" 
-                      : "text-navy hover:text-electric hover:bg-sky/10"
+                      ? "bg-theme-primary text-theme-background" 
+                      : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-white" : "text-electric"}`} />
+                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-theme-background" : "text-theme-primary"}`} />
                   Home
                 </motion.div>
               </Link>
@@ -156,13 +156,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-electric text-white" 
-                      : "text-navy hover:text-electric hover:bg-sky/10"
+                      ? "bg-theme-primary text-theme-background" 
+                      : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-white" : "text-electric"}`} />
+                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-theme-background" : "text-theme-primary"}`} />
                   Spots
                 </motion.div>
               </Link>
@@ -170,13 +170,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-electric text-white" 
-                      : "text-navy hover:text-electric hover:bg-sky/10"
+                      ? "bg-theme-primary text-theme-background" 
+                      : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-white" : "text-electric"}`} />
+                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-theme-background" : "text-theme-primary"}`} />
                   Community
                 </motion.div>
               </Link>
@@ -184,13 +184,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-electric text-white" 
-                      : "text-navy hover:text-electric hover:bg-sky/10"
+                      ? "bg-theme-primary text-theme-background" 
+                      : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-white" : "text-electric"}`} />
+                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} />
                   Learn
                 </motion.div>
               </Link>
