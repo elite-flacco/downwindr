@@ -4,6 +4,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { X, Wind, Waves, Thermometer, Calendar, Heart, ExternalLink } from "lucide-react";
 import { MonthNames, WindQuality } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
+import ReviewsAndRatings from "./ReviewsAndRatings";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 interface SpotDetailModalProps {
   spotDetails: { spot: any; windConditions: any[] } | undefined;
@@ -336,6 +338,23 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     </div>
                   </motion.div>
                   
+                  {/* Community Reviews & Ratings Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-8 mb-8 bg-theme-background rounded-xl p-5 shadow-md"
+                  >
+                    <h3 className="text-xl font-bold font-heading mb-5 text-theme-text flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                      </svg>
+                      Community Feedback
+                    </h3>
+                    
+                    <ReviewsAndRatings spotId={spotDetails.spot.id} />
+                  </motion.div>
+
                   {/* Action buttons */}
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
                     <Button 
