@@ -152,7 +152,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 {/* Wind Speed Preferences */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
-                    <Wind className="h-5 w-5 text-teal-600" />
+                    <Wind className="h-5 w-5 text-blue-700" />
                     <h3>Wind Speed Range</h3>
                   </div>
                   <div className="px-2">
@@ -184,7 +184,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 {/* Month Preference */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
-                    <Compass className="h-5 w-5 text-teal-600" />
+                    <Compass className="h-5 w-5 text-blue-700" />
                     <h3>Travel Month</h3>
                   </div>
                   <div className="px-2">
@@ -384,7 +384,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 </Button>
                 <Button 
                   onClick={handleSave}
-                  className="bg-teal-600 hover:bg-teal-700 text-white"
+                  className="bg-blue-700 hover:bg-blue-800 text-white"
                 >
                   <SendHorizonal className="mr-2 h-4 w-4" />
                   Find Perfect Spots

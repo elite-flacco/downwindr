@@ -198,12 +198,12 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                     {spot.conditions ? (
                       <div className="flex flex-wrap gap-1 justify-center">
                         {spot.conditions.slice(0, 3).map((condition: string, i: number) => (
-                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                          <span key={i} className="text-xs px-2 py-1 bg-slate-100 rounded-full text-slate-700">
                             {condition}
                           </span>
                         ))}
                         {spot.conditions.length > 3 && (
-                          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                          <span className="text-xs px-2 py-1 bg-slate-100 rounded-full text-slate-700">
                             +{spot.conditions.length - 3} more
                           </span>
                         )}
@@ -223,12 +223,12 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                     {spot.accommodationOptions ? (
                       <div className="flex flex-wrap gap-1 justify-center">
                         {spot.accommodationOptions.slice(0, 2).map((option: string, i: number) => (
-                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                          <span key={i} className="text-xs px-2 py-1 bg-slate-100 rounded-full text-slate-700">
                             {option}
                           </span>
                         ))}
                         {spot.accommodationOptions.length > 2 && (
-                          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                          <span className="text-xs px-2 py-1 bg-slate-100 rounded-full text-slate-700">
                             +{spot.accommodationOptions.length - 2} more
                           </span>
                         )}
@@ -248,12 +248,12 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                     {spot.foodOptions ? (
                       <div className="flex flex-wrap gap-1 justify-center">
                         {spot.foodOptions.slice(0, 2).map((option: string, i: number) => (
-                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                          <span key={i} className="text-xs px-2 py-1 bg-slate-100 rounded-full text-slate-700">
                             {option}
                           </span>
                         ))}
                         {spot.foodOptions.length > 2 && (
-                          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                          <span className="text-xs px-2 py-1 bg-slate-100 rounded-full text-slate-700">
                             +{spot.foodOptions.length - 2} more
                           </span>
                         )}
