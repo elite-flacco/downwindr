@@ -39,6 +39,22 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
         return "bg-slate-500 text-white";
     }
   };
+  
+  // Get wind quality emoji
+  const getWindQualityEmoji = (quality: WindQuality) => {
+    switch (quality) {
+      case WindQuality.Excellent:
+        return "🚀";
+      case WindQuality.Good:
+        return "😎";
+      case WindQuality.Moderate:
+        return "😊";
+      case WindQuality.Poor:
+        return "😐";
+      default:
+        return "";
+    }
+  };
 
   const DifficultyBadge = ({ level }: { level: string | null }) => {
     if (!level) return <Badge variant="outline">Unknown</Badge>;
@@ -121,7 +137,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                   <TableCell key={`wind-${spot.id}`} className="text-center">
                     {spot.currentWindCondition ? (
                       <Badge className={windQualityColor(spot.currentWindCondition.windQuality as WindQuality)}>
-                        {spot.currentWindCondition.windQuality}
+                        {spot.currentWindCondition.windQuality} {getWindQualityEmoji(spot.currentWindCondition.windQuality as WindQuality)}
                       </Badge>
                     ) : (
                       <CircleOff className="mx-auto h-5 w-5 text-gray-400" />
@@ -150,7 +166,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 {sortedSpots.map((spot) => (
                   <TableCell key={`air-${spot.id}`} className="text-center">
                     {spot.currentWindCondition?.airTemp ? 
-                      `${spot.currentWindCondition.airTemp}°C` : 
+                      `${spot.currentWindCondition.airTemp}°C 🌡️` : 
                       "N/A"}
                   </TableCell>
                 ))}
@@ -164,7 +180,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 {sortedSpots.map((spot) => (
                   <TableCell key={`water-${spot.id}`} className="text-center">
                     {spot.currentWindCondition?.waterTemp ? 
-                      `${spot.currentWindCondition.waterTemp}°C` : 
+                      `${spot.currentWindCondition.waterTemp}°C 🌊` : 
                       "N/A"}
                   </TableCell>
                 ))}
@@ -175,7 +191,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 <TableCell className="font-medium">Number of Schools</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`schools-${spot.id}`} className="text-center">
-                    {spot.numberOfSchools || "N/A"}
+                    {spot.numberOfSchools ? `${spot.numberOfSchools} 🏫` : "N/A"}
                   </TableCell>
                 ))}
               </TableRow>
@@ -285,7 +301,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 {sortedSpots.map((spot) => (
                   <TableCell key={`schoolCost-${spot.id}`} className="text-center">
                     {spot.averageSchoolCost ? 
-                      `$${spot.averageSchoolCost}/day` : 
+                      `$${spot.averageSchoolCost}/day 💰` : 
                       "N/A"}
                   </TableCell>
                 ))}
@@ -299,7 +315,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 {sortedSpots.map((spot) => (
                   <TableCell key={`accomCost-${spot.id}`} className="text-center">
                     {spot.averageAccommodationCost ? 
-                      `$${spot.averageAccommodationCost}/night` : 
+                      `$${spot.averageAccommodationCost}/night 🏨` : 
                       "N/A"}
                   </TableCell>
                 ))}
