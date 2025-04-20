@@ -151,7 +151,15 @@ export class MemStorage implements IStorage {
         "Dragon Tarifa Kite School|https://maps.google.com/maps?cid=13866010850051988642|4.8|127",
         "ION Club Tarifa|https://maps.google.com/maps?cid=14806290270589082059|4.7|94",
         "Rebel Tarifa|https://maps.google.com/maps?cid=9870977445894907991|4.9|68"
-      ]
+      ],
+      difficultyLevel: "All Levels",
+      conditions: ["Sandy Beach", "Occasional Chop", "Some Gusty Days"],
+      accommodationOptions: ["Hotels", "Apartments", "Hostels", "Camping"],
+      foodOptions: ["Seafood Restaurants", "Spanish Tapas", "International Cuisine", "Beach Bars"],
+      culture: "Vibrant mix of Spanish and Moorish influences with laid-back beach culture",
+      averageSchoolCost: 65,
+      averageAccommodationCost: 80,
+      numberOfSchools: 12
     });
 
     // 2. Cape Town, South Africa
@@ -171,7 +179,15 @@ export class MemStorage implements IStorage {
         "High Five Kitesurfing School|https://maps.google.com/maps?cid=17825071904597267949|4.9|103",
         "Cabrinha Kiteboarding|https://maps.google.com/maps?cid=5959338275045810135|4.8|85",
         "Best Kiteboarding South Africa|https://maps.google.com/maps?cid=8782497832221212255|4.7|77"
-      ]
+      ],
+      difficultyLevel: "Advanced",
+      conditions: ["Waves", "Strong Currents", "Open Ocean", "Rocky Sections"],
+      accommodationOptions: ["Luxury Hotels", "Vacation Rentals", "Boutique Guesthouses", "Surf Hostels"],
+      foodOptions: ["Fine Dining", "Seafood", "Farm-to-Table", "Wine Estates", "Food Markets"],
+      culture: "Diverse cosmopolitan city with rich history and strong European influences",
+      averageSchoolCost: 85,
+      averageAccommodationCost: 120,
+      numberOfSchools: 15
     });
 
     // 3. Cabarete, Dominican Republic
@@ -191,7 +207,15 @@ export class MemStorage implements IStorage {
         "Kite Club Cabarete|https://maps.google.com/maps?cid=10726341777331495804|4.8|156",
         "Cabarete Kite School|https://maps.google.com/maps?cid=8345246767243116914|4.9|93",
         "Laurel Eastman Kiteboarding|https://maps.google.com/maps?cid=11000888324115506309|4.7|134"
-      ]
+      ],
+      difficultyLevel: "Beginner to Intermediate",
+      conditions: ["Flat Inside Reef", "Waves Outside", "Warm Water", "Sandy Bottom"],
+      accommodationOptions: ["Beach Resorts", "Budget Hotels", "Hostels", "Apartments"],
+      foodOptions: ["Caribbean Cuisine", "Beachfront Restaurants", "International Options", "Street Food"],
+      culture: "Vibrant mix of Dominican, Haitian and international influences with relaxed beach lifestyle",
+      averageSchoolCost: 60,
+      averageAccommodationCost: 70,
+      numberOfSchools: 14
     });
 
     // 4. Maui, Hawaii

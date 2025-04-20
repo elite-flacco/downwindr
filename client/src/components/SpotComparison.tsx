@@ -1,0 +1,323 @@
+import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { WindQuality } from '@shared/schema';
+import { ArrowUpCircle, ArrowDownCircle, CircleDashed, Thermometer, CircleOff, DollarSign } from 'lucide-react';
+
+interface SpotComparisonProps {
+  spots: any[];
+  selectedMonth: number;
+  onClose?: () => void;
+}
+
+export default function SpotComparison({ spots, selectedMonth, onClose }: SpotComparisonProps) {
+  if (!spots || spots.length === 0) {
+    return <div className="p-4 text-center">No spots selected for comparison</div>;
+  }
+
+  const windQualityColor = (quality: WindQuality) => {
+    switch (quality) {
+      case WindQuality.Excellent:
+        return "bg-green-500 text-white";
+      case WindQuality.Good:
+        return "bg-green-300";
+      case WindQuality.Moderate:
+        return "bg-yellow-300";
+      case WindQuality.Poor:
+        return "bg-red-300";
+      default:
+        return "bg-gray-300";
+    }
+  };
+
+  const DifficultyBadge = ({ level }: { level: string | null }) => {
+    if (!level) return <Badge variant="outline">Unknown</Badge>;
+    
+    if (level.includes("Beginner")) {
+      return <Badge className="bg-green-500">Beginner Friendly</Badge>;
+    } else if (level.includes("Intermediate")) {
+      return <Badge className="bg-yellow-500">Intermediate</Badge>;
+    } else if (level.includes("Advanced")) {
+      return <Badge className="bg-red-500">Advanced</Badge>;
+    } else if (level.includes("All")) {
+      return <Badge className="bg-blue-500">All Levels</Badge>;
+    }
+    
+    return <Badge variant="outline">{level}</Badge>;
+  };
+
+  // Get wind conditions for each spot in the selected month
+  const getSpotWithConditions = (spot: any) => {
+    const windCondition = spot.windConditions?.find((cond: any) => cond.month === selectedMonth);
+    return { 
+      ...spot, 
+      currentWindCondition: windCondition || null
+    };
+  };
+
+  const spotsWithConditions = spots.map(getSpotWithConditions);
+
+  // Sort spots by wind quality
+  const sortedSpots = [...spotsWithConditions].sort((a, b) => {
+    const qualityOrder = { 
+      [WindQuality.Excellent]: 4, 
+      [WindQuality.Good]: 3, 
+      [WindQuality.Moderate]: 2, 
+      [WindQuality.Poor]: 1 
+    };
+    
+    const aQuality = a.currentWindCondition?.windQuality 
+      ? qualityOrder[a.currentWindCondition.windQuality as WindQuality] || 0 
+      : 0;
+      
+    const bQuality = b.currentWindCondition?.windQuality 
+      ? qualityOrder[b.currentWindCondition.windQuality as WindQuality] || 0 
+      : 0;
+    
+    return bQuality - aQuality;
+  });
+
+  const monthNames = [
+    "January", "February", "March", "April", 
+    "May", "June", "July", "August", 
+    "September", "October", "November", "December"
+  ];
+
+  return (
+    <Card className="w-full max-w-6xl mx-auto bg-white/95 shadow-lg backdrop-blur border rounded-lg">
+      <CardHeader>
+        <CardTitle className="text-center text-xl md:text-2xl text-sky-700">
+          Spot Comparison for {monthNames[selectedMonth - 1]}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[180px]">Metric</TableHead>
+                {sortedSpots.map((spot) => (
+                  <TableHead key={spot.id} className="min-w-[200px] text-center">
+                    {spot.name}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {/* Wind conditions */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">Wind Quality</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`wind-${spot.id}`} className="text-center">
+                    {spot.currentWindCondition ? (
+                      <Badge className={windQualityColor(spot.currentWindCondition.windQuality as WindQuality)}>
+                        {spot.currentWindCondition.windQuality}
+                      </Badge>
+                    ) : (
+                      <CircleOff className="mx-auto h-5 w-5 text-gray-400" />
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Wind Speed</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`speed-${spot.id}`} className="text-center">
+                    {spot.currentWindCondition?.windSpeed ? 
+                      `${spot.currentWindCondition.windSpeed} knots` : 
+                      "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Temperatures */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">
+                  <div className="flex items-center">
+                    <Thermometer className="mr-2 h-4 w-4" /> Air Temp
+                  </div>
+                </TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`air-${spot.id}`} className="text-center">
+                    {spot.currentWindCondition?.airTemp ? 
+                      `${spot.currentWindCondition.airTemp}°C` : 
+                      "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  <div className="flex items-center">
+                    <Thermometer className="mr-2 h-4 w-4" /> Water Temp
+                  </div>
+                </TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`water-${spot.id}`} className="text-center">
+                    {spot.currentWindCondition?.waterTemp ? 
+                      `${spot.currentWindCondition.waterTemp}°C` : 
+                      "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Schools */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">Number of Schools</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`schools-${spot.id}`} className="text-center">
+                    {spot.numberOfSchools || "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Difficulty */}
+              <TableRow>
+                <TableCell className="font-medium">Difficulty Level</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`diff-${spot.id}`} className="text-center">
+                    <DifficultyBadge level={spot.difficultyLevel} />
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Conditions */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">Conditions</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`cond-${spot.id}`} className="text-center">
+                    {spot.conditions ? (
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        {spot.conditions.slice(0, 3).map((condition: string, i: number) => (
+                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                            {condition}
+                          </span>
+                        ))}
+                        {spot.conditions.length > 3 && (
+                          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                            +{spot.conditions.length - 3} more
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      "N/A"
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Accommodation */}
+              <TableRow>
+                <TableCell className="font-medium">Accommodation</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`accom-${spot.id}`} className="text-center">
+                    {spot.accommodationOptions ? (
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        {spot.accommodationOptions.slice(0, 2).map((option: string, i: number) => (
+                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                            {option}
+                          </span>
+                        ))}
+                        {spot.accommodationOptions.length > 2 && (
+                          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                            +{spot.accommodationOptions.length - 2} more
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      "N/A"
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Food */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">Food Options</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`food-${spot.id}`} className="text-center">
+                    {spot.foodOptions ? (
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        {spot.foodOptions.slice(0, 2).map((option: string, i: number) => (
+                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                            {option}
+                          </span>
+                        ))}
+                        {spot.foodOptions.length > 2 && (
+                          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                            +{spot.foodOptions.length - 2} more
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      "N/A"
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Culture */}
+              <TableRow>
+                <TableCell className="font-medium">Culture</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`cult-${spot.id}`} className="text-center">
+                    {spot.culture || "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Costs */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">
+                  <div className="flex items-center">
+                    <DollarSign className="mr-2 h-4 w-4" /> School Cost (avg)
+                  </div>
+                </TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`schoolCost-${spot.id}`} className="text-center">
+                    {spot.averageSchoolCost ? 
+                      `$${spot.averageSchoolCost}/day` : 
+                      "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  <div className="flex items-center">
+                    <DollarSign className="mr-2 h-4 w-4" /> Accommodation Cost (avg)
+                  </div>
+                </TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`accomCost-${spot.id}`} className="text-center">
+                    {spot.averageAccommodationCost ? 
+                      `$${spot.averageAccommodationCost}/night` : 
+                      "N/A"}
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              {/* Notes */}
+              <TableRow className="bg-sky-50">
+                <TableCell className="font-medium">Seasonal Notes</TableCell>
+                {sortedSpots.map((spot) => (
+                  <TableCell key={`notes-${spot.id}`} className="text-center">
+                    {spot.currentWindCondition?.seasonalNotes || "No special notes"}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

@@ -7,8 +7,12 @@ import FilterControls from "@/components/FilterControls";
 import KiteMap from "@/components/KiteMap";
 import SpotsList from "@/components/SpotsList";
 import SpotDetailModal from "@/components/SpotDetailModal";
+import SpotComparison from "@/components/SpotComparison";
 import { MonthNames } from "@shared/schema";
 import type { Spot, SpotWithWindConditions } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { compareDesc } from "date-fns";
+import { BarChart, ChevronDown, LayoutGrid, List, Map } from "lucide-react";
 
 export default function Spots() {
   // State for selected month (1-12)
@@ -17,17 +21,37 @@ export default function Spots() {
   const [windQualityFilter, setWindQualityFilter] = useState<string[]>(["Excellent"]);
   const [selectedSpot, setSelectedSpot] = useState<number | null>(null);
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+  const [showComparison, setShowComparison] = useState<boolean>(false);
+  const [spotsToCompare, setSpotsToCompare] = useState<Spot[]>([]);
+  const [viewMode, setViewMode] = useState<"both" | "map" | "list">("both");
 
-  // Fetch spots by selected month
+  // Fetch all spots for the selected month
   const { data: spots, isLoading: spotsLoading } = useQuery<Spot[]>({
     queryKey: [`/api/spots/month/${selectedMonth}`],
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
-  // Fetch spot details when a spot is selected
+  // Fetch spot details with wind conditions when a spot is selected
   const { data: spotDetails, isLoading: detailsLoading } = useQuery<{spot: Spot, windConditions: any[]}>({
     queryKey: [`/api/spots/${selectedSpot}`],
     enabled: selectedSpot !== null,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+  
+  // Fetch additional data for spots being compared
+  const { data: spotsWithConditions, isLoading: comparisonLoading } = useQuery<Spot[]>({
+    queryKey: [`/api/spots/details`, spotsToCompare.map(s => s.id)],
+    enabled: showComparison && spotsToCompare.length > 0,
+    queryFn: async () => {
+      const promises = spotsToCompare.map(spot => 
+        fetch(`/api/spots/${spot.id}`).then(res => res.json())
+      );
+      const results = await Promise.all(promises);
+      return results.map(result => ({
+        ...result.spot,
+        windConditions: result.windConditions
+      }));
+    },
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
@@ -73,6 +97,34 @@ export default function Spots() {
   const handleCloseDetailModal = () => {
     setShowDetailModal(false);
   };
+  
+  // Toggle a spot in the comparison list
+  const toggleSpotComparison = (spot: Spot) => {
+    if (spotsToCompare.some(s => s.id === spot.id)) {
+      setSpotsToCompare(spotsToCompare.filter(s => s.id !== spot.id));
+    } else {
+      // Limit to max 3 spots for comparison
+      if (spotsToCompare.length < 3) {
+        setSpotsToCompare([...spotsToCompare, spot]);
+      }
+    }
+  };
+  
+  // Show comparison view
+  const handleShowComparison = () => {
+    setShowComparison(true);
+  };
+  
+  // Close comparison view
+  const handleCloseComparison = () => {
+    setShowComparison(false);
+  };
+  
+  // Clear all spots from comparison
+  const clearComparison = () => {
+    setSpotsToCompare([]);
+    setShowComparison(false);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -91,30 +143,135 @@ export default function Spots() {
           onMonthChange={handleMonthChange} 
         />
         
-        {/* Filter Controls */}
-        <FilterControls 
-          windQualityFilter={windQualityFilter}
-          onWindQualityFilterChange={handleWindQualityFilterChange}
-          searchQuery={searchQuery}
-          onSearchChange={handleSearchChange}
-        />
-        
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Map */}
-          <KiteMap 
-            spots={filteredSpots || []} 
-            onSpotSelect={handleSpotSelect}
-            isLoading={spotsLoading}
-          />
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          {/* Filter Controls */}
+          <div className="flex-grow">
+            <FilterControls 
+              windQualityFilter={windQualityFilter}
+              onWindQualityFilterChange={handleWindQualityFilterChange}
+              searchQuery={searchQuery}
+              onSearchChange={handleSearchChange}
+            />
+          </div>
           
-          {/* Spots List */}
-          <SpotsList 
-            spots={filteredSpots || []} 
-            onSpotSelect={handleSpotSelect}
-            isLoading={spotsLoading}
-            selectedMonth={selectedMonth}
-          />
+          {/* Compare Button */}
+          <div className="flex gap-2 items-center">
+            <div className="hidden sm:flex gap-1">
+              <Button
+                variant={viewMode === "both" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setViewMode("both")}
+                className="w-10 h-8"
+              >
+                <List className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === "map" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setViewMode("map")}
+                className="w-10 h-8"
+              >
+                <Map className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === "list" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setViewMode("list")}
+                className="w-10 h-8"
+              >
+                <BarChart className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <Button
+              onClick={handleShowComparison}
+              disabled={spotsToCompare.length < 2}
+              size="sm"
+              variant="secondary"
+              className="flex items-center"
+            >
+              <LayoutCompare className="h-4 w-4 mr-2" />
+              Compare {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
+            </Button>
+            
+            {spotsToCompare.length > 0 && (
+              <Button
+                onClick={clearComparison}
+                size="sm"
+                variant="ghost"
+                className="text-red-500 h-8 px-2"
+              >
+                Clear
+              </Button>
+            )}
+          </div>
         </div>
+        
+        {/* Spots to compare */}
+        {spotsToCompare.length > 0 && !showComparison && (
+          <div className="mb-4 p-2 bg-sky-50 rounded-md border border-sky-100">
+            <div className="text-sm text-sky-700 font-medium mb-2">Selected for comparison:</div>
+            <div className="flex flex-wrap gap-2">
+              {spotsToCompare.map(spot => (
+                <div key={spot.id} className="bg-white rounded-full px-3 py-1 text-sm flex items-center gap-1 border border-sky-200">
+                  {spot.name}
+                  <button 
+                    onClick={() => toggleSpotComparison(spot)}
+                    className="text-gray-400 hover:text-red-500"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Comparison View */}
+        {showComparison ? (
+          <div className="mt-4">
+            <SpotComparison 
+              spots={spotsWithConditions || spotsToCompare}
+              selectedMonth={selectedMonth}
+              onClose={handleCloseComparison}
+            />
+            <div className="mt-4 text-center">
+              <Button 
+                onClick={handleCloseComparison}
+                variant="outline"
+              >
+                Back to Map
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Map */}
+            {(viewMode === "both" || viewMode === "map") && (
+              <div className={`${viewMode === "both" ? "md:w-3/5" : "w-full"}`}>
+                <KiteMap 
+                  spots={filteredSpots || []} 
+                  onSpotSelect={handleSpotSelect}
+                  isLoading={spotsLoading}
+                />
+              </div>
+            )}
+            
+            {/* Spots List */}
+            {(viewMode === "both" || viewMode === "list") && (
+              <div className={`${viewMode === "both" ? "md:w-2/5" : "w-full"}`}>
+                <SpotsList 
+                  spots={filteredSpots || []} 
+                  onSpotSelect={handleSpotSelect}
+                  isLoading={spotsLoading}
+                  selectedMonth={selectedMonth}
+                  spotsToCompare={spotsToCompare}
+                  onToggleCompare={toggleSpotComparison}
+                />
+              </div>
+            )}
+          </div>
+        )}
       </main>
       
       {/* Spot Detail Modal */}
