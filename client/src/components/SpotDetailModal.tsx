@@ -20,7 +20,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   // Function to close with animation
   const handleClose = () => {
     setIsOpen(false);
-    setTimeout(onClose, 100); // Reduced wait time for animation to complete
+    setTimeout(onClose, 50); // Further reduced wait time for animation to complete
   };
   
   // Get wind quality color class and emoji
@@ -74,14 +74,14 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-theme-background/50 spot-detail-modal">
-      <AnimatePresence>
+      <AnimatePresence mode="sync">
         {isOpen && (
           <motion.div
             className="bg-theme-background rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto m-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.05 }}
           >
             {isLoading || !spotDetails ? (
               // Loading state
@@ -152,7 +152,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       className="text-3xl font-bold font-heading text-theme-background"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 0.1 }}
+                      transition={{ duration: 0.05 }}
                     >
                       {spotDetails.spot.name}
                     </motion.h2>
@@ -160,7 +160,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       className="text-theme-background text-opacity-90 flex items-center"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 0.1 }}
+                      transition={{ duration: 0.05 }}
                     >
                       <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -178,7 +178,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     className="flex flex-wrap gap-3 mb-5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.1 }}
+                    transition={{ duration: 0.05 }}
                   >
                     {renderCurrentWindBadge()}
                     
@@ -211,7 +211,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 0.1 }}
+                      transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
                       <h3 className="text-xl font-bold font-heading mb-3 text-theme-text flex items-center">
@@ -301,7 +301,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 0.1 }}
+                      transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
                       <h3 className="text-xl font-bold font-heading mb-3 text-theme-text flex items-center">
