@@ -115,13 +115,17 @@ export default function Footer() {
           
           <motion.div variants={itemVariants}>
             <h4 className="text-xl font-bold font-heading mb-5 flex items-center text-primary">
-              <Globe className="w-5 h-5 mr-2 text-primary" />
-              Contact Us
+              <Mail className="w-5 h-5 mr-2 text-primary" />
+              Get in Touch
             </h4>
             <ul className="space-y-4">
-              <li className="text-slate-600 flex items-center bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
-                <Mail className="w-5 h-5 mr-3 text-primary" /> 
-                <span>info@downwindr.com</span>
+              <li>
+                <Link href="/">
+                  <div className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 flex items-center cursor-pointer">
+                    <span className="bg-primary/20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                    Send Us a Message
+                  </div>
+                </Link>
               </li>
             </ul>
           </motion.div>
