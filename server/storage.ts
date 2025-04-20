@@ -35,7 +35,7 @@ export interface SpotWithMatchScore extends Spot {
 
 export interface IStorage {
   // Session store for authentication
-  sessionStore: session.SessionStore;
+  sessionStore: any; // Using any for SessionStore type to avoid import complexities
   
   // Spot operations
   getAllSpots(): Promise<Spot[]>;
@@ -92,17 +92,36 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
+  sessionStore: any; // Using any for SessionStore type to avoid import complexities
   private spots: Map<number, Spot>;
   private windConditions: Map<number, WindCondition>;
+  private users: Map<number, User>;
+  private reviews: Map<number, Review>;
+  private ratings: Map<number, Rating>;
   private currentSpotId: number;
   private currentWindConditionId: number;
+  private currentUserId: number;
+  private currentReviewId: number;
+  private currentRatingId: number;
   private regions: Map<string, string[]>;
 
   constructor() {
+    // Set up in-memory session store for development only
+    const MemoryStore = require('memorystore')(require('express-session'));
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    });
+    
     this.spots = new Map();
     this.windConditions = new Map();
+    this.users = new Map();
+    this.reviews = new Map();
+    this.ratings = new Map();
     this.currentSpotId = 1;
     this.currentWindConditionId = 1;
+    this.currentUserId = 1;
+    this.currentReviewId = 1;
+    this.currentRatingId = 1;
     
     // Define regions for filtering
     this.regions = new Map([
@@ -380,6 +399,189 @@ export class MemStorage implements IStorage {
     };
     this.windConditions.set(id, windCondition);
     return windCondition;
+  }
+  
+  // User operations
+  async getUserById(id: number): Promise<User | undefined> {
+    return this.users.get(id);
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      user => user.username === username
+    );
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      user => user.email === email
+    );
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const id = this.currentUserId++;
+    const now = new Date();
+    const user: User = {
+      ...insertUser,
+      id,
+      createdAt: now,
+      displayName: insertUser.displayName || null,
+      bio: insertUser.bio || null,
+      experience: insertUser.experience || null,
+      avatarUrl: insertUser.avatarUrl || null
+    };
+    this.users.set(id, user);
+    return user;
+  }
+
+  // Review operations
+  async getReviewsForSpot(spotId: number): Promise<ReviewWithUser[]> {
+    const spotReviews = Array.from(this.reviews.values())
+      .filter(review => review.spotId === spotId)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    
+    return spotReviews.map(review => {
+      const user = this.users.get(review.userId);
+      if (!user) throw new Error(`User not found for review: ${review.id}`);
+      
+      return {
+        ...review,
+        user: {
+          id: user.id,
+          username: user.username,
+          displayName: user.displayName,
+          avatarUrl: user.avatarUrl,
+          experience: user.experience
+        }
+      };
+    });
+  }
+
+  async getReviewByUserAndSpot(userId: number, spotId: number): Promise<Review | undefined> {
+    return Array.from(this.reviews.values()).find(
+      review => review.userId === userId && review.spotId === spotId
+    );
+  }
+
+  async createReview(insertReview: InsertReview): Promise<Review> {
+    const id = this.currentReviewId++;
+    const now = new Date();
+    const review: Review = {
+      ...insertReview,
+      id,
+      createdAt: now,
+      updatedAt: now,
+      visitDate: insertReview.visitDate || null
+    };
+    this.reviews.set(id, review);
+    return review;
+  }
+
+  async updateReview(id: number, content: string): Promise<Review | undefined> {
+    const review = this.reviews.get(id);
+    if (!review) return undefined;
+    
+    const updatedReview: Review = {
+      ...review,
+      content,
+      updatedAt: new Date()
+    };
+    this.reviews.set(id, updatedReview);
+    return updatedReview;
+  }
+
+  async deleteReview(id: number): Promise<boolean> {
+    return this.reviews.delete(id);
+  }
+
+  // Rating operations
+  async getRatingsForSpot(spotId: number): Promise<Rating[]> {
+    return Array.from(this.ratings.values()).filter(
+      rating => rating.spotId === spotId
+    );
+  }
+
+  async getRatingByUserAndSpot(userId: number, spotId: number): Promise<Rating | undefined> {
+    return Array.from(this.ratings.values()).find(
+      rating => rating.userId === userId && rating.spotId === spotId
+    );
+  }
+
+  async createRating(insertRating: InsertRating): Promise<Rating> {
+    const id = this.currentRatingId++;
+    const now = new Date();
+    const rating: Rating = {
+      ...insertRating,
+      id,
+      createdAt: now,
+      updatedAt: now
+    };
+    this.ratings.set(id, rating);
+    return rating;
+  }
+
+  async updateRating(id: number, ratingUpdate: Partial<InsertRating>): Promise<Rating | undefined> {
+    const rating = this.ratings.get(id);
+    if (!rating) return undefined;
+    
+    const updatedRating: Rating = {
+      ...rating,
+      ...ratingUpdate,
+      updatedAt: new Date()
+    };
+    this.ratings.set(id, updatedRating);
+    return updatedRating;
+  }
+
+  async deleteRating(id: number): Promise<boolean> {
+    return this.ratings.delete(id);
+  }
+  
+  // Combined operations
+  async getSpotWithReviewsAndRatings(spotId: number): Promise<{
+    spot: Spot;
+    windConditions: WindCondition[];
+    reviews: ReviewWithUser[];
+    averageRating: number;
+    totalRatings: number;
+    ratingBreakdown: {
+      windReliability: number;
+      beginnerFriendly: number;
+      scenery: number;
+      uncrowded: number;
+      localVibe: number;
+      overall: number;
+    };
+  } | undefined> {
+    const spot = await this.getSpotById(spotId);
+    if (!spot) return undefined;
+
+    const windConditions = await this.getWindConditionsForSpot(spotId);
+    const reviews = await this.getReviewsForSpot(spotId);
+    const ratings = await this.getRatingsForSpot(spotId);
+    
+    // Calculate average ratings
+    const totalRatings = ratings.length;
+    const calcAvg = (field: keyof Rating) => {
+      const sum = ratings.reduce((acc, rating) => acc + (rating[field] as number), 0);
+      return totalRatings > 0 ? sum / totalRatings : 0;
+    };
+    
+    return {
+      spot,
+      windConditions,
+      reviews,
+      averageRating: calcAvg('overall'),
+      totalRatings,
+      ratingBreakdown: {
+        windReliability: calcAvg('windReliability'),
+        beginnerFriendly: calcAvg('beginnerFriendly'),
+        scenery: calcAvg('scenery'),
+        uncrowded: calcAvg('uncrowded'),
+        localVibe: calcAvg('localVibe'),
+        overall: calcAvg('overall')
+      }
+    };
   }
 
   // Initialize with sample data

@@ -17,7 +17,7 @@ import { IStorage, UserPreferences, SpotWithMatchScore } from "./storage";
 const PostgresSessionStore = connectPg(session);
 
 export class DatabaseStorage implements IStorage {
-  sessionStore: session.SessionStore;
+  sessionStore: any; // Using any for SessionStore type to avoid import complexities
   private regions: Map<string, string[]>;
 
   constructor() {
