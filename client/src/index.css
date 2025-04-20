@@ -8,10 +8,21 @@
 @tailwind utilities;
 
 :root {
-  /* Base color palette - These are the raw color values */
-  --color-electric-blue: 204 100% 50%;  /* #0096FF */
+  /* Primary color scale */
+  --color-primary-50: 219 100% 97%;    /* #EFF6FF */
+  --color-primary-100: 217 100% 93%;   /* #DBEAFE */
+  --color-primary-200: 216 100% 87%;   /* #BFDBFE */
+  --color-primary-300: 216 100% 78%;   /* #93C5FD */
+  --color-primary-400: 217 100% 68%;   /* #60A5FA */
+  --color-primary-500: 217 97% 60%;    /* #3B82F6 */
+  --color-primary-600: 221 83% 53%;    /* #2563EB */
+  --color-primary-700: 224 76% 48%;    /* #1D4ED8 */
+  --color-primary-800: 226 71% 40%;    /* #1E40AF */
+  --color-primary-900: 224 64% 33%;    /* #1E3A8A */
+  --color-primary-950: 226 57% 21%;    /* #172554 */
+  
+  /* Other base colors */
   --color-cerulean: 190 100% 42%;       /* #00B4D8 */
-  --color-azure: 217 100% 62%;          /* #3A86FF */
   --color-yellow: 49 100% 52%;          /* #FFD60A */
   --color-coral: 1 100% 68%;            /* #FF5E5B */
   --color-lime: 157 100% 50%;           /* #00FF7F */
@@ -21,8 +32,8 @@
   
   /* Semantic color roles - Use these in components */
   /* Primary UI elements */
-  --theme-primary: var(--color-electric-blue);
-  --theme-primary-hover: var(--color-azure);
+  --theme-primary: var(--color-primary-700);
+  --theme-primary-hover: var(--color-primary-800);
   --theme-secondary: var(--color-cerulean);
   --theme-accent: var(--color-yellow);
   
