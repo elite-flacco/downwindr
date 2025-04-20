@@ -23,28 +23,19 @@ export default function Home() {
       <Header />
       
       <main className="flex-grow">
-        {/* Hero Section with full blended background */}
-        <section className="relative overflow-hidden pt-24 pb-40 md:pt-20 md:pb-32 lg:py-28">
-          {/* Background gradient to blend with illustration */}
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-50 to-cyan-50/20 z-0"></div>
-          
-          {/* Stretched illustration as full background - adjusted to show more of the kitesurfers */}
-          <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-            <div className="absolute inset-0 md:-top-28 md:top-5 md:left-52 lg:left-96">
-              <KitesurferIllustration className="w-[150%] md:w-[120%] h-auto" />
-            </div>
-          </div>
-          
-          {/* Main content */}
-          <div className="container mx-auto px-4 relative z-10">
+        {/* Hero Section with better responsive illustration */}
+        <section className="relative pt-24 pb-32 md:pt-28 md:pb-36 lg:pt-32 lg:pb-40 bg-gradient-to-br from-sky-50 to-cyan-50">
+          {/* New approach: Use a container-based strategy instead of absolute positioning */}
+          <div className="container mx-auto px-4 relative">
+            {/* Two column layout on desktop */}
             <div className="flex flex-col md:flex-row items-center">
-              {/* Left side text content - with backdrop for readability */}
-              <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10 z-10">
+              {/* Left side: Text content */}
+              <div className="w-full md:w-1/2 mb-10 md:mb-0 relative z-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="relative rounded-xl backdrop-blur-sm bg-white/40 p-8 md:p-10 shadow-sm"
+                  className="bg-white/70 backdrop-blur-sm p-8 md:p-10 rounded-xl shadow-sm border border-white/50"
                 >
                   <h1 
                     className="text-4xl md:text-5xl lg:text-6xl mb-4 text-primary"
@@ -80,9 +71,22 @@ export default function Home() {
                 </motion.div>
               </div>
               
-              {/* Right side is now empty as we're using the illustration as background */}
-              <div className="md:w-1/2"></div>
+              {/* Right side: Illustration (larger on desktop) */}
+              <div className="w-full md:w-1/2 relative">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="md:absolute md:-right-16 md:-left-16 md:-top-20 md:-bottom-20 flex items-center justify-center"
+                >
+                  <KitesurferIllustration className="w-full h-auto max-w-lg md:max-w-none" />
+                </motion.div>
+              </div>
             </div>
+            
+            {/* Decorative elements to help blend the illustration */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-sky-50 to-transparent"></div>
+            <div className="absolute -bottom-1 left-0 right-0 h-1 bg-white"></div>
           </div>
         </section>
         
