@@ -25,15 +25,15 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   const getWindQualityClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-blue-700 text-white";
+        return "bg-theme-accent-success text-theme-background";
       case WindQuality.Good:
-        return "bg-blue-600 text-white";
+        return "bg-theme-primary-hover text-theme-background";
       case WindQuality.Moderate:
-        return "bg-slate-600 text-white";
+        return "bg-theme-primary text-theme-background";
       case WindQuality.Poor:
-        return "bg-slate-500 text-white";
+        return "bg-theme-muted text-theme-background";
       default:
-        return "bg-slate-500 text-white";
+        return "bg-theme-muted text-theme-background";
     }
   };
   
@@ -180,16 +180,16 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   >
                     {renderCurrentWindBadge()}
                     
-                    <div className="flex items-center bg-slate-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm">
+                    <div className="flex items-center bg-theme-primary text-theme-background px-4 py-2 rounded-full text-sm font-medium shadow-sm">
                       <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves 🌊
                     </div>
                     
-                    <div className="flex items-center border border-slate-300 text-slate-800 bg-white px-4 py-2 rounded-full text-sm font-medium">
-                      <Thermometer className="mr-2 h-4 w-4 text-slate-600" /> {spotDetails.spot.tempRange} 🌡️
+                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-4 py-2 rounded-full text-sm font-medium">
+                      <Thermometer className="mr-2 h-4 w-4 text-theme-primary" /> {spotDetails.spot.tempRange} 🌡️
                     </div>
                     
-                    <div className="flex items-center border border-slate-300 text-slate-800 bg-white px-4 py-2 rounded-full text-sm font-medium">
-                      <Calendar className="mr-2 h-4 w-4 text-slate-600" /> Best: {spotDetails.spot.bestMonths} 📅
+                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-4 py-2 rounded-full text-sm font-medium">
+                      <Calendar className="mr-2 h-4 w-4 text-theme-primary" /> Best: {spotDetails.spot.bestMonths} 📅
                     </div>
                     
                     {spotDetails.spot.windguruCode && (
@@ -197,7 +197,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-blue-800 transition-colors"
+                        className="flex items-center bg-theme-accent-warning text-theme-background px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-theme-accent-warning/90 transition-colors"
                       >
                         <ExternalLink className="mr-2 h-4 w-4" /> Windguru Forecast
                       </a>
