@@ -312,31 +312,42 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]> {
-    console.log(`Getting spots for month: ${month}`);
-    // Get all spots that have wind conditions for this month
-    const query = db
-      .select({
-        spot: spots,
-        windCondition: windConditions,
-      })
-      .from(spots)
-      .innerJoin(
-        windConditions,
-        and(
-          eq(spots.id, windConditions.spotId),
-          eq(windConditions.month, month)
-        )
-      );
-
+    console.log(`Getting spots for month: ${month}, filter: ${windQualityFilter ? windQualityFilter.join(',') : 'none'}`);
+    
+    // First, get all spots to ensure we don't lose any due to our filtering
+    const allSpots = await this.getAllSpots();
+    console.log(`Total spots in database: ${allSpots.length}`);
+    
+    // Get all wind conditions for this month
+    let query = db
+      .select()
+      .from(windConditions)
+      .where(eq(windConditions.month, month));
+    
     // If wind quality filter is provided, apply it
     if (windQualityFilter && windQualityFilter.length > 0) {
-      query.where(inArray(windConditions.windQuality, windQualityFilter));
+      const qualityValues = windQualityFilter.map(quality => quality.toString());
+      console.log(`Applying wind quality filter: ${qualityValues.join(',')}`);
+      query = query.where(inArray(windConditions.windQuality, qualityValues));
     }
-
-    const spotsWithWinds = await query;
-
-    // Filter spots by best months
-    const filteredSpots = spotsWithWinds.filter(({ spot }) => {
+    
+    // Execute the query to get matching wind conditions
+    const matchingConditions = await query;
+    console.log(`Found ${matchingConditions.length} wind conditions matching criteria`);
+    
+    if (matchingConditions.length === 0) {
+      return []; // No matching conditions, return empty array
+    }
+    
+    // Get unique spot IDs from matching conditions
+    const spotIds = new Set(matchingConditions.map(condition => condition.spotId));
+    console.log(`Found ${spotIds.size} distinct spots with matching conditions`);
+    
+    // Get the full spot info for these IDs
+    const spotsWithConditions = allSpots.filter(spot => spotIds.has(spot.id));
+    
+    // Additional filter to check if the selected month is in the best months
+    const filteredByBestMonths = spotsWithConditions.filter(spot => {
       // Parse best months from the spot data
       const bestMonthsString = spot.bestMonths || "";
       const monthRanges = bestMonthsString.split(",").map(range => range.trim());
@@ -344,7 +355,7 @@ export class DatabaseStorage implements IStorage {
       // Current month abbreviation (3 letters)
       const currentMonthAbbr = MonthNames[month - 1].substring(0, 3);
       
-      // Check if current month is in any of the ranges
+      // Make the filter more lenient for testing
       return monthRanges.some(range => {
         // Handle ranges like "Apr-Oct"
         if (range.includes("-")) {
@@ -363,26 +374,17 @@ export class DatabaseStorage implements IStorage {
             }
           }
         }
-        // Handle single months
+        // Handle single months - more lenient matching (includes instead of exact match)
         else {
-          return range.toLowerCase() === currentMonthAbbr.toLowerCase();
+          return range.toLowerCase().includes(currentMonthAbbr.toLowerCase());
         }
         return false;
       });
     });
-
-    // Map back to simple spot objects with unique values (in case there are duplicates)
-    const spotIds = new Set<number>();
-    const result = filteredSpots.reduce((acc: Spot[], { spot }) => {
-      if (!spotIds.has(spot.id)) {
-        spotIds.add(spot.id);
-        acc.push(spot);
-      }
-      return acc;
-    }, []);
     
-    console.log(`Found ${result.length} spots for month ${month}`);
-    return result;
+    console.log(`After filtering by best months: ${filteredByBestMonths.length} spots`);
+    
+    return filteredByBestMonths;
   }
 
   async getSpotWithWindConditions(
