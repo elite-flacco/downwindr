@@ -194,16 +194,36 @@ export default function Spots() {
               </Button>
             </div>
             
-            <Button
-              onClick={handleShowComparison}
-              disabled={spotsToCompare.length < 2}
-              size="sm"
-              variant="secondary"
-              className="flex items-center"
-            >
-              <SplitSquareVertical className="h-4 w-4 mr-2" />
-              Compare {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
-            </Button>
+            <div className="flex gap-1">
+              <Button
+                onClick={handleShowComparison}
+                disabled={spotsToCompare.length < 2}
+                size="sm"
+                variant="secondary"
+                className="flex items-center"
+              >
+                <SplitSquareVertical className="h-4 w-4 mr-2" />
+                Compare Selected {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
+              </Button>
+              
+              <Button
+                onClick={() => {
+                  // Set all filtered spots as spots to compare (limited to first 3)
+                  const spotsToAdd = filteredSpots?.slice(0, 3) || [];
+                  setSpotsToCompare(spotsToAdd);
+                  if (spotsToAdd.length >= 2) {
+                    setShowComparison(true);
+                  }
+                }}
+                size="sm"
+                variant="outline"
+                className="flex items-center"
+                disabled={!filteredSpots || filteredSpots.length < 2}
+              >
+                <SplitSquareVertical className="h-4 w-4 mr-2" />
+                Compare All
+              </Button>
+            </div>
             
             {spotsToCompare.length > 0 && (
               <Button
