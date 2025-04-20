@@ -2,7 +2,7 @@ import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage, UserPreferences } from "./storage";
 import { z } from "zod";
-import { MonthNames, insertReviewSchema, insertRatingSchema } from "@shared/schema";
+import { MonthNames, insertReviewSchema, insertRatingSchema, WindQuality } from "@shared/schema";
 import { setupAuth } from "./auth";
 
 // Define user preferences schema for validation

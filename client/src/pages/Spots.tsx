@@ -35,9 +35,25 @@ export default function Spots() {
   const [isRecommending, setIsRecommending] = useState<boolean>(false);
   const [recommendedSpots, setRecommendedSpots] = useState<any[]>([]);
 
-  // Fetch all spots for the selected month
+  // Fetch spots for the selected month filtered by wind quality
   const { data: spots, isLoading: spotsLoading } = useQuery<Spot[]>({
-    queryKey: [`/api/spots/month/${selectedMonth}`],
+    queryKey: [`/api/spots/month/${selectedMonth}`, { windQuality: windQualityFilter }],
+    queryFn: async ({ queryKey }) => {
+      // Build the URL with wind quality filters
+      const baseUrl = `/api/spots/month/${selectedMonth}`;
+      const params = new URLSearchParams();
+      
+      // Add each wind quality as a separate query parameter
+      if (windQualityFilter.length > 0) {
+        windQualityFilter.forEach(quality => {
+          params.append('windQuality', quality);
+        });
+      }
+      
+      // Fetch with the constructed URL
+      const response = await apiRequest('GET', `${baseUrl}?${params.toString()}`);
+      return await response.json();
+    },
     staleTime: Infinity, // Keep data fresh forever (small dataset)
     gcTime: Infinity, // Keep in cache forever (v5 renamed cacheTime to gcTime)
   });
