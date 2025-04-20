@@ -49,6 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/spots/month/:month", async (req, res) => {
     try {
       const monthParam = req.params.month;
+      const windQualityParam = req.query.windQuality as string | string[] | undefined;
       
       // Parse month parameter
       let monthNumber: number;
@@ -71,8 +72,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Month must be between 1 and 12" });
       }
       
+      // Parse wind quality filter (can be a single value or an array)
+      let windQualityFilter: WindQuality[] | undefined;
+      
+      if (windQualityParam) {
+        const validQualities = Object.values(WindQuality);
+        
+        if (Array.isArray(windQualityParam)) {
+          // Filter to only include valid wind qualities
+          windQualityFilter = windQualityParam
+            .filter(quality => validQualities.includes(quality as WindQuality))
+            .map(quality => quality as WindQuality);
+        } else {
+          // Single value
+          if (validQualities.includes(windQualityParam as WindQuality)) {
+            windQualityFilter = [windQualityParam as WindQuality];
+          }
+        }
+      }
+      
       console.log(`Getting spots for month: ${monthNumber}`);
-      const spots = await storage.getSpotsByMonth(monthNumber);
+      const spots = await storage.getSpotsByMonth(monthNumber, windQualityFilter);
       console.log(`Found ${spots.length} spots for month ${monthNumber}`);
       
       return res.json(spots);

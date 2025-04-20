@@ -311,10 +311,10 @@ export class DatabaseStorage implements IStorage {
     return spot;
   }
 
-  async getSpotsByMonth(month: number): Promise<Spot[]> {
+  async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]> {
     console.log(`Getting spots for month: ${month}`);
     // Get all spots that have wind conditions for this month
-    const spotsWithWinds = await db
+    const query = db
       .select({
         spot: spots,
         windCondition: windConditions,
@@ -328,8 +328,59 @@ export class DatabaseStorage implements IStorage {
         )
       );
 
-    // Map back to simple spot objects
-    const result = spotsWithWinds.map(({ spot }) => spot);
+    // If wind quality filter is provided, apply it
+    if (windQualityFilter && windQualityFilter.length > 0) {
+      query.where(inArray(windConditions.windQuality, windQualityFilter));
+    }
+
+    const spotsWithWinds = await query;
+
+    // Filter spots by best months
+    const filteredSpots = spotsWithWinds.filter(({ spot }) => {
+      // Parse best months from the spot data
+      const bestMonthsString = spot.bestMonths || "";
+      const monthRanges = bestMonthsString.split(",").map(range => range.trim());
+      
+      // Current month abbreviation (3 letters)
+      const currentMonthAbbr = MonthNames[month - 1].substring(0, 3);
+      
+      // Check if current month is in any of the ranges
+      return monthRanges.some(range => {
+        // Handle ranges like "Apr-Oct"
+        if (range.includes("-")) {
+          const [startMonth, endMonth] = range.split("-").map(m => m.trim());
+          
+          // Convert month abbreviations to month numbers (1-12)
+          const startIdx = MonthNames.findIndex(m => m.substring(0, 3).toLowerCase() === startMonth.toLowerCase());
+          const endIdx = MonthNames.findIndex(m => m.substring(0, 3).toLowerCase() === endMonth.toLowerCase());
+          
+          if (startIdx !== -1 && endIdx !== -1) {
+            // Handle wrapping around the year (e.g., "Nov-Feb")
+            if (startIdx > endIdx) {
+              return month - 1 >= startIdx || month - 1 <= endIdx;
+            } else {
+              return month - 1 >= startIdx && month - 1 <= endIdx;
+            }
+          }
+        }
+        // Handle single months
+        else {
+          return range.toLowerCase() === currentMonthAbbr.toLowerCase();
+        }
+        return false;
+      });
+    });
+
+    // Map back to simple spot objects with unique values (in case there are duplicates)
+    const spotIds = new Set<number>();
+    const result = filteredSpots.reduce((acc: Spot[], { spot }) => {
+      if (!spotIds.has(spot.id)) {
+        spotIds.add(spot.id);
+        acc.push(spot);
+      }
+      return acc;
+    }, []);
+    
     console.log(`Found ${result.length} spots for month ${month}`);
     return result;
   }
