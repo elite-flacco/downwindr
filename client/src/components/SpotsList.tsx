@@ -46,9 +46,9 @@ export default function SpotsList({
           Array(4).fill(0).map((_, i) => (
             <div key={i} className="mb-6 pb-6 border-b border-theme-border">
               <motion.div
-                initial={{ opacity: 0.5 }}
-                animate={{ opacity: [0.5, 0.8, 0.5] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                initial={{ opacity: 0.6 }}
+                animate={{ opacity: [0.6, 0.8, 0.6] }}
+                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
               >
                 <div className="flex justify-between items-start mb-2">
                   <Skeleton className="h-6 w-40" />
@@ -77,10 +77,10 @@ export default function SpotsList({
               <motion.div
                 key={spot.id}
                 className={`spot-card relative rounded-lg p-4 mb-4 ${index < spots.length - 1 ? 'border-b border-theme-border pb-6' : ''}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                whileHover={{ scale: 1.02 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.1 }}
+                whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
               >
                 <div className="flex justify-between items-start mb-3">
                   <h4 className="text-lg font-bold font-heading text-theme-primary">{spot.name}</h4>
