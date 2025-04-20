@@ -1,8 +1,23 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage, UserPreferences } from "./storage";
 import { z } from "zod";
 import { MonthNames } from "@shared/schema";
+
+// Define user preferences schema for validation
+const userPreferencesSchema = z.object({
+  windSpeedMin: z.number().min(5).max(35),
+  windSpeedMax: z.number().min(5).max(35),
+  temperature: z.enum(["cold", "moderate", "warm", "hot"]),
+  difficulty: z.string(),
+  budget: z.enum(["budget", "moderate", "luxury"]),
+  preferredRegion: z.string(),
+  hasKiteSchools: z.boolean(),
+  preferWaves: z.boolean(),
+  foodOptions: z.boolean(),
+  culture: z.boolean(),
+  month: z.number().min(1).max(12)
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // HTTP server
@@ -143,6 +158,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({ message: 'Mapbox token not configured' });
     }
     res.json({ token: process.env.MAPBOX_ACCESS_TOKEN });
+  });
+  
+  // Get recommended spots based on user preferences
+  app.post("/api/spots/recommendations", async (req, res) => {
+    try {
+      const parseResult = userPreferencesSchema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          message: "Invalid preferences data", 
+          errors: parseResult.error.errors 
+        });
+      }
+      
+      const preferences: UserPreferences = parseResult.data;
+      
+      // Validate that min wind speed is less than max wind speed
+      if (preferences.windSpeedMin > preferences.windSpeedMax) {
+        return res.status(400).json({ 
+          message: "Invalid wind speed range: minimum must be less than maximum" 
+        });
+      }
+      
+      const recommendedSpots = await storage.getRecommendedSpots(preferences);
+      res.json(recommendedSpots);
+    } catch (error) {
+      console.error("Error getting recommendations:", error);
+      res.status(500).json({ message: "Error fetching spot recommendations" });
+    }
   });
 
   return httpServer;

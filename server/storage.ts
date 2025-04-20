@@ -5,6 +5,26 @@ import {
   WindQuality, MonthNames
 } from "@shared/schema";
 
+export interface UserPreferences {
+  windSpeedMin: number;
+  windSpeedMax: number;
+  temperature: "cold" | "moderate" | "warm" | "hot";
+  difficulty: string;
+  budget: "budget" | "moderate" | "luxury";
+  preferredRegion: string;
+  hasKiteSchools: boolean;
+  preferWaves: boolean;
+  foodOptions: boolean;
+  culture: boolean;
+  month: number;
+}
+
+export interface SpotWithMatchScore extends Spot {
+  matchScore: number;
+  reasons: string[];
+  windCondition?: WindCondition;
+}
+
 export interface IStorage {
   // Spot operations
   getAllSpots(): Promise<Spot[]>;
@@ -18,6 +38,9 @@ export interface IStorage {
   getWindConditionsForSpot(spotId: number): Promise<WindCondition[]>;
   getWindConditionBySpotAndMonth(spotId: number, month: number): Promise<WindCondition | undefined>;
   createWindCondition(windCondition: InsertWindCondition): Promise<WindCondition>;
+  
+  // Recommendation operation
+  getRecommendedSpots(preferences: UserPreferences): Promise<SpotWithMatchScore[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -25,6 +48,7 @@ export class MemStorage implements IStorage {
   private windConditions: Map<number, WindCondition>;
   private currentSpotId: number;
   private currentWindConditionId: number;
+  private regions: Map<string, string[]>;
 
   constructor() {
     this.spots = new Map();
@@ -32,8 +56,186 @@ export class MemStorage implements IStorage {
     this.currentSpotId = 1;
     this.currentWindConditionId = 1;
     
+    // Define regions for filtering
+    this.regions = new Map([
+      ['caribbean', ['Dominican Republic', 'Cuba', 'Aruba', 'Jamaica', 'Puerto Rico']],
+      ['north-america', ['USA', 'Canada', 'Mexico']],
+      ['south-america', ['Brazil', 'Venezuela', 'Colombia', 'Peru', 'Chile', 'Argentina']],
+      ['europe', ['Spain', 'Portugal', 'France', 'Italy', 'Greece', 'Croatia', 'Netherlands', 'Germany', 'United Kingdom', 'Ireland']],
+      ['africa', ['South Africa', 'Morocco', 'Egypt', 'Tanzania', 'Kenya', 'Cape Verde']],
+      ['asia', ['Thailand', 'Philippines', 'Vietnam', 'Indonesia', 'Sri Lanka', 'Japan', 'South Korea']],
+      ['oceania', ['Australia', 'New Zealand', 'Fiji', 'French Polynesia']]
+    ]);
+    
     // Initialize with sample data
     this.initializeData();
+  }
+  
+  // Recommendation algorithm
+  async getRecommendedSpots(preferences: UserPreferences): Promise<SpotWithMatchScore[]> {
+    // Get all spots
+    const allSpots = await this.getAllSpots();
+    const month = preferences.month;
+    const results: SpotWithMatchScore[] = [];
+    
+    for (const spot of allSpots) {
+      // Get wind condition for the selected month
+      const windCondition = await this.getWindConditionBySpotAndMonth(spot.id, month);
+      if (!windCondition) continue; // Skip spots without wind data for the selected month
+      
+      let score = 0;
+      const reasons: string[] = [];
+      
+      // Calculate match score based on preferences
+      
+      // 1. Wind speed match (most important factor)
+      const windSpeed = windCondition.windSpeed;
+      if (windSpeed >= preferences.windSpeedMin && windSpeed <= preferences.windSpeedMax) {
+        score += 0.25; // 25% of total score
+        reasons.push(`Wind speed (${windSpeed} knots) is within your preferred range`);
+      } else {
+        // Still give partial points for being close
+        const minDistance = Math.min(
+          Math.abs(windSpeed - preferences.windSpeedMin),
+          Math.abs(windSpeed - preferences.windSpeedMax)
+        );
+        
+        if (minDistance <= 5) {
+          score += 0.15;
+          reasons.push(`Wind speed (${windSpeed} knots) is close to your preferred range`);
+        }
+      }
+      
+      // 2. Wind quality
+      if (windCondition.windQuality === WindQuality.Excellent) {
+        score += 0.15;
+        reasons.push('Excellent wind quality for this month');
+      } else if (windCondition.windQuality === WindQuality.Good) {
+        score += 0.1;
+        reasons.push('Good wind quality for this month');
+      }
+      
+      // 3. Temperature preferences
+      if (windCondition.airTemp) {
+        const temp = windCondition.airTemp;
+        let tempMatch = false;
+        
+        switch (preferences.temperature) {
+          case 'cold':
+            if (temp < 20) {
+              tempMatch = true;
+              reasons.push(`Cool temperatures (${temp}°C) match your preference`);
+            }
+            break;
+          case 'moderate':
+            if (temp >= 20 && temp < 25) {
+              tempMatch = true;
+              reasons.push(`Moderate temperatures (${temp}°C) match your preference`);
+            }
+            break;
+          case 'warm':
+            if (temp >= 25 && temp < 30) {
+              tempMatch = true;
+              reasons.push(`Warm temperatures (${temp}°C) match your preference`);
+            }
+            break;
+          case 'hot':
+            if (temp >= 30) {
+              tempMatch = true;
+              reasons.push(`Hot temperatures (${temp}°C) match your preference`);
+            }
+            break;
+        }
+        
+        if (tempMatch) {
+          score += 0.1;
+        }
+      }
+      
+      // 4. Difficulty level match
+      if (spot.difficultyLevel) {
+        if (preferences.difficulty === 'all' || 
+            spot.difficultyLevel.toLowerCase().includes(preferences.difficulty.toLowerCase())) {
+          score += 0.1;
+          reasons.push(`Difficulty level (${spot.difficultyLevel}) matches your skill level`);
+        }
+      }
+      
+      // 5. Budget preferences
+      if (spot.averageSchoolCost && spot.averageAccommodationCost) {
+        const totalCostPerDay = spot.averageSchoolCost + spot.averageAccommodationCost;
+        
+        let budgetMatch = false;
+        if (preferences.budget === 'budget' && totalCostPerDay < 120) {
+          budgetMatch = true;
+          reasons.push('Budget-friendly pricing fits your preference');
+        } else if (preferences.budget === 'moderate' && totalCostPerDay >= 120 && totalCostPerDay <= 200) {
+          budgetMatch = true;
+          reasons.push('Moderate pricing fits your preference');
+        } else if (preferences.budget === 'luxury' && totalCostPerDay > 200) {
+          budgetMatch = true;
+          reasons.push('Luxury amenities and pricing match your preference');
+        }
+        
+        if (budgetMatch) {
+          score += 0.1;
+        }
+      }
+      
+      // 6. Region preference
+      if (preferences.preferredRegion !== 'any') {
+        const regionCountries = this.regions.get(preferences.preferredRegion) || [];
+        if (regionCountries.includes(spot.country)) {
+          score += 0.1;
+          reasons.push(`Located in your preferred ${preferences.preferredRegion} region`);
+        }
+      }
+      
+      // 7. Kite schools availability
+      if (preferences.hasKiteSchools && spot.kiteSchools && spot.kiteSchools.length > 0) {
+        score += 0.05;
+        reasons.push(`Has ${spot.numberOfSchools || spot.kiteSchools.length} kite schools available`);
+      }
+      
+      // 8. Wave preference
+      if (preferences.preferWaves && spot.waveSize && 
+          (spot.waveSize.toLowerCase().includes('strong') || spot.waveSize.toLowerCase().includes('medium'))) {
+        score += 0.05;
+        reasons.push(`Offers ${spot.waveSize} waves for riding`);
+      } else if (!preferences.preferWaves && spot.waveSize && 
+                spot.waveSize.toLowerCase().includes('flat')) {
+        score += 0.05;
+        reasons.push('Offers flat water conditions as preferred');
+      }
+      
+      // 9. Food options importance
+      if (preferences.foodOptions && spot.foodOptions && spot.foodOptions.length > 0) {
+        score += 0.05;
+        reasons.push('Variety of food options are available');
+      }
+      
+      // 10. Culture/activities importance
+      if (preferences.culture && spot.culture) {
+        score += 0.05;
+        reasons.push('Rich cultural experiences and activities available');
+      }
+      
+      // Add to results if the score is above minimum threshold
+      if (score > 0.3) { // At least 30% match
+        results.push({
+          ...spot,
+          matchScore: score,
+          reasons,
+          windCondition
+        });
+      }
+    }
+    
+    // Sort by match score descending
+    results.sort((a, b) => b.matchScore - a.matchScore);
+    
+    // Return top matches (limited to 8)
+    return results.slice(0, 8);
   }
 
   // Spot operations
