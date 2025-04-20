@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MonthSelector from "@/components/MonthSelector";
@@ -193,17 +194,20 @@ export default function Spots() {
       <Header />
       
       <main className="container mx-auto px-4 py-6 flex-grow">
-        {/* Page Title with more compact styling */}
-        <div className="mb-3">
-          <h2 className="text-2xl font-bold text-primary">Find Perfect Kitesurfing Spots</h2>
-          <p className="text-sm text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions</p>
+        {/* Page Title with more visual impact */}
+        <div className="mb-6 pt-2">
+          <h2 className="text-3xl font-bold text-ocean-dark mb-2">Find Perfect Kitesurfing Spots</h2>
+          <div className="flex items-center">
+            <div className="h-1 w-12 bg-primary rounded-full mr-3"></div>
+            <p className="text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions</p>
+          </div>
         </div>
         
-        {/* Compact filter bar with controls */}
-        <div className="bg-white rounded-lg border border-slate-100 shadow-sm p-3 mb-4">
-          <div className="flex flex-col md:flex-row justify-between gap-3 mb-3">
+        {/* Enhanced filter bar with controls */}
+        <div className="bg-white rounded-xl border border-slate-100 shadow-lg p-5 mb-6">
+          <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
             {/* Top row: Month Selector and Recommendation Button */}
-            <div className="flex items-center justify-between md:justify-start gap-2 flex-wrap">
+            <div className="flex items-center justify-between md:justify-start gap-3 flex-wrap">
               <MonthSelector 
                 selectedMonth={selectedMonth} 
                 onMonthChange={handleMonthChange} 
@@ -212,48 +216,48 @@ export default function Spots() {
               <Button 
                 onClick={handleShowPreferencesModal}
                 variant="default"
-                className="bg-blue-700 hover:bg-blue-800 text-white h-8 text-xs px-2"
+                className="bg-ocean-gradient hover:bg-ocean-blue text-white h-9 px-3 shadow-md text-sm font-medium transition-all duration-300"
                 size="sm"
               >
-                <Sparkles className="h-3.5 w-3.5" />
-                {/* Get Personalized Recommendations */}
+                <Sparkles className="h-4 w-4 mr-1.5" />
+                Get Recommendations
               </Button>
             </div>
             
             {/* View Toggles */}
-            <div className="flex items-center gap-1">
-              <span className="text-xs text-slate-500 mr-1 hidden md:inline">View:</span>
-              <div className="flex gap-1 p-0.5 bg-slate-100 rounded-md">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-slate-500 mr-1 hidden md:inline">View:</span>
+              <div className="flex gap-1 p-1 bg-blue-50 rounded-md shadow-sm">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setViewMode("both")}
-                  className={`w-8 h-7 p-0 ${viewMode === "both" ? "bg-white shadow-sm" : ""}`}
+                  className={`w-9 h-8 p-0 transition-all duration-200 ${viewMode === "both" ? "bg-white shadow-md text-ocean-dark" : "text-slate-500"}`}
                 >
-                  <List className="h-3.5 w-3.5" />
+                  <SplitSquareVertical className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setViewMode("map")}
-                  className={`w-8 h-7 p-0 ${viewMode === "map" ? "bg-white shadow-sm" : ""}`}
+                  className={`w-9 h-8 p-0 transition-all duration-200 ${viewMode === "map" ? "bg-white shadow-md text-ocean-dark" : "text-slate-500"}`}
                 >
-                  <Map className="h-3.5 w-3.5" />
+                  <Map className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setViewMode("list")}
-                  className={`w-8 h-7 p-0 ${viewMode === "list" ? "bg-white shadow-sm" : ""}`}
+                  className={`w-9 h-8 p-0 transition-all duration-200 ${viewMode === "list" ? "bg-white shadow-md text-ocean-dark" : "text-slate-500"}`}
                 >
-                  <BarChart className="h-3.5 w-3.5" />
+                  <List className="h-4 w-4" />
                 </Button>
               </div>
             </div>
           </div>
           
           {/* Bottom row: Filter Controls and Compare Buttons */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             {/* Filter Controls */}
             <div className="w-full sm:flex-grow">
               <FilterControls 
@@ -264,16 +268,16 @@ export default function Spots() {
               />
             </div>
             
-            {/* Compare Buttons - More Compact */}
-            <div className="flex gap-1 items-center mt-2 sm:mt-0">
+            {/* Compare Buttons - Enhanced */}
+            <div className="flex gap-2 items-center mt-2 sm:mt-0">
               <Button
                 onClick={handleShowComparison}
                 disabled={spotsToCompare.length < 2}
                 size="sm"
-                variant="secondary"
-                className="h-8 text-xs px-2"
+                variant={spotsToCompare.length >= 2 ? "default" : "secondary"}
+                className={`h-9 text-sm font-medium px-3 ${spotsToCompare.length >= 2 ? "bg-teal text-white shadow-md" : ""}`}
               >
-                <SplitSquareVertical className="h-3.5 w-3.5 mr-1" />
+                <SplitSquareVertical className="h-4 w-4 mr-1.5" />
                 Compare {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
               </Button>
               
@@ -288,10 +292,10 @@ export default function Spots() {
                 }}
                 size="sm"
                 variant="outline"
-                className="h-8 text-xs px-2"
+                className="h-9 text-sm font-medium px-3 border-ocean-blue text-ocean-blue"
                 disabled={!filteredSpots || filteredSpots.length < 2}
               >
-                <SplitSquareVertical className="h-3.5 w-3.5 mr-1" />
+                <SplitSquareVertical className="h-4 w-4 mr-1.5" />
                 Compare All
               </Button>
               
@@ -300,7 +304,7 @@ export default function Spots() {
                   onClick={clearComparison}
                   size="sm"
                   variant="ghost"
-                  className="text-red-500 h-8 p-0 w-7"
+                  className="text-red-500 h-9 p-0 w-9 hover:bg-red-50"
                 >
                   ✕
                 </Button>
@@ -309,19 +313,19 @@ export default function Spots() {
           </div>
         </div>
         
-        {/* Spots to compare - More compact badges */}
+        {/* Spots to compare - Enhanced badges */}
         {spotsToCompare.length > 0 && !showComparison && (
-          <div className="mb-3 flex items-center gap-2">
-            <span className="text-xs text-slate-500">Selected:</span>
-            <div className="flex flex-wrap gap-1">
+          <div className="mb-4 flex items-center gap-2 bg-blue-50/50 p-3 rounded-lg border border-blue-100">
+            <span className="text-sm font-medium text-ocean-dark">Selected for comparison:</span>
+            <div className="flex flex-wrap gap-2">
               {spotsToCompare.map(spot => (
-                <div key={spot.id} className="bg-white rounded-full px-2 py-0.5 text-xs flex items-center gap-1 border border-sky-100 shadow-sm">
+                <div key={spot.id} className="bg-white rounded-full px-3 py-1 text-sm flex items-center gap-2 border border-blue-100 shadow-sm">
                   {spot.name}
                   <button 
                     onClick={() => toggleSpotComparison(spot)}
-                    className="text-gray-400 hover:text-red-500 w-3.5 h-3.5 flex items-center justify-center rounded-full hover:bg-red-50"
+                    className="text-gray-400 hover:text-red-500 w-4 h-4 flex items-center justify-center rounded-full hover:bg-red-50 transition-colors duration-200"
                   >
-                    <span className="text-[10px]">✕</span>
+                    <span className="text-xs">✕</span>
                   </button>
                 </div>
               ))}
@@ -331,21 +335,40 @@ export default function Spots() {
         
         {/* Comparison View */}
         {showComparison ? (
-          <div className="mt-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4 bg-white rounded-xl border border-blue-100 shadow-lg overflow-hidden"
+          >
+            <div className="p-3 bg-gradient-to-r from-ocean-blue to-teal text-white flex items-center justify-between">
+              <h3 className="text-lg font-bold">Comparing {spotsWithConditions?.length || spotsToCompare.length} Spots</h3>
+              <Button 
+                onClick={handleCloseComparison}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white/10 h-8 w-8 p-0 rounded-full"
+              >
+                ✕
+              </Button>
+            </div>
+            
             <SpotComparison 
               spots={spotsWithConditions || spotsToCompare}
               selectedMonth={selectedMonth}
               onClose={handleCloseComparison}
             />
-            <div className="mt-4 text-center">
+            
+            <div className="py-4 text-center bg-blue-50/50 border-t border-blue-100">
               <Button 
                 onClick={handleCloseComparison}
                 variant="outline"
+                className="border-ocean-blue text-ocean-blue hover:bg-blue-50"
               >
-                Back to Map
+                <Map className="w-4 h-4 mr-2" /> Back to Map
               </Button>
             </div>
-          </div>
+          </motion.div>
         ) : (
           <div className="flex flex-col md:flex-row gap-6">
             {/* Map */}
@@ -396,15 +419,21 @@ export default function Spots() {
       
       {/* Recommendations Modal */}
       {showRecommendations && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4">
-          <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/60 backdrop-blur-sm p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            className="w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+          >
             <RecommendedSpots
               spots={recommendedSpots}
               isLoading={isRecommending}
               onSpotSelect={handleSpotSelect}
               onClose={handleCloseRecommendations}
             />
-          </div>
+          </motion.div>
         </div>
       )}
       
