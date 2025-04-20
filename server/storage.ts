@@ -1,9 +1,17 @@
 import { 
-  spots, windConditions, 
+  spots, windConditions, users, reviews, ratings,
   type Spot, type InsertSpot, 
   type WindCondition, type InsertWindCondition,
+  type User, type InsertUser,
+  type Review, type InsertReview, type ReviewWithUser,
+  type Rating, type InsertRating, type SpotWithRatings,
   WindQuality, MonthNames
 } from "@shared/schema";
+import { db } from "./db";
+import { eq, and, desc, avg, count, sql, like, or } from "drizzle-orm";
+import connectPg from "connect-pg-simple";
+import session from "express-session";
+import { pool } from "./db";
 
 export interface UserPreferences {
   windSpeedMin: number;
@@ -26,6 +34,9 @@ export interface SpotWithMatchScore extends Spot {
 }
 
 export interface IStorage {
+  // Session store for authentication
+  sessionStore: session.SessionStore;
+  
   // Spot operations
   getAllSpots(): Promise<Spot[]>;
   getSpotById(id: number): Promise<Spot | undefined>;
@@ -41,6 +52,43 @@ export interface IStorage {
   
   // Recommendation operation
   getRecommendedSpots(preferences: UserPreferences): Promise<SpotWithMatchScore[]>;
+  
+  // User operations
+  getUserById(id: number): Promise<User | undefined>;
+  getUserByUsername(username: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  createUser(user: InsertUser): Promise<User>;
+  
+  // Review operations
+  getReviewsForSpot(spotId: number): Promise<ReviewWithUser[]>;
+  getReviewByUserAndSpot(userId: number, spotId: number): Promise<Review | undefined>;
+  createReview(review: InsertReview): Promise<Review>;
+  updateReview(id: number, content: string): Promise<Review | undefined>;
+  deleteReview(id: number): Promise<boolean>;
+  
+  // Rating operations
+  getRatingsForSpot(spotId: number): Promise<Rating[]>;
+  getRatingByUserAndSpot(userId: number, spotId: number): Promise<Rating | undefined>;
+  createRating(rating: InsertRating): Promise<Rating>;
+  updateRating(id: number, rating: Partial<InsertRating>): Promise<Rating | undefined>;
+  deleteRating(id: number): Promise<boolean>;
+  
+  // Combined operations
+  getSpotWithReviewsAndRatings(spotId: number): Promise<{
+    spot: Spot;
+    windConditions: WindCondition[];
+    reviews: ReviewWithUser[];
+    averageRating: number;
+    totalRatings: number;
+    ratingBreakdown: {
+      windReliability: number;
+      beginnerFriendly: number;
+      scenery: number;
+      uncrowded: number;
+      localVibe: number;
+      overall: number;
+    };
+  } | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -669,4 +717,7 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { DatabaseStorage } from "./database-storage";
+
+// Use the database-backed storage instead of in-memory storage
+export const storage = new DatabaseStorage();

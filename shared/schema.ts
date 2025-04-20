@@ -1,6 +1,7 @@
-import { pgTable, text, serial, integer, boolean, real, json } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, real, json, timestamp, unique } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { relations } from "drizzle-orm";
 
 // Main spots table
 export const spots = pgTable("spots", {
@@ -94,7 +95,153 @@ export const MonthNames = [
   "September", "October", "November", "December"
 ];
 
+// User table for authentication and reviews
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+  displayName: text("display_name"),
+  bio: text("bio"),
+  experience: text("experience"), // Beginner, Intermediate, Advanced
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  avatarUrl: text("avatar_url"),
+});
+
+// Reviews table for community spot reviews
+export const reviews = pgTable("reviews", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  spotId: integer("spot_id").notNull().references(() => spots.id),
+  content: text("content").notNull(),
+  visitDate: timestamp("visit_date"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => {
+  return {
+    // Ensure one review per user per spot
+    uniqUserSpot: unique().on(table.userId, table.spotId),
+  }
+});
+
+// Ratings table for community spot ratings
+export const ratings = pgTable("ratings", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  spotId: integer("spot_id").notNull().references(() => spots.id),
+  windReliability: integer("wind_reliability").notNull(), // 1-5 stars
+  beginnerFriendly: integer("beginner_friendly").notNull(), // 1-5 stars
+  scenery: integer("scenery").notNull(), // 1-5 stars
+  uncrowded: integer("uncrowded").notNull(), // 1-5 stars
+  localVibe: integer("local_vibe").notNull(), // 1-5 stars
+  overall: integer("overall").notNull(), // 1-5 stars
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => {
+  return {
+    // Ensure one rating per user per spot
+    uniqUserSpot: unique().on(table.userId, table.spotId),
+  }
+});
+
+// Define relations
+export const spotsRelations = relations(spots, ({ many }) => ({
+  windConditions: many(windConditions),
+  reviews: many(reviews),
+  ratings: many(ratings),
+}));
+
+export const windConditionsRelations = relations(windConditions, ({ one }) => ({
+  spot: one(spots, {
+    fields: [windConditions.spotId],
+    references: [spots.id],
+  }),
+}));
+
+export const usersRelations = relations(users, ({ many }) => ({
+  reviews: many(reviews),
+  ratings: many(ratings),
+}));
+
+export const reviewsRelations = relations(reviews, ({ one }) => ({
+  user: one(users, {
+    fields: [reviews.userId],
+    references: [users.id],
+  }),
+  spot: one(spots, {
+    fields: [reviews.spotId],
+    references: [spots.id],
+  }),
+}));
+
+export const ratingsRelations = relations(ratings, ({ one }) => ({
+  user: one(users, {
+    fields: [ratings.userId],
+    references: [users.id],
+  }),
+  spot: one(spots, {
+    fields: [ratings.spotId],
+    references: [spots.id],
+  }),
+}));
+
 // Extended types for frontend
 export type SpotWithWindConditions = Spot & {
   windConditions: WindCondition[];
+};
+
+// Define insert schemas for new tables
+export const insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  email: true,
+  password: true,
+  displayName: true,
+  bio: true,
+  experience: true,
+  avatarUrl: true,
+});
+
+export const insertReviewSchema = createInsertSchema(reviews).pick({
+  userId: true,
+  spotId: true,
+  content: true,
+  visitDate: true,
+});
+
+export const insertRatingSchema = createInsertSchema(ratings).pick({
+  userId: true,
+  spotId: true,
+  windReliability: true,
+  beginnerFriendly: true,
+  scenery: true,
+  uncrowded: true,
+  localVibe: true,
+  overall: true,
+});
+
+// Define types for the new tables
+export type User = typeof users.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type Review = typeof reviews.$inferSelect;
+export type InsertReview = z.infer<typeof insertReviewSchema>;
+export type Rating = typeof ratings.$inferSelect;
+export type InsertRating = z.infer<typeof insertRatingSchema>;
+
+// Extended type for reviews with user data
+export type ReviewWithUser = Review & {
+  user: Pick<User, 'id' | 'username' | 'displayName' | 'avatarUrl' | 'experience'>;
+};
+
+// Extended type for spots with ratings summary
+export type SpotWithRatings = Spot & {
+  averageRating: number;
+  totalRatings: number;
+  ratingBreakdown: {
+    windReliability: number;
+    beginnerFriendly: number;
+    scenery: number;
+    uncrowded: number;
+    localVibe: number;
+    overall: number;
+  };
 };
