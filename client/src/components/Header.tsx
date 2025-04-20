@@ -40,14 +40,14 @@ export default function Header() {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
           >
-            <div className="bg-ocean-gradient p-2 rounded-full mr-3 shadow-md">
+            <div className="bg-sky-gradient p-2 rounded-full mr-3 shadow-md">
               <Wind className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-azure" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+              <h1 className="text-xl font-bold text-electric" style={{ fontFamily: "'Permanent Marker', cursive" }}>
                 Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
               </h1>
-              <p className="text-xs text-deep-ocean/70 font-medium">Ride the perfect breeze 💨</p>
+              <p className="text-xs text-navy/70 font-medium">Ride the perfect breeze 💨</p>
             </div>
           </motion.div>
         </Link>

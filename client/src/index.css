@@ -8,25 +8,30 @@
 @tailwind utilities;
 
 :root {
-  /* New Ocean-inspired color palette */
-  --deep-ocean-blue: 198 76% 23%; /* #0B4F6C */
-  --bright-azure: 200 100% 37%;   /* #007CBE */
-  --light-sky-blue: 197 69% 73%;  /* #8ECAE6 */
-  --sandy-beige: 39 60% 93%;      /* #F8F1E0 */
-  --sunset-orange: 16 100% 65%;   /* #FF7F50 */
-  --seafoam-green: 177 55% 70%;   /* #8BD7D2 */
-  --off-white: 0 0% 98%;          /* #F9F9F9 */
-  --light-gray: 0 0% 90%;         /* #E6E6E6 */
-  --charcoal: 230 16% 21%;        /* #2D3142 */
+  /* Vibrant Blues */
+  --electric-blue: 204 100% 50%;  /* #0096FF */
+  --cerulean: 190 100% 42%;       /* #00B4D8 */
+  --azure: 217 100% 62%;          /* #3A86FF */
+  
+  /* Fun Accent Colors */
+  --sunshine-yellow: 49 100% 52%; /* #FFD60A */
+  --coral: 1 100% 68%;            /* #FF5E5B */
+  --lime-green: 157 100% 50%;     /* #00FF7F */
+  
+  /* Supporting Colors */
+  --white: 0 0% 100%;             /* #FFFFFF */
+  --light-blue: 187 91% 94%;      /* #E0FBFC */
+  --deep-navy: 202 100% 18%;      /* #003459 */
   
   /* Core colors aliases for consistent usage */
-  --color-primary: var(--bright-azure);
-  --color-secondary: var(--deep-ocean-blue);
-  --color-accent: var(--sunset-orange);
-  --color-background: var(--off-white);
-  --color-card: var(--sandy-beige);
-  --color-text: var(--charcoal);
-  --color-muted: var(--light-gray);
+  --color-primary: var(--electric-blue);
+  --color-secondary: var(--cerulean);
+  --color-accent: var(--sunshine-yellow);
+  --color-action: var(--coral);
+  --color-success: var(--lime-green);
+  --color-background: var(--white);
+  --color-section: var(--light-blue);
+  --color-text: var(--deep-navy);
   
   /* Wind quality indicators */
   --color-wind-excellent: 177 55% 70%; /* Seafoam Green */
@@ -59,35 +64,35 @@
   }
 
   body {
-    color: hsl(var(--charcoal));
+    color: hsl(var(--deep-navy));
     font-family: 'Montserrat', var(--font-body);
-    background: linear-gradient(135deg, hsl(var(--off-white)) 0%, hsl(var(--light-sky-blue) / 10%) 100%);
+    background: linear-gradient(135deg, hsl(var(--white)) 0%, hsl(var(--light-blue) / 30%) 100%);
   }
 
   h1 {
     font-family: var(--font-title);
-    color: hsl(var(--deep-ocean-blue));
+    color: hsl(var(--electric-blue));
     @apply font-bold tracking-wide text-4xl md:text-5xl;
     letter-spacing: 1px;
   }
 
   h2 {
     font-family: var(--font-heading);
-    color: hsl(var(--deep-ocean-blue));
+    color: hsl(var(--electric-blue));
     @apply text-2xl md:text-3xl font-bold;
     letter-spacing: 0.5px;
   }
 
   h3 {
     font-family: var(--font-heading);
-    color: hsl(var(--deep-ocean-blue));
+    color: hsl(var(--cerulean));
     @apply text-xl md:text-2xl font-bold;
     letter-spacing: 0.5px;
   }
 
   h4, h5, h6 {
     font-family: var(--font-fun);
-    color: hsl(var(--bright-azure));
+    color: hsl(var(--azure));
     @apply font-bold;
   }
 
@@ -96,12 +101,12 @@
   }
 
   a {
-    color: hsl(var(--bright-azure));
+    color: hsl(var(--cerulean));
     @apply transition-colors duration-200;
   }
 
   a:hover {
-    color: hsl(var(--deep-ocean-blue));
+    color: hsl(var(--electric-blue));
   }
 
   .font-heading {
@@ -208,124 +213,136 @@
   
   /* Background gradients */
   .bg-ocean-gradient {
-    background: linear-gradient(135deg, hsl(var(--deep-ocean-blue)) 0%, hsl(var(--bright-azure)) 100%);
+    background: linear-gradient(135deg, hsl(var(--deep-navy)) 0%, hsl(var(--electric-blue)) 100%);
   }
   
   .bg-sky-gradient {
-    background: linear-gradient(135deg, hsl(var(--bright-azure)) 0%, hsl(var(--light-sky-blue)) 100%);
+    background: linear-gradient(135deg, hsl(var(--electric-blue)) 0%, hsl(var(--cerulean)) 100%);
   }
   
   .bg-sunset-gradient {
-    background: linear-gradient(135deg, hsl(var(--sunset-orange)) 0%, hsl(var(--sandy-beige)) 100%);
+    background: linear-gradient(135deg, hsl(var(--coral)) 0%, hsl(var(--sunshine-yellow)) 100%);
   }
   
   /* Wind quality classes */
   .wind-excellent {
     @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--seafoam-green));
+    background-color: hsl(var(--lime-green));
   }
   
   .wind-good {
     @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--bright-azure));
+    background-color: hsl(var(--azure));
   }
   
   .wind-moderate {
-    @apply text-charcoal relative overflow-hidden;
-    background-color: hsl(var(--sandy-beige));
+    @apply text-deep-navy relative overflow-hidden;
+    background-color: hsl(var(--light-blue));
   }
   
   .wind-poor {
     @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--sunset-orange));
+    background-color: hsl(var(--coral));
   }
   
   /* Text colors */
-  .text-deep-ocean {
-    color: hsl(var(--deep-ocean-blue));
+  /* New vibrant color text utilities */
+  .text-electric {
+    color: hsl(var(--electric-blue));
+  }
+  
+  .text-cerulean {
+    color: hsl(var(--cerulean));
   }
   
   .text-azure {
-    color: hsl(var(--bright-azure));
+    color: hsl(var(--azure));
   }
   
-  .text-sky {
-    color: hsl(var(--light-sky-blue));
-  }
-  
-  .text-sandy {
-    color: hsl(var(--sandy-beige));
-  }
-  
-  .text-sunset {
-    color: hsl(var(--sunset-orange));
-  }
-  
-  .text-seafoam {
-    color: hsl(var(--seafoam-green));
-  }
-  
-  .text-charcoal {
-    color: hsl(var(--charcoal));
-  }
-  
-  /* Legacy text colors for compatibility */
-  .text-ocean-blue {
-    color: hsl(var(--bright-azure));
-  }
-  
-  .text-ocean-dark {
-    color: hsl(var(--deep-ocean-blue));
-  }
-  
-  .text-teal {
-    color: hsl(var(--seafoam-green));
+  .text-yellow {
+    color: hsl(var(--sunshine-yellow));
   }
   
   .text-coral {
-    color: hsl(var(--sunset-orange));
+    color: hsl(var(--coral));
+  }
+  
+  .text-lime {
+    color: hsl(var(--lime-green));
+  }
+  
+  .text-navy {
+    color: hsl(var(--deep-navy));
   }
   
   /* Background colors */
-  .bg-deep-ocean {
-    background-color: hsl(var(--deep-ocean-blue));
+  .bg-electric {
+    background-color: hsl(var(--electric-blue));
+  }
+  
+  .bg-cerulean {
+    background-color: hsl(var(--cerulean));
   }
   
   .bg-azure {
-    background-color: hsl(var(--bright-azure));
+    background-color: hsl(var(--azure));
   }
   
-  .bg-sky {
-    background-color: hsl(var(--light-sky-blue));
-  }
-  
-  .bg-sandy {
-    background-color: hsl(var(--sandy-beige));
-  }
-  
-  .bg-sunset {
-    background-color: hsl(var(--sunset-orange));
-  }
-  
-  .bg-seafoam {
-    background-color: hsl(var(--seafoam-green));
-  }
-  
-  /* Legacy background colors for compatibility */
-  .bg-ocean-blue {
-    background-color: hsl(var(--bright-azure));
-  }
-  
-  .bg-ocean-dark {
-    background-color: hsl(var(--deep-ocean-blue));
-  }
-  
-  .bg-teal {
-    background-color: hsl(var(--seafoam-green));
+  .bg-yellow {
+    background-color: hsl(var(--sunshine-yellow));
   }
   
   .bg-coral {
-    background-color: hsl(var(--sunset-orange));
+    background-color: hsl(var(--coral));
+  }
+  
+  .bg-lime {
+    background-color: hsl(var(--lime-green));
+  }
+  
+  .bg-navy {
+    background-color: hsl(var(--deep-navy));
+  }
+  
+  .bg-sky {
+    background-color: hsl(var(--light-blue));
+  }
+  
+  /* Legacy colors for compatibility */
+  .text-deep-ocean {
+    color: hsl(var(--deep-navy));
+  }
+  
+  .text-ocean-blue {
+    color: hsl(var(--electric-blue));
+  }
+  
+  .text-ocean-dark {
+    color: hsl(var(--deep-navy));
+  }
+  
+  .text-sky {
+    color: hsl(var(--light-blue));
+  }
+  
+  .text-seafoam {
+    color: hsl(var(--lime-green));
+  }
+  
+  .bg-deep-ocean {
+    background-color: hsl(var(--deep-navy));
+  }
+  
+  .bg-ocean-blue {
+    background-color: hsl(var(--electric-blue));
+  }
+  
+  .bg-ocean-dark {
+    background-color: hsl(var(--deep-navy));
+  }
+  
+  .bg-teal {
+    background-color: hsl(var(--lime-green));
   }
 }
 
@@ -362,7 +379,7 @@
   /* Card hover effects */
   .spot-card {
     @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
-    background: linear-gradient(135deg, white 0%, hsl(var(--sandy-beige) / 40%) 100%);
+    background: linear-gradient(135deg, white 0%, hsl(var(--light-blue) / 40%) 100%);
   }
   
   /* Animated wind indicator */
@@ -427,23 +444,23 @@
   /* Wind quality indicators with improved styling */
   .wind-quality-excellent {
     @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--seafoam-green));
+    background-color: hsl(var(--lime-green));
   }
 
   .wind-quality-good {
     @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--bright-azure));
+    background-color: hsl(var(--azure));
   }
 
   .wind-quality-moderate {
     @apply relative overflow-hidden;
-    background-color: hsl(var(--sandy-beige));
-    color: hsl(var(--charcoal));
+    background-color: hsl(var(--light-blue));
+    color: hsl(var(--deep-navy));
   }
 
   .wind-quality-poor {
     @apply text-white relative overflow-hidden;
-    background-color: hsl(var(--sunset-orange));
+    background-color: hsl(var(--coral));
   }
   
   /* Fun wave animation */
