@@ -100,6 +100,10 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   const { data: userRating } = useQuery<Rating>({
     queryKey: [`/api/spots/${spotId}/ratings/user`],
     enabled: !!user && !!spotId,
+    retry: false, // Don't retry on 404
+    onError: () => {
+      // Just ignore error - means user hasn't rated yet
+    }
   });
 
   // Submit review mutation

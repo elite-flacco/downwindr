@@ -319,6 +319,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get user's rating for a specific spot
+  app.get("/api/spots/:id/ratings/user", isAuthenticated, async (req, res) => {
+    try {
+      const spotId = parseInt(req.params.id, 10);
+      if (isNaN(spotId)) {
+        return res.status(400).json({ message: "Invalid spot ID" });
+      }
+      
+      const userId = (req.user as Express.User).id;
+      const rating = await storage.getRatingByUserAndSpot(userId, spotId);
+      
+      if (!rating) {
+        return res.status(404).json({ message: "Rating not found" });
+      }
+      
+      res.json(rating);
+    } catch (error) {
+      console.error("Error fetching user rating:", error);
+      res.status(500).json({ message: "Error fetching user rating" });
+    }
+  });
+  
   // Create or update a rating (requires authentication)
   app.post("/api/ratings", isAuthenticated, async (req, res) => {
     try {
