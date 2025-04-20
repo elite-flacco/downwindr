@@ -71,10 +71,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Month must be between 1 and 12" });
       }
       
+      console.log(`Getting spots for month: ${monthNumber}`);
       const spots = await storage.getSpotsByMonth(monthNumber);
-      res.json(spots);
+      console.log(`Found ${spots.length} spots for month ${monthNumber}`);
+      
+      return res.json(spots);
     } catch (error) {
-      res.status(500).json({ message: "Error fetching spots by month" });
+      console.error("Error in /api/spots/month/:month route:", error);
+      
+      // If no spots are found, return an empty array rather than an error
+      if (error instanceof Error) {
+        return res.status(500).json({ 
+          message: "Error fetching spots by month",
+          error: error.message
+        });
+      }
+      
+      return res.status(500).json({ message: "Error fetching spots by month" });
     }
   });
 

@@ -210,6 +210,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Jul-Dec",
         tags: ["Kite Schools", "Equipment Rental", "Lagoons", "Beachfront Accommodation"],
         difficultyLevel: "Beginner to Intermediate",
+        kiteSchools: ["Club Ventos", "Kite Brazil", "Windtown Beach Resort"],
         localAttractions: "Dune buggy tours, traditional fishing villages, Fortaleza day trips"
       });
       
@@ -269,6 +270,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "May-Oct",
         tags: ["Premium Resorts", "Kite Schools", "Equipment Rental"],
         difficultyLevel: "Intermediate to Advanced",
+        kiteSchools: ["ION Club Le Morne", "KiteGlobing", "Yoaneye Kite Centre"],
         localAttractions: "UNESCO World Heritage site, Le Morne mountain hikes, Black River Gorges National Park"
       });
       
@@ -320,6 +322,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Apr-Sep",
         tags: ["Kite Camps", "Equipment Rental", "Accommodation"],
         difficultyLevel: "All Levels",
+        kiteSchools: ["Dakhla Attitude", "Ocean Vagabond", "West Point Dakhla"],
         localAttractions: "Sahara Desert tours, traditional Berber villages, Dragon Island"
       });
       
@@ -384,26 +387,35 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getSpotsByMonth(month: number): Promise<Spot[]> {
-    // Get all spot IDs with good or excellent wind conditions for the month
-    const goodSpotIds = await db.select({ spotId: windConditions.spotId })
-      .from(windConditions)
-      .where(and(
-        eq(windConditions.month, month),
-        or(
-          eq(windConditions.windQuality, WindQuality.Good),
-          eq(windConditions.windQuality, WindQuality.Excellent)
-        )
-      ));
-    
-    // No spots found with good conditions
-    if (goodSpotIds.length === 0) {
-      return [];
+    try {
+      // Get all spot IDs with good or excellent wind conditions for the month
+      const goodSpotIds = await db.select({ spotId: windConditions.spotId })
+        .from(windConditions)
+        .where(and(
+          eq(windConditions.month, month),
+          or(
+            eq(windConditions.windQuality, WindQuality.Good),
+            eq(windConditions.windQuality, WindQuality.Excellent)
+          )
+        ));
+      
+      // No spots found with good conditions
+      if (goodSpotIds.length === 0) {
+        return [];
+      }
+      
+      // Extract spot IDs from the result array
+      const spotIdArray = goodSpotIds.map(s => s.spotId);
+      
+      // Get the spots with good conditions
+      return await db.select()
+        .from(spots)
+        .where(sql`${spots.id} IN (${spotIdArray.join(',')})`);
+    } catch (error) {
+      console.error("Error in getSpotsByMonth:", error);
+      // Return all spots as a fallback if there's an issue with filtering by month
+      return this.getAllSpots();
     }
-    
-    // Get the spots with good conditions
-    return await db.select()
-      .from(spots)
-      .where(sql`${spots.id} IN (${goodSpotIds.map(s => s.spotId).join(',')})`);
   }
 
   async getSpotWithWindConditions(id: number): Promise<{spot: Spot, windConditions: WindCondition[]} | undefined> {
