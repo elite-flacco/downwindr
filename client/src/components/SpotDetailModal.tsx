@@ -194,14 +194,14 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       <Calendar className="mr-2 h-4 w-4 text-theme-primary" /> Best: {spotDetails.spot.bestMonths} 📅
                     </div>
                     
-                    {spotDetails.spot.windguruCode && (
+                    {spotDetails.spot.windguruCode != null && spotDetails.spot.windguruCode !== '' && (
                       <a 
                         href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center bg-theme-accent-warning text-theme-background px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-theme-accent-warning/90 transition-colors"
                       >
-                        <ExternalLink className="mr-2 h-4 w-4" /> Windguru Forecast
+                        <Wind className="mr-2 h-4 w-4" /> Windguru Forecast
                       </a>
                     )}
                   </motion.div>
@@ -322,7 +322,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     className="mb-8 bg-theme-background rounded-xl p-5 shadow-md border border-theme-border"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.1 }}
+                    transition={{ duration: 0.05 }}
                   >
                     <h3 className="text-xl font-bold font-heading mb-4 text-theme-text flex items-center">
                       <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -350,7 +350,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.1 }}
+                    transition={{ duration: 0.05 }}
                     className="mt-8 mb-8 bg-theme-background rounded-xl p-5 shadow-md"
                   >
                     <h3 className="text-xl font-bold font-heading mb-5 text-theme-text flex items-center">
