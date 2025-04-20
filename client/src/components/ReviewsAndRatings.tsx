@@ -101,9 +101,8 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
     queryKey: [`/api/spots/${spotId}/ratings/user`],
     enabled: !!user && !!spotId,
     retry: false, // Don't retry on 404
-    onError: () => {
-      // Just ignore error - means user hasn't rated yet
-    }
+    staleTime: 60000, // 1 minute
+    gcTime: 300000, // 5 minutes
   });
 
   // Submit review mutation

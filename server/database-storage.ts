@@ -37,6 +37,345 @@ export class DatabaseStorage implements IStorage {
       ['asia', ['Thailand', 'Philippines', 'Vietnam', 'Indonesia', 'Sri Lanka', 'Japan', 'South Korea']],
       ['oceania', ['Australia', 'New Zealand', 'Fiji', 'French Polynesia']]
     ]);
+    
+    // Initialize data if spots table is empty
+    this.checkAndInitializeData();
+  }
+  
+  private async checkAndInitializeData() {
+    try {
+      // Check if we have any spots
+      const spotsResult = await db.select().from(spots).limit(1);
+      
+      if (spotsResult.length === 0) {
+        console.log("No spots found in database. Initializing with sample data...");
+        this.initializeData();
+      }
+    } catch (error) {
+      console.error("Error checking database for spots:", error);
+    }
+  }
+  
+  private async initializeData() {
+    try {
+      // 1. Tarifa, Spain
+      const tarifa = await this.createSpot({
+        name: "Tarifa, Spain",
+        country: "Spain",
+        latitude: 36.0143,
+        longitude: -5.6044,
+        description: "Famous for consistent Levante and Poniente winds, this spot offers perfect conditions for kiters of all levels.",
+        waveSize: "Medium",
+        tempRange: "16-20°C",
+        bestMonths: "Dec-Mar",
+        tags: ["Kite Schools", "Equipment Rental", "Beachfront Accommodation"],
+        difficulty: "Intermediate",
+        popularity: "High",
+        imageUrl: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=nick-fewings-NG9lpXnUMqM-unsplash.jpg",
+        region: "europe",
+        localAttractions: "Historic Old Town, Gibraltar day trips"
+      });
+      
+      // Create wind conditions for Tarifa
+      for (let month = 1; month <= 12; month++) {
+        let windQuality = WindQuality.Moderate;
+        let windSpeed = 12;
+        let airTemp = 15;
+        let waterTemp = 13;
+        let seasonalNotes = "";
+        
+        // Winter (stronger winds)
+        if (month >= 1 && month <= 3) {
+          windQuality = WindQuality.Excellent;
+          windSpeed = 22;
+          airTemp = 15;
+          waterTemp = 15;
+          seasonalNotes = "Strong Levante winds common in winter months. Wetsuits recommended.";
+        } 
+        // Spring (good winds, moderate temps)
+        else if (month >= 4 && month <= 6) {
+          windQuality = WindQuality.Good;
+          windSpeed = 18;
+          airTemp = 20;
+          waterTemp = 17;
+          seasonalNotes = "Pleasant temperatures with still reliable wind. Spring wetsuit (3/2) recommended.";
+        }
+        // Summer (less reliable winds, warmer)
+        else if (month >= 7 && month <= 9) {
+          windQuality = WindQuality.Moderate;
+          windSpeed = 15;
+          airTemp = 27;
+          waterTemp = 22;
+          seasonalNotes = "Thermal Poniente winds in afternoons. Crowded beaches during high season.";
+        }
+        // Fall (good winds again)
+        else {
+          windQuality = WindQuality.Good;
+          windSpeed = 20;
+          airTemp = 18;
+          waterTemp = 19;
+          seasonalNotes = "Excellent conditions with fewer crowds. Autumn storms can bring stronger winds.";
+        }
+        
+        await this.createWindCondition({
+          spotId: tarifa.id,
+          month,
+          windSpeed,
+          windQuality,
+          airTemp,
+          waterTemp,
+          seasonalNotes
+        });
+      }
+      
+      // 2. Cabarete, Dominican Republic
+      const cabarete = await this.createSpot({
+        name: "Cabarete, Dominican Republic",
+        country: "Dominican Republic",
+        latitude: 19.7644,
+        longitude: -70.4168,
+        description: "Known as the 'Kiteboarding Capital of the World', Cabarete offers consistent trade winds and warm waters year-round.",
+        waveSize: "Small to Medium",
+        tempRange: "24-30°C",
+        bestMonths: "Jun-Aug",
+        tags: ["Kite Schools", "Equipment Rental", "Beach Bars", "Accommodation"],
+        difficulty: "Beginner to Advanced",
+        popularity: "Very High",
+        imageUrl: "https://images.unsplash.com/photo-1559113202-c916b8e44373?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=matt-hardy-6ArTTluciuA-unsplash.jpg",
+        region: "caribbean"
+      });
+      
+      // Create wind conditions for Cabarete
+      for (let month = 1; month <= 12; month++) {
+        let windQuality = WindQuality.Good;
+        let windSpeed = 17;
+        let airTemp = 26;
+        let waterTemp = 25;
+        let seasonalNotes = "";
+        
+        // Winter (moderate winds)
+        if (month >= 1 && month <= 3) {
+          windQuality = WindQuality.Good;
+          windSpeed = 16;
+          airTemp = 25;
+          waterTemp = 25;
+          seasonalNotes = "Reliable trade winds, perfect for beginners and freestyle riders.";
+        } 
+        // Spring (improving winds)
+        else if (month >= 4 && month <= 5) {
+          windQuality = WindQuality.Good;
+          windSpeed = 18;
+          airTemp = 27;
+          waterTemp = 26;
+          seasonalNotes = "Consistent afternoon thermal effect, usually picking up around 11am.";
+        }
+        // Summer (peak wind season)
+        else if (month >= 6 && month <= 8) {
+          windQuality = WindQuality.Excellent;
+          windSpeed = 22;
+          airTemp = 30;
+          waterTemp = 28;
+          seasonalNotes = "Peak season with strongest and most consistent trade winds. More crowded.";
+        }
+        // Fall (hurricane season - more variable)
+        else {
+          windQuality = month >= 11 ? WindQuality.Good : WindQuality.Moderate;
+          windSpeed = month >= 11 ? 17 : 15;
+          airTemp = 27;
+          waterTemp = 26;
+          seasonalNotes = month >= 11 ? "Winds becoming more reliable again after hurricane season." : "Wind can be affected by hurricane season. Check forecasts carefully.";
+        }
+        
+        await this.createWindCondition({
+          spotId: cabarete.id,
+          month,
+          windSpeed,
+          windQuality,
+          airTemp,
+          waterTemp,
+          seasonalNotes
+        });
+      }
+      
+      // 3. Cumbuco, Brazil
+      const cumbuco = await this.createSpot({
+        name: "Cumbuco, Brazil",
+        country: "Brazil",
+        latitude: -3.6178,
+        longitude: -38.7447,
+        description: "Offers perfect flat water lagoons and consistent cross-onshore winds. A paradise for freestylers and beginners alike.",
+        waveSize: "Small",
+        tempRange: "26-32°C",
+        bestMonths: "Jul-Dec",
+        tags: ["Kite Schools", "Equipment Rental", "Lagoons", "Beachfront Accommodation"],
+        difficulty: "Beginner to Intermediate",
+        popularity: "High",
+        imageUrl: "https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=victor-freitas-hOuJYX2K5DA-unsplash.jpg",
+        region: "south-america"
+      });
+      
+      // Create wind conditions for Cumbuco
+      for (let month = 1; month <= 12; month++) {
+        let windQuality = WindQuality.Moderate;
+        let windSpeed = 15;
+        let airTemp = 28;
+        let waterTemp = 27;
+        let seasonalNotes = "";
+        
+        // Summer in Brazil (Dec-Feb) - Transition season
+        if (month >= 1 && month <= 2 || month === 12) {
+          windQuality = WindQuality.Good;
+          windSpeed = 18;
+          airTemp = 31;
+          waterTemp = 28;
+          seasonalNotes = "Reliable winds most days, but more variable than peak season.";
+        } 
+        // Fall/Winter in Brazil (Mar-Jun) - Rainy season, less wind
+        else if (month >= 3 && month <= 6) {
+          windQuality = WindQuality.Moderate;
+          windSpeed = 13;
+          airTemp = 28;
+          waterTemp = 27;
+          seasonalNotes = "Off-season with occasional rainy days and less reliable winds.";
+        }
+        // Winter/Spring in Brazil (Jul-Nov) - Peak wind season
+        else {
+          windQuality = WindQuality.Excellent;
+          windSpeed = 25;
+          airTemp = 29;
+          waterTemp = 27;
+          seasonalNotes = "Peak wind season with super consistent cross-shore trade winds nearly every day.";
+        }
+        
+        await this.createWindCondition({
+          spotId: cumbuco.id,
+          month,
+          windSpeed,
+          windQuality,
+          airTemp,
+          waterTemp,
+          seasonalNotes
+        });
+      }
+      
+      // 4. Le Morne, Mauritius
+      const leMorne = await this.createSpot({
+        name: "Le Morne, Mauritius",
+        country: "Mauritius",
+        latitude: -20.4574,
+        longitude: 57.3089,
+        description: "World-class spot with clear lagoon and wave conditions. Protected by coral reef with stunning backdrop of Le Morne mountain.",
+        waveSize: "Medium to Large (Outside reef)",
+        tempRange: "22-30°C",
+        bestMonths: "May-Oct",
+        tags: ["Premium Resorts", "Kite Schools", "Equipment Rental"],
+        difficulty: "Intermediate to Advanced",
+        popularity: "High",
+        imageUrl: "https://images.unsplash.com/photo-1596295517860-04a84af8ad4d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=derek-story-wWQMpbaiK2Y-unsplash.jpg",
+        region: "africa"
+      });
+      
+      // Create wind conditions for Le Morne
+      for (let month = 1; month <= 12; month++) {
+        let windQuality = WindQuality.Good;
+        let windSpeed = 18;
+        let airTemp = 25;
+        let waterTemp = 24;
+        let seasonalNotes = "";
+        
+        // Summer (Dec-Apr) - Warmer, cyclone season
+        if ((month >= 1 && month <= 4) || month === 12) {
+          windQuality = WindQuality.Moderate;
+          windSpeed = 15;
+          airTemp = 29;
+          waterTemp = 28;
+          seasonalNotes = "Warmer but less reliable winds. Cyclone season - monitor weather forecasts.";
+        } 
+        // Winter (May-Nov) - Peak wind season
+        else {
+          windQuality = month >= 6 && month <= 9 ? WindQuality.Excellent : WindQuality.Good;
+          windSpeed = month >= 6 && month <= 9 ? 22 : 18;
+          airTemp = 23;
+          waterTemp = 23;
+          seasonalNotes = "Trade winds most consistent. Perfect conditions with fewer crowds than summer.";
+        }
+        
+        await this.createWindCondition({
+          spotId: leMorne.id,
+          month,
+          windSpeed,
+          windQuality,
+          airTemp,
+          waterTemp,
+          seasonalNotes
+        });
+      }
+      
+      // 5. Dakhla, Morocco
+      const dakhla = await this.createSpot({
+        name: "Dakhla, Morocco",
+        country: "Morocco",
+        latitude: 23.7115,
+        longitude: -15.9370,
+        description: "Incredible flat water lagoon with consistent wind. Remote location offers uncrowded conditions and unique desert landscape.",
+        waveSize: "Flat (Lagoon) to Medium (Ocean side)",
+        tempRange: "18-26°C",
+        bestMonths: "Apr-Sep",
+        tags: ["Kite Camps", "Equipment Rental", "Accommodation"],
+        difficulty: "All Levels",
+        popularity: "Medium",
+        imageUrl: "https://images.unsplash.com/photo-1596649299486-4cdea56fd59d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=sebastian-pena-lambarri-bNSdIHcHe-Q-unsplash.jpg",
+        region: "africa"
+      });
+      
+      // Create wind conditions for Dakhla
+      for (let month = 1; month <= 12; month++) {
+        let windQuality = WindQuality.Good;
+        let windSpeed = 18;
+        let airTemp = 22;
+        let waterTemp = 19;
+        let seasonalNotes = "";
+        
+        // Winter (Jan-Mar) - Cooler, windier
+        if (month >= 1 && month <= 3) {
+          windQuality = WindQuality.Good;
+          windSpeed = 20;
+          airTemp = 18;
+          waterTemp = 17;
+          seasonalNotes = "Strong winds but cooler temperatures. 4/3 wetsuit recommended.";
+        } 
+        // Spring/Summer (Apr-Sep) - Peak season
+        else if (month >= 4 && month <= 9) {
+          windQuality = WindQuality.Excellent;
+          windSpeed = 22;
+          airTemp = 24;
+          waterTemp = 20;
+          seasonalNotes = "Perfect conditions with thermal winds virtually every day. Short wetsuit sufficient.";
+        }
+        // Fall (Oct-Dec) - Transitional
+        else {
+          windQuality = WindQuality.Good;
+          windSpeed = 17;
+          airTemp = 20;
+          waterTemp = 18;
+          seasonalNotes = "Less reliable winds but still good conditions most days.";
+        }
+        
+        await this.createWindCondition({
+          spotId: dakhla.id,
+          month,
+          windSpeed,
+          windQuality,
+          airTemp,
+          waterTemp,
+          seasonalNotes
+        });
+      }
+      
+      console.log("Sample data initialization complete!");
+    } catch (error) {
+      console.error("Error initializing sample data:", error);
+    }
   }
 
   // Spot operations
