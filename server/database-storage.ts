@@ -74,7 +74,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Dec-Mar",
         tags: ["Kite Schools", "Equipment Rental", "Beachfront Accommodation"],
         difficultyLevel: "Intermediate",
-        kiteSchools: ["Tarifa Max Kitesurfing", "ION Club Tarifa", "Dragon Tarifa"],
+        kiteSchools: ["Tarifa Max Kitesurfing|https://maps.google.com/?q=Tarifa+Max+Kitesurfing|4.8|122", "ION Club Tarifa|https://maps.google.com/?q=ION+Club+Tarifa|4.7|95", "Dragon Tarifa|https://maps.google.com/?q=Dragon+Tarifa+Kite+School|4.9|78"],
         localAttractions: "Historic Old Town, Gibraltar day trips"
       });
       
@@ -142,7 +142,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Jun-Aug",
         tags: ["Kite Schools", "Equipment Rental", "Beach Bars", "Accommodation"],
         difficultyLevel: "Beginner to Advanced",
-        kiteSchools: ["Kite Club Cabarete", "Laurel Eastman Kiteboarding School", "GoKite Cabarete"],
+        kiteSchools: ["Kite Club Cabarete|https://maps.google.com/?q=Kite+Club+Cabarete|4.6|87", "Laurel Eastman Kiteboarding School|https://maps.google.com/?q=Laurel+Eastman+Kiteboarding+Cabarete|4.9|132", "GoKite Cabarete|https://maps.google.com/?q=GoKite+Cabarete|4.8|95"],
         localAttractions: "Vibrant nightlife, beachfront restaurants, nearby waterfalls"
       });
       
@@ -210,7 +210,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Jul-Dec",
         tags: ["Kite Schools", "Equipment Rental", "Lagoons", "Beachfront Accommodation"],
         difficultyLevel: "Beginner to Intermediate",
-        kiteSchools: ["Club Ventos", "Kite Brazil", "Windtown Beach Resort"],
+        kiteSchools: ["Club Ventos|https://maps.google.com/?q=Club+Ventos+Cumbuco|4.9|105", "Kite Brazil|https://maps.google.com/?q=Kite+Brazil+Cumbuco|4.7|76", "Windtown Beach Resort|https://maps.google.com/?q=Windtown+Beach+Resort+Cumbuco|4.8|62"],
         localAttractions: "Dune buggy tours, traditional fishing villages, Fortaleza day trips"
       });
       
@@ -270,7 +270,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "May-Oct",
         tags: ["Premium Resorts", "Kite Schools", "Equipment Rental"],
         difficultyLevel: "Intermediate to Advanced",
-        kiteSchools: ["ION Club Le Morne", "KiteGlobing", "Yoaneye Kite Centre"],
+        kiteSchools: ["ION Club Le Morne|https://maps.google.com/?q=ION+Club+Le+Morne|4.8|102", "KiteGlobing|https://maps.google.com/?q=KiteGlobing+Le+Morne+Mauritius|4.9|85", "Yoaneye Kite Centre|https://maps.google.com/?q=Yoaneye+Kite+Centre+Le+Morne|4.7|53"],
         localAttractions: "UNESCO World Heritage site, Le Morne mountain hikes, Black River Gorges National Park"
       });
       
@@ -322,7 +322,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Apr-Sep",
         tags: ["Kite Camps", "Equipment Rental", "Accommodation"],
         difficultyLevel: "All Levels",
-        kiteSchools: ["Dakhla Attitude", "Ocean Vagabond", "West Point Dakhla"],
+        kiteSchools: ["Dakhla Attitude|https://maps.google.com/?q=Dakhla+Attitude+Morocco|4.8|114", "Ocean Vagabond|https://maps.google.com/?q=Ocean+Vagabond+Dakhla|4.7|92", "West Point Dakhla|https://maps.google.com/?q=West+Point+Dakhla|4.9|73"],
         localAttractions: "Sahara Desert tours, traditional Berber villages, Dragon Island"
       });
       
