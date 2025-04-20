@@ -1,68 +1,119 @@
-import { useState } from 'react';
-import { Link } from 'wouter';
-import { Wind, Compass, Users, Info, Menu, X, Map, Activity } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'wouter';
+import { Wind, Compass, Users, Info, Menu, X, Map, Activity, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
+
+  // Handle scroll effect for sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
   return (
-    <header className="bg-white border-b border-slate-100 shadow-sm">
+    <header 
+      className={`bg-white border-b border-slate-100 w-full transition-all duration-300 ${
+        scrolled ? "sticky top-0 z-50 shadow-md" : "shadow-sm"
+      }`}
+    >
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link href="/">
-          <div className="flex items-center cursor-pointer">
-            <motion.div 
-              className="flex items-center" 
-              whileHover={{ scale: 1.05 }} 
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="bg-primary/10 p-2 rounded-full mr-3">
-                <Wind className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold font-heading" style={{ fontFamily: "'Permanent Marker', cursive" }}>
-                  Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
-                </h1>
-                <p className="text-xs text-slate-500">Ride the perfect breeze 💨</p>
-              </div>
-            </motion.div>
-          </div>
+          <motion.div 
+            className="flex items-center cursor-pointer"
+            whileHover={{ scale: 1.05 }} 
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="bg-ocean-gradient p-2 rounded-full mr-3 shadow-md">
+              <Wind className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-ocean-blue" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+                Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
+              </h1>
+              <p className="text-xs text-slate-500 font-medium">Ride the perfect breeze 💨</p>
+            </div>
+          </motion.div>
         </Link>
         
-        <nav className="hidden md:flex space-x-1">
+        <nav className="hidden md:flex space-x-2">
           <Link href="/">
-            <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
+            <motion.div 
+              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                location === "/" 
+                  ? "bg-primary text-white shadow-md" 
+                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+              }`}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
               <Wind className="w-4 h-4 mr-2" />
-              Home 🏠
-            </div>
+              Home
+            </motion.div>
           </Link>
           <Link href="/spots">
-            <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
+            <motion.div 
+              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                location === "/spots" 
+                  ? "bg-primary text-white shadow-md" 
+                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+              }`}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
               <Map className="w-4 h-4 mr-2" />
-              Spots 🌊
-            </div>
+              Spots
+            </motion.div>
           </Link>
           <Link href="/community">
-            <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
+            <motion.div 
+              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                location === "/community" 
+                  ? "bg-primary text-white shadow-md" 
+                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+              }`}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
               <Users className="w-4 h-4 mr-2" />
-              Community 👥
-            </div>
+              Community
+            </motion.div>
           </Link>
           <Link href="/learn">
-            <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-              <Activity className="w-4 h-4 mr-2" />
-              Learn 📚
-            </div>
+            <motion.div 
+              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                location === "/learn" 
+                  ? "bg-primary text-white shadow-md" 
+                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+              }`}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
+              <Sun className="w-4 h-4 mr-2" />
+              Learn
+            </motion.div>
           </Link>
         </nav>
         
         <div className="md:hidden">
           <motion.button 
-            className="text-slate-700 p-2 rounded-lg hover:bg-slate-100" 
+            className="text-ocean-blue p-2 rounded-lg hover:bg-blue-50" 
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
             whileTap={{ scale: 0.9 }}
@@ -80,7 +131,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="md:hidden bg-white w-full py-2 shadow-inner border-t border-slate-100"
+            className="md:hidden bg-white w-full py-2 shadow-md border-t border-slate-100"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -88,28 +139,60 @@ export default function Header() {
           >
             <nav className="container mx-auto px-4 flex flex-col space-y-2 py-2">
               <Link href="/">
-                <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-                  <Wind className="w-5 h-5 mr-3 text-primary" />
-                  Home 🏠
-                </div>
+                <motion.div 
+                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                    location === "/" 
+                      ? "bg-primary text-white" 
+                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  }`}
+                  whileHover={{ x: 5 }}
+                  whileTap={{ x: 0 }}
+                >
+                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-white" : "text-primary"}`} />
+                  Home
+                </motion.div>
               </Link>
               <Link href="/spots">
-                <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-                  <Map className="w-5 h-5 mr-3 text-primary" />
-                  Spots 🌊
-                </div>
+                <motion.div 
+                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                    location === "/spots" 
+                      ? "bg-primary text-white" 
+                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  }`}
+                  whileHover={{ x: 5 }}
+                  whileTap={{ x: 0 }}
+                >
+                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-white" : "text-primary"}`} />
+                  Spots
+                </motion.div>
               </Link>
               <Link href="/community">
-                <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-                  <Users className="w-5 h-5 mr-3 text-primary" />
-                  Community 👥
-                </div>
+                <motion.div 
+                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                    location === "/community" 
+                      ? "bg-primary text-white" 
+                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  }`}
+                  whileHover={{ x: 5 }}
+                  whileTap={{ x: 0 }}
+                >
+                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-white" : "text-primary"}`} />
+                  Community
+                </motion.div>
               </Link>
               <Link href="/learn">
-                <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-                  <Activity className="w-5 h-5 mr-3 text-primary" />
-                  Learn 📚
-                </div>
+                <motion.div 
+                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                    location === "/learn" 
+                      ? "bg-primary text-white" 
+                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  }`}
+                  whileHover={{ x: 5 }}
+                  whileTap={{ x: 0 }}
+                >
+                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-white" : "text-primary"}`} />
+                  Learn
+                </motion.div>
               </Link>
             </nav>
           </motion.div>

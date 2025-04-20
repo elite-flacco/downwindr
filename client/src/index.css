@@ -1,10 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kalam&family=Quicksand:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Ocean-inspired color palette */
+  --color-ocean-blue: 196 85% 45%;
+  --color-ocean-dark: 200 75% 25%;
+  --color-teal: 174 75% 40%;
+  --color-sky-blue: 199 80% 70%;
+  --color-sand: 35 70% 90%;
+  --color-coral: 16 85% 55%;
+  --color-seafoam: 160 60% 85%;
+  --color-navy: 215 70% 20%;
+  
+  /* Wind quality indicators */
+  --color-wind-excellent: 160 70% 45%;
+  --color-wind-good: 120 60% 45%;
+  --color-wind-moderate: 35 90% 55%;
+  --color-wind-poor: 0 70% 55%;
+  
+  /* More vibrant wind quality colors */
+  --wind-good: 142, 92%, 50%;
+  --wind-moderate: 38, 100%, 55%;
+  --wind-poor: 0, 94%, 65%;
+  --neutral-light: 210, 20%, 96%;
+  --neutral-dark: 210, 70%, 30%;
+
+  /* Super vibrant fun color palette */
+  --ocean-blue: 203, 95%, 58%;
+  --ocean-dark: 207, 90%, 40%;
+  --turquoise: 174, 90%, 50%;
+  --coral: 16, 100%, 70%;
+  --deep-purple: 263, 80%, 55%;
+  --sunny-yellow: 42, 100%, 68%;
+  --royal-blue: 214, 87%, 55%;
+  --tropical-green: 163, 100%, 48%;
+  
+  /* Font families */
+  --font-fun: 'Kalam', cursive;
+  --font-heading: 'Permanent Marker', cursive;
+  --font-title: 'Bangers', cursive;
+  --font-body: 'Quicksand', sans-serif;
+}
 
 @layer base {
   * {
@@ -16,26 +58,36 @@
   }
 
   body {
-    @apply antialiased text-foreground;
-    font-family: var(--font-body);
-    background: linear-gradient(135deg, #f9fafb 0%, #f0fdfa 100%);
+    @apply antialiased text-slate-800;
+    font-family: 'Montserrat', var(--font-body);
+    background: linear-gradient(135deg, #f9fafb 0%, hsl(180 60% 97%) 100%);
   }
 
   h1 {
     font-family: var(--font-title);
-    @apply font-bold tracking-wide text-primary;
+    @apply font-bold tracking-wide text-ocean-dark text-4xl md:text-5xl;
     letter-spacing: 1px;
   }
 
-  h2, h3 {
+  h2 {
     font-family: var(--font-heading);
-    @apply text-primary;
+    @apply text-ocean-dark text-2xl md:text-3xl font-bold;
+    letter-spacing: 0.5px;
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    @apply text-ocean-dark text-xl md:text-2xl font-bold;
     letter-spacing: 0.5px;
   }
 
   h4, h5, h6 {
     font-family: var(--font-fun);
-    @apply font-bold text-primary;
+    @apply font-bold text-teal;
+  }
+
+  p {
+    @apply leading-relaxed;
   }
 
   .font-heading {
@@ -51,7 +103,77 @@
   }
 
   .font-body {
-    font-family: var(--font-body);
+    font-family: 'Montserrat', var(--font-body);
+  }
+  
+  /* Grid system */
+  .container {
+    @apply px-4 mx-auto;
+    max-width: 1280px;
+  }
+  
+  /* Section spacing */
+  section {
+    @apply py-12 md:py-16;
+  }
+  
+  /* Button styling */
+  button, .btn {
+    @apply transition-all duration-300;
+  }
+}
+
+@layer components {
+  /* Card styling */
+  .card {
+    @apply bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden transition-all duration-300;
+  }
+  
+  .card:hover {
+    @apply shadow-md transform -translate-y-1;
+  }
+  
+  /* Badge styling */
+  .badge {
+    @apply px-2 py-1 text-xs font-medium rounded-full;
+  }
+  
+  .badge-primary {
+    @apply bg-primary/10 text-primary;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .badge-warning {
+    @apply bg-amber-100 text-amber-700;
+  }
+  
+  .badge-danger {
+    @apply bg-red-100 text-red-700;
+  }
+  
+  /* Active tab styling */
+  .tab {
+    @apply px-4 py-2 font-medium rounded-md transition-colors duration-200;
+  }
+  
+  .tab.active {
+    @apply bg-primary text-white;
+  }
+  
+  .tab:not(.active) {
+    @apply text-slate-600 hover:bg-slate-100;
+  }
+  
+  /* Interactive elements */
+  .interactive-item {
+    @apply transition-all duration-300 cursor-pointer;
+  }
+  
+  .interactive-item:hover {
+    @apply transform scale-105;
   }
 }
 
@@ -59,7 +181,7 @@
   /* Map container styling */
   .map-container {
     height: calc(100vh - 5rem);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: hidden;
   }
@@ -69,6 +191,71 @@
       height: 50vh;
     }
   }
+  
+  /* Background gradients */
+  .bg-ocean-gradient {
+    background: linear-gradient(135deg, hsl(from var(--color-ocean-blue) h s l) 0%, hsl(from var(--color-teal) h s l) 100%);
+  }
+  
+  .bg-sunset-gradient {
+    background: linear-gradient(135deg, hsl(from var(--color-coral) h s l) 0%, hsl(from var(--color-sand) h s l) 100%);
+  }
+  
+  /* Wind quality classes */
+  .wind-excellent {
+    @apply bg-green-500 text-white;
+  }
+  
+  .wind-good {
+    @apply bg-emerald-400 text-white;
+  }
+  
+  .wind-moderate {
+    @apply bg-amber-400 text-slate-800;
+  }
+  
+  .wind-poor {
+    @apply bg-red-500 text-white;
+  }
+  
+  /* Text colors */
+  .text-ocean-blue {
+    color: hsl(from var(--color-ocean-blue) h s l);
+  }
+  
+  .text-ocean-dark {
+    color: hsl(from var(--color-ocean-dark) h s l);
+  }
+  
+  .text-teal {
+    color: hsl(from var(--color-teal) h s l);
+  }
+  
+  .text-coral {
+    color: hsl(from var(--color-coral) h s l);
+  }
+  
+  /* Background colors */
+  .bg-ocean-blue {
+    background-color: hsl(from var(--color-ocean-blue) h s l);
+  }
+  
+  .bg-ocean-dark {
+    background-color: hsl(from var(--color-ocean-dark) h s l);
+  }
+  
+  .bg-teal {
+    background-color: hsl(from var(--color-teal) h s l);
+  }
+  
+  .bg-coral {
+    background-color: hsl(from var(--color-coral) h s l);
+  }
+  
+  .bg-seafoam {
+    background-color: hsl(from var(--color-seafoam) h s l);
+  }
+}
 
   /* Month selector styling */
   .month-selector {
@@ -203,32 +390,8 @@
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
-}
 
-:root {
-  /* More vibrant wind quality colors */
-  --wind-good: 142, 92%, 50%;
-  --wind-moderate: 38, 100%, 55%;
-  --wind-poor: 0, 94%, 65%;
-  --neutral-light: 210, 20%, 96%;
-  --neutral-dark: 210, 70%, 30%;
 
-  /* Super vibrant fun color palette */
-  --ocean-blue: 203, 95%, 58%;
-  --ocean-dark: 207, 90%, 40%;
-  --turquoise: 174, 90%, 50%;
-  --coral: 16, 100%, 70%;
-  --deep-purple: 263, 80%, 55%;
-  --sunny-yellow: 42, 100%, 68%;
-  --royal-blue: 214, 87%, 55%;
-  --tropical-green: 163, 100%, 48%;
-  
-  /* Font families */
-  --font-fun: 'Kalam', cursive;
-  --font-heading: 'Permanent Marker', cursive;
-  --font-title: 'Bangers', cursive;
-  --font-body: 'Quicksand', sans-serif;
-}
 
 /* Custom Mapbox GL styles */
 .mapboxgl-popup-content {
