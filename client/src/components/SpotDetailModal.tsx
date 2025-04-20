@@ -27,13 +27,13 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   const getWindQualityClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-theme-accent-success text-theme-background";
+        return "wind-quality-excellent text-theme-text";
       case WindQuality.Good:
-        return "bg-theme-primary-hover text-theme-background";
+        return "wind-quality-good text-theme-text";
       case WindQuality.Moderate:
-        return "bg-theme-primary text-theme-background";
+        return "wind-quality-moderate text-theme-background";
       case WindQuality.Poor:
-        return "bg-theme-muted text-theme-background";
+        return "wind-quality-poor text-theme-background";
       default:
         return "bg-theme-muted text-theme-background";
     }
@@ -186,12 +186,10 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves 🌊
                     </div>
                     
-                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-4 py-2 rounded-full text-sm font-medium">
-                      <Thermometer className="mr-2 h-4 w-4 text-theme-primary" /> {spotDetails.spot.tempRange} 🌡️
+                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">🌡️ {spotDetails.spot.tempRange} 
                     </div>
                     
-                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-4 py-2 rounded-full text-sm font-medium">
-                      <Calendar className="mr-2 h-4 w-4 text-theme-primary" /> Best: {spotDetails.spot.bestMonths} 📅
+                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">📅 Best: {spotDetails.spot.bestMonths}
                     </div>
                     
                     {spotDetails.spot.windguruCode != null && spotDetails.spot.windguruCode !== '' && (
@@ -199,7 +197,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center bg-theme-accent-warning text-theme-background px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-theme-accent-warning/90 transition-colors"
+                        className="flex items-center bg-theme-accent-warning text-theme-text px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-theme-accent-warning/90 transition-colors border"
                       >
                         <Wind className="mr-2 h-4 w-4" /> Windguru Forecast
                       </a>
@@ -214,7 +212,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="text-xl font-bold font-heading mb-3 text-theme-text flex items-center">
+                      <h3 className="text-xl mb-3 text-theme-text flex items-center">
                         <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>

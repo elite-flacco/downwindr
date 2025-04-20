@@ -28,7 +28,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
   const windQualityColor = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-blue-700 text-white";
+        return "wind-quality-excellent text-white";
       case WindQuality.Good:
         return "bg-blue-600 text-white";
       case WindQuality.Moderate:
@@ -39,6 +39,23 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
         return "bg-slate-500 text-white";
     }
   };
+
+  // Get wind quality color class and emoji
+  const getWindQualityClass = (quality: WindQuality) => {
+    switch (quality) {
+      case WindQuality.Excellent:
+        return "wind-quality-excellent text-theme-text";
+      case WindQuality.Good:
+        return "wind-quality-good text-theme-text";
+      case WindQuality.Moderate:
+        return "wind-quality-moderate text-theme-background";
+      case WindQuality.Poor:
+        return "wind-quality-poor text-theme-background";
+      default:
+        return "bg-theme-muted text-theme-background";
+    }
+  };
+
   
   // Get wind quality emoji
   const getWindQualityEmoji = (quality: WindQuality) => {
@@ -260,7 +277,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 {sortedSpots.map((spot) => (
                   <TableCell key={`wind-${spot.id}`} className="text-center">
                     {spot.currentWindCondition ? (
-                      <Badge className={windQualityColor(spot.currentWindCondition.windQuality as WindQuality)}>
+                      <Badge className={`f${getWindQualityClass(spot.currentWindCondition.windQuality)} text-white px-4 py-2 rounded-full`}>
                         {spot.currentWindCondition.windQuality} {getWindQualityEmoji(spot.currentWindCondition.windQuality as WindQuality)}
                       </Badge>
                     ) : (

@@ -339,31 +339,19 @@ export default function Spots() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="mt-4 bg-white rounded-xl border border-blue-100 shadow-lg overflow-hidden"
+            className="mt-4 bg-white rounded-xl shadow-lg overflow-hidden"
           >
-            <div className="p-3 bg-gradient-to-r from-ocean-blue to-teal text-white flex items-center justify-between">
-              <h3 className="text-lg font-bold">Comparing {spotsWithConditions?.length || spotsToCompare.length} Spots</h3>
-              <Button 
-                onClick={handleCloseComparison}
-                variant="ghost"
-                size="sm"
-                className="text-white hover:bg-white/10 h-8 w-8 p-0 rounded-full"
-              >
-                ✕
-              </Button>
-            </div>
-            
             <SpotComparison 
               spots={spotsWithConditions || spotsToCompare}
               selectedMonth={selectedMonth}
               onClose={handleCloseComparison}
             />
             
-            <div className="py-4 text-center bg-blue-50/50 border-t border-blue-100">
+            <div className="py-4 text-center bg-blue-50/50">
               <Button 
                 onClick={handleCloseComparison}
                 variant="outline"
-                className="border-ocean-blue text-ocean-blue hover:bg-blue-50"
+                className="hover:bg-blue-50 text-xs"
               >
                 <Map className="w-4 h-4 mr-2" /> Back to Map
               </Button>
