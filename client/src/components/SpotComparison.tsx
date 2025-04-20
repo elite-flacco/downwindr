@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { WindQuality } from '@shared/schema';
-import { ArrowUpCircle, ArrowDownCircle, CircleDashed, Thermometer, CircleOff, DollarSign } from 'lucide-react';
+import { ArrowUpCircle, ArrowDownCircle, CircleDashed, Thermometer, CircleOff, DollarSign, Shirt } from 'lucide-react';
 
 interface SpotComparisonProps {
   spots: any[];
@@ -70,6 +70,54 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
     }
     
     return <Badge variant="outline">{level}</Badge>;
+  };
+  
+  // Get wetsuit recommendation based on water temperature
+  const getWetsuitRecommendation = (waterTemp: number | null | undefined) => {
+    if (!waterTemp) return { needed: false, recommendation: "N/A" };
+    
+    if (waterTemp >= 25) {
+      return { 
+        needed: false, 
+        recommendation: "No wetsuit needed 👙"
+      };
+    } else if (waterTemp >= 22) {
+      return { 
+        needed: true, 
+        recommendation: "Rashguard or 1mm top ☀️",
+        color: "bg-blue-100 text-blue-700" 
+      };
+    } else if (waterTemp >= 19) {
+      return { 
+        needed: true, 
+        recommendation: "2mm shorty or top 🌤️",
+        color: "bg-blue-200 text-blue-800" 
+      };
+    } else if (waterTemp >= 17) {
+      return { 
+        needed: true, 
+        recommendation: "3/2mm full suit 🌥️",
+        color: "bg-blue-300 text-blue-900"
+      };
+    } else if (waterTemp >= 14) {
+      return { 
+        needed: true, 
+        recommendation: "4/3mm full suit 🌦️",
+        color: "bg-blue-400 text-white"
+      };
+    } else if (waterTemp >= 10) {
+      return { 
+        needed: true, 
+        recommendation: "5/4mm + boots & gloves ❄️",
+        color: "bg-blue-600 text-white"
+      };
+    } else {
+      return { 
+        needed: true, 
+        recommendation: "6/5mm + hood, boots & gloves ⛄",
+        color: "bg-blue-800 text-white"
+      };
+    }
   };
 
   // Get wind conditions for each spot in the selected month
@@ -185,9 +233,32 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                   </TableCell>
                 ))}
               </TableRow>
+              
+              {/* Wetsuit Recommendation */}
+              <TableRow className="bg-slate-50">
+                <TableCell className="font-medium">
+                  <div className="flex items-center">
+                    <Shirt className="mr-2 h-4 w-4" /> Wetsuit Recommendation
+                  </div>
+                </TableCell>
+                {sortedSpots.map((spot) => {
+                  const wetsuitRec = getWetsuitRecommendation(spot.currentWindCondition?.waterTemp);
+                  return (
+                    <TableCell key={`wetsuit-${spot.id}`} className="text-center">
+                      {wetsuitRec.recommendation !== "N/A" ? (
+                        <span className={`px-2 py-1 rounded-md inline-block text-sm ${wetsuitRec.color || ""}`}>
+                          {wetsuitRec.recommendation}
+                        </span>
+                      ) : (
+                        "N/A"
+                      )}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
 
               {/* Schools */}
-              <TableRow className="bg-slate-50">
+              <TableRow>
                 <TableCell className="font-medium">Number of Schools</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`schools-${spot.id}`} className="text-center">
