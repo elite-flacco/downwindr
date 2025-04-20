@@ -223,6 +223,43 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       <div className="space-y-3 text-theme-text-light">
                         <p className="leading-relaxed">{spotDetails.spot.description}</p>
                         
+                        {/* Add kite schools in the kitesurfing info card */}
+                        {spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
+                          <div className="mt-4 mb-2">
+                            <h4 className="font-bold text-theme-text mb-2 flex items-center">
+                              <svg className="w-4 h-4 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                              </svg>
+                              Kite Schools:
+                            </h4>
+                            <ul className="text-sm">
+                              {spotDetails.spot.kiteSchools.map((school: string, idx: number) => {
+                                const parts = school.split('|');
+                                const name = parts[0];
+                                const mapLink = parts[1] || null;
+                                
+                                return (
+                                  <li key={idx} className="mb-1">
+                                    {mapLink ? (
+                                      <a 
+                                        href={mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-theme-primary hover:text-theme-primary-hover transition-colors duration-300 flex items-center"
+                                      >
+                                        {name}
+                                        <ExternalLink className="ml-1 h-3 w-3" />
+                                      </a>
+                                    ) : (
+                                      <span>{name}</span>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        )}
+                        
                         <div className="flex flex-wrap gap-2 mt-4">
                           {spotDetails.spot.tags.map((tag: string, index: number) => (
                             <div 
@@ -272,20 +309,29 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                               return (
                                 <li key={idx} className="flex flex-col mb-3">
                                   <div className="flex items-center">
-                                    <a 
-                                      href={mapLink}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-theme-primary hover:text-theme-primary-hover transition-colors duration-300 flex items-center"
-                                    >
-                                      <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                      </svg>
-                                      <span className="font-medium">{name}</span>
-                                      <svg className="w-3 h-3 ml-1 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                      </svg>
-                                    </a>
+                                    {mapLink ? (
+                                      <a 
+                                        href={mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-theme-primary hover:text-theme-primary-hover transition-colors duration-300 flex items-center"
+                                      >
+                                        <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                        </svg>
+                                        <span className="font-medium">{name}</span>
+                                        <svg className="w-3 h-3 ml-1 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg>
+                                      </a>
+                                    ) : (
+                                      <div className="flex items-center">
+                                        <svg className="w-4 h-4 mr-2 flex-shrink-0 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                        </svg>
+                                        <span className="font-medium">{name}</span>
+                                      </div>
+                                    )}
                                   </div>
                                   
                                   {rating && reviews && (

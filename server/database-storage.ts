@@ -407,10 +407,10 @@ export class DatabaseStorage implements IStorage {
       // Extract spot IDs from the result array
       const spotIdArray = goodSpotIds.map(s => s.spotId);
       
-      // Get the spots with good conditions
+      // Get the spots with good conditions - using properly parameterized queries
       return await db.select()
         .from(spots)
-        .where(sql`${spots.id} IN (${spotIdArray.join(',')})`);
+        .where(sql`${spots.id} IN (${spotIdArray.map(id => sql`${id}`).join(', ')})`);
     } catch (error) {
       console.error("Error in getSpotsByMonth:", error);
       // Return all spots as a fallback if there's an issue with filtering by month
