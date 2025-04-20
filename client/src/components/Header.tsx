@@ -57,8 +57,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-azure text-white shadow-md" 
-                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                  ? "bg-electric text-white shadow-md" 
+                  : "text-navy hover:text-electric hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -71,8 +71,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-azure text-white shadow-md" 
-                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                  ? "bg-electric text-white shadow-md" 
+                  : "text-navy hover:text-electric hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -85,8 +85,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-azure text-white shadow-md" 
-                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                  ? "bg-electric text-white shadow-md" 
+                  : "text-navy hover:text-electric hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -99,8 +99,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-azure text-white shadow-md" 
-                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                  ? "bg-electric text-white shadow-md" 
+                  : "text-navy hover:text-electric hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -113,7 +113,7 @@ export default function Header() {
         
         <div className="md:hidden">
           <motion.button 
-            className="text-azure p-2 rounded-lg hover:bg-sky/10" 
+            className="text-electric p-2 rounded-lg hover:bg-sky/10" 
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
             whileTap={{ scale: 0.9 }}
@@ -142,13 +142,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
-                      ? "bg-azure text-white" 
-                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                      ? "bg-electric text-white" 
+                      : "text-navy hover:text-electric hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-white" : "text-azure"}`} />
+                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-white" : "text-electric"}`} />
                   Home
                 </motion.div>
               </Link>
@@ -156,13 +156,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-azure text-white" 
-                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                      ? "bg-electric text-white" 
+                      : "text-navy hover:text-electric hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-white" : "text-azure"}`} />
+                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-white" : "text-electric"}`} />
                   Spots
                 </motion.div>
               </Link>
@@ -170,13 +170,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-azure text-white" 
-                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                      ? "bg-electric text-white" 
+                      : "text-navy hover:text-electric hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-white" : "text-azure"}`} />
+                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-white" : "text-electric"}`} />
                   Community
                 </motion.div>
               </Link>
@@ -184,13 +184,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-azure text-white" 
-                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
+                      ? "bg-electric text-white" 
+                      : "text-navy hover:text-electric hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-white" : "text-azure"}`} />
+                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-white" : "text-electric"}`} />
                   Learn
                 </motion.div>
               </Link>
