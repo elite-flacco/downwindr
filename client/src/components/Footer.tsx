@@ -124,18 +124,18 @@ export default function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl mb-6 flex items-center text-deep-ocean font-bold">
-              <Sun className="w-5 h-5 mr-2 text-azure" />
+            <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
+              <Sun className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Resources
             </h4>
             <ul className="space-y-4">
               <li>
                 <Link href="/learn">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Tutorials
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -144,10 +144,10 @@ export default function Footer() {
               <li>
                 <Link href="/learn">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Equipment Reviews
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -156,10 +156,10 @@ export default function Footer() {
               <li>
                 <Link href="/learn">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Beginner's Guide
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -169,18 +169,18 @@ export default function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl mb-6 flex items-center text-deep-ocean font-bold">
-              <Mail className="w-5 h-5 mr-2 text-azure" />
+            <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
+              <Mail className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Get in Touch
             </h4>
             <ul className="space-y-4">
               <li>
                 <Link href="/contact">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     Send Us a Message
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -189,10 +189,10 @@ export default function Footer() {
               <li>
                 <Link href="/about">
                   <motion.div 
-                    className="text-deep-ocean/80 hover:text-azure group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
                     whileHover={{ x: 5 }}
                   >
-                    <span className="h-0.5 w-4 bg-azure/40 mr-3 group-hover:bg-azure transition-colors"></span>
+                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
                     About Us
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
@@ -200,16 +200,16 @@ export default function Footer() {
               </li>
             </ul>
             
-            <div className="mt-8 p-4 bg-sky/10 rounded-lg border border-sky/20 shadow-sm">
-              <h5 className="text-sm font-bold text-azure mb-2">Newsletter</h5>
-              <p className="text-xs text-deep-ocean/80 mb-3">Get wind updates and new spots in your inbox</p>
+            <div className="mt-8 p-4 bg-theme-surface rounded-lg border border-theme-border shadow-sm">
+              <h5 className="text-sm font-bold text-theme-primary mb-2">Newsletter</h5>
+              <p className="text-xs text-theme-text-light mb-3">Get wind updates and new spots in your inbox</p>
               <div className="flex">
                 <input 
                   type="email" 
                   placeholder="Your email" 
-                  className="flex-1 text-sm py-2 px-3 rounded-l-md border border-sky/20 focus:outline-none focus:ring-1 focus:ring-azure"
+                  className="flex-1 text-sm py-2 px-3 rounded-l-md border border-theme-border focus:outline-none focus:ring-1 focus:ring-theme-primary"
                 />
-                <button className="bg-azure text-white text-sm font-medium py-2 px-3 rounded-r-md hover:bg-azure/90 transition-colors">
+                <button className="bg-theme-primary text-theme-background text-sm font-medium py-2 px-3 rounded-r-md hover:bg-theme-primary/90 transition-colors">
                   Subscribe
                 </button>
               </div>
@@ -217,8 +217,8 @@ export default function Footer() {
           </motion.div>
         </motion.div>
         
-        <div className="mt-12 pt-6 text-center text-deep-ocean/60 text-sm relative">
-          <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky/20 to-transparent"></div>
+        <div className="mt-12 pt-6 text-center text-theme-text-light text-sm relative">
+          <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-theme-border to-transparent"></div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -229,13 +229,13 @@ export default function Footer() {
             <p>&copy; {new Date().getFullYear()} Downwindr. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0 text-xs">
               <Link href="/privacy">
-                <div className="hover:text-azure cursor-pointer transition-colors">Privacy Policy</div>
+                <div className="hover:text-theme-primary cursor-pointer transition-colors">Privacy Policy</div>
               </Link>
               <Link href="/terms">
-                <div className="hover:text-azure cursor-pointer transition-colors">Terms of Service</div>
+                <div className="hover:text-theme-primary cursor-pointer transition-colors">Terms of Service</div>
               </Link>
               <Link href="/cookies">
-                <div className="hover:text-azure cursor-pointer transition-colors">Cookie Policy</div>
+                <div className="hover:text-theme-primary cursor-pointer transition-colors">Cookie Policy</div>
               </Link>
             </div>
           </motion.div>
