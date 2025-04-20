@@ -311,7 +311,7 @@ export class DatabaseStorage implements IStorage {
         numberOfSchools: 20
       });
 
-      const conditions = [
+      const cabarete_conditions = [
         {
           spotId: cabarete.id,
           month: 1,
@@ -435,7 +435,7 @@ export class DatabaseStorage implements IStorage {
       ];
 
       // Create wind conditions for Cabarete
-      await this.setupSpotWindConditions(cabarete.id, conditions);
+      await this.setupSpotWindConditions(cabarete.id, cabarete_conditions);
 
       // 3. Cumbuco, Brazil
       const cumbuco = await this.createSpot({

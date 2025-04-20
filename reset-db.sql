@@ -1,0 +1,7 @@
+-- Drop all tables in the database
+DROP TABLE IF EXISTS "wind_conditions" CASCADE;
+DROP TABLE IF EXISTS "spots" CASCADE;
+DROP TABLE IF EXISTS "users" CASCADE;
+DROP TABLE IF EXISTS "reviews" CASCADE;
+DROP TABLE IF EXISTS "ratings" CASCADE;
+DROP TABLE IF EXISTS "session" CASCADE;
