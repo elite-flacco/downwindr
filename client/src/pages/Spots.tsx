@@ -197,7 +197,7 @@ export default function Spots() {
       <main className="container mx-auto px-4 py-6 flex-grow">
         {/* Page Title with more visual impact */}
         <div className="mb-6 pt-2">
-          <h2 className="text-3xl font-bold text-ocean-dark mb-2">Find Perfect Kitesurfing Spots</h2>
+          <h2 className="text-2xl text-ocean-dark mb-2">Find Perfect Kitesurfing Spots</h2>
           <div className="flex items-center">
             <div className="h-1 w-12 bg-primary rounded-full mr-3"></div>
             <p className="text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions</p>
@@ -220,8 +220,7 @@ export default function Spots() {
                 className="bg-ocean-gradient hover:bg-ocean-blue text-white h-9 px-3 shadow-md text-sm font-medium transition-all duration-300"
                 size="sm"
               >
-                <Sparkles className="h-4 w-4 mr-1.5" />
-                Get Recommendations
+                <Sparkles className="h-4 w-4" />
               </Button>
             </div>
             
