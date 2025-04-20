@@ -78,10 +78,10 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
         {isOpen && (
           <motion.div
             className="bg-theme-background rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto m-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
           >
             {isLoading || !spotDetails ? (
               // Loading state

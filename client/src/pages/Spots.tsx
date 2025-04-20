@@ -38,7 +38,8 @@ export default function Spots() {
   // Fetch all spots for the selected month
   const { data: spots, isLoading: spotsLoading } = useQuery<Spot[]>({
     queryKey: [`/api/spots/month/${selectedMonth}`],
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: Infinity, // Keep data fresh forever (small dataset)
+    gcTime: Infinity, // Keep in cache forever (v5 renamed cacheTime to gcTime)
   });
 
   // Fetch spot details with wind conditions when a spot is selected

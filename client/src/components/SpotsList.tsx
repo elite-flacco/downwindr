@@ -79,7 +79,7 @@ export default function SpotsList({
                 className={`spot-card relative rounded-lg p-4 mb-4 ${index < spots.length - 1 ? 'border-b border-theme-border pb-6' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ duration: 0.2 }}
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="flex justify-between items-start mb-3">
