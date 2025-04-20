@@ -40,7 +40,7 @@ export interface IStorage {
   // Spot operations
   getAllSpots(): Promise<Spot[]>;
   getSpotById(id: number): Promise<Spot | undefined>;
-  getSpotsByMonth(month: number): Promise<Spot[]>;
+  getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]>;
   getSpotWithWindConditions(id: number): Promise<{spot: Spot, windConditions: WindCondition[]} | undefined>;
   searchSpots(query: string): Promise<Spot[]>;
   createSpot(spot: InsertSpot): Promise<Spot>;
@@ -314,27 +314,37 @@ export class MemStorage implements IStorage {
     return this.spots.get(id);
   }
 
-  async getSpotsByMonth(month: number): Promise<Spot[]> {
-    const goodSpotIds = new Set<number>();
+  async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]> {
+    const eligibleSpotIds = new Set<number>();
     
     // Get all wind conditions for the specified month
     const conditions = Array.from(this.windConditions.values()).filter(
       condition => condition.month === month
     );
     
-    // Filter for good or excellent wind conditions
-    conditions.forEach(condition => {
-      if (
-        condition.windQuality === WindQuality.Good ||
-        condition.windQuality === WindQuality.Excellent
-      ) {
-        goodSpotIds.add(condition.spotId);
-      }
-    });
+    // Filter by wind quality if specified
+    if (windQualityFilter && windQualityFilter.length > 0) {
+      // Only include spots with wind quality matching the filter
+      conditions.forEach(condition => {
+        if (windQualityFilter.includes(condition.windQuality as WindQuality)) {
+          eligibleSpotIds.add(condition.spotId);
+        }
+      });
+    } else {
+      // Default: filter for good or excellent wind conditions
+      conditions.forEach(condition => {
+        if (
+          condition.windQuality === WindQuality.Good ||
+          condition.windQuality === WindQuality.Excellent
+        ) {
+          eligibleSpotIds.add(condition.spotId);
+        }
+      });
+    }
     
-    // Get the spots with good conditions
+    // Get the spots with matching conditions
     return Array.from(this.spots.values()).filter(
-      spot => goodSpotIds.has(spot.id)
+      spot => eligibleSpotIds.has(spot.id)
     );
   }
 
