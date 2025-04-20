@@ -109,15 +109,15 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
   const getPinColor = (quality: WindQuality) => {
     switch(quality) {
       case WindQuality.Excellent:
-        return '#047857'; // Primary green
+        return '#1d4ed8'; // Blue-700
       case WindQuality.Good:
-        return '#0E9C85'; // Slightly lighter primary
+        return '#2563eb'; // Blue-600
       case WindQuality.Moderate:
-        return '#f59e0b'; // Amber
+        return '#475569'; // Slate-600
       case WindQuality.Poor:
-        return '#ef4444'; // Red
+        return '#64748b'; // Slate-500
       default:
-        return '#3b82f6'; // Blue
+        return '#3b82f6'; // Blue-500
     }
   };
 
@@ -126,7 +126,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
       {isLoading ? (
         <div className="map-container bg-slate-50 flex items-center justify-center">
           <div className="flex flex-col items-center justify-center">
-            <Wind className="w-12 h-12 text-primary/70 animate-pulse mb-4" />
+            <Wind className="w-12 h-12 text-blue-600/70 animate-pulse mb-4" />
             <Skeleton className="w-48 h-6 mb-2" />
             <Skeleton className="w-36 h-4" />
           </div>
@@ -135,11 +135,11 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
         <div className="map-container relative">
           {/* Header overlay */}
           <div className="absolute top-4 left-4 z-[9] bg-white px-4 py-3 rounded-xl shadow-sm flex items-center space-x-3 border border-slate-100">
-            <div className="bg-primary/10 rounded-full p-2">
-              <Wind className="text-primary w-5 h-5" />
+            <div className="bg-blue-100 rounded-full p-2">
+              <Wind className="text-blue-700 w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading text-primary text-lg" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
+              <h3 className="font-heading text-blue-700 text-lg" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
               <p className="text-xs text-slate-500">Find your perfect spot</p>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
               >
                 <div className="p-3 max-w-[280px]">
                   <div className="mb-3 pb-2 border-b border-slate-100">
-                    <h3 className="font-heading text-primary text-lg">{popupInfo.spot.name}</h3>
+                    <h3 className="font-heading text-blue-700 text-lg">{popupInfo.spot.name}</h3>
                     <div className="text-xs text-slate-500 flex items-center">
                       <MapPin className="w-3 h-3 mr-1" />
                       {popupInfo.spot.country}
@@ -241,7 +241,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                       </span>
                     </div>
                     <div className="flex items-center text-xs text-slate-600">
-                      <Waves className="w-3 h-3 mr-1 text-primary/70" />
+                      <Waves className="w-3 h-3 mr-1 text-blue-600" />
                       {popupInfo.spot.waveSize}
                     </div>
                   </div>
@@ -253,7 +253,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                   <div className="flex gap-2 mb-3">
                     <Button 
                       size="sm"
-                      className="flex-1 bg-primary text-white hover:bg-primary/90"
+                      className="flex-1 bg-blue-700 text-white hover:bg-blue-800"
                       onClick={() => {
                         onSpotSelect(popupInfo.spot.id);
                         setPopupInfo(null);
