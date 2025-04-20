@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
-import { Wind, Compass, Users, Info, Menu, X } from 'lucide-react';
+import { Wind, Compass, Users, Info, Menu, X, Map, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
@@ -24,8 +24,8 @@ export default function Header() {
                 <Wind className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-xl font-bold font-heading">KiteSpotter</h1>
-                <p className="text-xs text-slate-500">Find Your Perfect Wind</p>
+                <h1 className="text-xl font-bold font-heading" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h1>
+                <p className="text-xs text-slate-500">Ride the perfect breeze</p>
               </div>
             </motion.div>
           </div>
@@ -38,19 +38,25 @@ export default function Header() {
               Home
             </div>
           </Link>
-          <Link href="/">
+          <Link href="/spots">
             <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-              <Compass className="w-4 h-4 mr-2" />
+              <Map className="w-4 h-4 mr-2" />
               Spots
             </div>
           </Link>
-          <Link href="/">
+          <Link href="/community">
             <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
               <Users className="w-4 h-4 mr-2" />
               Community
             </div>
           </Link>
-          <Link href="/">
+          <Link href="/learn">
+            <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
+              <Activity className="w-4 h-4 mr-2" />
+              Learn
+            </div>
+          </Link>
+          <Link href="/about">
             <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-2 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
               <Info className="w-4 h-4 mr-2" />
               About
@@ -91,19 +97,25 @@ export default function Header() {
                   Home
                 </div>
               </Link>
-              <Link href="/">
+              <Link href="/spots">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
-                  <Compass className="w-5 h-5 mr-3 text-primary" />
+                  <Map className="w-5 h-5 mr-3 text-primary" />
                   Spots
                 </div>
               </Link>
-              <Link href="/">
+              <Link href="/community">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
                   <Users className="w-5 h-5 mr-3 text-primary" />
                   Community
                 </div>
               </Link>
-              <Link href="/">
+              <Link href="/learn">
+                <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
+                  <Activity className="w-5 h-5 mr-3 text-primary" />
+                  Learn
+                </div>
+              </Link>
+              <Link href="/about">
                 <div className="font-medium text-slate-600 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-md transition-colors duration-200 flex items-center cursor-pointer">
                   <Info className="w-5 h-5 mr-3 text-primary" />
                   About

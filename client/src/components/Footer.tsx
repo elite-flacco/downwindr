@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="bg-primary/10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
               <Wind className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="text-2xl font-bold font-heading mb-2 text-primary">KiteSpotter</h3>
+            <h3 className="text-2xl font-bold font-heading mb-2 text-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
             <p className="text-slate-600 mb-6">Find the perfect wind for your next kitesurfing adventure!</p>
             <div className="flex space-x-4">
               <div className="h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center hover:bg-primary/20 transition-all duration-300 cursor-pointer">
@@ -153,7 +153,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="text-slate-600 flex items-center bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
                 <Mail className="w-5 h-5 mr-3 text-primary" /> 
-                <span>info@kitespotter.com</span>
+                <span>info@downwindr.com</span>
               </li>
               <li className="text-slate-600 flex items-center bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
                 <Phone className="w-5 h-5 mr-3 text-primary" /> 
@@ -176,7 +176,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="flex flex-col md:flex-row justify-between items-center"
           >
-            <p>&copy; {new Date().getFullYear()} KiteSpotter. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Downwindr. All rights reserved.</p>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <Link href="/">
                 <div className="hover:text-primary cursor-pointer transition-colors">Privacy Policy</div>
