@@ -8,7 +8,7 @@ import {
   WindQuality, MonthNames
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, desc, avg, count, sql, like, or } from "drizzle-orm";
+import { eq, and, desc, avg, count, sql, like, or, inArray } from "drizzle-orm";
 import { pool } from "./db";
 import connectPg from "connect-pg-simple";
 import session from "express-session";
@@ -410,7 +410,7 @@ export class DatabaseStorage implements IStorage {
       // Get the spots with good conditions
       return await db.select()
         .from(spots)
-        .where(inArray(spots.id, spotIdArray));
+        .where(sql`${spots.id} IN (${spotIdArray})`);
     } catch (error) {
       console.error("Error in getSpotsByMonth:", error);
       // Return all spots as a fallback if there's an issue with filtering by month
