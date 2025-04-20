@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MonthSelector from "@/components/MonthSelector";
@@ -8,11 +9,13 @@ import KiteMap from "@/components/KiteMap";
 import SpotsList from "@/components/SpotsList";
 import SpotDetailModal from "@/components/SpotDetailModal";
 import SpotComparison from "@/components/SpotComparison";
+import PreferencesModal from "@/components/PreferencesModal";
+import RecommendedSpots from "@/components/RecommendedSpots";
 import { MonthNames } from "@shared/schema";
 import type { Spot, SpotWithWindConditions } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { compareDesc } from "date-fns";
-import { BarChart, ChevronDown, List, Map, SplitSquareVertical } from "lucide-react";
+import { BarChart, ChevronDown, List, Map, SplitSquareVertical, Navigation, Sparkles } from "lucide-react";
 
 export default function Spots() {
   // State for selected month (1-12)
@@ -24,6 +27,12 @@ export default function Spots() {
   const [showComparison, setShowComparison] = useState<boolean>(false);
   const [spotsToCompare, setSpotsToCompare] = useState<Spot[]>([]);
   const [viewMode, setViewMode] = useState<"both" | "map" | "list">("both");
+  
+  // New states for recommendation feature
+  const [showPreferencesModal, setShowPreferencesModal] = useState<boolean>(false);
+  const [showRecommendations, setShowRecommendations] = useState<boolean>(false);
+  const [isRecommending, setIsRecommending] = useState<boolean>(false);
+  const [recommendedSpots, setRecommendedSpots] = useState<any[]>([]);
 
   // Fetch all spots for the selected month
   const { data: spots, isLoading: spotsLoading } = useQuery<Spot[]>({
@@ -136,6 +145,48 @@ export default function Spots() {
     setSpotsToCompare([]);
     setShowComparison(false);
   };
+  
+  // Show preferences modal
+  const handleShowPreferencesModal = () => {
+    setShowPreferencesModal(true);
+  };
+  
+  // Close preferences modal
+  const handleClosePreferencesModal = () => {
+    setShowPreferencesModal(false);
+  };
+  
+  // Handle saving preferences and getting recommendations
+  const handleSavePreferences = async (preferences: any) => {
+    setIsRecommending(true);
+    setShowRecommendations(true);
+    
+    try {
+      const response = await fetch('/api/spots/recommendations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(preferences),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to get recommendations');
+      }
+      
+      const data = await response.json();
+      setRecommendedSpots(data);
+    } catch (error) {
+      console.error('Error getting recommendations:', error);
+    } finally {
+      setIsRecommending(false);
+    }
+  };
+  
+  // Close recommendations view
+  const handleCloseRecommendations = () => {
+    setShowRecommendations(false);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -148,11 +199,23 @@ export default function Spots() {
           <p className="text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions by month</p>
         </div>
         
-        {/* Month Selector */}
-        <MonthSelector 
-          selectedMonth={selectedMonth} 
-          onMonthChange={handleMonthChange} 
-        />
+        {/* Month Selector + Personalized Recommendation Button */}
+        <div className="flex flex-wrap items-center justify-between mb-4">
+          <MonthSelector 
+            selectedMonth={selectedMonth} 
+            onMonthChange={handleMonthChange} 
+          />
+          
+          <Button 
+            onClick={handleShowPreferencesModal}
+            variant="default"
+            className="bg-teal-600 hover:bg-teal-700 text-white shadow-md"
+            size="sm"
+          >
+            <Sparkles className="h-4 w-4 mr-2" />
+            Get Personalized Recommendations
+          </Button>
+        </div>
         
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           {/* Filter Controls */}
@@ -312,6 +375,29 @@ export default function Spots() {
           isLoading={detailsLoading}
           onClose={handleCloseDetailModal} 
         />
+      )}
+      
+      {/* Preferences Modal */}
+      {showPreferencesModal && (
+        <PreferencesModal
+          onClose={handleClosePreferencesModal}
+          onSavePreferences={handleSavePreferences}
+          currentMonth={selectedMonth}
+        />
+      )}
+      
+      {/* Recommendations Modal */}
+      {showRecommendations && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4">
+          <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <RecommendedSpots
+              spots={recommendedSpots}
+              isLoading={isRecommending}
+              onSpotSelect={handleSpotSelect}
+              onClose={handleCloseRecommendations}
+            />
+          </div>
+        </div>
       )}
       
       <Footer />
