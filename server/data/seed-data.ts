@@ -58,7 +58,7 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Cabarete, Dominican Republic",
       country: "Dominican Republic",
-      region: "Caribbean",
+      // region is not a field in the schema
       latitude: 19.7557,
       longitude: -70.4172,
       description:
