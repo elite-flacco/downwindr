@@ -7,7 +7,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== THEME CONFIGURATION ===== */
 :root {
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
   /* Primary color scale */
   --color-primary-50: 219 100% 97%;    /* #EFF6FF */
   --color-primary-100: 217 100% 93%;   /* #DBEAFE */
@@ -20,50 +27,45 @@
   --color-primary-800: 226 71% 40%;    /* #1E40AF */
   --color-primary-900: 224 64% 33%;    /* #1E3A8A */
   --color-primary-950: 226 57% 21%;    /* #172554 */
-  
-  /* Other base colors */
-  --color-cerulean: 190 100% 42%;       /* #00B4D8 */
-  --color-yellow: 49 100% 52%;          /* #FFD60A */
-  --color-coral: 1 100% 68%;            /* #FF5E5B */
-  --color-lime: 157 100% 50%;           /* #00FF7F */
-  --color-white: 0 0% 100%;             /* #FFFFFF */
-  --color-light-blue: 187 91% 94%;      /* #E0FBFC */
-  --color-slate: 221 23% 23%;           /* #003459 */
-  
+
+  /* Vibrant color palette */
+  --color-electric-blue: 195 100% 50%; /* #00B4FF */
+  --color-azure: 210 100% 62%;         /* #3A86FF */
+  --color-cerulean: 190 100% 42%;      /* #00B4D8 */
+  --color-yellow: 49 100% 52%;         /* #FFD60A */
+  --color-coral: 1 100% 68%;           /* #FF5E5B */
+  --color-lime: 157 100% 50%;          /* #00FF7F */
+  --color-white: 0 0% 100%;            /* #FFFFFF */
+  --color-light-blue: 187 91% 94%;     /* #E0FBFC */
+  --color-slate: 221 39% 20%;          /* #1F2A40 */ /* Updated for more vibrance */
+  --color-deep-navy: 212 70% 18%;      /* #15304B */
+
   /* Semantic color roles - Use these in components */
   /* Primary UI elements */
   --theme-primary: var(--color-primary-700);
   --theme-primary-hover: var(--color-primary-800);
   --theme-secondary: var(--color-cerulean);
   --theme-accent: var(--color-yellow);
-  
+
   /* Actions and status indicators */
   --theme-action: var(--color-coral);
   --theme-success: var(--color-lime);
   --theme-warning: var(--color-yellow);
   --theme-info: var(--color-cerulean);
-  
+
   /* Content and backgrounds */
   --theme-background: var(--color-white);
   --theme-surface: var(--color-light-blue);
   --theme-text: var(--color-slate);
   --theme-text-light: var(--color-slate)/70%;
   --theme-border: var(--color-light-blue)/50%;
-  
+
   /* Wind quality indicators */
   --theme-wind-excellent: var(--color-lime);
-  --theme-wind-good: var(--color-azure);
+  --theme-wind-good: var(--color-primary-500);
   --theme-wind-moderate: var(--color-light-blue);
   --theme-wind-poor: var(--color-coral);
-  
-  /* Legacy color naming for compatibility */
-  --ocean-blue: 200, 100%, 37%;        /* Bright Azure */
-  --ocean-dark: 198, 76%, 23%;         /* Deep Ocean Blue */
-  --turquoise: 177, 55%, 70%;          /* Seafoam Green */
-  --coral: 16, 100%, 65%;              /* Sunset Orange */
-  --neutral-light: 0, 0%, 98%;         /* Off White */
-  --neutral-dark: 230, 16%, 21%;       /* Charcoal */
-  
+
   /* Font families */
   --font-fun: 'Kalam', cursive;
   --font-heading: 'Permanent Marker', cursive;
@@ -71,6 +73,7 @@
   --font-body: 'Quicksand', sans-serif;
 }
 
+/* ===== BASE STYLES ===== */
 @layer base {
   * {
     @apply border-border;
@@ -78,6 +81,7 @@
 
   html, body {
     @apply h-full;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -126,6 +130,14 @@
     color: hsl(var(--theme-primary));
   }
 
+  button, 
+  a,
+  .tab,
+  .interactive-item {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  /* Font utilities */
   .font-heading {
     font-family: var(--font-heading);
   }
@@ -133,7 +145,7 @@
   .font-title {
     font-family: var(--font-title);
   }
-  
+
   .font-fun {
     font-family: var(--font-fun);
   }
@@ -141,236 +153,84 @@
   .font-body {
     font-family: 'Montserrat', var(--font-body);
   }
-  
+
   /* Grid system */
   .container {
     @apply px-4 mx-auto;
     max-width: 1280px;
   }
-  
+
   /* Section spacing */
   section {
     @apply py-12 md:py-16;
   }
-  
+
   /* Button styling */
   button, .btn {
     @apply transition-all duration-300;
   }
 }
 
+/* ===== COMPONENTS ===== */
 @layer components {
   /* Card styling */
   .card {
     @apply bg-white rounded-lg border border-border shadow-sm overflow-hidden transition-all duration-300;
+    will-change: transform, box-shadow;
   }
-  
+
   .card:hover {
     @apply shadow-md transform -translate-y-1;
   }
-  
+
   /* Badge styling */
   .badge {
     @apply px-2 py-1 text-xs font-medium rounded-full;
   }
-  
+
   .badge-primary {
     @apply bg-primary/10 text-primary;
   }
-  
+
   .badge-success {
     @apply bg-success/10 text-success;
   }
-  
+
   .badge-warning {
     @apply bg-warning/10 text-warning;
   }
-  
+
   .badge-danger {
     @apply bg-action/10 text-action;
   }
-  
+
   /* Active tab styling */
   .tab {
     @apply px-4 py-2 font-medium rounded-md transition-colors duration-200;
   }
-  
+
   .tab.active {
     background-color: hsl(var(--theme-primary));
     color: hsl(var(--theme-background));
   }
-  
+
   .tab:not(.active) {
     color: hsl(var(--theme-text-light));
   }
-  
+
   .tab:not(.active):hover {
     background-color: hsl(var(--theme-surface));
   }
-  
+
   /* Interactive elements */
   .interactive-item {
     @apply transition-all duration-300 cursor-pointer;
+    will-change: transform;
   }
-  
+
   .interactive-item:hover {
     @apply transform scale-105;
   }
-}
-
-@layer utilities {
-  /* Map container styling */
-  .map-container {
-    height: calc(100vh - 5rem);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  @media (max-width: 768px) {
-    .map-container {
-      height: 50vh;
-    }
-  }
-  
-  /* Background gradients */
-  .bg-ocean-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-primary-hover)) 100%);
-  }
-  
-  .bg-sky-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-secondary)) 100%);
-  }
-  
-  .bg-sunset-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-action)) 0%, hsl(var(--theme-accent)) 100%);
-  }
-  
-  /* Wind quality classes */
-  .wind-excellent {
-    @apply relative overflow-hidden;
-    background-color: hsl(var(--theme-wind-excellent));
-    color: hsl(var(--theme-background));
-  }
-  
-  .wind-good {
-    @apply relative overflow-hidden;
-    background-color: hsl(var(--theme-wind-good));
-    color: hsl(var(--theme-background));
-  }
-  
-  .wind-moderate {
-    @apply relative overflow-hidden;
-    background-color: hsl(var(--theme-wind-moderate));
-    color: hsl(var(--theme-text));
-  }
-  
-  .wind-poor {
-    @apply relative overflow-hidden;
-    background-color: hsl(var(--theme-wind-poor));
-    color: hsl(var(--theme-background));
-  }
-  
-  /* Text colors */
-  /* New vibrant color text utilities */
-  .text-electric {
-    color: hsl(var(--electric-blue));
-  }
-  
-  .text-cerulean {
-    color: hsl(var(--cerulean));
-  }
-  
-  .text-azure {
-    color: hsl(var(--azure));
-  }
-  
-  .text-yellow {
-    color: hsl(var(--sunshine-yellow));
-  }
-  
-  .text-coral {
-    color: hsl(var(--coral));
-  }
-  
-  .text-lime {
-    color: hsl(var(--lime-green));
-  }
-  
-  .text-navy {
-    color: hsl(var(--deep-navy));
-  }
-  
-  /* Background colors */
-  .bg-electric {
-    background-color: hsl(var(--electric-blue));
-  }
-  
-  .bg-cerulean {
-    background-color: hsl(var(--cerulean));
-  }
-  
-  .bg-azure {
-    background-color: hsl(var(--azure));
-  }
-  
-  .bg-yellow {
-    background-color: hsl(var(--sunshine-yellow));
-  }
-  
-  .bg-coral {
-    background-color: hsl(var(--coral));
-  }
-  
-  .bg-lime {
-    background-color: hsl(var(--lime-green));
-  }
-  
-  .bg-navy {
-    background-color: hsl(var(--deep-navy));
-  }
-  
-  .bg-sky {
-    background-color: hsl(var(--light-blue));
-  }
-  
-  /* Legacy colors for compatibility */
-  .text-deep-ocean {
-    color: hsl(var(--deep-navy));
-  }
-  
-  .text-ocean-blue {
-    color: hsl(var(--electric-blue));
-  }
-  
-  .text-ocean-dark {
-    color: hsl(var(--deep-navy));
-  }
-  
-  .text-sky {
-    color: hsl(var(--light-blue));
-  }
-  
-  .text-seafoam {
-    color: hsl(var(--lime-green));
-  }
-  
-  .bg-deep-ocean {
-    background-color: hsl(var(--deep-navy));
-  }
-  
-  .bg-ocean-blue {
-    background-color: hsl(var(--electric-blue));
-  }
-  
-  .bg-ocean-dark {
-    background-color: hsl(var(--deep-navy));
-  }
-  
-  .bg-teal {
-    background-color: hsl(var(--lime-green));
-  }
-}
 
   /* Month selector styling */
   .month-selector {
@@ -383,127 +243,80 @@
   .month-selector::-webkit-scrollbar {
     display: none;
   }
-  
+
   /* Month button styles */
   .month-button {
     @apply relative overflow-hidden transition-all duration-300 hover:scale-105;
     color: hsl(var(--theme-text-light));
   }
-  
+
   .month-button.active {
     background-color: hsl(var(--theme-primary)/10%);
     color: hsl(var(--theme-primary));
     @apply font-bold shadow-sm;
   }
-  
+
   .month-button.active::after {
     content: '';
     @apply absolute bottom-0 left-0 w-full h-1;
     background-color: hsl(var(--theme-primary));
     animation: slide-in 0.3s ease-out;
   }
-  
-  @keyframes slide-in {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-  }
-  
+
   /* Card hover effects */
   .spot-card {
     @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
     background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 40%) 100%);
+    will-change: transform, box-shadow;
   }
-  
-  /* Animated wind indicator */
-  .wind-indicator {
+
+  /* Wind quality indicators - unified naming */
+  .wind-quality {
     @apply relative overflow-hidden;
   }
-  
-  .wind-indicator::before {
-    content: '';
-    @apply absolute inset-0 opacity-20 bg-white;
-    animation: wind-wave 3s infinite ease-in-out;
-  }
-  
-  @keyframes wind-wave {
-    0%, 100% { transform: translateX(-50%); }
-    50% { transform: translateX(0); }
-  }
 
-  /* Set leaflet map base z-index */
-  .leaflet-container {
-    z-index: 10;
-  }
-  
-  /* Make sure modal is above leaflet map and controls */
-  .spot-detail-modal {
-    z-index: 1000 !important; /* Higher than leaflet's highest layers */
-  }
-  
-  /* Custom map styling */
-  .custom-marker-icon {
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  }
-  
-  .custom-marker-icon:hover {
-    transform: scale(1.1);
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-  }
-  
-  .marker-pulse {
-    animation: marker-pulse 0.5s ease-out;
-  }
-  
-  @keyframes marker-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
-  }
-  
-  /* Custom popup styling */
-  .spot-popup .leaflet-popup-content-wrapper {
-    border-radius: 12px;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-  }
-  
-  .spot-popup .leaflet-popup-content {
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Wind quality indicators with improved styling */
   .wind-quality-excellent {
-    @apply relative overflow-hidden;
+    @apply wind-quality;
     background-color: hsl(var(--theme-wind-excellent));
-    color: hsl(var(--theme-background));
+    color: #000; /* Darker text for better contrast */
   }
 
   .wind-quality-good {
-    @apply relative overflow-hidden;
+    @apply wind-quality;
     background-color: hsl(var(--theme-wind-good));
     color: hsl(var(--theme-background));
   }
 
   .wind-quality-moderate {
-    @apply relative overflow-hidden;
+    @apply wind-quality;
     background-color: hsl(var(--theme-wind-moderate));
     color: hsl(var(--theme-text));
   }
 
   .wind-quality-poor {
-    @apply relative overflow-hidden;
+    @apply wind-quality;
     background-color: hsl(var(--theme-wind-poor));
     color: hsl(var(--theme-background));
   }
-  
+
+  /* Wind indicator */
+  .wind-indicator {
+    @apply relative overflow-hidden;
+  }
+
+  .wind-indicator::before {
+    content: '';
+    @apply absolute inset-0 opacity-20 bg-white;
+    animation: wind-wave 3s infinite ease-in-out;
+    will-change: transform;
+  }
+
   /* Fun wave animation */
   .wave-bg {
     position: relative;
     overflow: hidden;
   }
-  
+
   .wave-bg::after {
     content: '';
     position: absolute;
@@ -513,14 +326,59 @@
     height: 8px;
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
     animation: wave 2s infinite linear;
+    will-change: transform;
   }
-  
-  @keyframes wave {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+}
+
+/* ===== MAP STYLES ===== */
+/* Map container styling */
+.map-container {
+  height: 550px !important;
+  width: 100% !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    height: 50vh !important;
   }
+}
 
+/* Make sure modal is above leaflet map and controls */
+.spot-detail-modal {
+  z-index: 1000 !important; /* Higher than leaflet's highest layers */
+}
 
+/* Custom map styling */
+.custom-marker-icon {
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  will-change: transform;
+}
+
+.custom-marker-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+}
+
+.marker-pulse {
+  animation: marker-pulse 0.5s ease-out;
+}
+
+/* Custom popup styling */
+.spot-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.spot-popup .leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+}
 
 /* Custom Mapbox GL styles */
 .mapboxgl-popup-content {
@@ -550,8 +408,127 @@
   height: 36px !important;
 }
 
-/* Fix map container for Mapbox GL */
-.map-container {
-  height: 550px !important;
-  width: 100% !important;
+/* ===== UTILITIES ===== */
+@layer utilities {
+  /* Background gradients */
+  .bg-ocean-gradient {
+    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-primary-hover)) 100%);
+  }
+
+  .bg-sky-gradient {
+    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-secondary)) 100%);
+  }
+
+  .bg-sunset-gradient {
+    background: linear-gradient(135deg, hsl(var(--theme-action)) 0%, hsl(var(--theme-accent)) 100%);
+  }
+
+  /* Vibrant text colors */
+  .text-electric {
+    color: hsl(var(--color-electric-blue));
+  }
+
+  .text-cerulean {
+    color: hsl(var(--color-cerulean));
+  }
+
+  .text-azure {
+    color: hsl(var(--color-azure));
+  }
+
+  .text-yellow {
+    color: hsl(var(--color-yellow));
+  }
+
+  .text-coral {
+    color: hsl(var(--color-coral));
+  }
+
+  .text-lime {
+    color: hsl(var(--color-lime));
+  }
+
+  .text-navy {
+    color: hsl(var(--color-deep-navy));
+  }
+
+  /* Background colors */
+  .bg-electric {
+    background-color: hsl(var(--color-electric-blue));
+  }
+
+  .bg-cerulean {
+    background-color: hsl(var(--color-cerulean));
+  }
+
+  .bg-azure {
+    background-color: hsl(var(--color-azure));
+  }
+
+  .bg-yellow {
+    background-color: hsl(var(--color-yellow));
+  }
+
+  .bg-coral {
+    background-color: hsl(var(--color-coral));
+  }
+
+  .bg-lime {
+    background-color: hsl(var(--color-lime));
+  }
+
+  .bg-navy {
+    background-color: hsl(var(--color-deep-navy));
+  }
+
+  .bg-sky {
+    background-color: hsl(var(--color-light-blue));
+  }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slide-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes wind-wave {
+  0%, 100% { transform: translateX(-50%) translateZ(0); }
+  50% { transform: translateX(0) translateZ(0); }
+}
+
+@keyframes marker-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(-100%) translateZ(0); }
+  100% { transform: translateX(100%) translateZ(0); }
+}
+
+
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  .month-selector {
+    @apply px-2;
+  }
+
+  .month-button {
+    @apply px-3 py-2 text-sm;
+  }
 }
