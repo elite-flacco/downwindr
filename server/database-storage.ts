@@ -75,7 +75,15 @@ export class DatabaseStorage implements IStorage {
         tags: ["Kite Schools", "Equipment Rental", "Beachfront Accommodation"],
         difficultyLevel: "Intermediate",
         kiteSchools: ["Tarifa Max Kitesurfing|https://maps.google.com/?q=Tarifa+Max+Kitesurfing|4.8|122", "ION Club Tarifa|https://maps.google.com/?q=ION+Club+Tarifa|4.7|95", "Dragon Tarifa|https://maps.google.com/?q=Dragon+Tarifa+Kite+School|4.9|78"],
-        localAttractions: "Historic Old Town, Gibraltar day trips"
+        localAttractions: "Historic Old Town, Gibraltar day trips",
+        windguruCode: "48",
+        conditions: ["Medium Waves", "Reliable Wind", "Sandy Bottom"],
+        accommodationOptions: ["Beach Hotels", "Budget Hostels", "Vacation Rentals"],
+        foodOptions: ["Local Tapas", "Seafood Restaurants", "Beach Bars"],
+        culture: "Spanish coastal culture with flamenco influences",
+        averageSchoolCost: 80,
+        averageAccommodationCost: 75,
+        numberOfSchools: 3
       });
       
       // Create wind conditions for Tarifa
@@ -143,7 +151,15 @@ export class DatabaseStorage implements IStorage {
         tags: ["Kite Schools", "Equipment Rental", "Beach Bars", "Accommodation"],
         difficultyLevel: "Beginner to Advanced",
         kiteSchools: ["Kite Club Cabarete|https://maps.google.com/?q=Kite+Club+Cabarete|4.6|87", "Laurel Eastman Kiteboarding School|https://maps.google.com/?q=Laurel+Eastman+Kiteboarding+Cabarete|4.9|132", "GoKite Cabarete|https://maps.google.com/?q=GoKite+Cabarete|4.8|95"],
-        localAttractions: "Vibrant nightlife, beachfront restaurants, nearby waterfalls"
+        localAttractions: "Vibrant nightlife, beachfront restaurants, nearby waterfalls",
+        windguruCode: "227",
+        conditions: ["Small to Medium Waves", "Reliable Wind", "Sandy Bottom"],
+        accommodationOptions: ["Beach Resorts", "Budget Hostels", "Vacation Rentals"],
+        foodOptions: ["Local Caribbean Cuisine", "International Restaurants", "Beach Bars"],
+        culture: "Caribbean island vibe with Latin influences",
+        averageSchoolCost: 90,
+        averageAccommodationCost: 80,
+        numberOfSchools: 3
       });
       
       // Create wind conditions for Cabarete
@@ -211,7 +227,15 @@ export class DatabaseStorage implements IStorage {
         tags: ["Kite Schools", "Equipment Rental", "Lagoons", "Beachfront Accommodation"],
         difficultyLevel: "Beginner to Intermediate",
         kiteSchools: ["Club Ventos|https://maps.google.com/?q=Club+Ventos+Cumbuco|4.9|105", "Kite Brazil|https://maps.google.com/?q=Kite+Brazil+Cumbuco|4.7|76", "Windtown Beach Resort|https://maps.google.com/?q=Windtown+Beach+Resort+Cumbuco|4.8|62"],
-        localAttractions: "Dune buggy tours, traditional fishing villages, Fortaleza day trips"
+        localAttractions: "Dune buggy tours, traditional fishing villages, Fortaleza day trips",
+        windguruCode: "300",
+        conditions: ["Flat Water", "Stable Wind", "Lagoon", "Beach"],
+        accommodationOptions: ["Pousadas", "Beachfront Hotels", "Kitesurfing Resorts"],
+        foodOptions: ["Local Brazilian Cuisine", "Seafood", "Beach Restaurants"],
+        culture: "Brazilian beach culture with samba and local festivals",
+        averageSchoolCost: 75,
+        averageAccommodationCost: 65,
+        numberOfSchools: 3
       });
       
       // Create wind conditions for Cumbuco
@@ -271,7 +295,15 @@ export class DatabaseStorage implements IStorage {
         tags: ["Premium Resorts", "Kite Schools", "Equipment Rental"],
         difficultyLevel: "Intermediate to Advanced",
         kiteSchools: ["ION Club Le Morne|https://maps.google.com/?q=ION+Club+Le+Morne|4.8|102", "KiteGlobing|https://maps.google.com/?q=KiteGlobing+Le+Morne+Mauritius|4.9|85", "Yoaneye Kite Centre|https://maps.google.com/?q=Yoaneye+Kite+Centre+Le+Morne|4.7|53"],
-        localAttractions: "UNESCO World Heritage site, Le Morne mountain hikes, Black River Gorges National Park"
+        localAttractions: "UNESCO World Heritage site, Le Morne mountain hikes, Black River Gorges National Park",
+        windguruCode: "176",
+        conditions: ["Lagoon", "Reef Break", "Wave Riding", "Bump and Jump"],
+        accommodationOptions: ["Luxury Resorts", "Beach Villas", "Boutique Hotels"],
+        foodOptions: ["Creole Cuisine", "Seafood", "International Restaurants"],
+        culture: "Mix of French, African, Indian and Chinese influences in a tropical paradise",
+        averageSchoolCost: 100,
+        averageAccommodationCost: 150,
+        numberOfSchools: 3
       });
       
       // Create wind conditions for Le Morne
@@ -323,7 +355,15 @@ export class DatabaseStorage implements IStorage {
         tags: ["Kite Camps", "Equipment Rental", "Accommodation"],
         difficultyLevel: "All Levels",
         kiteSchools: ["Dakhla Attitude|https://maps.google.com/?q=Dakhla+Attitude+Morocco|4.8|114", "Ocean Vagabond|https://maps.google.com/?q=Ocean+Vagabond+Dakhla|4.7|92", "West Point Dakhla|https://maps.google.com/?q=West+Point+Dakhla|4.9|73"],
-        localAttractions: "Sahara Desert tours, traditional Berber villages, Dragon Island"
+        localAttractions: "Sahara Desert tours, traditional Berber villages, Dragon Island",
+        windguruCode: "379",
+        conditions: ["Flat Water", "Lagoon", "Ocean Side", "Steady Wind"],
+        accommodationOptions: ["Kite Camps", "Eco Lodges", "Desert Resorts"],
+        foodOptions: ["Moroccan Cuisine", "Fresh Seafood", "Camp Dining"],
+        culture: "Blend of Berber, Arab and nomadic desert traditions",
+        averageSchoolCost: 70,
+        averageAccommodationCost: 60,
+        numberOfSchools: 3
       });
       
       // Create wind conditions for Dakhla
