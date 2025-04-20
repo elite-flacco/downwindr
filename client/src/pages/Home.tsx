@@ -25,7 +25,15 @@ export default function Home() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-16 pb-12 md:py-20 lg:py-24">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 to-blue-100 z-0"></div>
+          {/* Enhanced background with gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-100 z-0"></div>
+          
+          {/* Subtle wave pattern background */}
+          <div className="absolute inset-0 z-0 opacity-10" 
+               style={{ 
+                 backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264.888-.14 1.24.19 1.64.39 1.85.39.41 0 1.12-.41 1.22-.4.11.01 1.85.2 2.08.15.23-.05 1.02-.4 1.2-.47.19-.05.48-.36.69-.14.18.11.95.13 1.11.22.18.1.91.24 1.06.11.16-.12.2-.1.38-.1.78 0 1.62.5 1.81.02.2-.47.06-.47.89-.47.55 0 .31.21.54.57.36.57 1.21.79 2.01.79.39 0 .24-.09.77-.17.65-.09 1.29.03 1.5-.41.12-.29.23-.21.62-.14.11.03.46.17.57.08.19-.14.14-.18.67-.04.77.21 1.75.17 2.51.22.41.03.56-.16.8-.38.13-.14.27-.17.44-.13.1.01.32.18.44.16.6-.01 1.07-.21 1.49-.56.14-.13.13-.36.51-.27.11.01.5.3.71.22.14-.06.34-.14.65-.14.35-.01.4.33.58.26.1-.05.16-.1.44-.1.38-.01.34.08.34.17.03.22.42.11.6.18.08.02.25.14.37.19.21.1.44.19.73.19.29 0 .36-.08.52-.25.14-.14.25-.22.51-.16.12.03.24.08.45.08.57.06.14-.13.25-.13.11 0 .09.12.53.11.33-.01.42-.14.57-.28.13-.13.29-.18.59-.18.21 0 .38.02.62.02.19 0 .31-.21.53-.23.17-.04.31.09.5.09.16 0 .29-.09.53.03.16.08.15.18.49.18.4 0 .66-.26.85-.48.05-.05.27 0 .42 0 .38 0 .76-.26.97-.4.11-.07.12.03.31.03.19 0 .48-.28.67-.35.49-.17.53.02 1.04-.08.47-.1.67-.3.99-.44.29-.12.4-.04.65-.04.26 0 .42-.17.67-.31.25-.15.3.05.42-.16.04-.07.11-.06.22-.13.1-.07.37-.17.5-.25.31-.17.74-.14.89-.37.03-.06.52-.14.62-.19.26-.12.08-.36.41-.41.19-.03.26.22.55.22.12 0 .25-.1.37-.1.12 0 .24.22.35.22.11 0 .23-.09.42-.17.19-.07.42-.18.58-.18.17 0 .3.18.53.19.22.01.28-.14.43-.28.14-.12.41-.23.42-.4' fill='%2306b6d4' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                 backgroundSize: "cover"
+               }}></div>
           
           {/* Decorative Elements */}
           <div className="absolute top-20 right-20 opacity-20">
@@ -35,6 +43,7 @@ export default function Home() {
             <Cloud className="w-16 h-16 text-primary/20" />
           </div>
           
+          {/* Main content */}
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
@@ -78,14 +87,25 @@ export default function Home() {
               </div>
               
               <div className="md:w-1/2">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="relative"
-                >
-                  <KitesurferIllustration className="w-full h-auto max-w-lg mx-auto" />
-                </motion.div>
+                <div className="relative">
+                  {/* Floating effect for the illustration */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.8, 
+                      delay: 0.4,
+                      ease: "easeOut"
+                    }}
+                    className="relative z-10"
+                  >
+                    {/* Add a subtle glow behind the illustration */}
+                    <div className="absolute inset-0 -mx-6 -my-10 bg-gradient-to-br from-cyan-200/30 to-primary/20 rounded-full blur-3xl"></div>
+                    
+                    {/* The illustration */}
+                    <KitesurferIllustration className="w-full h-auto max-w-lg mx-auto relative z-10" />
+                  </motion.div>
+                </div>
               </div>
             </div>
           </div>
