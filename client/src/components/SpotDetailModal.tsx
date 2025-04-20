@@ -336,10 +336,10 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         .map((condition, idx) => (
                           <div 
                             key={condition.id} 
-                            className={`p-3 rounded-lg shadow-sm ${getWindQualityClass(condition.windQuality)}`}
+                            className={`p-2 rounded-lg ${getWindQualityClass(condition.windQuality)} transition-all hover:shadow-md hover:scale-105`}
                           >
-                            <div className="font-bold text-white">{MonthNames[condition.month - 1].substring(0, 3)}</div>
-                            <div className="text-xs text-white font-medium">{condition.windSpeed} knots</div>
+                            <div className="text-white text-xs">{MonthNames[condition.month - 1].substring(0, 3)}</div>
+                            <div className="text-xs text-white opacity-90">{condition.windSpeed} knots</div>
                             <div className="text-xs text-white mt-1">{getWindQualityEmoji(condition.windQuality)}</div>
                           </div>
                         ))}
