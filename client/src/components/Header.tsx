@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header 
-      className={`bg-white border-b border-slate-100 w-full transition-all duration-300 ${
+      className={`bg-white border-b border-sky/10 w-full transition-all duration-300 ${
         scrolled ? "sticky top-0 z-50 shadow-md" : "shadow-sm"
       }`}
     >
@@ -44,10 +44,10 @@ export default function Header() {
               <Wind className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-ocean-blue" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+              <h1 className="text-xl font-bold text-azure" style={{ fontFamily: "'Permanent Marker', cursive" }}>
                 Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
               </h1>
-              <p className="text-xs text-slate-500 font-medium">Ride the perfect breeze 💨</p>
+              <p className="text-xs text-deep-ocean/70 font-medium">Ride the perfect breeze 💨</p>
             </div>
           </motion.div>
         </Link>
@@ -57,8 +57,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-primary text-white shadow-md" 
-                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  ? "bg-azure text-white shadow-md" 
+                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -71,8 +71,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-primary text-white shadow-md" 
-                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  ? "bg-azure text-white shadow-md" 
+                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -85,8 +85,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-primary text-white shadow-md" 
-                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  ? "bg-azure text-white shadow-md" 
+                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -99,8 +99,8 @@ export default function Header() {
             <motion.div 
               className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-primary text-white shadow-md" 
-                  : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                  ? "bg-azure text-white shadow-md" 
+                  : "text-deep-ocean hover:text-azure hover:bg-sky/10"
               }`}
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -113,7 +113,7 @@ export default function Header() {
         
         <div className="md:hidden">
           <motion.button 
-            className="text-ocean-blue p-2 rounded-lg hover:bg-blue-50" 
+            className="text-azure p-2 rounded-lg hover:bg-sky/10" 
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
             whileTap={{ scale: 0.9 }}
@@ -131,7 +131,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="md:hidden bg-white w-full py-2 shadow-md border-t border-slate-100"
+            className="md:hidden bg-white w-full py-2 shadow-md border-t border-sky/10"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -142,13 +142,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
-                      ? "bg-primary text-white" 
-                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                      ? "bg-azure text-white" 
+                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-white" : "text-primary"}`} />
+                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-white" : "text-azure"}`} />
                   Home
                 </motion.div>
               </Link>
@@ -156,13 +156,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-primary text-white" 
-                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                      ? "bg-azure text-white" 
+                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-white" : "text-primary"}`} />
+                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-white" : "text-azure"}`} />
                   Spots
                 </motion.div>
               </Link>
@@ -170,13 +170,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-primary text-white" 
-                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                      ? "bg-azure text-white" 
+                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-white" : "text-primary"}`} />
+                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-white" : "text-azure"}`} />
                   Community
                 </motion.div>
               </Link>
@@ -184,13 +184,13 @@ export default function Header() {
                 <motion.div 
                   className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-primary text-white" 
-                      : "text-slate-600 hover:text-ocean-blue hover:bg-blue-50"
+                      ? "bg-azure text-white" 
+                      : "text-deep-ocean hover:text-azure hover:bg-sky/10"
                   }`}
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-white" : "text-primary"}`} />
+                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-white" : "text-azure"}`} />
                   Learn
                 </motion.div>
               </Link>
