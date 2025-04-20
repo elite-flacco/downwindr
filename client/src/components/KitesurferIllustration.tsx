@@ -95,15 +95,15 @@ export default function KitesurferIllustration({ className = "w-full h-auto" }: 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Background gradient */}
+      {/* Background gradient with transparency for blending */}
       <defs>
         <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#cffafe" />
-          <stop offset="100%" stopColor="#0891b2" />
+          <stop offset="0%" stopColor="#ecfeff" />
+          <stop offset="100%" stopColor="#a5f3fc" stopOpacity="0.3" />
         </linearGradient>
         <linearGradient id="oceanGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#0ea5e9" />
-          <stop offset="100%" stopColor="#0c4a6e" />
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#0c4a6e" stopOpacity="0.9" />
         </linearGradient>
         <radialGradient id="sunGlow" cx="650" cy="80" r="70" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#fef9c3" />
@@ -111,8 +111,8 @@ export default function KitesurferIllustration({ className = "w-full h-auto" }: 
         </radialGradient>
       </defs>
       
-      {/* Sky with gradient */}
-      <rect width="800" height="350" fill="url(#skyGradient)" />
+      {/* Sky with gradient - with transparency for blending with page background */}
+      <rect width="800" height="350" fill="url(#skyGradient)" fillOpacity="0.7" />
       
       {/* Sun glow effect */}
       <circle cx="650" cy="80" r="70" fill="url(#sunGlow)" />
