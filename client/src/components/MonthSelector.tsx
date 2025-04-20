@@ -20,7 +20,7 @@ export default function MonthSelector({ selectedMonth, onMonthChange }: MonthSel
         value={selectedMonth.toString()}
         onValueChange={(value) => onMonthChange(parseInt(value))}
       >
-        <SelectTrigger className="h-8 text-sm border-slate-200 min-w-[120px] py-1 px-3 focus:ring-primary/30">
+        <SelectTrigger className="h-8 text-sm border-slate-200 min-w-[120px] py-1 px-3 focus:ring-primary/30 bg-white">
           <SelectValue placeholder="Select month">
             {MonthNames[selectedMonth - 1]}
           </SelectValue>
