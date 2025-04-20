@@ -25,15 +25,15 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   const getWindQualityClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-wind-good";
+        return "bg-emerald-600 text-white";
       case WindQuality.Good:
-        return "bg-wind-good";
+        return "bg-teal-600 text-white";
       case WindQuality.Moderate:
-        return "bg-wind-moderate";
+        return "bg-amber-600 text-white";
       case WindQuality.Poor:
-        return "bg-wind-poor";
+        return "bg-rose-600 text-white";
       default:
-        return "bg-neutral-light";
+        return "bg-slate-500 text-white";
     }
   };
   
@@ -164,16 +164,16 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   >
                     {renderCurrentWindBadge()}
                     
-                    <div className="flex items-center bg-ocean-blue bg-opacity-10 text-ocean-dark px-4 py-2 rounded-full text-sm font-medium shadow">
-                      <Waves className="mr-2 h-4 w-4 text-ocean-blue" /> {spotDetails.spot.waveSize} Waves
+                    <div className="flex items-center bg-sky-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow">
+                      <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves
                     </div>
                     
-                    <div className="flex items-center bg-sunny-yellow bg-opacity-10 text-ocean-dark px-4 py-2 rounded-full text-sm font-medium shadow">
-                      <Thermometer className="mr-2 h-4 w-4 text-sunny-yellow" /> {spotDetails.spot.tempRange}
+                    <div className="flex items-center bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow">
+                      <Thermometer className="mr-2 h-4 w-4" /> {spotDetails.spot.tempRange}
                     </div>
                     
-                    <div className="flex items-center bg-tropical-green bg-opacity-10 text-ocean-dark px-4 py-2 rounded-full text-sm font-medium shadow">
-                      <Calendar className="mr-2 h-4 w-4 text-tropical-green" /> Best: {spotDetails.spot.bestMonths}
+                    <div className="flex items-center bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow">
+                      <Calendar className="mr-2 h-4 w-4" /> Best: {spotDetails.spot.bestMonths}
                     </div>
                     
                     {spotDetails.spot.windguruCode && (
@@ -181,7 +181,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-purple-700 transition-colors"
+                        className="flex items-center bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-indigo-700 transition-colors"
                       >
                         <ExternalLink className="mr-2 h-4 w-4" /> Windguru Forecast
                       </a>
@@ -209,7 +209,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                           {spotDetails.spot.tags.map((tag: string, index: number) => (
                             <div 
                               key={index} 
-                              className="text-sm border border-ocean-blue border-opacity-30 px-3 py-1 rounded-full bg-ocean-blue bg-opacity-5 text-ocean-dark"
+                              className="text-sm border border-sky-600 px-3 py-1 rounded-full bg-sky-100 text-sky-800"
                             >
                               {tag}
                             </div>
@@ -293,7 +293,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   
                   {/* Wind conditions table */}
                   <motion.div 
-                    className="mb-8 bg-beach-sand rounded-xl p-5 shadow-md"
+                    className="mb-8 bg-gray-50 rounded-xl p-5 shadow-md"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
@@ -323,7 +323,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
                     <Button 
                       variant="outline" 
-                      className="w-full sm:w-auto px-5 py-3 bg-ocean-dark text-white border-ocean-dark hover:bg-ocean-blue transition-colors duration-300"
+                      className="w-full sm:w-auto px-5 py-3 bg-slate-600 text-white hover:bg-slate-700 transition-colors duration-300"
                       onClick={handleClose}
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -333,7 +333,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     </Button>
                     
                     <Button 
-                      className="w-full sm:w-auto px-5 py-3 bg-gradient-to-r from-ocean-blue to-tropical-green text-white border-none hover:opacity-90 transition-opacity duration-300 shadow-lg"
+                      className="w-full sm:w-auto px-5 py-3 bg-teal-600 hover:bg-teal-700 text-white transition-colors duration-300 shadow-md"
                     >
                       Add to Favorites 
                       <Heart className="ml-2 h-5 w-5 animate-pulse" />

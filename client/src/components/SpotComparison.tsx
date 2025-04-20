@@ -28,15 +28,15 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
   const windQualityColor = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-green-500 text-white";
+        return "bg-emerald-600 text-white";
       case WindQuality.Good:
-        return "bg-green-300";
+        return "bg-teal-600 text-white";
       case WindQuality.Moderate:
-        return "bg-yellow-300";
+        return "bg-amber-600 text-white";
       case WindQuality.Poor:
-        return "bg-red-300";
+        return "bg-rose-600 text-white";
       default:
-        return "bg-gray-300";
+        return "bg-slate-500 text-white";
     }
   };
 
@@ -44,13 +44,13 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
     if (!level) return <Badge variant="outline">Unknown</Badge>;
     
     if (level.includes("Beginner")) {
-      return <Badge className="bg-green-500">Beginner Friendly</Badge>;
+      return <Badge className="bg-teal-600 text-white">Beginner Friendly</Badge>;
     } else if (level.includes("Intermediate")) {
-      return <Badge className="bg-yellow-500">Intermediate</Badge>;
+      return <Badge className="bg-amber-600 text-white">Intermediate</Badge>;
     } else if (level.includes("Advanced")) {
-      return <Badge className="bg-red-500">Advanced</Badge>;
+      return <Badge className="bg-rose-600 text-white">Advanced</Badge>;
     } else if (level.includes("All")) {
-      return <Badge className="bg-blue-500">All Levels</Badge>;
+      return <Badge className="bg-indigo-600 text-white">All Levels</Badge>;
     }
     
     return <Badge variant="outline">{level}</Badge>;
