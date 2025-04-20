@@ -60,11 +60,11 @@
   --theme-text-light: var(--color-slate)/70%;
   --theme-border: var(--color-light-blue)/50%;
 
-  /* Wind quality indicators */
-  --theme-wind-excellent: var(--color-lime);
-  --theme-wind-good: var(--color-primary-500);
-  --theme-wind-moderate: var(--color-light-blue);
-  --theme-wind-poor: var(--color-coral);
+  /* Wind quality indicators - Custom colors */
+  --theme-wind-excellent: rgba(255, 48, 51, 1); /* Red */
+  --theme-wind-good: rgba(255, 175, 15, 1); /* Orange */
+  --theme-wind-moderate: rgba(11, 254, 26, 1); /* Green */
+  --theme-wind-poor: rgba(194, 252, 249, 1); /* Light blue */
 
   /* Font families */
   --font-fun: 'Kalam', cursive;
