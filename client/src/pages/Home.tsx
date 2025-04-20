@@ -195,7 +195,7 @@ export default function Home() {
         <section className="py-16 bg-gradient-to-br from-primary to-primary/80 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 
-              className="text-3xl md:text-4xl font-bold mb-6"
+              className="text-3xl text-white/90 md:text-4xl font-bold mb-6"
               style={{ fontFamily: "'Permanent Marker', cursive" }}
             >
               Ready to Catch the Wind?

@@ -43,7 +43,7 @@ export default function Footer() {
               <Wind className="w-8 h-8 text-primary" />
             </div>
             <h3 className="text-2xl font-bold font-heading mb-2 text-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
-            <p className="text-slate-600 mb-6">🌍 Discover. 📚 Learn. 🤝 Connect</p>
+            <p className="text-slate-600 mb-6">🌍 Discover 📚 Learn 🤝 Connect</p>
             {/* <div className="flex space-x-4">
               <div className="h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center hover:bg-primary/20 transition-all duration-300 cursor-pointer">
                 <svg className="w-5 h-5 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -98,7 +98,7 @@ export default function Footer() {
                 <Link href="/">
                   <div className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 flex items-center cursor-pointer">
                     <span className="bg-primary/20 w-1.5 h-1.5 rounded-full mr-2"></span>
-                    Kitesurfing Guide
+                    Tutorials
                   </div>
                 </Link>
               </li>
