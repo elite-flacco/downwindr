@@ -120,11 +120,87 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
     }
   };
 
-  // Get wind conditions for each spot in the selected month
+  // Get wind conditions for each spot in the selected month and enrich with derived data
   const getSpotWithConditions = (spot: any) => {
     const windCondition = spot.windConditions?.find((cond: any) => cond.month === selectedMonth);
+    
+    // Calculate/derive missing values
+    const numberOfSchools = spot.kiteSchools?.length || null;
+    
+    // Default values for accommodation cost based on country/region (if missing)
+    let averageAccommodationCost = spot.averageAccommodationCost;
+    if (averageAccommodationCost === null) {
+      if (spot.country === "Spain") averageAccommodationCost = 75;
+      else if (spot.country === "Dominican Republic") averageAccommodationCost = 80;
+      else if (spot.country === "Egypt") averageAccommodationCost = 60;
+      else if (spot.country === "Brazil") averageAccommodationCost = 65;
+      else if (spot.country.includes("United States")) averageAccommodationCost = 120;
+      else averageAccommodationCost = 85; // default
+    }
+    
+    // Default values for school cost based on country/region (if missing)
+    let averageSchoolCost = spot.averageSchoolCost;
+    if (averageSchoolCost === null) {
+      if (spot.country === "Spain") averageSchoolCost = 80;
+      else if (spot.country === "Dominican Republic") averageSchoolCost = 90;
+      else if (spot.country === "Egypt") averageSchoolCost = 70;
+      else if (spot.country === "Brazil") averageSchoolCost = 75;
+      else if (spot.country.includes("United States")) averageSchoolCost = 110;
+      else averageSchoolCost = 85; // default
+    }
+    
+    // If conditions array is null, create from tags
+    let conditions = spot.conditions;
+    if (conditions === null && spot.tags) {
+      conditions = [
+        spot.waveSize ? `${spot.waveSize} Waves` : "Flat Water",
+        windCondition?.windQuality === "Excellent" ? "Reliable Wind" : "Variable Wind",
+        spot.difficultyLevel ? `${spot.difficultyLevel} Level` : "All Levels"
+      ];
+    }
+    
+    // Default accommodation options based on tags (if missing)
+    let accommodationOptions = spot.accommodationOptions;
+    if (accommodationOptions === null && spot.tags) {
+      accommodationOptions = spot.tags
+        .filter((tag: string) => 
+          tag.toLowerCase().includes('accommodation') || 
+          tag.toLowerCase().includes('hotel') || 
+          tag.toLowerCase().includes('resort')
+        );
+      
+      // Add some defaults if still empty
+      if (accommodationOptions.length === 0) {
+        accommodationOptions = ["Hotels", "Apartments", "Hostels"];
+      }
+    }
+    
+    // Default food options (if missing)
+    let foodOptions = spot.foodOptions;
+    if (foodOptions === null) {
+      foodOptions = ["Local Restaurants", "Beach Bars", "Cafes"];
+    }
+    
+    // Default culture if missing
+    let culture = spot.culture;
+    if (culture === null) {
+      if (spot.country === "Spain") culture = "Spanish coastal culture with flamenco influences";
+      else if (spot.country === "Dominican Republic") culture = "Caribbean island vibe with Latin influences";
+      else if (spot.country === "Egypt") culture = "Egyptian culture with Red Sea coastal lifestyle";
+      else if (spot.country === "Brazil") culture = "Brazilian beach culture with samba and local festivals";
+      else if (spot.country.includes("United States")) culture = "American beach town atmosphere";
+      else culture = "Local coastal culture";
+    }
+    
     return { 
-      ...spot, 
+      ...spot,
+      numberOfSchools,
+      averageAccommodationCost,
+      averageSchoolCost,
+      conditions,
+      accommodationOptions,
+      foodOptions,
+      culture,
       currentWindCondition: windCondition || null
     };
   };
