@@ -69,10 +69,7 @@ export class DatabaseStorage implements IStorage {
         tempRange: "16-20°C",
         bestMonths: "Dec-Mar",
         tags: ["Kite Schools", "Equipment Rental", "Beachfront Accommodation"],
-        difficulty: "Intermediate",
-        popularity: "High",
-        imageUrl: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=nick-fewings-NG9lpXnUMqM-unsplash.jpg",
-        region: "europe",
+        difficultyLevel: "Intermediate",
         localAttractions: "Historic Old Town, Gibraltar day trips"
       });
       
@@ -139,10 +136,8 @@ export class DatabaseStorage implements IStorage {
         tempRange: "24-30°C",
         bestMonths: "Jun-Aug",
         tags: ["Kite Schools", "Equipment Rental", "Beach Bars", "Accommodation"],
-        difficulty: "Beginner to Advanced",
-        popularity: "Very High",
-        imageUrl: "https://images.unsplash.com/photo-1559113202-c916b8e44373?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=matt-hardy-6ArTTluciuA-unsplash.jpg",
-        region: "caribbean"
+        difficultyLevel: "Beginner to Advanced",
+        localAttractions: "Vibrant nightlife, beachfront restaurants, nearby waterfalls"
       });
       
       // Create wind conditions for Cabarete
@@ -208,10 +203,8 @@ export class DatabaseStorage implements IStorage {
         tempRange: "26-32°C",
         bestMonths: "Jul-Dec",
         tags: ["Kite Schools", "Equipment Rental", "Lagoons", "Beachfront Accommodation"],
-        difficulty: "Beginner to Intermediate",
-        popularity: "High",
-        imageUrl: "https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=victor-freitas-hOuJYX2K5DA-unsplash.jpg",
-        region: "south-america"
+        difficultyLevel: "Beginner to Intermediate",
+        localAttractions: "Dune buggy tours, traditional fishing villages, Fortaleza day trips"
       });
       
       // Create wind conditions for Cumbuco
@@ -269,10 +262,8 @@ export class DatabaseStorage implements IStorage {
         tempRange: "22-30°C",
         bestMonths: "May-Oct",
         tags: ["Premium Resorts", "Kite Schools", "Equipment Rental"],
-        difficulty: "Intermediate to Advanced",
-        popularity: "High",
-        imageUrl: "https://images.unsplash.com/photo-1596295517860-04a84af8ad4d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=derek-story-wWQMpbaiK2Y-unsplash.jpg",
-        region: "africa"
+        difficultyLevel: "Intermediate to Advanced",
+        localAttractions: "UNESCO World Heritage site, Le Morne mountain hikes, Black River Gorges National Park"
       });
       
       // Create wind conditions for Le Morne
@@ -322,10 +313,10 @@ export class DatabaseStorage implements IStorage {
         tempRange: "18-26°C",
         bestMonths: "Apr-Sep",
         tags: ["Kite Camps", "Equipment Rental", "Accommodation"],
-        difficulty: "All Levels",
-        popularity: "Medium",
+        difficultyLevel: "All Levels",
         imageUrl: "https://images.unsplash.com/photo-1596649299486-4cdea56fd59d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=sebastian-pena-lambarri-bNSdIHcHe-Q-unsplash.jpg",
-        region: "africa"
+        region: "africa",
+        localAttractions: "Sahara Desert tours, traditional Berber villages, Dragon Island"
       });
       
       // Create wind conditions for Dakhla
