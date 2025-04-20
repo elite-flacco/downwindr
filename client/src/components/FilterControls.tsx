@@ -74,12 +74,12 @@ export default function FilterControls({
       </div>
       
       {/* Search Input */}
-      <div className="relative flex-grow">
+      <div className="relative w-64">
         <div className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
           <Search className="h-3.5 w-3.5 text-slate-400" />
         </div>
         <Input
-          className="pl-8 pr-2 py-1 h-8 text-sm border-slate-200 focus-visible:ring-primary/30"
+          className="pl-8 pr-2 py-1 h-8 text-sm bg-white border-slate-200 focus-visible:ring-primary/30"
           placeholder="Search spots or locations..."
           value={searchQuery}
           onChange={handleSearchInputChange}
