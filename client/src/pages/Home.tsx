@@ -23,20 +23,28 @@ export default function Home() {
       <Header />
       
       <main className="flex-grow">
-        {/* Hero Section - using only the illustration as background */}
-        <section className="relative overflow-x-hidden pt-16 pb-32 md:py-20 lg:py-28">
-          {/* No additional background - using just the illustration */}
-          <div className="absolute inset-0 bg-white z-0"></div>
+        {/* Hero Section with full blended background */}
+        <section className="relative overflow-hidden pt-24 pb-40 md:pt-20 md:pb-32 lg:py-28">
+          {/* Background gradient to blend with illustration */}
+          <div className="absolute inset-0 bg-gradient-to-br from-sky-50 to-cyan-50/20 z-0"></div>
+          
+          {/* Stretched illustration as full background */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+            <div className="absolute inset-0 md:-top-10 md:-bottom-10 md:-right-96 xl:-right-64">
+              <KitesurferIllustration className="w-[200%] md:w-[140%] h-auto" />
+            </div>
+          </div>
           
           {/* Main content */}
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col md:flex-row items-center">
-              {/* Left side text content */}
+              {/* Left side text content - with backdrop for readability */}
               <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10 z-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
+                  className="relative rounded-xl backdrop-blur-sm bg-white/40 p-8 md:p-10 shadow-sm"
                 >
                   <h1 
                     className="text-4xl md:text-5xl lg:text-6xl mb-4 text-primary"
@@ -45,7 +53,7 @@ export default function Home() {
                     Catch the Perfect Wind
                   </h1>
                   
-                  <p className="text-lg md:text-xl text-slate-600 mb-8">
+                  <p className="text-lg md:text-xl text-slate-700 mb-8">
                     Discover the world's best kitesurfing spots with real-time wind conditions, 
                     seasonal recommendations, and local insights.
                   </p>
@@ -72,31 +80,8 @@ export default function Home() {
                 </motion.div>
               </div>
               
-              {/* Illustration container - positioned to not interfere with text */}
-              <div className="md:w-1/2 md:absolute md:right-0 md:top-0 md:bottom-0 overflow-visible">
-                {/* Wrapper to control positioning */}
-                <div className="relative h-full flex items-center justify-center">
-                  {/* Floating effect for the illustration */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ 
-                      duration: 0.8, 
-                      delay: 0.4,
-                      ease: "easeOut"
-                    }}
-                    className="relative"
-                    style={{ 
-                      width: '140%', 
-                      maxWidth: '1000px',
-                      right: '-10%'
-                    }}
-                  >
-                    {/* The illustration - sized to fully fit viewport height */}
-                    <KitesurferIllustration className="w-full h-auto" />
-                  </motion.div>
-                </div>
-              </div>
+              {/* Right side is now empty as we're using the illustration as background */}
+              <div className="md:w-1/2"></div>
             </div>
           </div>
         </section>
