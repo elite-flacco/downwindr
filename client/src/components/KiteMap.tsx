@@ -109,13 +109,13 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
   const getPinColor = (quality: WindQuality) => {
     switch(quality) {
       case WindQuality.Excellent:
-        return 'var(--theme-accent-success)'; // Success accent for excellent
+        return 'rgba(255, 48, 51, 1)'; // Success accent for excellent
       case WindQuality.Good:
-        return 'var(--theme-primary-hover)'; // Primary hover for good
+        return 'rgba(255, 175, 15, 1)'; // Primary hover for good
       case WindQuality.Moderate:
-        return 'var(--theme-primary)'; // Primary for moderate
+        return 'rgba(11, 254, 26, 1)'; // Primary for moderate
       case WindQuality.Poor:
-        return 'var(--theme-muted)'; // Muted for poor
+        return 'rgba(194, 252, 249, 1)'; // Muted for poor
       default:
         return 'var(--theme-primary)'; // Primary as default
     }
@@ -134,15 +134,12 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
       ) : (
         <div className="map-container relative">
           {/* Header overlay */}
-          <div className="absolute top-4 left-4 z-[9] bg-theme-background px-4 py-3 rounded-xl shadow-sm flex items-center space-x-3 border border-theme-border">
-            <div className="bg-theme-primary/10 rounded-full p-2">
-              <Wind className="text-theme-primary w-5 h-5" />
-            </div>
+          {/* <div className="absolute top-4 left-4 z-[9] bg-theme-background px-4 py-3 rounded-xl shadow-sm flex items-center space-x-3 border border-theme-border">
             <div>
               <h3 className="font-heading text-theme-primary text-lg" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
               <p className="text-xs text-theme-text-light">Find your perfect spot</p>
             </div>
-          </div>
+          </div> */}
           
           {/* Main map component */}
           {mapboxData && mapboxData.token && (
@@ -218,10 +215,9 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                 anchor="bottom"
                 onClose={() => setPopupInfo(null)}
                 closeOnClick={false}
-                className="custom-popup"
                 offset={[0, -10]}
               >
-                <div className="p-3 max-w-[280px]">
+                <div className="p-3 max-w-[380px]">
                   <div className="mb-3 pb-2 border-b border-theme-border">
                     <h3 className="font-heading text-theme-primary text-lg">{popupInfo.spot.name}</h3>
                     <div className="text-xs text-theme-text-light flex items-center">
@@ -236,7 +232,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                         className="w-4 h-4 rounded-full mr-2"
                         style={{ backgroundColor: getPinColor(popupInfo.quality) }}
                       ></div>
-                      <span className="text-sm font-medium" style={{ color: getPinColor(popupInfo.quality) }}>
+                      <span className="text-xs font-medium mr-2" style={{ color: getPinColor(popupInfo.quality) }}>
                         {popupInfo.quality} wind
                       </span>
                     </div>
@@ -246,20 +242,20 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                     </div>
                   </div>
                   
-                  <div className="text-sm mb-3 text-theme-text-light max-h-[80px] overflow-y-auto leading-snug">
+                  {/* <div className="text-sm mb-3 text-theme-text-light max-h-[80px] overflow-y-auto leading-snug">
                     {popupInfo.spot.description.substring(0, 120)}...
-                  </div>
+                  </div> */}
                   
-                  <div className="flex gap-2 mb-3">
+                  <div className="flex gap-2 mb-3 mt-8">
                     <Button 
                       size="sm"
-                      className="flex-1 bg-theme-primary text-theme-background hover:bg-theme-primary-hover"
+                      className="flex bg-theme-primary text-theme-background hover:bg-theme-primary-hover text-xs"
                       onClick={() => {
                         onSpotSelect(popupInfo.spot.id);
                         setPopupInfo(null);
                       }}
                     >
-                      <Compass className="w-4 h-4 mr-1" /> View Details
+                      <Compass className="w-2 h-2" /> View Details
                     </Button>
                     
                     {popupInfo.spot.windguruCode && (
@@ -267,9 +263,9 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                         href={`https://www.windguru.cz/${popupInfo.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center bg-theme-surface text-theme-text px-3 py-1 rounded-md text-sm font-medium hover:bg-theme-muted/30 transition-colors"
+                        className="flex items-center justify-center bg-theme-surface text-theme-text px-3 py-1 rounded-md text-xs font-medium hover:bg-theme-primary/30 transition-colors"
                       >
-                        <ExternalLink className="w-4 h-4 mr-1" /> Windguru
+                        <ExternalLink className="w-2 h-2 mr-2" /> Windguru
                       </a>
                     )}
                   </div>
