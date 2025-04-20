@@ -92,8 +92,15 @@ export class DatabaseStorage implements IStorage {
     }, 0);
   }
 
+  private initializationInProgress = false;
+  private initialized = false;
+
   private async checkAndInitializeData() {
+    if (this.initialized || this.initializationInProgress) return;
+    
     try {
+      this.initializationInProgress = true;
+      
       // Check if we have any spots
       const spotsResult = await db.select().from(spots).limit(1);
 
@@ -104,8 +111,12 @@ export class DatabaseStorage implements IStorage {
         await this.initializeData();
         console.log("Sample data initialization completed successfully");
       }
+      
+      this.initialized = true;
     } catch (error) {
       console.error("Error checking database for spots:", error);
+    } finally {
+      this.initializationInProgress = false;
     }
   }
 
