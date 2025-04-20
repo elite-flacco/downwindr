@@ -274,102 +274,168 @@ export class DatabaseStorage implements IStorage {
       const cabarete = await this.createSpot({
         name: "Cabarete, Dominican Republic",
         country: "Dominican Republic",
-        latitude: 19.7644,
-        longitude: -70.4168,
+        latitude: 19.7496,
+        longitude: -70.4125,
         description:
-          "Known as the 'Kiteboarding Capital of the World', Cabarete offers consistent trade winds and warm waters year-round.",
+          "Cabarete is a Caribbean hotspot renowned for its consistent trade winds, warm waters, and vibrant kitesurfing community, suitable for all skill levels.",
         waveSize: "Small to Medium",
-        tempRange: "24-30°C",
-        bestMonths: "Jun-Aug",
-        tags: [
-          "Kite Schools",
-          "Equipment Rental",
-          "Beach Bars",
-          "Accommodation",
-        ],
-        difficultyLevel: "Beginner to Advanced",
+        tempRange: "25–30°C",
+        bestMonths: "June–August",
+        tags: ["Kite Schools", "Equipment Rental", "Beachfront Accommodation"],
+        difficultyLevel: "Beginner to Intermediate",
         kiteSchools: [
-          "Kite Club Cabarete|https://maps.google.com/?q=Kite+Club+Cabarete|4.6|87",
-          "Laurel Eastman Kiteboarding School|https://maps.google.com/?q=Laurel+Eastman+Kiteboarding+Cabarete|4.9|132",
-          "GoKite Cabarete|https://maps.google.com/?q=GoKite+Cabarete|4.8|95",
+          "Kite Club Cabarete|https://maps.google.com/?q=Kite+Club+Cabarete|4.8|200",
+          "Laurel Eastman Kiteboarding|https://maps.google.com/?q=Laurel+Eastman+Kiteboarding|4.9|180",
+          "Cabarete Kite Point|https://maps.google.com/?q=Cabarete+Kite+Point|4.7|150",
+          "Vela Cabarete|https://maps.google.com/?q=Vela+Cabarete|4.6|120",
+          "Gokite Cabarete|https://maps.google.com/?q=Gokite+Cabarete|4.8|100"
         ],
         localAttractions:
-          "Vibrant nightlife, beachfront restaurants, nearby waterfalls",
-        windguruCode: "227",
-        conditions: ["Small to Medium Waves", "Reliable Wind", "Sandy Bottom"],
+          "El Choco National Park, Caves of Cabarete, Nightlife in downtown Cabarete",
+        windguruCode: "123456",
+        conditions: ["Flat to Choppy Water", "Consistent Trade Winds", "Sandy Bottom"],
         accommodationOptions: [
-          "Beach Resorts",
-          "Budget Hostels",
-          "Vacation Rentals",
+          "Beachfront Resorts",
+          "Boutique Hotels",
+          "Vacation Rentals"
         ],
         foodOptions: [
-          "Local Caribbean Cuisine",
-          "International Restaurants",
-          "Beach Bars",
+          "Local Dominican Cuisine",
+          "Seafood Restaurants",
+          "International Dining Options"
         ],
-        culture: "Caribbean island vibe with Latin influences",
-        averageSchoolCost: 90,
-        averageAccommodationCost: 80,
-        numberOfSchools: 3,
+        culture:
+          "A blend of Dominican and international cultures with a laid-back beach vibe",
+        averageSchoolCost: 65,
+        averageAccommodationCost: 85,
+        numberOfSchools: 20
       });
 
-      // Create wind conditions for Cabarete
-      for (let month = 1; month <= 12; month++) {
-        let windQuality = WindQuality.Good;
-        let windSpeed = 17;
-        let airTemp = 26;
-        let waterTemp = 25;
-        let seasonalNotes = "";
-
-        // Winter (moderate winds)
-        if (month >= 1 && month <= 3) {
-          windQuality = WindQuality.Good;
-          windSpeed = 16;
-          airTemp = 25;
-          waterTemp = 25;
-          seasonalNotes =
-            "Reliable trade winds, perfect for beginners and freestyle riders.";
-        }
-        // Spring (improving winds)
-        else if (month >= 4 && month <= 5) {
-          windQuality = WindQuality.Good;
-          windSpeed = 18;
-          airTemp = 27;
-          waterTemp = 26;
-          seasonalNotes =
-            "Consistent afternoon thermal effect, usually picking up around 11am.";
-        }
-        // Summer (peak wind season)
-        else if (month >= 6 && month <= 8) {
-          windQuality = WindQuality.Excellent;
-          windSpeed = 22;
-          airTemp = 30;
-          waterTemp = 28;
-          seasonalNotes =
-            "Peak season with strongest and most consistent trade winds. More crowded.";
-        }
-        // Fall (hurricane season - more variable)
-        else {
-          windQuality = month >= 11 ? WindQuality.Good : WindQuality.Moderate;
-          windSpeed = month >= 11 ? 17 : 15;
-          airTemp = 27;
-          waterTemp = 26;
-          seasonalNotes =
-            month >= 11
-              ? "Winds becoming more reliable again after hurricane season."
-              : "Wind can be affected by hurricane season. Check forecasts carefully.";
-        }
-
-        await this.createWindCondition({
+      const conditions = [
+        {
           spotId: cabarete.id,
-          month,
-          windSpeed,
-          windQuality,
-          airTemp,
-          waterTemp,
-          seasonalNotes,
-        });
-      }
+          month: 1,
+          windQuality: WindQuality.Moderate,
+          windSpeed: 15,
+          airTemp: 27,
+          waterTemp: 26,
+          seasonalNotes:
+            "Winter season with moderate trade winds; suitable for beginners."
+        },
+        {
+          spotId: cabarete.id,
+          month: 2,
+          windQuality: WindQuality.Moderate,
+          windSpeed: 16,
+          airTemp: 27,
+          waterTemp: 26,
+          seasonalNotes:
+            "Consistent winds continue; pleasant temperatures for kiting."
+        },
+        {
+          spotId: cabarete.id,
+          month: 3,
+          windQuality: WindQuality.Good,
+          windSpeed: 18,
+          airTemp: 28,
+          waterTemp: 26,
+          seasonalNotes:
+            "Spring brings stronger winds; ideal for intermediate kiters."
+        },
+        {
+          spotId: cabarete.id,
+          month: 4,
+          windQuality: WindQuality.Good,
+          windSpeed: 20,
+          airTemp: 29,
+          waterTemp: 27,
+          seasonalNotes:
+            "Increasing wind strength; popular time for kitesurfing events."
+        },
+        {
+          spotId: cabarete.id,
+          month: 5,
+          windQuality: WindQuality.Excellent,
+          windSpeed: 22,
+          airTemp: 30,
+          waterTemp: 28,
+          seasonalNotes:
+            "Peak kitesurfing season begins; consistent strong trade winds."
+        },
+        {
+          spotId: cabarete.id,
+          month: 6,
+          windQuality: WindQuality.Excellent,
+          windSpeed: 24,
+          airTemp: 31,
+          waterTemp: 28,
+          seasonalNotes:
+            "Optimal conditions with steady winds and warm temperatures."
+        },
+        {
+          spotId: cabarete.id,
+          month: 7,
+          windQuality: WindQuality.Excellent,
+          windSpeed: 25,
+          airTemp: 31,
+          waterTemp: 29,
+          seasonalNotes:
+            "Strongest winds of the year; ideal for advanced kitesurfers."
+        },
+        {
+          spotId: cabarete.id,
+          month: 8,
+          windQuality: WindQuality.Excellent,
+          windSpeed: 24,
+          airTemp: 31,
+          waterTemp: 29,
+          seasonalNotes:
+            "Continued strong winds; vibrant kitesurfing community activities."
+        },
+        {
+          spotId: cabarete.id,
+          month: 9,
+          windQuality: WindQuality.Good,
+          windSpeed: 22,
+          airTemp: 30,
+          waterTemp: 28,
+          seasonalNotes:
+            "Winds begin to taper; still favorable conditions for kiting."
+        },
+        {
+          spotId: cabarete.id,
+          month: 10,
+          windQuality: WindQuality.Good,
+          windSpeed: 20,
+          airTemp: 29,
+          waterTemp: 28,
+          seasonalNotes:
+            "Autumn season with moderate winds; fewer crowds on the beach."
+        },
+        {
+          spotId: cabarete.id,
+          month: 11,
+          windQuality: WindQuality.Moderate,
+          windSpeed: 18,
+          airTemp: 28,
+          waterTemp: 27,
+          seasonalNotes:
+            "Transition period; suitable for beginners and intermediates."
+        },
+        {
+          spotId: cabarete.id,
+          month: 12,
+          windQuality: WindQuality.Moderate,
+          windSpeed: 16,
+          airTemp: 27,
+          waterTemp: 26,
+          seasonalNotes:
+            "Mild winds and pleasant temperatures; ideal for learning."
+        }
+      ];
+
+      // Create wind conditions for Cabarete
+      await this.setupSpotWindConditions(cabarete.id, conditions);
 
       // 3. Cumbuco, Brazil
       const cumbuco = await this.createSpot({
