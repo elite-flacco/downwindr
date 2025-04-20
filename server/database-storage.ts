@@ -39,7 +39,10 @@ export class DatabaseStorage implements IStorage {
     ]);
     
     // Initialize data if spots table is empty
-    this.checkAndInitializeData();
+    // Using setTimeout to ensure this runs asynchronously after constructor completes
+    setTimeout(() => {
+      this.checkAndInitializeData();
+    }, 0);
   }
   
   private async checkAndInitializeData() {
@@ -49,7 +52,8 @@ export class DatabaseStorage implements IStorage {
       
       if (spotsResult.length === 0) {
         console.log("No spots found in database. Initializing with sample data...");
-        this.initializeData();
+        await this.initializeData();
+        console.log("Sample data initialization completed successfully");
       }
     } catch (error) {
       console.error("Error checking database for spots:", error);
@@ -70,6 +74,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Dec-Mar",
         tags: ["Kite Schools", "Equipment Rental", "Beachfront Accommodation"],
         difficultyLevel: "Intermediate",
+        kiteSchools: ["Tarifa Max Kitesurfing", "ION Club Tarifa", "Dragon Tarifa"],
         localAttractions: "Historic Old Town, Gibraltar day trips"
       });
       
@@ -137,6 +142,7 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Jun-Aug",
         tags: ["Kite Schools", "Equipment Rental", "Beach Bars", "Accommodation"],
         difficultyLevel: "Beginner to Advanced",
+        kiteSchools: ["Kite Club Cabarete", "Laurel Eastman Kiteboarding School", "GoKite Cabarete"],
         localAttractions: "Vibrant nightlife, beachfront restaurants, nearby waterfalls"
       });
       
