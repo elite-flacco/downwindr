@@ -209,7 +209,7 @@ export default function Spots() {
           <Button 
             onClick={handleShowPreferencesModal}
             variant="default"
-            className="bg-teal-600 hover:bg-teal-700 text-white shadow-md"
+            className="bg-blue-700 hover:bg-blue-800 text-white shadow-md"
             size="sm"
           >
             <Sparkles className="h-4 w-4 mr-2" />
