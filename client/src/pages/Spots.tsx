@@ -215,8 +215,8 @@ export default function Spots() {
                 className="bg-blue-700 hover:bg-blue-800 text-white h-8 text-xs px-2"
                 size="sm"
               >
-                <Sparkles className="h-3.5 w-3.5 mr-1" />
-                Get Personalized Recommendations
+                <Sparkles className="h-3.5 w-3.5" />
+                {/* Get Personalized Recommendations */}
               </Button>
             </div>
             
