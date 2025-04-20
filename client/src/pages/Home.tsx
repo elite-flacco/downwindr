@@ -28,10 +28,10 @@ export default function Home() {
           {/* Background gradient to blend with illustration */}
           <div className="absolute inset-0 bg-gradient-to-br from-sky-50 to-cyan-50/20 z-0"></div>
           
-          {/* Stretched illustration as full background */}
+          {/* Stretched illustration as full background - adjusted to show more of the kitesurfers */}
           <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-            <div className="absolute inset-0 md:-top-10 md:-bottom-10 md:-right-96 xl:-right-64">
-              <KitesurferIllustration className="w-[200%] md:w-[140%] h-auto" />
+            <div className="absolute inset-0 md:-top-28 md:top-5 md:left-52 lg:left-96">
+              <KitesurferIllustration className="w-[150%] md:w-[120%] h-auto" />
             </div>
           </div>
           
