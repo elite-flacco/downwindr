@@ -333,7 +333,8 @@
 /* ===== MAP STYLES ===== */
 /* Map container styling */
 .map-container {
-  height: 550px !important;
+  height: 75vh !important;
+  min-height: 600px !important;
   width: 100% !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -343,7 +344,8 @@
 
 @media (max-width: 768px) {
   .map-container {
-    height: 50vh !important;
+    height: 60vh !important;
+    min-height: 450px !important;
   }
 }
 

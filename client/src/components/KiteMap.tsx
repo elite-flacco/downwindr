@@ -122,7 +122,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
   };
 
   return (
-    <Card className="w-full md:w-2/3 overflow-hidden rounded-xl shadow-sm border border-theme-border">
+    <Card className="w-full overflow-hidden rounded-xl shadow-sm border border-theme-border">
       {isLoading ? (
         <div className="map-container bg-theme-surface flex items-center justify-center">
           <div className="flex flex-col items-center justify-center">

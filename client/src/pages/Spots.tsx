@@ -358,10 +358,10 @@ export default function Spots() {
             </div>
           </motion.div>
         ) : (
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Map */}
+          <div className="flex flex-col md:flex-row gap-6 w-full">
+            {/* Map - Full width */}
             {(viewMode === "both" || viewMode === "map") && (
-              <div className={`${viewMode === "both" ? "md:w-3/5" : "w-full"}`}>
+              <div className={`${viewMode === "both" ? "md:w-2/3 lg:w-3/4" : "w-full"} w-full`}>
                 <KiteMap 
                   spots={filteredSpots || []} 
                   onSpotSelect={handleSpotSelect}
@@ -370,9 +370,9 @@ export default function Spots() {
               </div>
             )}
             
-            {/* Spots List */}
+            {/* Spots List - Reduced width */}
             {(viewMode === "both" || viewMode === "list") && (
-              <div className={`${viewMode === "both" ? "md:w-2/5" : "w-full"}`}>
+              <div className={`${viewMode === "both" ? "md:w-1/3 lg:w-1/4" : "w-full"}`}>
                 <SpotsList 
                   spots={filteredSpots || []} 
                   onSpotSelect={handleSpotSelect}
