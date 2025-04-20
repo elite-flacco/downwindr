@@ -12,7 +12,7 @@ import { MonthNames } from "@shared/schema";
 import type { Spot, SpotWithWindConditions } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { compareDesc } from "date-fns";
-import { BarChart, ChevronDown, LayoutGrid, List, Map } from "lucide-react";
+import { BarChart, ChevronDown, List, Map, SplitSquareVertical } from "lucide-react";
 
 export default function Spots() {
   // State for selected month (1-12)
@@ -43,11 +43,22 @@ export default function Spots() {
     queryKey: [`/api/spots/details`, spotsToCompare.map(s => s.id)],
     enabled: showComparison && spotsToCompare.length > 0,
     queryFn: async () => {
-      const promises = spotsToCompare.map(spot => 
-        fetch(`/api/spots/${spot.id}`).then(res => res.json())
-      );
-      const results = await Promise.all(promises);
-      return results.map(result => ({
+      const response = await fetch(`/api/spots/details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ids: spotsToCompare.map(spot => spot.id)
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch comparison data');
+      }
+      
+      const results = await response.json();
+      return results.map((result: any) => ({
         ...result.spot,
         windConditions: result.windConditions
       }));
@@ -190,7 +201,7 @@ export default function Spots() {
               variant="secondary"
               className="flex items-center"
             >
-              <LayoutCompare className="h-4 w-4 mr-2" />
+              <SplitSquareVertical className="h-4 w-4 mr-2" />
               Compare {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
             </Button>
             

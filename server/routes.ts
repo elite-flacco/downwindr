@@ -105,6 +105,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get multiple spots by IDs for comparison
+  app.post("/api/spots/details", async (req, res) => {
+    try {
+      const schema = z.object({
+        ids: z.array(z.number())
+      });
+      
+      const parseResult = schema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          message: "Invalid request body", 
+          errors: parseResult.error.errors 
+        });
+      }
+      
+      const { ids } = parseResult.data;
+      if (!ids.length) {
+        return res.status(400).json({ message: "At least one spot ID is required" });
+      }
+      
+      const promises = ids.map(id => storage.getSpotWithWindConditions(id));
+      const results = await Promise.all(promises);
+      
+      // Filter out any null results (spots not found)
+      const validResults = results.filter(result => result !== undefined);
+      
+      res.json(validResults);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching multiple spots" });
+    }
+  });
+  
   // Get Mapbox access token
   app.get("/api/mapbox-token", (req, res) => {
     if (!process.env.MAPBOX_ACCESS_TOKEN) {

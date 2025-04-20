@@ -235,7 +235,15 @@ export class MemStorage implements IStorage {
         "HST Windsurfing & Kitesurfing School|https://maps.google.com/maps?cid=7018811138901521443|4.9|112",
         "Action Sports Maui|https://maps.google.com/maps?cid=14999410322423969558|4.8|89",
         "Kiteboarding School of Maui|https://maps.google.com/maps?cid=4390272951247276118|4.7|143"
-      ]
+      ],
+      difficultyLevel: "Intermediate to Advanced",
+      conditions: ["Waves", "Reef Breaks", "Strong Currents", "Clean Water"],
+      accommodationOptions: ["Luxury Resorts", "Vacation Rentals", "B&Bs", "Hostels"],
+      foodOptions: ["Hawaiian Cuisine", "Seafood", "Fine Dining", "Food Trucks"],
+      culture: "Hawaiian culture with strong surfing heritage and respect for ocean traditions",
+      averageSchoolCost: 110,
+      averageAccommodationCost: 180,
+      numberOfSchools: 8
     });
 
     // 5. Zanzibar, Tanzania
@@ -255,7 +263,15 @@ export class MemStorage implements IStorage {
         "Zanzibar Kite Paradise|https://maps.google.com/maps?cid=10046944852400555969|4.9|87",
         "Kite Centre Paje|https://maps.google.com/maps?cid=14557586088856125633|4.7|105",
         "Aquaholics Zanzibar|https://maps.google.com/maps?cid=9450883969741128811|4.8|74"
-      ]
+      ],
+      difficultyLevel: "Beginner Friendly",
+      conditions: ["Flat Water", "Shallow Lagoon", "Sandy Bottom", "Warm Water"],
+      accommodationOptions: ["Beach Bungalows", "Boutique Hotels", "Backpacker Lodges", "Local Guesthouses"],
+      foodOptions: ["Swahili Cuisine", "Seafood", "International Options", "Beach Restaurants"],
+      culture: "Swahili culture with strong Arabic influences and friendly locals",
+      averageSchoolCost: 50,
+      averageAccommodationCost: 45,
+      numberOfSchools: 10
     });
 
     // 6. Essaouira, Morocco
@@ -275,7 +291,15 @@ export class MemStorage implements IStorage {
         "Essaouira Kitesurfing|https://maps.google.com/maps?cid=3583446324805989002|4.8|97",
         "Explora Morocco|https://maps.google.com/maps?cid=16231288534362533599|4.9|82",
         "Kite Paradise Morocco|https://maps.google.com/maps?cid=6624767784441822246|4.7|65"
-      ]
+      ],
+      difficultyLevel: "Intermediate",
+      conditions: ["Bay Setting", "Chop", "Medium Waves", "Strong Wind"],
+      accommodationOptions: ["Riads", "Medina Hotels", "Beachfront Apartments", "Budget Hostels"],
+      foodOptions: ["Moroccan Cuisine", "Fresh Seafood", "French Influence", "Street Food"],
+      culture: "Traditional Moroccan with Berber, Arabic and French influences in a historic setting",
+      averageSchoolCost: 55,
+      averageAccommodationCost: 40,
+      numberOfSchools: 6
     });
 
     // Add wind conditions for all spots
