@@ -139,8 +139,8 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
               <Wind className="text-primary w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading text-primary text-lg">KiteSpotter</h3>
-              <p className="text-xs text-slate-500">Find perfect wind conditions</p>
+              <h3 className="font-heading text-primary text-lg" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
+              <p className="text-xs text-slate-500">Find your perfect spot</p>
             </div>
           </div>
           
