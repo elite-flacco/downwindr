@@ -314,8 +314,6 @@ export class DatabaseStorage implements IStorage {
         bestMonths: "Apr-Sep",
         tags: ["Kite Camps", "Equipment Rental", "Accommodation"],
         difficultyLevel: "All Levels",
-        imageUrl: "https://images.unsplash.com/photo-1596649299486-4cdea56fd59d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=sebastian-pena-lambarri-bNSdIHcHe-Q-unsplash.jpg",
-        region: "africa",
         localAttractions: "Sahara Desert tours, traditional Berber villages, Dragon Island"
       });
       
