@@ -50,32 +50,6 @@ export default function Footer() {
             </div>
             <h3 className="text-2xl font-bold mb-2 text-theme-primary-hover" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
             <p className="text-theme-text-light mb-6 leading-relaxed">Discover the perfect kitesurfing destinations worldwide. Ride the perfect breeze!</p>
-            <div className="flex space-x-4">
-              <motion.a 
-                whileHover={{ y: -3 }}
-                whileTap={{ y: 0 }}
-                href="#" 
-                className="h-10 w-10 rounded-full bg-theme-surface flex items-center justify-center hover:bg-theme-surface/80 transition-all duration-300 cursor-pointer shadow-sm"
-              >
-                <Facebook className="w-5 h-5 text-theme-primary-hover" />
-              </motion.a>
-              <motion.a 
-                whileHover={{ y: -3 }}
-                whileTap={{ y: 0 }}
-                href="#" 
-                className="h-10 w-10 rounded-full bg-theme-surface flex items-center justify-center hover:bg-theme-surface/80 transition-all duration-300 cursor-pointer shadow-sm"
-              >
-                <Instagram className="w-5 h-5 text-theme-primary-hover" />
-              </motion.a>
-              <motion.a 
-                whileHover={{ y: -3 }}
-                whileTap={{ y: 0 }}
-                href="#" 
-                className="h-10 w-10 rounded-full bg-theme-surface flex items-center justify-center hover:bg-theme-surface/80 transition-all duration-300 cursor-pointer shadow-sm"
-              >
-                <Twitter className="w-5 h-5 text-theme-primary-hover" />
-              </motion.a>
-            </div>
           </motion.div>
           
           <motion.div variants={itemVariants}>
@@ -200,24 +174,10 @@ export default function Footer() {
               </li>
             </ul>
             
-            <div className="mt-8 p-4 bg-theme-surface rounded-lg border border-theme-border shadow-sm">
-              <h5 className="text-sm font-bold text-theme-primary mb-2">Newsletter</h5>
-              <p className="text-xs text-theme-text-light mb-3">Get wind updates and new spots in your inbox</p>
-              <div className="flex">
-                <input 
-                  type="email" 
-                  placeholder="Your email" 
-                  className="flex-1 text-sm py-2 px-3 rounded-l-md border border-theme-border focus:outline-none focus:ring-1 focus:ring-theme-primary"
-                />
-                <button className="bg-theme-primary text-theme-background text-sm font-medium py-2 px-3 rounded-r-md hover:bg-theme-primary/90 transition-colors">
-                  Subscribe
-                </button>
-              </div>
-            </div>
           </motion.div>
         </motion.div>
         
-        <div className="mt-12 pt-6 text-center text-theme-text-light text-sm relative">
+        <div className="mt-2 pt-2 text-center text-theme-text-light text-sm relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-theme-border to-transparent"></div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -227,17 +187,6 @@ export default function Footer() {
             className="flex flex-col md:flex-row justify-between items-center"
           >
             <p>&copy; {new Date().getFullYear()} Downwindr. All rights reserved.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0 text-xs">
-              <Link href="/privacy">
-                <div className="hover:text-theme-primary cursor-pointer transition-colors">Privacy Policy</div>
-              </Link>
-              <Link href="/terms">
-                <div className="hover:text-theme-primary cursor-pointer transition-colors">Terms of Service</div>
-              </Link>
-              <Link href="/cookies">
-                <div className="hover:text-theme-primary cursor-pointer transition-colors">Cookie Policy</div>
-              </Link>
-            </div>
           </motion.div>
         </div>
       </div>

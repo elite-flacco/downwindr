@@ -162,57 +162,6 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Highlight Stats Section */}
-        <section className="py-10 md:py-16 bg-white relative overflow-hidden">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="p-6 rounded-xl text-center"
-              >
-                <h3 className="text-4xl md:text-5xl font-bold text-ocean-dark mb-1">300+</h3>
-                <p className="text-slate-600 text-sm md:text-base">Global Spots</p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="p-6 rounded-xl text-center"
-              >
-                <h3 className="text-4xl md:text-5xl font-bold text-ocean-dark mb-1">12K+</h3>
-                <p className="text-slate-600 text-sm md:text-base">Kitesurfers</p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="p-6 rounded-xl text-center"
-              >
-                <h3 className="text-4xl md:text-5xl font-bold text-ocean-dark mb-1">5K+</h3>
-                <p className="text-slate-600 text-sm md:text-base">Monthly Reviews</p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="p-6 rounded-xl text-center"
-              >
-                <h3 className="text-4xl md:text-5xl font-bold text-ocean-dark mb-1">98%</h3>
-                <p className="text-slate-600 text-sm md:text-base">Satisfaction</p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-        
         {/* Features Section */}
         <section className="py-16 bg-gradient-to-b from-white to-blue-50/30">
           <div className="container mx-auto px-4">

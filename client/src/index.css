@@ -28,7 +28,7 @@
   --color-lime: 157 100% 50%;           /* #00FF7F */
   --color-white: 0 0% 100%;             /* #FFFFFF */
   --color-light-blue: 187 91% 94%;      /* #E0FBFC */
-  --color-navy: 202 100% 18%;           /* #003459 */
+  --color-slate: 221 23% 23%;           /* #003459 */
   
   /* Semantic color roles - Use these in components */
   /* Primary UI elements */
@@ -46,8 +46,8 @@
   /* Content and backgrounds */
   --theme-background: var(--color-white);
   --theme-surface: var(--color-light-blue);
-  --theme-text: var(--color-navy);
-  --theme-text-light: var(--color-navy)/70%;
+  --theme-text: var(--color-slate);
+  --theme-text-light: var(--color-slate)/70%;
   --theme-border: var(--color-light-blue)/50%;
   
   /* Wind quality indicators */
@@ -235,7 +235,7 @@
   
   /* Background gradients */
   .bg-ocean-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-text)) 0%, hsl(var(--theme-primary)) 100%);
+    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-primary-hover)) 100%);
   }
   
   .bg-sky-gradient {
