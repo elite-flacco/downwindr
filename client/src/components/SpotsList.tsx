@@ -41,29 +41,7 @@ export default function SpotsList({
           Top Spots in {MonthNames[selectedMonth - 1]}
         </h3>
         
-        {isLoading ? (
-          // Loading skeleton with animation
-          Array(4).fill(0).map((_, i) => (
-            <div key={i} className="mb-6 pb-6 border-b border-theme-border">
-              <motion.div
-                initial={{ opacity: 0.6 }}
-                animate={{ opacity: [0.6, 0.8, 0.6] }}
-                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <Skeleton className="h-6 w-40" />
-                  <Skeleton className="h-6 w-24" />
-                </div>
-                <Skeleton className="h-4 w-full mb-2" />
-                <Skeleton className="h-4 w-full mb-2" />
-                <div className="flex items-center">
-                  <Skeleton className="h-4 w-24 mr-4" />
-                  <Skeleton className="h-4 w-24" />
-                </div>
-              </motion.div>
-            </div>
-          ))
-        ) : spots.length === 0 ? (
+        {spots.length === 0 && !isLoading ? (
           <div className="text-center py-12 px-4">
             <Wind className="w-16 h-16 mx-auto mb-4 text-theme-muted" />
             <p className="text-theme-text font-medium">No kitesurfing spots found for {MonthNames[selectedMonth - 1]}.</p>

@@ -36,7 +36,7 @@ export default function Spots() {
   const [recommendedSpots, setRecommendedSpots] = useState<any[]>([]);
 
   // Fetch spots for the selected month filtered by wind quality
-  const { data: spots, isLoading: spotsLoading } = useQuery<Spot[]>({
+  const { data: spots, isLoading: spotsLoading, isPending, isFetching } = useQuery<Spot[]>({
     queryKey: [`/api/spots/month/${selectedMonth}`, { windQuality: windQualityFilter }],
     queryFn: async ({ queryKey }) => {
       // Build the URL with wind quality filters
@@ -56,6 +56,7 @@ export default function Spots() {
     },
     staleTime: Infinity, // Keep data fresh forever (small dataset)
     gcTime: Infinity, // Keep in cache forever (v5 renamed cacheTime to gcTime)
+    placeholderData: (previousData) => previousData // Use previous data while loading
   });
 
   // Fetch spot details with wind conditions when a spot is selected
@@ -94,7 +95,7 @@ export default function Spots() {
   });
 
   // Filtered spots based on search query and wind quality filter
-  const filteredSpots = spots?.filter(spot => {
+  const filteredSpots = spots ? spots.filter((spot: Spot) => {
     // Filter by search query
     const matchesSearch = searchQuery === "" || 
       spot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -103,7 +104,7 @@ export default function Spots() {
     // Filter by wind quality is handled by the backend based on selected month
     
     return matchesSearch;
-  });
+  }) : [];
 
   // Handle month selection
   const handleMonthChange = (month: number) => {
@@ -377,22 +378,47 @@ export default function Spots() {
           <div className="flex flex-col md:flex-row gap-6 w-full">
             {/* Map - Full width */}
             {(viewMode === "both" || viewMode === "map") && (
-              <div className={`${viewMode === "both" ? "md:w-2/3 lg:w-3/4" : "w-full"} w-full`}>
+              <div className={`${viewMode === "both" ? "md:w-2/3 lg:w-3/4" : "w-full"} w-full relative`}>
+                {/* Subtle loading overlay */}
+                {isFetching && filteredSpots && filteredSpots.length > 0 && (
+                  <div className="absolute inset-0 bg-white/40 flex items-center justify-center z-10 rounded-xl pointer-events-none">
+                    <div className="bg-white/80 px-3 py-2 rounded-full shadow-md flex items-center space-x-2">
+                      <div className="animate-pulse flex space-x-1">
+                        <div className="h-2 w-2 bg-primary rounded-full"></div>
+                        <div className="h-2 w-2 bg-primary rounded-full delay-75"></div>
+                        <div className="h-2 w-2 bg-primary rounded-full delay-150"></div>
+                      </div>
+                      <span className="text-xs font-medium text-primary">Updating map...</span>
+                    </div>
+                  </div>
+                )}
                 <KiteMap 
                   spots={filteredSpots || []} 
                   onSpotSelect={handleSpotSelect}
-                  isLoading={spotsLoading}
+                  isLoading={spotsLoading && !spots?.length} // Only show full loading state on initial load
                 />
               </div>
             )}
             
             {/* Spots List - Reduced width */}
             {(viewMode === "both" || viewMode === "list") && (
-              <div className={`${viewMode === "both" ? "md:w-1/3 lg:w-1/4" : "w-full"}`}>
+              <div className={`${viewMode === "both" ? "md:w-1/3 lg:w-1/4" : "w-full"} relative`}>
+                {/* Subtle loading overlay */}
+                {isFetching && filteredSpots && filteredSpots.length > 0 && (
+                  <div className="absolute inset-0 bg-white/40 flex items-center justify-center z-10 rounded-xl pointer-events-none">
+                    <div className="bg-white/80 px-3 py-2 rounded-full shadow-md">
+                      <div className="animate-pulse flex space-x-1">
+                        <div className="h-2 w-2 bg-primary rounded-full"></div>
+                        <div className="h-2 w-2 bg-primary rounded-full delay-75"></div>
+                        <div className="h-2 w-2 bg-primary rounded-full delay-150"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <SpotsList 
                   spots={filteredSpots || []} 
                   onSpotSelect={handleSpotSelect}
-                  isLoading={spotsLoading}
+                  isLoading={spotsLoading && !spots?.length} // Only show full loading state on initial load
                   selectedMonth={selectedMonth}
                   spotsToCompare={spotsToCompare}
                   onToggleCompare={toggleSpotComparison}
