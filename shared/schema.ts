@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, real } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, real, json } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -17,6 +17,14 @@ export const spots = pgTable("spots", {
   tags: text("tags").array().notNull(), // Array of tags
   windguruCode: text("windguru_code"), // Windguru spot code for direct linking
   kiteSchools: text("kite_schools").array(), // Array of kite school names and their Google Maps links
+  difficultyLevel: text("difficulty_level"), // Beginner, Intermediate, Advanced, All Levels
+  conditions: text("conditions").array(), // Array of conditions like "Gusty", "Sandy Bottom", "Reef", etc.
+  accommodationOptions: text("accommodation_options").array(), // Array of accommodation types
+  foodOptions: text("food_options").array(), // Array of food options
+  culture: text("culture"), // Description of local culture
+  averageSchoolCost: real("average_school_cost"), // Average cost in USD
+  averageAccommodationCost: real("average_accommodation_cost"), // Average cost in USD per night
+  numberOfSchools: integer("number_of_schools"), // Number of kite schools in the area
 });
 
 // Monthly wind conditions for each spot
@@ -26,6 +34,9 @@ export const windConditions = pgTable("wind_conditions", {
   month: integer("month").notNull(), // 1-12 for Jan-Dec
   windSpeed: real("wind_speed").notNull(), // Average wind speed in knots
   windQuality: text("wind_quality").notNull(), // "Poor", "Moderate", "Good", "Excellent"
+  airTemp: real("air_temp"), // Average air temperature in Celsius
+  waterTemp: real("water_temp"), // Average water temperature in Celsius
+  seasonalNotes: text("seasonal_notes"), // Any seasonal specific notes
 });
 
 // Insert schemas
@@ -42,6 +53,14 @@ export const insertSpotSchema = createInsertSchema(spots).pick({
   tags: true,
   windguruCode: true,
   kiteSchools: true,
+  difficultyLevel: true,
+  conditions: true,
+  accommodationOptions: true,
+  foodOptions: true,
+  culture: true,
+  averageSchoolCost: true,
+  averageAccommodationCost: true,
+  numberOfSchools: true,
 });
 
 export const insertWindConditionSchema = createInsertSchema(windConditions).pick({
@@ -49,6 +68,9 @@ export const insertWindConditionSchema = createInsertSchema(windConditions).pick
   month: true,
   windSpeed: true,
   windQuality: true,
+  airTemp: true,
+  waterTemp: true,
+  seasonalNotes: true,
 });
 
 // Types

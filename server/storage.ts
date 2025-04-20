@@ -92,7 +92,15 @@ export class MemStorage implements IStorage {
       ...insertSpot, 
       id,
       windguruCode: insertSpot.windguruCode || null,
-      kiteSchools: insertSpot.kiteSchools || null
+      kiteSchools: insertSpot.kiteSchools || null,
+      difficultyLevel: insertSpot.difficultyLevel || null,
+      conditions: insertSpot.conditions || null,
+      accommodationOptions: insertSpot.accommodationOptions || null,
+      foodOptions: insertSpot.foodOptions || null,
+      culture: insertSpot.culture || null,
+      averageSchoolCost: insertSpot.averageSchoolCost || null,
+      averageAccommodationCost: insertSpot.averageAccommodationCost || null,
+      numberOfSchools: insertSpot.numberOfSchools || null
     };
     this.spots.set(id, spot);
     return spot;
@@ -113,7 +121,13 @@ export class MemStorage implements IStorage {
 
   async createWindCondition(insertCondition: InsertWindCondition): Promise<WindCondition> {
     const id = this.currentWindConditionId++;
-    const windCondition: WindCondition = { ...insertCondition, id };
+    const windCondition: WindCondition = { 
+      ...insertCondition, 
+      id,
+      airTemp: insertCondition.airTemp || null,
+      waterTemp: insertCondition.waterTemp || null,
+      seasonalNotes: insertCondition.seasonalNotes || null
+    };
     this.windConditions.set(id, windCondition);
     return windCondition;
   }
@@ -256,7 +270,15 @@ export class MemStorage implements IStorage {
       ...data, 
       id,
       windguruCode: data.windguruCode || null,
-      kiteSchools: data.kiteSchools || null
+      kiteSchools: data.kiteSchools || null,
+      difficultyLevel: data.difficultyLevel || null,
+      conditions: data.conditions || null,
+      accommodationOptions: data.accommodationOptions || null,
+      foodOptions: data.foodOptions || null,
+      culture: data.culture || null,
+      averageSchoolCost: data.averageSchoolCost || null,
+      averageAccommodationCost: data.averageAccommodationCost || null,
+      numberOfSchools: data.numberOfSchools || null
     };
     this.spots.set(id, spot);
     return spot;
@@ -265,125 +287,133 @@ export class MemStorage implements IStorage {
   // Helper to add monthly wind conditions for a spot
   private addWindConditionsForSpot(spotId: number) {
     // Pattern depends on the spot
-    let windPattern: { speed: number, quality: WindQuality }[] = [];
+    let windPatterns: { speed: number, quality: WindQuality, airTemp: number, waterTemp: number, seasonalNotes?: string }[] = [];
     
     switch(spotId) {
       case 1: // Tarifa
-        windPattern = [
-          { speed: 22, quality: WindQuality.Excellent }, // Jan
-          { speed: 20, quality: WindQuality.Excellent }, // Feb
-          { speed: 18, quality: WindQuality.Good }, // Mar
-          { speed: 15, quality: WindQuality.Moderate }, // Apr
-          { speed: 14, quality: WindQuality.Moderate }, // May
-          { speed: 12, quality: WindQuality.Poor }, // Jun
-          { speed: 10, quality: WindQuality.Poor }, // Jul
-          { speed: 11, quality: WindQuality.Poor }, // Aug
-          { speed: 13, quality: WindQuality.Moderate }, // Sep
-          { speed: 15, quality: WindQuality.Moderate }, // Oct
-          { speed: 18, quality: WindQuality.Good }, // Nov
-          { speed: 21, quality: WindQuality.Excellent }, // Dec
+        windPatterns = [
+          { speed: 22, quality: WindQuality.Excellent, airTemp: 16, waterTemp: 15, seasonalNotes: "Winter season, strongest winds, bring wetsuit" }, // Jan
+          { speed: 20, quality: WindQuality.Excellent, airTemp: 17, waterTemp: 15, seasonalNotes: "Still cool, excellent wind consistency" }, // Feb
+          { speed: 18, quality: WindQuality.Good, airTemp: 19, waterTemp: 16 }, // Mar
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 21, waterTemp: 17 }, // Apr
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 24, waterTemp: 19 }, // May
+          { speed: 12, quality: WindQuality.Poor, airTemp: 28, waterTemp: 21, seasonalNotes: "Tourist season begins, less wind" }, // Jun
+          { speed: 10, quality: WindQuality.Poor, airTemp: 30, waterTemp: 23, seasonalNotes: "Peak tourist season, most crowded" }, // Jul
+          { speed: 11, quality: WindQuality.Poor, airTemp: 30, waterTemp: 23 }, // Aug
+          { speed: 13, quality: WindQuality.Moderate, airTemp: 27, waterTemp: 22 }, // Sep
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 23, waterTemp: 20 }, // Oct
+          { speed: 18, quality: WindQuality.Good, airTemp: 19, waterTemp: 18 }, // Nov
+          { speed: 21, quality: WindQuality.Excellent, airTemp: 17, waterTemp: 16, seasonalNotes: "Beginning of winter season, strong winds return" }, // Dec
         ];
         break;
       case 2: // Cape Town
-        windPattern = [
-          { speed: 25, quality: WindQuality.Excellent }, // Jan
-          { speed: 23, quality: WindQuality.Excellent }, // Feb
-          { speed: 18, quality: WindQuality.Good }, // Mar
-          { speed: 15, quality: WindQuality.Moderate }, // Apr
-          { speed: 12, quality: WindQuality.Poor }, // May
-          { speed: 10, quality: WindQuality.Poor }, // Jun
-          { speed: 10, quality: WindQuality.Poor }, // Jul
-          { speed: 12, quality: WindQuality.Poor }, // Aug
-          { speed: 14, quality: WindQuality.Moderate }, // Sep
-          { speed: 18, quality: WindQuality.Good }, // Oct
-          { speed: 22, quality: WindQuality.Excellent }, // Nov
-          { speed: 24, quality: WindQuality.Excellent }, // Dec
+        windPatterns = [
+          { speed: 25, quality: WindQuality.Excellent, airTemp: 26, waterTemp: 18, seasonalNotes: "Peak summer season, most consistent wind" }, // Jan
+          { speed: 23, quality: WindQuality.Excellent, airTemp: 26, waterTemp: 19, seasonalNotes: "Excellent conditions continue" }, // Feb
+          { speed: 18, quality: WindQuality.Good, airTemp: 24, waterTemp: 19 }, // Mar
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 22, waterTemp: 18 }, // Apr
+          { speed: 12, quality: WindQuality.Poor, airTemp: 19, waterTemp: 17, seasonalNotes: "Winter approaching, conditions deteriorating" }, // May
+          { speed: 10, quality: WindQuality.Poor, airTemp: 18, waterTemp: 16, seasonalNotes: "Winter season, cold water, wetsuit essential" }, // Jun
+          { speed: 10, quality: WindQuality.Poor, airTemp: 17, waterTemp: 15 }, // Jul
+          { speed: 12, quality: WindQuality.Poor, airTemp: 18, waterTemp: 15 }, // Aug
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 19, waterTemp: 16 }, // Sep
+          { speed: 18, quality: WindQuality.Good, airTemp: 21, waterTemp: 16 }, // Oct
+          { speed: 22, quality: WindQuality.Excellent, airTemp: 23, waterTemp: 17, seasonalNotes: "Wind season begins, excellent conditions" }, // Nov
+          { speed: 24, quality: WindQuality.Excellent, airTemp: 25, waterTemp: 18, seasonalNotes: "Perfect summer conditions" }, // Dec
         ];
         break;
       case 3: // Cabarete
-        windPattern = [
-          { speed: 18, quality: WindQuality.Good }, // Jan
-          { speed: 18, quality: WindQuality.Good }, // Feb
-          { speed: 16, quality: WindQuality.Moderate }, // Mar
-          { speed: 17, quality: WindQuality.Good }, // Apr
-          { speed: 18, quality: WindQuality.Good }, // May
-          { speed: 20, quality: WindQuality.Excellent }, // Jun
-          { speed: 20, quality: WindQuality.Excellent }, // Jul
-          { speed: 18, quality: WindQuality.Good }, // Aug
-          { speed: 16, quality: WindQuality.Moderate }, // Sep
-          { speed: 15, quality: WindQuality.Moderate }, // Oct
-          { speed: 16, quality: WindQuality.Moderate }, // Nov
-          { speed: 17, quality: WindQuality.Good }, // Dec
+        windPatterns = [
+          { speed: 18, quality: WindQuality.Good, airTemp: 27, waterTemp: 26 }, // Jan
+          { speed: 18, quality: WindQuality.Good, airTemp: 27, waterTemp: 26 }, // Feb
+          { speed: 16, quality: WindQuality.Moderate, airTemp: 28, waterTemp: 26 }, // Mar
+          { speed: 17, quality: WindQuality.Good, airTemp: 29, waterTemp: 27 }, // Apr
+          { speed: 18, quality: WindQuality.Good, airTemp: 30, waterTemp: 28 }, // May
+          { speed: 20, quality: WindQuality.Excellent, airTemp: 31, waterTemp: 28, seasonalNotes: "Perfect summer conditions, thermal winds strongest" }, // Jun
+          { speed: 20, quality: WindQuality.Excellent, airTemp: 31, waterTemp: 29, seasonalNotes: "Peak season, ideal conditions" }, // Jul
+          { speed: 18, quality: WindQuality.Good, airTemp: 31, waterTemp: 29 }, // Aug
+          { speed: 16, quality: WindQuality.Moderate, airTemp: 30, waterTemp: 29, seasonalNotes: "Hurricane season possible" }, // Sep
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 29, waterTemp: 28, seasonalNotes: "Hurricane season possible" }, // Oct
+          { speed: 16, quality: WindQuality.Moderate, airTemp: 28, waterTemp: 27 }, // Nov
+          { speed: 17, quality: WindQuality.Good, airTemp: 27, waterTemp: 26 }, // Dec
         ];
         break;
       case 4: // Maui
-        windPattern = [
-          { speed: 15, quality: WindQuality.Moderate }, // Jan
-          { speed: 16, quality: WindQuality.Moderate }, // Feb
-          { speed: 18, quality: WindQuality.Good }, // Mar
-          { speed: 20, quality: WindQuality.Excellent }, // Apr
-          { speed: 22, quality: WindQuality.Excellent }, // May
-          { speed: 22, quality: WindQuality.Excellent }, // Jun
-          { speed: 21, quality: WindQuality.Excellent }, // Jul
-          { speed: 20, quality: WindQuality.Excellent }, // Aug
-          { speed: 18, quality: WindQuality.Good }, // Sep
-          { speed: 17, quality: WindQuality.Good }, // Oct
-          { speed: 15, quality: WindQuality.Moderate }, // Nov
-          { speed: 14, quality: WindQuality.Moderate }, // Dec
+        windPatterns = [
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 25, waterTemp: 23 }, // Jan
+          { speed: 16, quality: WindQuality.Moderate, airTemp: 25, waterTemp: 23 }, // Feb
+          { speed: 18, quality: WindQuality.Good, airTemp: 25, waterTemp: 24 }, // Mar
+          { speed: 20, quality: WindQuality.Excellent, airTemp: 26, waterTemp: 24, seasonalNotes: "Start of prime season" }, // Apr
+          { speed: 22, quality: WindQuality.Excellent, airTemp: 27, waterTemp: 25, seasonalNotes: "Perfect wind conditions" }, // May
+          { speed: 22, quality: WindQuality.Excellent, airTemp: 28, waterTemp: 25, seasonalNotes: "Peak season, can be crowded" }, // Jun
+          { speed: 21, quality: WindQuality.Excellent, airTemp: 29, waterTemp: 26, seasonalNotes: "Consistent thermal winds" }, // Jul
+          { speed: 20, quality: WindQuality.Excellent, airTemp: 29, waterTemp: 26 }, // Aug
+          { speed: 18, quality: WindQuality.Good, airTemp: 29, waterTemp: 26 }, // Sep
+          { speed: 17, quality: WindQuality.Good, airTemp: 28, waterTemp: 25 }, // Oct
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 27, waterTemp: 24 }, // Nov
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 26, waterTemp: 24 }, // Dec
         ];
         break;
       case 5: // Zanzibar
-        windPattern = [
-          { speed: 20, quality: WindQuality.Excellent }, // Jan
-          { speed: 19, quality: WindQuality.Good }, // Feb
-          { speed: 18, quality: WindQuality.Good }, // Mar
-          { speed: 14, quality: WindQuality.Moderate }, // Apr
-          { speed: 12, quality: WindQuality.Poor }, // May
-          { speed: 17, quality: WindQuality.Good }, // Jun
-          { speed: 19, quality: WindQuality.Good }, // Jul
-          { speed: 18, quality: WindQuality.Good }, // Aug
-          { speed: 16, quality: WindQuality.Moderate }, // Sep
-          { speed: 14, quality: WindQuality.Moderate }, // Oct
-          { speed: 16, quality: WindQuality.Moderate }, // Nov
-          { speed: 19, quality: WindQuality.Good }, // Dec
+        windPatterns = [
+          { speed: 20, quality: WindQuality.Excellent, airTemp: 31, waterTemp: 29, seasonalNotes: "Peak of north monsoon (Kaskazi)" }, // Jan
+          { speed: 19, quality: WindQuality.Good, airTemp: 31, waterTemp: 29 }, // Feb
+          { speed: 18, quality: WindQuality.Good, airTemp: 30, waterTemp: 29, seasonalNotes: "End of north monsoon" }, // Mar
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 29, waterTemp: 28 }, // Apr
+          { speed: 12, quality: WindQuality.Poor, airTemp: 28, waterTemp: 27, seasonalNotes: "Transition month, unpredictable" }, // May
+          { speed: 17, quality: WindQuality.Good, airTemp: 27, waterTemp: 26, seasonalNotes: "Start of south monsoon (Kuzi)" }, // Jun
+          { speed: 19, quality: WindQuality.Good, airTemp: 26, waterTemp: 25, seasonalNotes: "Consistent south winds" }, // Jul
+          { speed: 18, quality: WindQuality.Good, airTemp: 26, waterTemp: 25 }, // Aug
+          { speed: 16, quality: WindQuality.Moderate, airTemp: 27, waterTemp: 25, seasonalNotes: "End of south monsoon" }, // Sep
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 28, waterTemp: 26 }, // Oct
+          { speed: 16, quality: WindQuality.Moderate, airTemp: 29, waterTemp: 27 }, // Nov
+          { speed: 19, quality: WindQuality.Good, airTemp: 30, waterTemp: 28, seasonalNotes: "North monsoon begins again" }, // Dec
         ];
         break;
       case 6: // Essaouira
-        windPattern = [
-          { speed: 14, quality: WindQuality.Moderate }, // Jan
-          { speed: 15, quality: WindQuality.Moderate }, // Feb
-          { speed: 17, quality: WindQuality.Good }, // Mar
-          { speed: 19, quality: WindQuality.Good }, // Apr
-          { speed: 22, quality: WindQuality.Excellent }, // May
-          { speed: 24, quality: WindQuality.Excellent }, // Jun
-          { speed: 25, quality: WindQuality.Excellent }, // Jul
-          { speed: 25, quality: WindQuality.Excellent }, // Aug
-          { speed: 21, quality: WindQuality.Excellent }, // Sep
-          { speed: 17, quality: WindQuality.Good }, // Oct
-          { speed: 15, quality: WindQuality.Moderate }, // Nov
-          { speed: 14, quality: WindQuality.Moderate }, // Dec
+        windPatterns = [
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 18, waterTemp: 16 }, // Jan
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 19, waterTemp: 16 }, // Feb
+          { speed: 17, quality: WindQuality.Good, airTemp: 21, waterTemp: 17 }, // Mar
+          { speed: 19, quality: WindQuality.Good, airTemp: 22, waterTemp: 17, seasonalNotes: "Spring conditions, trade winds building" }, // Apr
+          { speed: 22, quality: WindQuality.Excellent, airTemp: 23, waterTemp: 18, seasonalNotes: "Trade winds well established" }, // May
+          { speed: 24, quality: WindQuality.Excellent, airTemp: 24, waterTemp: 19, seasonalNotes: "Peak season begins" }, // Jun
+          { speed: 25, quality: WindQuality.Excellent, airTemp: 25, waterTemp: 21, seasonalNotes: "Strongest winds, ideal conditions" }, // Jul
+          { speed: 25, quality: WindQuality.Excellent, airTemp: 25, waterTemp: 21, seasonalNotes: "Peak season, most crowded" }, // Aug
+          { speed: 21, quality: WindQuality.Excellent, airTemp: 24, waterTemp: 20 }, // Sep
+          { speed: 17, quality: WindQuality.Good, airTemp: 22, waterTemp: 19 }, // Oct
+          { speed: 15, quality: WindQuality.Moderate, airTemp: 20, waterTemp: 18 }, // Nov
+          { speed: 14, quality: WindQuality.Moderate, airTemp: 19, waterTemp: 17 }, // Dec
         ];
         break;
       default:
-        // Default random pattern
-        windPattern = Array(12).fill(0).map((_, i) => {
+        // Default random pattern with temperature data
+        windPatterns = Array(12).fill(0).map((_, i) => {
           const speed = 10 + Math.floor(Math.random() * 15);
           let quality = WindQuality.Poor;
           if (speed > 20) quality = WindQuality.Excellent;
           else if (speed > 17) quality = WindQuality.Good;
           else if (speed > 14) quality = WindQuality.Moderate;
-          return { speed, quality };
+          return { 
+            speed, 
+            quality, 
+            airTemp: 20 + Math.floor(Math.random() * 10),
+            waterTemp: 18 + Math.floor(Math.random() * 8)
+          };
         });
     }
     
     // Create wind conditions for each month
     for (let month = 1; month <= 12; month++) {
-      const pattern = windPattern[month - 1];
+      const pattern = windPatterns[month - 1];
       this.createWindCondition({
         spotId,
         month,
         windSpeed: pattern.speed,
-        windQuality: pattern.quality
+        windQuality: pattern.quality,
+        airTemp: pattern.airTemp,
+        waterTemp: pattern.waterTemp,
+        seasonalNotes: pattern.seasonalNotes
       });
     }
   }
