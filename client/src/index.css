@@ -55,10 +55,10 @@
 
   /* Content and backgrounds */
   --theme-background: var(--color-white);
-  --theme-surface: var(--color-light-blue);
+  --theme-surface: var(--color-primary-100);
   --theme-text: var(--color-slate);
   --theme-text-light: var(--color-slate)/70%;
-  --theme-border: var(--color-light-blue)/50%;
+  --theme-border: var(--color-primary-100)/50%;
 
   /* Wind quality indicators - Custom colors */
   --theme-wind-excellent: 359, 100%, 59%; /* Red */

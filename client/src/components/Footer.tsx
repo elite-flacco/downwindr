@@ -5,11 +5,9 @@ import {
   Phone, 
   MapPin,
   Compass,
+  Info,
   Sun,
   Globe,
-  Instagram,
-  Facebook,
-  Twitter,
   ArrowUpRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -49,7 +47,7 @@ export default function Footer() {
               <Wind className="w-8 h-8 text-theme-background" />
             </div>
             <h3 className="text-2xl font-bold mb-2 text-theme-primary-hover" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
-            <p className="text-theme-text-light mb-6 leading-relaxed">Discover the perfect kitesurfing destinations worldwide. Ride the perfect breeze!</p>
+            <p className="text-theme-text-light mb-6 leading-relaxed">Discover your dream kitesurfing experience worldwide.</p>
           </motion.div>
           
           <motion.div variants={itemVariants}>
@@ -82,24 +80,12 @@ export default function Footer() {
                   </motion.div>
                 </Link>
               </li>
-              <li>
-                <Link href="/learn">
-                  <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
-                    whileHover={{ x: 5 }}
-                  >
-                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
-                    Weather Guide
-                    <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </motion.div>
-                </Link>
-              </li>
             </ul>
           </motion.div>
           
           <motion.div variants={itemVariants}>
             <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
-              <Sun className="w-5 h-5 mr-2 text-theme-primary-hover" />
+              <Info className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Resources
             </h4>
             <ul className="space-y-4">
@@ -127,18 +113,6 @@ export default function Footer() {
                   </motion.div>
                 </Link>
               </li>
-              <li>
-                <Link href="/learn">
-                  <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
-                    whileHover={{ x: 5 }}
-                  >
-                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
-                    Beginner's Guide
-                    <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </motion.div>
-                </Link>
-              </li>
             </ul>
           </motion.div>
           
@@ -160,7 +134,7 @@ export default function Footer() {
                   </motion.div>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/about">
                   <motion.div 
                     className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
@@ -171,7 +145,7 @@ export default function Footer() {
                     <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
                 </Link>
-              </li>
+              </li> */}
             </ul>
             
           </motion.div>

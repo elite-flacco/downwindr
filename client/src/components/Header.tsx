@@ -67,7 +67,7 @@ export default function Header() {
         <nav className="hidden md:flex space-x-2">
           <Link href="/">
             <motion.div 
-              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -76,12 +76,12 @@ export default function Header() {
               whileTap={{ y: 0 }}
             >
               <Wind className="w-4 h-4 mr-2" />
-              Home
+              Back to the Beach
             </motion.div>
           </Link>
           <Link href="/spots">
             <motion.div 
-              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/spots" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -90,12 +90,12 @@ export default function Header() {
               whileTap={{ y: 0 }}
             >
               <Map className="w-4 h-4 mr-2" />
-              Spots
+              Where to Shred
             </motion.div>
           </Link>
           <Link href="/community">
             <motion.div 
-              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/community" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -104,12 +104,12 @@ export default function Header() {
               whileTap={{ y: 0 }}
             >
               <Users className="w-4 h-4 mr-2" />
-              Community
+              Wind Fam
             </motion.div>
           </Link>
           <Link href="/learn">
             <motion.div 
-              className={`font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/learn" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -117,8 +117,8 @@ export default function Header() {
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
             >
-              <Sun className="w-4 h-4 mr-2" />
-              Learn
+              <Info className="w-4 h-4 mr-2" />
+              Skill Up
             </motion.div>
           </Link>
         </nav>
@@ -170,7 +170,7 @@ export default function Header() {
                 size="sm"
               >
                 <LogIn className="h-4 w-4" />
-                Login
+                Join the Ride
               </Button>
             </Link>
           )}
@@ -255,7 +255,7 @@ export default function Header() {
             <nav className="container mx-auto px-4 flex flex-col space-y-2 py-2">
               <Link href="/">
                 <motion.div 
-                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
                       ? "bg-theme-primary text-theme-background" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -264,12 +264,12 @@ export default function Header() {
                   whileTap={{ x: 0 }}
                 >
                   <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Home
+                  Back to the Beach
                 </motion.div>
               </Link>
               <Link href="/spots">
                 <motion.div 
-                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
                       ? "bg-theme-primary text-theme-background" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -278,12 +278,12 @@ export default function Header() {
                   whileTap={{ x: 0 }}
                 >
                   <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Spots
+                  Where to Shred
                 </motion.div>
               </Link>
               <Link href="/community">
                 <motion.div 
-                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
                       ? "bg-theme-primary text-theme-background" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -292,12 +292,12 @@ export default function Header() {
                   whileTap={{ x: 0 }}
                 >
                   <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Community
+                  Wind Fam
                 </motion.div>
               </Link>
               <Link href="/learn">
                 <motion.div 
-                  className={`font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
                       ? "bg-theme-primary text-theme-background" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -305,8 +305,8 @@ export default function Header() {
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Sun className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Learn
+                  <Info className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} />
+                  Skill Up
                 </motion.div>
               </Link>
             </nav>
