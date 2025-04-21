@@ -27,7 +27,7 @@ export default function Spots() {
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [showComparison, setShowComparison] = useState<boolean>(false);
   const [spotsToCompare, setSpotsToCompare] = useState<Spot[]>([]);
-  const [viewMode, setViewMode] = useState<"both" | "map" | "list">("both");
+  const [viewMode, setViewMode] = useState<"both" | "map" | "list">("map");
   
   // New states for recommendation feature
   const [showPreferencesModal, setShowPreferencesModal] = useState<boolean>(false);
@@ -243,16 +243,16 @@ export default function Spots() {
             
             {/* View Toggles */}
             <div className="flex items-center gap-2">
-              <span className="text-sm text-slate-500 mr-1 hidden md:inline">View:</span>
+              <span className="text-sm text-slate-500 mr-1 hidden md:inline"></span>
               <div className="flex gap-1 p-1 bg-blue-50 rounded-md shadow-sm">
-                <Button
+                {/* <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setViewMode("both")}
                   className={`w-9 h-8 p-0 transition-all duration-200 ${viewMode === "both" ? "bg-white shadow-md text-ocean-dark" : "text-slate-500"}`}
                 >
                   <SplitSquareVertical className="h-4 w-4" />
-                </Button>
+                </Button> */}
                 <Button
                   variant="ghost"
                   size="sm"
