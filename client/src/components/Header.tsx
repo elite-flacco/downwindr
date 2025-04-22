@@ -75,8 +75,8 @@ export default function Header() {
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
             >
-              <Wind className="w-4 h-4 mr-2" />
-              Back to the Beach
+              {/* <Wind className="w-4 h-4 mr-2" /> */}
+              🏖️ Back to the Beach
             </motion.div>
           </Link>
           <Link href="/spots">
@@ -89,8 +89,8 @@ export default function Header() {
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
             >
-              <Map className="w-4 h-4 mr-2" />
-              Where to Shred
+              {/* <Map className="w-4 h-4 mr-2" /> */}
+              📍 Where to Shred
             </motion.div>
           </Link>
           <Link href="/community">
@@ -103,8 +103,8 @@ export default function Header() {
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
             >
-              <Users className="w-4 h-4 mr-2" />
-              Wind Fam
+              {/* <Users className="w-4 h-4 mr-2" /> */}
+              🌬️ Wind Fam
             </motion.div>
           </Link>
           <Link href="/learn">
@@ -117,8 +117,8 @@ export default function Header() {
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
             >
-              <Info className="w-4 h-4 mr-2" />
-              Skill Up
+              {/* <Info className="w-4 h-4 mr-2" /> */}
+              🎓 Skill Up
             </motion.div>
           </Link>
         </nav>
@@ -263,8 +263,8 @@ export default function Header() {
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Back to the Beach
+                  {/* <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-theme-background" : "text-theme-primary"}`} /> */}
+                  🏖️ Back to the Beach
                 </motion.div>
               </Link>
               <Link href="/spots">
@@ -277,8 +277,8 @@ export default function Header() {
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Where to Shred
+                  {/* <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-theme-background" : "text-theme-primary"}`} /> */}
+                  📍 Where to Shred
                 </motion.div>
               </Link>
               <Link href="/community">
@@ -291,8 +291,8 @@ export default function Header() {
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Wind Fam
+                  {/* <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-theme-background" : "text-theme-primary"}`} /> */}
+                  🌬️ Wind Fam
                 </motion.div>
               </Link>
               <Link href="/learn">
@@ -305,8 +305,8 @@ export default function Header() {
                   whileHover={{ x: 5 }}
                   whileTap={{ x: 0 }}
                 >
-                  <Info className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} />
-                  Skill Up
+                  {/* <Info className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} /> */}
+                  🎓 Skill Up
                 </motion.div>
               </Link>
             </nav>

@@ -165,24 +165,6 @@ export default function Home() {
         {/* Features Section */}
         <section className="py-16 bg-gradient-to-b from-white to-blue-50/30">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 
-                  className="text-3xl md:text-4xl font-bold text-ocean-dark mb-4"
-                >
-                  Why Downwindr?
-                </h2>
-                <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6"></div>
-                <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-                  We help kitesurfers of all levels find their ideal riding conditions with our 
-                  comprehensive tools and community-driven insights.
-                </p>
-              </motion.div>
-            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Feature 1 */}
@@ -275,109 +257,7 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Benefits Section with Icons */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
-              <motion.div 
-                className="md:w-1/2"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold text-ocean-dark mb-4">
-                  Make Better Kitesurfing Plans
-                </h2>
-                <div className="w-20 h-1 bg-primary rounded-full mb-6"></div>
-                <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                  Downwindr helps you make informed decisions before you travel. Know where and when to
-                  go for the best kitesurfing conditions, so you can maximize your time on the water.
-                </p>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="flex items-start">
-                    <div className="bg-blue-50 p-3 rounded-lg mr-4">
-                      <Anchor className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-ocean-dark mb-2">Reliable Data</h3>
-                      <p className="text-slate-600">Trusted wind information collected from multiple sources</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-blue-50 p-3 rounded-lg mr-4">
-                      <ShieldCheck className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-ocean-dark mb-2">Safety First</h3>
-                      <p className="text-slate-600">Spot hazards and safety considerations highlighted</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-blue-50 p-3 rounded-lg mr-4">
-                      <Star className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-ocean-dark mb-2">Expert Reviews</h3>
-                      <p className="text-slate-600">Insights from experienced kitesurfers at each location</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-blue-50 p-3 rounded-lg mr-4">
-                      <Waves className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-ocean-dark mb-2">Wave Conditions</h3>
-                      <p className="text-slate-600">Detailed information on wave types and heights</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="md:w-1/2 bg-blue-50 rounded-2xl p-1 overflow-hidden shadow-lg"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <div className="bg-gradient-to-br from-ocean-blue to-primary h-full w-full rounded-xl overflow-hidden relative py-16 px-8">
-                  <div className="absolute top-0 left-0 w-full h-full opacity-20">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                      <path fill="#FFFFFF" d="M41.3,-69.3C55.4,-63.5,69.9,-55.1,78.9,-42.3C87.8,-29.6,91.3,-12.4,88.6,3.4C85.9,19.1,77.1,33.5,67.1,47.4C57.1,61.3,45.8,74.6,31.8,80.2C17.9,85.8,1.2,83.6,-15.8,80.1C-32.8,76.6,-50.2,71.8,-61.3,60.8C-72.4,49.8,-77.3,32.6,-79.3,15.6C-81.4,-1.4,-80.5,-18.2,-74.4,-32.8C-68.2,-47.5,-56.7,-60.1,-43.1,-66.3C-29.4,-72.6,-14.7,-72.5,-0.4,-71.9C14,-71.3,27.2,-75.1,41.3,-69.3Z" transform="translate(100 100)" />
-                    </svg>
-                  </div>
-                  
-                  <div className="text-center relative z-10">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-                      Ready to Discover Your Next Destination?
-                    </h3>
-                    <p className="text-white/90 mb-8 leading-relaxed text-lg max-w-lg mx-auto">
-                      Join thousands of kitesurfers who use Downwindr to plan their perfect trips.
-                    </p>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Link href="/spots">
-                        <Button 
-                          size="lg" 
-                          className="bg-white text-primary hover:bg-white/90 font-medium px-8 shadow-lg"
-                        >
-                          Explore Spots <Map className="w-5 h-5 ml-2" />
-                        </Button>
-                      </Link>
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+
         
         {/* CTA Section */}
         <section className="py-20 relative overflow-hidden">
@@ -398,11 +278,11 @@ export default function Home() {
               className="max-w-3xl mx-auto"
             >
               <h2 
-                className="text-3xl md:text-5xl font-bold text-white mb-6"
+                className="text-3xl md:text-5xl font-bold text-slate mb-6"
               >
                 Ready to Catch the Perfect Wind?
               </h2>
-              <p className="text-white/90 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
+              <p className="text-slate/90 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
                 Start exploring the best kitesurfing spots around the world and plan your next adventure!
               </p>
               <motion.div
