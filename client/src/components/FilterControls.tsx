@@ -27,7 +27,7 @@ export default function FilterControls({
     <div className="mb-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
       {/* Wind Quality Filter */}
       <div className="flex items-center flex-shrink-0 flex-nowrap">
-        <h3 className="text-xs font-medium text-slate-600 mr-2 whitespace-nowrap">
+        <h3 className="text-xs text-slate-600 mr-2 whitespace-nowrap">
           <Filter className="w-3 h-3 inline mr-1 text-primary align-text-bottom" />
           Wind:
         </h3>
@@ -74,12 +74,12 @@ export default function FilterControls({
       </div>
       
       {/* Search Input */}
-      <div className="relative w-64">
+      <div className="relative w-80">
         <div className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
           <Search className="h-3.5 w-3.5 text-slate-400" />
         </div>
         <Input
-          className="pl-8 pr-2 py-1 h-8 text-sm bg-white border-slate-200 focus-visible:ring-primary/30"
+          className="pl-8 pr-2 py-1 h-8 text-xs bg-white border-slate-200 focus-visible:ring-primary/30"
           placeholder="Search spots or locations..."
           value={searchQuery}
           onChange={handleSearchInputChange}

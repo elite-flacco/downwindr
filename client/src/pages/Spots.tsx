@@ -213,12 +213,12 @@ export default function Spots() {
       
       <main className="container mx-auto px-4 py-6 flex-grow">
         {/* Page Title with more visual impact */}
-        <div className="mb-6 pt-2">
-          <h2 className="text-2xl text-ocean-dark mb-2">Find Perfect Kitesurfing Spots</h2>
-          <div className="flex items-center">
+        <div className="mb-2 pt-2">
+          <h2 className="text-xl text-ocean-dark mb-2">Find your dream spots</h2>
+          {/* <div className="flex items-center">
             <div className="h-1 w-12 bg-primary rounded-full mr-3"></div>
             <p className="text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions</p>
-          </div>
+          </div> */}
         </div>
         
         {/* Enhanced filter bar with controls */}
@@ -356,7 +356,7 @@ export default function Spots() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="mt-4 bg-white rounded-xl shadow-lg overflow-hidden"
+            className="mt-4 overflow-hidden"
           >
             <SpotComparison 
               spots={spotsWithConditions || spotsToCompare}
@@ -364,7 +364,7 @@ export default function Spots() {
               onClose={handleCloseComparison}
             />
             
-            <div className="py-4 text-center bg-blue-50/50">
+            <div className="py-4 text-center mt-6">
               <Button 
                 onClick={handleCloseComparison}
                 variant="outline"

@@ -177,7 +177,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
   ];
 
   return (
-    <Card className="w-full max-w-6xl mx-auto bg-white/95 shadow-lg backdrop-blur border rounded-lg">
+    <Card className="w-full mx-auto bg-white/95 shadow-lg backdrop-blur rounded-lg">
       <CardHeader>
         <CardTitle className="text-center text-xl md:text-2xl text-blue-700">
           Spot Comparison for {monthNames[selectedMonth - 1]}
