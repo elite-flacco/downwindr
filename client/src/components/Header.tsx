@@ -52,7 +52,7 @@ export default function Header() {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
           >
-            <div className="bg-sky-gradient p-2 rounded-full mr-3 shadow-md">
+            <div className="bg-ocean-gradient p-2 rounded-full mr-3 shadow-md">
               <Wind className="w-6 h-6 text-theme-background" />
             </div>
             <div>

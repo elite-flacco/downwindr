@@ -83,23 +83,9 @@ export default {
         "theme-wind-poor": "hsl(var(--theme-wind-poor))",
         
         // Vibrant Blues
-        "electric": "hsl(var(--color-electric-blue))",
-        "cerulean": "hsl(var(--color-cerulean))",
-        "azure": "hsl(var(--color-azure))",
         "yellow": "hsl(var(--color-yellow))",
         "coral": "hsl(var(--color-coral))",
-        "lime": "hsl(var(--color-lime))",
-        "navy": "hsl(var(--color-navy))",
-        "sky": "hsl(var(--color-light-blue))",
-        
-        // Legacy colors (for backward compatibility)
-        "neutral-light": "hsl(var(--theme-background))",
-        "neutral-dark": "hsl(var(--theme-text))",
-        "wind-good": "hsl(var(--theme-wind-good))",
-        "wind-moderate": "hsl(var(--theme-wind-moderate))",
-        "wind-poor": "hsl(var(--theme-wind-poor))",
-        "ocean-blue": "hsl(var(--color-electric-blue))",
-        "ocean-dark": "hsl(var(--color-navy))",
+
       },
       keyframes: {
         "accordion-down": {

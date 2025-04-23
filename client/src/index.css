@@ -29,16 +29,10 @@
   --color-primary-950: 226 57% 21%;    /* #172554 */
 
   /* Vibrant color palette */
-  --color-electric-blue: 195 100% 50%; /* #00B4FF */
-  --color-azure: 210 100% 62%;         /* #3A86FF */
-  --color-cerulean: 190 100% 42%;      /* #00B4D8 */
   --color-yellow: 49 100% 52%;         /* #FFD60A */
   --color-coral: 1 100% 68%;           /* #FF5E5B */
-  --color-lime: 157 100% 50%;          /* #00FF7F */
   --color-white: 0 0% 100%;            /* #FFFFFF */
-  --color-light-blue: 187 91% 94%;     /* #E0FBFC */
   --color-slate: 221 39% 20%;          /* #1F2A40 */ /* Updated for more vibrance */
-  --color-deep-navy: 212 70% 18%;      /* #15304B */
 
   /* Semantic color roles - Use these in components */
   /* Primary UI elements */
@@ -68,7 +62,7 @@
 
   /* Font families */
   --font-fun: 'Kalam', cursive;
-  --font-heading: 'Permanent Marker', cursive;
+  --font-heading: 'Bangers', cursive;
   --font-title: 'Bangers', cursive;
   --font-body: 'Quicksand', sans-serif;
 }
@@ -86,7 +80,7 @@
 
   body {
     color: hsl(var(--theme-text));
-    font-family: 'Montserrat', var(--font-body);
+    font-family: var(--font-body);
     background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 30%) 100%);
   }
 
@@ -112,7 +106,7 @@
   }
 
   h4, h5, h6 {
-    font-family: var(--font-fun);
+    font-family: var(--font-heading);
     color: hsl(var(--theme-primary-hover));
     @apply font-bold;
   }
@@ -151,7 +145,7 @@
   }
 
   .font-body {
-    font-family: 'Montserrat', var(--font-body);
+    font-family: var(--font-body);
   }
 
   /* Grid system */
@@ -278,13 +272,13 @@
   .wind-quality-excellent {
     @apply wind-quality;
     background-color: hsl(var(--theme-wind-excellent));
-    color: #000; /* Darker text for better contrast */
+    color: hsl(var(--theme-text));
   }
 
   .wind-quality-good {
     @apply wind-quality;
     background-color: hsl(var(--theme-wind-good));
-    color: hsl(var(--theme-background));
+    color: hsl(var(--theme-text));
   }
 
   .wind-quality-moderate {
@@ -296,7 +290,7 @@
   .wind-quality-poor {
     @apply wind-quality;
     background-color: hsl(var(--theme-wind-poor));
-    color: hsl(var(--theme-background));
+    color: hsl(var(--theme-text));
   }
 
   /* Wind indicator */
@@ -393,7 +387,7 @@
   border-radius: 12px !important;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid rgba(209, 213, 219, 0.4) !important;
-  max-width: 300px !important;;
+  max-width: 300px !important;
 }
 
 .mapboxgl-popup-close-button {
@@ -423,54 +417,9 @@
     background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-primary-hover)) 100%);
   }
 
-  .bg-sky-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-secondary)) 100%);
-  }
-
-  .bg-sunset-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-action)) 0%, hsl(var(--theme-accent)) 100%);
-  }
-
-  /* Vibrant text colors */
-  .text-electric {
-    color: hsl(var(--color-electric-blue));
-  }
-
-  .text-cerulean {
-    color: hsl(var(--color-cerulean));
-  }
-
-  .text-azure {
-    color: hsl(var(--color-azure));
-  }
-
-  .text-yellow {
-    color: hsl(var(--color-yellow));
-  }
-
-  .text-coral {
-    color: hsl(var(--color-coral));
-  }
-
-  .text-lime {
-    color: hsl(var(--color-lime));
-  }
-
-  .text-navy {
-    color: hsl(var(--color-deep-navy));
-  }
-
   /* Background colors */
-  .bg-electric {
-    background-color: hsl(var(--color-electric-blue));
-  }
-
-  .bg-cerulean {
-    background-color: hsl(var(--color-cerulean));
-  }
-
-  .bg-azure {
-    background-color: hsl(var(--color-azure));
+  .bg-primary {
+    background-color: hsl(var(--color-primary-500));
   }
 
   .bg-yellow {
@@ -481,17 +430,6 @@
     background-color: hsl(var(--color-coral));
   }
 
-  .bg-lime {
-    background-color: hsl(var(--color-lime));
-  }
-
-  .bg-navy {
-    background-color: hsl(var(--color-deep-navy));
-  }
-
-  .bg-sky {
-    background-color: hsl(var(--color-light-blue));
-  }
 }
 
 /* ===== ANIMATIONS ===== */

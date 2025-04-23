@@ -137,7 +137,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-slate-800">Your Kitesurfing Preferences</h2>
+                <h2 className="text-xl text-slate-800">Your Kitesurfing Preferences</h2>
                 <Button
                   size="icon"
                   variant="outline"
@@ -153,7 +153,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <Wind className="h-5 w-5 text-blue-700" />
-                    <h3>Wind Speed Range</h3>
+                    <p>Wind Speed Range</p>
                   </div>
                   <div className="px-2">
                     <div className="flex justify-between text-sm text-slate-500 mb-2">
@@ -185,7 +185,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <Compass className="h-5 w-5 text-blue-700" />
-                    <h3>Travel Month</h3>
+                    <p>Travel Month</p>
                   </div>
                   <div className="px-2">
                     <Select 
@@ -212,7 +212,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <ThermometerSun className="h-5 w-5 text-blue-700" />
-                    <h3>Temperature Preference</h3>
+                    <p>Temperature Preference</p>
                   </div>
                   <div className="px-2">
                     <Select 
@@ -239,7 +239,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <Award className="h-5 w-5 text-blue-700" />
-                    <h3>Skill Level</h3>
+                    <p>Skill Level</p>
                   </div>
                   <div className="px-2">
                     <Select 
@@ -266,7 +266,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <DollarSign className="h-5 w-5 text-blue-700" />
-                    <h3>Budget Range</h3>
+                    <p>Budget Range</p>
                   </div>
                   <div className="px-2">
                     <Select 
@@ -293,7 +293,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <Globe className="h-5 w-5 text-blue-700" />
-                    <h3>Preferred Region</h3>
+                    <p>Preferred Region</p>
                   </div>
                   <div className="px-2">
                     <Select 
@@ -320,7 +320,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <Waves className="h-5 w-5 text-blue-700" />
-                    <h3>Additional Preferences</h3>
+                    <p>Additional Preferences</p>
                   </div>
                   <div className="px-2 space-y-3">
                     <div className="flex items-center justify-between">
