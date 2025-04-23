@@ -188,7 +188,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                   {/* Match Score Bar */}
                   <div className="w-full h-2 bg-slate-100 rounded-full mb-2">
                     <div 
-                      className={`h-full rounded-full ${getMatchColor(spot.matchScore)}`}
+                      className={`rounded-full ${getMatchColor(spot.matchScore)}`}
                       style={{ width: `${getMatchPercent(spot.matchScore)}%` }}
                     ></div>
                   </div>

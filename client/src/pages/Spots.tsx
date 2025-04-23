@@ -455,9 +455,9 @@ export default function Spots() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="w-full max-w-4xl max-h-[90vh] overflow-hidden"
+            className="w-full max-w-4xl max-h-[90vh] overflow-y-auto"
           >
-            <div className="w-full h-full overflow-y-auto overflow-x-hidden">
+            <div className="w-full overflow-y-auto overflow-x-hidden">
               <RecommendedSpots
                 spots={recommendedSpots}
                 isLoading={isRecommending}
