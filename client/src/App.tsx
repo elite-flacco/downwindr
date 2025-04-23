@@ -4,6 +4,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Spots from "@/pages/Spots";
 import AuthPage from "@/pages/auth-page";
+import Community from "@/pages/Community";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
@@ -13,7 +14,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/spots" component={Spots} />
       <Route path="/auth" component={AuthPage} />
-      <Route path="/community" component={NotFound} />
+      <Route path="/community" component={Community} />
       <Route path="/learn" component={NotFound} />
       <Route path="/about" component={NotFound} />
       <Route component={NotFound} />
