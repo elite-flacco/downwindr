@@ -380,7 +380,7 @@ export default function Spots() {
             {(viewMode === "both" || viewMode === "map") && (
               <div className={`${viewMode === "both" ? "md:w-2/3 lg:w-3/4" : "w-full"} w-full relative`}>
                 {/* Subtle loading overlay */}
-                {isFetching && filteredSpots && filteredSpots.length > 0 && (
+                {isFetching && filteredSpots && Array.isArray(filteredSpots) && filteredSpots.length > 0 && (
                   <div className="absolute inset-0 bg-white/40 flex items-center justify-center z-10 rounded-xl pointer-events-none">
                     <div className="bg-white/80 px-3 py-2 rounded-full shadow-md flex items-center space-x-2">
                       <div className="animate-pulse flex space-x-1">
@@ -393,9 +393,9 @@ export default function Spots() {
                   </div>
                 )}
                 <KiteMap 
-                  spots={filteredSpots || []} 
+                  spots={filteredSpots} 
                   onSpotSelect={handleSpotSelect}
-                  isLoading={spotsLoading && !spots?.length} // Only show full loading state on initial load
+                  isLoading={spotsLoading && (!spots || !Array.isArray(spots) || spots.length === 0)} // Only show full loading state on initial load
                 />
               </div>
             )}
@@ -404,7 +404,7 @@ export default function Spots() {
             {(viewMode === "both" || viewMode === "list") && (
               <div className={`${viewMode === "both" ? "md:w-1/3 lg:w-1/4" : "w-full"} relative`}>
                 {/* Subtle loading overlay */}
-                {isFetching && filteredSpots && filteredSpots.length > 0 && (
+                {isFetching && filteredSpots && Array.isArray(filteredSpots) && filteredSpots.length > 0 && (
                   <div className="absolute inset-0 bg-white/40 flex items-center justify-center z-10 rounded-xl pointer-events-none">
                     <div className="bg-white/80 px-3 py-2 rounded-full shadow-md">
                       <div className="animate-pulse flex space-x-1">
@@ -416,9 +416,9 @@ export default function Spots() {
                   </div>
                 )}
                 <SpotsList 
-                  spots={filteredSpots || []} 
+                  spots={filteredSpots} 
                   onSpotSelect={handleSpotSelect}
-                  isLoading={spotsLoading && !spots?.length} // Only show full loading state on initial load
+                  isLoading={spotsLoading && (!spots || !Array.isArray(spots) || spots.length === 0)} // Only show full loading state on initial load
                   selectedMonth={selectedMonth}
                   spotsToCompare={spotsToCompare}
                   onToggleCompare={toggleSpotComparison}
@@ -455,14 +455,16 @@ export default function Spots() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+            className="w-full max-w-4xl max-h-[90vh] overflow-hidden"
           >
-            <RecommendedSpots
-              spots={recommendedSpots}
-              isLoading={isRecommending}
-              onSpotSelect={handleSpotSelect}
-              onClose={handleCloseRecommendations}
-            />
+            <div className="w-full h-full overflow-y-auto overflow-x-hidden">
+              <RecommendedSpots
+                spots={recommendedSpots}
+                isLoading={isRecommending}
+                onSpotSelect={handleSpotSelect}
+                onClose={handleCloseRecommendations}
+              />
+            </div>
           </motion.div>
         </div>
       )}
