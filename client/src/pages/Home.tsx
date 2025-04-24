@@ -82,8 +82,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="text-lg md:text-xl text-slate-700 mb-8 leading-relaxed"
                   >
-                    Discover the world's best kitesurfing spots with real-time wind conditions, 
-                    seasonal recommendations, and local insights.
+                    Plan your next kitesurfing trip, discover epic spots, and join a global wind fam.
                   </motion.p>
                   
                   <motion.div 
@@ -94,19 +93,20 @@ export default function Home() {
                   >
                     <Link href="/spots">
                       <Button 
-                        size="lg" 
-                        className="bg-ocean-blue hover:bg-primary/90 text-white font-medium px-8 py-6 shadow-md hover:shadow-lg transition-all duration-300"
+                        variant="secondary"
+                        size="default" 
+                        className="font-medium shadow-md hover:shadow-lg transition-all duration-300"
                       >
-                        Find Spots <Map className="w-5 h-5 ml-2" />
+                        🌎 Find Your Spot
                       </Button>
                     </Link>
                     <Link href="/learn">
                       <Button 
                         variant="outline" 
-                        size="lg" 
-                        className="bg-white/80 backdrop-blur-sm border-ocean-blue text-ocean-blue hover:bg-blue-50 font-medium px-8 py-6"
+                        size="default" 
+                        className="backdrop-blur-sm font-medium"
                       >
-                        Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                        Join the Ride <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </Link>
                   </motion.div>
@@ -160,145 +160,6 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Features Section */}
-        <section className="py-16 bg-gradient-to-b from-white to-blue-50/30">
-          <div className="container mx-auto px-4">
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Feature 1 */}
-              <motion.div 
-                className="bg-white p-8 rounded-xl border border-slate-100 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-                whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-              >
-                <div className="w-16 h-16 bg-ocean-gradient rounded-xl flex items-center justify-center mb-6 shadow-md">
-                  <Map className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-ocean-dark mb-4">Interactive Spot Map</h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Explore a global map of kitesurfing locations with detailed wind data, seasonal 
-                  recommendations, and local tips.
-                </p>
-                <Link href="/spots">
-                  <motion.div 
-                    className="text-primary font-medium flex items-center cursor-pointer group"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <span>Explore spots</span> 
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                  </motion.div>
-                </Link>
-              </motion.div>
-              
-              {/* Feature 2 */}
-              <motion.div 
-                className="bg-white p-8 rounded-xl border border-slate-100 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-                whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="w-16 h-16 bg-ocean-gradient rounded-xl flex items-center justify-center mb-6 shadow-md">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-ocean-dark mb-4">Community Insights</h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Connect with fellow kitesurfers, share experiences, and get real-time updates
-                  about conditions at popular spots.
-                </p>
-                <Link href="/community">
-                  <motion.div 
-                    className="text-primary font-medium flex items-center cursor-pointer group"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <span>Join community</span> 
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                  </motion.div>
-                </Link>
-              </motion.div>
-              
-              {/* Feature 3 */}
-              <motion.div 
-                className="bg-white p-8 rounded-xl border border-slate-100 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-                whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="w-16 h-16 bg-ocean-gradient rounded-xl flex items-center justify-center mb-6 shadow-md">
-                  <Sun className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-ocean-dark mb-4">Seasonal Planning</h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Plan your kitesurfing trips with confidence using our monthly wind quality data
-                  and seasonal recommendations.
-                </p>
-                <Link href="/spots">
-                  <motion.div 
-                    className="text-primary font-medium flex items-center cursor-pointer group"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <span>Check seasons</span> 
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                  </motion.div>
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-        
-
-        
-        {/* CTA Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary to-ocean-dark z-0"></div>
-          
-          {/* Wave overlay */}
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full h-auto">
-              <path fill="#ffffff" fillOpacity="0.2" d="M0,192L48,176C96,160,192,128,288,117.3C384,107,480,117,576,144C672,171,768,213,864,213.3C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-          </div>
-          
-          <div className="container mx-auto px-4 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-3xl mx-auto"
-            >
-              <h2 
-                className="text-3xl md:text-5xl font-bold text-slate mb-6"
-              >
-                Ready to Catch the Perfect Wind?
-              </h2>
-              <p className="text-slate/90 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
-                Start exploring the best kitesurfing spots around the world and plan your next adventure!
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link href="/spots">
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-primary hover:bg-white/90 font-medium px-10 py-7 text-lg shadow-xl"
-                  >
-                    Find Kitesurfing Spots <Compass className="w-6 h-6 ml-2" />
-                  </Button>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
       </main>
       
       <Footer />
