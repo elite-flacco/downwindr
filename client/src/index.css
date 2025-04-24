@@ -80,7 +80,7 @@
 
   body {
     color: hsl(var(--theme-text));
-    font-family: var(--font-body);
+    font-family: var(--font-body), "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", sans-serif;
     background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 30%) 100%);
   }
 
