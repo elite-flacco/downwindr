@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import KitesurferIllustration from "@/components/KitesurferIllustration";
+import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -28,10 +28,13 @@ export default function Home() {
       <Header />
       
       <main className="flex-grow">
-        {/* Hero Section with contained illustration */}
-        <section className="relative py-24 md:py-28 lg:py-32 bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50 overflow-hidden">
+        {/* Hero Section with real kitesurfing image */}
+        <section className="relative py-24 md:py-28 lg:py-32 bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 overflow-hidden">
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-theme-primary/5 to-theme-primary-hover/5 mix-blend-overlay"></div>
+          
           {/* Background wave pattern */}
-          <div className="absolute inset-0 z-0 opacity-15">
+          <div className="absolute inset-0 z-0 opacity-10">
             <svg 
               className="absolute bottom-0 left-0 w-full opacity-20" 
               xmlns="http://www.w3.org/2000/svg" 
@@ -113,17 +116,30 @@ export default function Home() {
                 </motion.div>
               </div>
               
-              {/* Right content - Illustration area */}
+              {/* Right content - Hero image area */}
               <div className="w-full lg:w-1/2 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 overflow-hidden">
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="relative h-full flex items-center"
+                  className="relative h-full flex items-center justify-center"
                 >
-                  {/* Position the illustration to fill the right side but stay contained */}
-                  <div className="absolute lg:-right-32 lg:-top-10 lg:bottom-0 lg:w-[700px] w-full flex items-center">
-                    <KitesurferIllustration className="w-full h-auto" />
+                  {/* Image container with rounded corners and enhanced styling */}
+                  <div className="lg:absolute inset-0 w-full lg:h-full flex items-center justify-center p-4">
+                    <div className="relative w-full h-full overflow-hidden rounded-xl shadow-xl transition-all duration-500">
+                      {/* Main image */}
+                      <img 
+                        src={kitesurfingHeroImage} 
+                        alt="Aerial view of kitesurfers on turquoise water" 
+                        className="object-cover w-full h-full max-h-[500px] lg:max-h-none"
+                      />
+                      
+                      {/* Image overlay with attribution */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                      <div className="absolute bottom-2 right-2 text-white/70 text-xs bg-black/30 px-2 py-1 rounded backdrop-blur-sm">
+                        Photo by Marcreation on Unsplash
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               </div>
