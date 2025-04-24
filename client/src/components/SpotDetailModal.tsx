@@ -234,64 +234,91 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       <div className="space-y-3 text-theme-text-light">
                         <p className="leading-relaxed">{spotDetails.spot.description}</p>
                         
-                        {/* Add kite schools in the kitesurfing info card */}
+                        {/* Add kite schools in the kitesurfing info card - Top 5 rated only */}
                         {spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
                           <div className="mt-4 mb-2">
                             <h4 className="font-bold text-theme-text mb-2 flex items-center">
                               <svg className="w-4 h-4 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                               </svg>
-                              Kite Schools:
+                              Top Rated Kite Schools:
                             </h4>
                             <ul className="text-sm">
-                              {spotDetails.spot.kiteSchools.map((school: string, idx: number) => {
-                                const parts = school.split('|');
-                                const name = parts[0];
-                                const mapLink = parts[1] || null;
-                                const rating = parts[2] || null;
-                                const reviews = parts[3] || null;
-                                
-                                return (
-                                  <li key={idx} className="flex flex-col mb-3">
-                                    <div className="flex items-center">
-                                      {mapLink ? (
-                                        <a 
-                                          href={mapLink}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="text-theme-primary hover:text-theme-primary-hover transition-colors duration-300 flex items-center"
-                                        >
-                                          <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                          </svg>
-                                          <span className="font-medium">{name}</span>
-                                          <ExternalLink className="ml-1 h-3 w-3" />
-                                        </a>
-                                      ) : (
+                              {spotDetails.spot.kiteSchools
+                                // Parse the school data for sorting
+                                .map((school: string) => {
+                                  const parts = school.split('|');
+                                  const name = parts[0];
+                                  const mapLink = parts[1] || null;
+                                  const rating = parts[2] ? parseFloat(parts[2]) : 0;
+                                  const reviews = parts[3] ? parseInt(parts[3], 10) : 0;
+                                  
+                                  return {
+                                    name,
+                                    mapLink,
+                                    rating,
+                                    reviews,
+                                    originalString: school
+                                  };
+                                })
+                                // Sort by rating (highest first), then by number of reviews
+                                .sort((a, b) => {
+                                  if (b.rating !== a.rating) {
+                                    return b.rating - a.rating;
+                                  }
+                                  return b.reviews - a.reviews;
+                                })
+                                // Take only the top 5
+                                .slice(0, 5)
+                                .map((school, idx) => {
+                                  return (
+                                    <li key={idx} className="flex flex-col mb-3">
+                                      <div className="flex items-center justify-between">
                                         <div className="flex items-center">
-                                          <svg className="w-4 h-4 mr-2 flex-shrink-0 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                          </svg>
-                                          <span className="font-medium">{name}</span>
+                                          {school.mapLink ? (
+                                            <a 
+                                              href={school.mapLink}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="text-theme-primary hover:text-theme-primary-hover transition-colors duration-300 flex items-center"
+                                            >
+                                              <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                              </svg>
+                                              <span className="font-medium">{school.name}</span>
+                                              <ExternalLink className="ml-1 h-3 w-3" />
+                                            </a>
+                                          ) : (
+                                            <div className="flex items-center">
+                                              <svg className="w-4 h-4 mr-2 flex-shrink-0 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                              </svg>
+                                              <span className="font-medium">{school.name}</span>
+                                            </div>
+                                          )}
+                                        </div>
+                                        
+                                        {/* Always show rating badge if available */}
+                                        {school.rating > 0 && (
+                                          <div className="px-2 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium flex items-center">
+                                            <svg className="w-3 h-3 mr-1 text-theme-accent-warning" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                            {school.rating} ({school.reviews})
+                                          </div>
+                                        )}
+                                      </div>
+                                      
+                                      {/* Show review count in a more subtle way under the school name */}
+                                      {school.reviews > 0 && (
+                                        <div className="ml-6 mt-1 text-xs text-theme-text-light">
+                                          Based on {school.reviews} student reviews
                                         </div>
                                       )}
-                                    </div>
-                                    
-                                    {rating && reviews && (
-                                      <div className="ml-6 mt-1 flex items-center text-sm text-theme-text-light">
-                                        <div className="flex items-center">
-                                          <svg className="w-4 h-4 text-theme-accent-warning" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                          </svg>
-                                          <span className="ml-1 font-medium">{rating}</span>
-                                          <span className="mx-1.5">•</span>
-                                          <span>{reviews} reviews</span>
-                                        </div>
-                                      </div>
-                                    )}
-                                  </li>
-                                );
-                              })}
+                                    </li>
+                                  );
+                                })
+                              }
                             </ul>
                           </div>
                         )}
