@@ -16,8 +16,18 @@ const countryFlags: { [key: string]: string } = {
   "Australia": "🇦🇺",
   "United States": "🇺🇸",
   "Mexico": "🇲🇽",
+  "Italy": "🇮🇹",
   "South Africa": "🇿🇦",
-  // Add more countries as needed
+  // Add other countries from the database
+  "France": "🇫🇷",
+  "Germany": "🇩🇪",
+  "United Kingdom": "🇬🇧",
+  "Ireland": "🇮🇪",
+  "China": "🇨🇳",
+  "Japan": "🇯🇵",
+  "India": "🇮🇳",
+  "Canada": "🇨🇦",
+  "New Zealand": "🇳🇿"
 };
 
 // Function to get country flag emoji

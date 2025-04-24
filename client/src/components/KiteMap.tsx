@@ -9,6 +9,7 @@ import { Wind, MapPin, Compass, Waves, Anchor, ExternalLink } from "lucide-react
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { getCountryFlag } from "@/lib/countryUtils";
 
 // Import Mapbox GL CSS
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -222,7 +223,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                     <h3 className="font-heading text-theme-primary text-lg">{popupInfo.spot.name}</h3>
                     <div className="text-xs text-theme-text-light flex items-center">
                       <MapPin className="w-3 h-3 mr-1" />
-                      {popupInfo.spot.country}
+                      {popupInfo.spot.country} {getCountryFlag(popupInfo.spot.country)}
                     </div>
                   </div>
                   

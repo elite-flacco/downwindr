@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Wind, Thermometer, Calendar, Waves, Navigation, Award, DollarSign } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spot, WindQuality } from "@shared/schema";
+import { getCountryFlag } from "@/lib/countryUtils";
 
 interface SpotWithMatchScore extends Spot {
   matchScore: number;
@@ -136,7 +137,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                   <div className="flex flex-wrap justify-between items-start gap-2">
                     <h3 className="text-xl font-bold text-slate-800 mb-2 break-words">{spot.name}</h3>
                     <Badge variant="outline" className="text-xs bg-slate-50 border-slate-200 text-slate-600 flex-shrink-0">
-                      {spot.country}
+                      {spot.country} {getCountryFlag(spot.country)}
                     </Badge>
                   </div>
                   
