@@ -4,54 +4,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== THEME CONFIGURATION ===== */
+/* ===== COLOR SYSTEM ===== */
 :root {
-  /* Core colors */
-  --primary: 217 97% 60%;
-  --primary-foreground: 0 0% 100%;
-  
-  /* Color palette */
-  --theme-warning: 49 100% 52%; /* Yellow */
-  --theme-action: 1 100% 68%; /* Coral/Red */
-  --theme-success: 142 71% 45%; /* Green */
-  
-  /* UI colors derived from primary */
-  --theme-primary: 224 76% 48%; /* Primary-700 */
-  --theme-primary-hover: 217 97% 60%; /* Primary-500 */
-  --theme-secondary: 217 97% 60%; /* Primary-500 */
-  --theme-surface: 217 100% 93%; /* Primary-100 */
-  --theme-border: 217 100% 93% / 50%; /* Primary-100/50% */
-  
-  /* General UI */
-  --theme-background: 0 0% 100%; /* White */
-  --theme-text: 221 39% 20%; /* Dark slate */
-  --theme-text-light: 221 39% 20% / 70%; /* Transparent slate */
-  
-  /* Map wind quality indicators */
+  /* Core Brand Colors - Change these to update the entire theme */
+  --core-primary: 217 97% 60%;      /* Main blue - #3B82F6 */
+  --core-accent: 49 100% 52%;       /* Yellow - #FFD60A */
+  --core-action: 1 100% 68%;        /* Coral/Red - #FF5E5B */
+  --core-success: 142 71% 45%;      /* Green */
+  --core-neutral: 221 39% 20%;      /* Slate - #1F2A40 */
+  --core-white: 0 0% 100%;          /* White - #FFFFFF */
+
+  /* Primary color scale - Generated from core-primary */
+  --color-primary-50: 219 100% 97%;   /* #EFF6FF - Lightest */
+  --color-primary-100: 217 100% 93%;  /* #DBEAFE */
+  --color-primary-200: 216 100% 87%;  /* #BFDBFE */
+  --color-primary-300: 216 100% 78%;  /* #93C5FD */
+  --color-primary-400: 217 100% 68%;  /* #60A5FA */
+  --color-primary-500: var(--core-primary); /* #3B82F6 - Base */
+  --color-primary-600: 221 83% 53%;   /* #2563EB */
+  --color-primary-700: 224 76% 48%;   /* #1D4ED8 */
+  --color-primary-800: 226 71% 40%;   /* #1E40AF */
+  --color-primary-900: 224 64% 33%;   /* #1E3A8A */
+  --color-primary-950: 226 57% 21%;   /* #172554 - Darkest */
+
+  /* Semantic color mapping - These reference the core colors */
+  --theme-primary: var(--color-primary-700);
+  --theme-primary-hover: var(--color-primary-500);
+  --theme-secondary: var(--color-primary-500);
+  --theme-accent: var(--core-accent);
+  --theme-action: var(--core-action);
+  --theme-success: var(--core-success);
+  --theme-warning: var(--core-accent);
+  --theme-background: var(--core-white);
+  --theme-surface: var(--color-primary-100);
+  --theme-text: var(--core-neutral);
+  --theme-text-light: var(--core-neutral) / 70%;
+  --theme-border: var(--color-primary-100) / 50%;
+  --theme-button: var(--color-primary-500);
+  --theme-button-hover: var(--color-primary-600);
+
+  /* Wind quality indicators */
   --theme-wind-excellent: 359 100% 59%; /* Red */
   --theme-wind-good: 40 100% 53%; /* Orange */
   --theme-wind-moderate: 127 100% 52%; /* Green */
   --theme-wind-poor: 177 85% 87%; /* Light blue */
   
-  /* Button variants */
-  --theme-button: 217 97% 60%; /* Primary-500 */
-  --theme-button-hover: 221 83% 53%; /* Primary-600 */
-  
-  /* ShadCN compatibility (using our simplified palette) */
+  /* ShadCN compatibility - These reference our semantic system */
   --background: var(--theme-background);
   --foreground: var(--theme-text);
   --card: var(--theme-background);
   --card-foreground: var(--theme-text);
   --popover: var(--theme-background);
   --popover-foreground: var(--theme-text);
+  --primary: var(--theme-primary);
+  --primary-foreground: var(--core-white);
   --secondary: var(--theme-surface);
-  --secondary-foreground: 226 71% 40%; 
+  --secondary-foreground: var(--color-primary-800);
   --muted: var(--theme-surface);
   --muted-foreground: var(--theme-text-light);
-  --accent: var(--theme-warning);
+  --accent: var(--theme-accent);
   --accent-foreground: var(--theme-text);
   --destructive: var(--theme-action);
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: var(--core-white);
   --border: var(--theme-border);
   --input: var(--theme-surface);
   --ring: var(--theme-secondary);
