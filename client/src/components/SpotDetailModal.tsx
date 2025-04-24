@@ -405,7 +405,8 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
                     <Button 
                       variant="outline" 
-                      className="w-full sm:w-auto px-5 py-1 border-theme-text/50 text-xs bg-white hover:bg-theme-surface text-theme-text transition-colors duration-300"
+                      size="sm"
+                      className="w-full sm:w-auto border-theme-text/50 bg-white hover:bg-theme-surface transition-colors duration-300"
                       onClick={handleClose}
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
