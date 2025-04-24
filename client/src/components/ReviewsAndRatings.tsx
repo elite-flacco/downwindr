@@ -309,7 +309,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
             <Card className="border border-dashed">
               <CardContent className="pt-6 text-center py-10">
                 <h3 className="text-lg font-medium mb-2">No Reviews Yet</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="mb-4">
                   Be the first to share your experience at this kitesurfing spot!
                 </p>
                 {user ? (
@@ -323,7 +323,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                   </Button>
                 ) : (
                   <Link href="/auth">
-                    <Button variant="outline" className="flex items-center gap-1 bg-theme-button hover:bg-theme-button-hover">
+                    <Button variant="outline" className="flex items-center gap-1">
                       Login to Review
                     </Button>
                   </Link>

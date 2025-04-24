@@ -37,7 +37,7 @@ export default function SpotsList({
   return (
     <Card className="w-full rounded-xl border border-theme-border shadow-sm">
       <CardContent className="p-6">
-        <h3 className="text-lg font-semibold mb-4 text-theme-text flex items-center">
+        <h3 className="mb-4 text-theme-text flex items-center">
           <Sparkles className="w-5 h-5 mr-2 text-theme-primary" />
           Top Spots in {MonthNames[selectedMonth - 1]}
         </h3>
@@ -62,7 +62,7 @@ export default function SpotsList({
                 whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
               >
                 <div className="flex justify-between items-start mb-3">
-                  <h4 className="text-lg font-bold font-heading text-theme-primary">{spot.name}</h4>
+                  <h4 className="text-theme-primary">{spot.name}</h4>
                   <div className="px-3 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium">
                     <Wind className="w-3 h-3 inline mr-1" /> {spot.bestMonths}
                   </div>
@@ -105,7 +105,8 @@ export default function SpotsList({
                   <div className="flex items-center justify-between mt-2">
                     <Button 
                       variant="ghost"
-                      className="text-theme-primary font-medium flex items-center justify-start hover:text-theme-primary/80 transition-all duration-300 hover:bg-theme-primary/5 p-0"
+                      size="sm"
+                      className="font-medium flex items-center justify-start transition-all duration-300"
                       onClick={() => onSpotSelect(spot.id)}
                     >
                       See details <ChevronRight className="ml-1 w-4 h-4" />
@@ -117,7 +118,7 @@ export default function SpotsList({
                         pressed={isInCompare}
                         onPressedChange={() => onToggleCompare(spot)}
                         disabled={!isInCompare && spotsToCompare.length >= 3}
-                        className={`h-8 ${
+                        className={`h-8 text-xs ${
                           isInCompare 
                             ? "bg-theme-accent-warning/30 text-theme-accent-warning hover:bg-theme-accent-warning/40" 
                             : "text-theme-text-light hover:text-theme-primary hover:bg-theme-primary/5"

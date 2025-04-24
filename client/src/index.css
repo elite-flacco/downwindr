@@ -46,12 +46,6 @@
   --theme-button: var(--color-primary-500);
   --theme-button-hover: var(--color-primary-600);
 
-  /* Wind quality indicators */
-  --theme-wind-excellent: 359, 100%, 59%; /* Red */
-  --theme-wind-good: 40, 100%, 53%; /* Orange */
-  --theme-wind-moderate: 127, 100%, 52%; /* Green */
-  --theme-wind-poor: 177, 85%, 87%; /* Light blue */
-
   /* For ShadCN UI compatibility */
   --background: var(--color-white);
   --foreground: var(--color-slate);
@@ -216,19 +210,19 @@
   }
 
   .wind-quality-excellent {
-    @apply wind-quality bg-theme-wind-excellent text-theme-text;
+    @apply wind-quality bg-wind-excellent text-white;
   }
 
   .wind-quality-good {
-    @apply wind-quality bg-theme-wind-good text-theme-text;
+    @apply wind-quality bg-wind-good text-theme-text;
   }
 
   .wind-quality-moderate {
-    @apply wind-quality bg-theme-wind-moderate text-theme-text;
+    @apply wind-quality bg-wind-moderate text-theme-text;
   }
 
   .wind-quality-poor {
-    @apply wind-quality bg-theme-wind-poor text-theme-text;
+    @apply wind-quality bg-wind-poor text-theme-text;
   }
 
   /* Wind indicator */

@@ -90,6 +90,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        wind: {
+          excellent: 'hsl(359, 100%, 59%)',
+          good: 'hsl(40, 100%, 53%)',
+          moderate: 'hsl(127, 100%, 52%)',
+          poor: 'hsl(177, 85%, 87%)',
+        },
         
         // Theme color system - moved from CSS variables to Tailwind config
         "theme-primary": "hsl(var(--theme-primary))",
@@ -107,12 +113,6 @@ export default {
         "theme-border": "hsl(var(--theme-border))",
         "theme-button": "hsl(var(--theme-button))",
         "theme-button-hover": "hsl(var(--theme-button-hover))",
-        
-        // Wind quality indicators
-        "theme-wind-excellent": "hsl(var(--theme-wind-excellent))",
-        "theme-wind-good": "hsl(var(--theme-wind-good))",
-        "theme-wind-moderate": "hsl(var(--theme-wind-moderate))",
-        "theme-wind-poor": "hsl(var(--theme-wind-poor))",
         
         // Vibrant colors
         "yellow": "hsl(var(--color-yellow))",

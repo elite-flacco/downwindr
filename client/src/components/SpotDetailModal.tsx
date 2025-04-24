@@ -28,15 +28,15 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
   const getWindQualityClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "wind-quality-excellent text-theme-text";
+        return "wind-quality-excellent";
       case WindQuality.Good:
-        return "wind-quality-good text-theme-text";
+        return "wind-quality-good";
       case WindQuality.Moderate:
-        return "wind-quality-moderate text-theme-text";
+        return "wind-quality-moderate";
       case WindQuality.Poor:
-        return "wind-quality-poor text-theme-text";
+        return "wind-quality-poor";
       default:
-        return "bg-theme-muted text-theme-text";
+        return "bg-theme-muted";
     }
   };
   
@@ -376,8 +376,8 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                             key={condition.id} 
                             className={`p-2 rounded-lg ${getWindQualityClass(condition.windQuality)} transition-all hover:shadow-md hover:scale-105`}
                           >
-                            <div className="text-slate text-xs">{MonthNames[condition.month - 1].substring(0, 3)}</div>
-                            <div className="text-xs text-slate opacity-90">{condition.windSpeed} knots</div>
+                            <div className="text-xs">{MonthNames[condition.month - 1].substring(0, 3)}</div>
+                            <div className="text-xs opacity-90">{condition.windSpeed} knots</div>
                             <div className="text-xs mt-1">{getWindQualityEmoji(condition.windQuality)}</div>
                           </div>
                         ))}
