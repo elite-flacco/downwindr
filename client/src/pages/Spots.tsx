@@ -308,8 +308,8 @@ export default function Spots() {
                   }
                 }}
                 size="sm"
-                variant="outline"
-                className="h-9 text-xs font-medium px-3 bg-coral text-white hover:bg-coral/60 border-coral"
+                variant="action"
+                className="h-9 text-xs font-medium px-3"
                 disabled={!filteredSpots || filteredSpots.length < 2}
               >
                 <SplitSquareVertical className="h-4 w-4 mr-1.5" />
