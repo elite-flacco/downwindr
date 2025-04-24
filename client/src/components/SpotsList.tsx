@@ -85,7 +85,19 @@ export default function SpotsList({
                     <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center gap-1.5">
                       <MapPin className="w-3 h-3 inline text-theme-primary/70" />
                       <span className="flex items-center gap-1">
-                        {spot.country} {getCountryFlag(spot.country)}
+                        {spot.country} {
+                          (() => {
+                            const flag = getCountryFlag(spot.country);
+                            return flag ? (
+                              <img 
+                                src={flag.url} 
+                                alt={`${spot.country} flag`} 
+                                title={spot.country}
+                                className="h-3.5 inline-block"
+                              />
+                            ) : null
+                          })()
+                        }
                       </span>
                     </div>
                   </div>

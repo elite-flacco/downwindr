@@ -29,19 +29,26 @@ const countryToCode: { [key: string]: string } = {
   "New Zealand": "NZ"
 };
 
+// Type definition for the flag format we'll return
+export type CountryFlag = {
+  code: string;
+  url: string;
+};
+
 /**
- * Converts a country name to a flag emoji
- * Using the 'Regional Indicator Symbol' Unicode characters
+ * Returns a country flag object with code and image URL
+ * @param country The country name
+ * @returns A CountryFlag object or null if country not found
  */
-export function getCountryFlag(country: string): string {
-  if (!country) return "";
+export function getCountryFlag(country: string): CountryFlag | null {
+  if (!country) return null;
   
-  // Get the country code
   const code = countryToCode[country];
-  if (!code) return country; // If no code found, return the country name
+  if (!code) return null;
   
-  // Convert the country code to flag emoji
-  // Each regional indicator symbol is 127397 code points after its corresponding ASCII letter
-  const codePoints = [...code].map(char => 127397 + char.charCodeAt(0));
-  return String.fromCodePoint(...codePoints);
+  const lowerCode = code.toLowerCase();
+  return {
+    code: code,
+    url: `https://flagcdn.com/w20/${lowerCode}.png`
+  };
 }

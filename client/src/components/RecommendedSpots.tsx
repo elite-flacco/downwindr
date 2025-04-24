@@ -137,7 +137,19 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                   <div className="flex flex-wrap justify-between items-start gap-2">
                     <h3 className="text-xl font-bold text-slate-800 mb-2 break-words">{spot.name}</h3>
                     <Badge variant="outline" className="text-xs bg-slate-50 border-slate-200 text-slate-600 flex-shrink-0">
-                      {spot.country} {getCountryFlag(spot.country)}
+                      {spot.country} {
+                        (() => {
+                          const flag = getCountryFlag(spot.country);
+                          return flag ? (
+                            <img 
+                              src={flag.url} 
+                              alt={`${spot.country} flag`}
+                              title={spot.country}
+                              className="h-3.5 inline-block ml-1"
+                            />
+                          ) : null
+                        })()
+                      }
                     </Badge>
                   </div>
                   

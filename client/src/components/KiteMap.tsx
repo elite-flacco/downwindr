@@ -223,7 +223,19 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                     <h3 className="font-heading text-theme-primary text-lg">{popupInfo.spot.name}</h3>
                     <div className="text-xs text-theme-text-light flex items-center">
                       <MapPin className="w-3 h-3 mr-1" />
-                      {popupInfo.spot.country} {getCountryFlag(popupInfo.spot.country)}
+                      {popupInfo.spot.country} {
+                        (() => {
+                          const flag = getCountryFlag(popupInfo.spot.country);
+                          return flag ? (
+                            <img 
+                              src={flag.url} 
+                              alt={`${popupInfo.spot.country} flag`} 
+                              title={popupInfo.spot.country}
+                              className="h-3.5 inline-block ml-1"
+                            />
+                          ) : null
+                        })()
+                      }
                     </div>
                   </div>
                   
