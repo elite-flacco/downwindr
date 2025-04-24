@@ -1,41 +1,47 @@
 
-// Map of country names to their flag emojis
-const countryFlags: { [key: string]: string } = {
-  "Spain": "🇪🇸",
-  "Portugal": "🇵🇹",
-  "Brazil": "🇧🇷",
-  "Greece": "🇬🇷",
-  "Morocco": "🇲🇦",
-  "Egypt": "🇪🇬",
-  "Cape Verde": "🇨🇻",
-  "Dominican Republic": "🇩🇴",
-  "Vietnam": "🇻🇳",
-  "Philippines": "🇵🇭",
-  "Thailand": "🇹🇭",
-  "Indonesia": "🇮🇩",
-  "Australia": "🇦🇺",
-  "United States": "🇺🇸",
-  "Mexico": "🇲🇽",
-  "Italy": "🇮🇹",
-  "South Africa": "🇿🇦",
-  // Add other countries from the database
-  "France": "🇫🇷",
-  "Germany": "🇩🇪",
-  "United Kingdom": "🇬🇧",
-  "Ireland": "🇮🇪",
-  "China": "🇨🇳",
-  "Japan": "🇯🇵",
-  "India": "🇮🇳",
-  "Canada": "🇨🇦",
-  "New Zealand": "🇳🇿"
+// Map of country names to their ISO 3166-1 alpha-2 codes
+const countryToCode: { [key: string]: string } = {
+  "Spain": "ES",
+  "Portugal": "PT",
+  "Brazil": "BR",
+  "Greece": "GR",
+  "Morocco": "MA",
+  "Egypt": "EG",
+  "Cape Verde": "CV",
+  "Dominican Republic": "DO",
+  "Vietnam": "VN",
+  "Philippines": "PH",
+  "Thailand": "TH",
+  "Indonesia": "ID",
+  "Australia": "AU",
+  "United States": "US",
+  "Mexico": "MX",
+  "Italy": "IT",
+  "South Africa": "ZA",
+  "France": "FR",
+  "Germany": "DE",
+  "United Kingdom": "GB",
+  "Ireland": "IE",
+  "China": "CN",
+  "Japan": "JP",
+  "India": "IN",
+  "Canada": "CA",
+  "New Zealand": "NZ"
 };
 
-// Function to get country flag emoji
+/**
+ * Converts a country name to a flag emoji
+ * Using the 'Regional Indicator Symbol' Unicode characters
+ */
 export function getCountryFlag(country: string): string {
-  // Check if country exists in our mapping
-  if (country && countryFlags[country]) {
-    return countryFlags[country];
-  }
-  // Default flag if country not found
-  return "🏳️";
+  if (!country) return "";
+  
+  // Get the country code
+  const code = countryToCode[country];
+  if (!code) return country; // If no code found, return the country name
+  
+  // Convert the country code to flag emoji
+  // Each regional indicator symbol is 127397 code points after its corresponding ASCII letter
+  const codePoints = [...code].map(char => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
 }
