@@ -92,7 +92,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <Button
                     size="icon"
                     variant="outline"
-                    className="absolute top-4 right-4 bg-theme-background rounded-full p-2 shadow-md"
+                    className="absolute top-4 right-4 rounded-full p-2 shadow-md"
                     onClick={handleClose}
                   >
                     <X className="h-4 w-4" />
@@ -406,7 +406,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <Button 
                       variant="outline" 
                       size="sm"
-                      className="w-full sm:w-auto border-theme-text/50 bg-white hover:bg-theme-surface transition-colors duration-300"
+                      className="w-full sm:w-auto transition-colors duration-300"
                       onClick={handleClose}
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

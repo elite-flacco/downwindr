@@ -72,9 +72,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-4xl md:text-5xl lg:text-6xl mb-6 text-ocean-blue font-bold"
-                    style={{ fontFamily: "'Permanent Marker', cursive" }}
-                  >
+                    className="text-4xl md:text-5xl lg:text-6xl mb-6 text-ocean-blue font-bold"                  >
                     Catch the Perfect Wind
                   </motion.h1>
                   

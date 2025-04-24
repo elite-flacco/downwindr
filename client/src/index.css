@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam&family=Quicksand:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,12 +10,6 @@
 
 /* ===== THEME CONFIGURATION ===== */
 :root {
-  /* Font weights */
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
   /* Primary color scale */
   --color-primary-50: 219 100% 97%;    /* #EFF6FF */
   --color-primary-100: 217 100% 93%;   /* #DBEAFE */
@@ -32,22 +27,17 @@
   --color-yellow: 49 100% 52%;         /* #FFD60A */
   --color-coral: 1 100% 68%;           /* #FF5E5B */
   --color-white: 0 0% 100%;            /* #FFFFFF */
-  --color-slate: 221 39% 20%;          /* #1F2A40 */ /* Updated for more vibrance */
+  --color-slate: 221 39% 20%;          /* #1F2A40 */
 
-  /* Semantic color roles - Use these in components */
-  /* Primary UI elements */
+  /* Semantic color roles */
   --theme-primary: var(--color-primary-700);
   --theme-primary-hover: var(--color-primary-500);
-  --theme-secondary: var(--color-cerulean);
+  --theme-secondary: var(--color-primary-500);
   --theme-accent: var(--color-yellow);
-
-  /* Actions and status indicators */
   --theme-action: var(--color-coral);
-  --theme-success: var(--color-lime);
+  --theme-success: 142 71% 45%;
   --theme-warning: var(--color-yellow);
-  --theme-info: var(--color-cerulean);
-
-  /* Content and backgrounds */
+  --theme-info: var(--color-primary-400);
   --theme-background: var(--color-white);
   --theme-surface: var(--color-primary-100);
   --theme-text: var(--color-slate);
@@ -56,68 +46,64 @@
   --theme-button: var(--color-primary-500);
   --theme-button-hover: var(--color-primary-600);
 
-  /* Wind quality indicators - Custom colors */
+  /* Wind quality indicators */
   --theme-wind-excellent: 359, 100%, 59%; /* Red */
   --theme-wind-good: 40, 100%, 53%; /* Orange */
   --theme-wind-moderate: 127, 100%, 52%; /* Green */
   --theme-wind-poor: 177, 85%, 87%; /* Light blue */
 
-  /* Font families */
-  --font-fun: 'Kalam', cursive;
-  --font-title: 'Baloo 2', cursive;
-  --font-heading: 'Bangers', cursive;
-  --font-body: 'Quicksand', sans-serif;
+  /* For ShadCN UI compatibility */
+  --background: var(--color-white);
+  --foreground: var(--color-slate);
+  --card: var(--color-white);
+  --card-foreground: var(--color-slate);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-slate);
+  --primary: var(--color-primary-700);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-primary-100);
+  --secondary-foreground: var(--color-primary-800);
+  --muted: var(--color-primary-100);
+  --muted-foreground: var(--color-slate)/70%;
+  --accent: var(--color-yellow);
+  --accent-foreground: var(--color-slate);
+  --destructive: var(--color-coral);
+  --destructive-foreground: var(--color-white);
+  --border: var(--color-primary-100)/50%;
+  --input: var(--color-primary-100);
+  --ring: var(--color-primary-500);
+  --radius: 0.5rem;
 }
 
 /* ===== BASE STYLES ===== */
 @layer base {
-  * {
-    @apply border-border;
-  }
-
   html, body {
     @apply h-full;
     scroll-behavior: smooth;
   }
 
   body {
-    color: hsl(var(--theme-text));
-    font-family: var(--font-body), "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", sans-serif;
-    background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 30%) 100%);
-    -webkit-font-smoothing: antialiased;
+    @apply text-theme-text font-body bg-page-gradient antialiased;
   }
 
   h1 {
-    font-family: var(--font-title);
-    color: hsl(var(--theme-primary));
-    @apply font-bold tracking-wide text-4xl md:text-5xl;
-    letter-spacing: 1px;
+    @apply font-title text-theme-primary font-bold tracking-wide text-4xl md:text-5xl tracking-wider;
   }
 
   h2 {
-    font-family: var(--font-heading);
-    color: hsl(var(--theme-primary));
-    @apply text-2xl md:text-3xl font-bold;
-    letter-spacing: 0.5px;
+    @apply font-heading text-theme-primary text-2xl md:text-3xl font-bold tracking-wide;
   }
 
   h3 {
-    font-family: var(--font-heading);
-    color: hsl(var(--theme-secondary));
-    @apply text-xl md:text-2xl;
-    letter-spacing: 0.5px;
+    @apply font-heading text-theme-secondary text-xl md:text-2xl tracking-wide;
   }
 
   h4 {
-    font-family: var(--font-heading);
-    color: hsl(var(--theme-primary-hover));
-    @apply text-lg md:text-xl;
+    @apply font-heading text-theme-primary-hover text-lg md:text-xl;
   }
 
   h5, h6 {
-    font-family: var(--font-heading);
-    color: hsl(var(--theme-primary-hover));
-    @apply text-lg md:text-lg;
+    @apply font-heading text-theme-primary-hover text-lg;
   }
 
   p {
@@ -125,52 +111,15 @@
   }
 
   a {
-    color: hsl(var(--theme-secondary));
-    @apply transition-colors duration-200;
+    @apply text-theme-secondary transition-colors duration-200 hover:text-theme-primary;
   }
 
-  a:hover {
-    color: hsl(var(--theme-primary));
+  button, a, .tab, .interactive-item {
+    @apply focus:outline-none focus:ring-1 focus:ring-primary;
   }
 
-  button, 
-  a,
-  .tab,
-  .interactive-item {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-
-  /* Font utilities */
-  .font-heading {
-    font-family: var(--font-heading);
-  }
-
-  .font-title {
-    font-family: var(--font-title);
-  }
-
-  .font-fun {
-    font-family: var(--font-fun);
-  }
-
-  .font-body {
-    font-family: var(--font-body);
-  }
-
-  /* Grid system */
-  .container {
-    @apply px-4 mx-auto;
-    max-width: 1280px;
-  }
-
-  /* Section spacing */
   section {
     @apply py-12 md:py-16;
-  }
-
-  /* Button styling */
-  button, .btn {
-    @apply transition-all duration-300;
   }
 }
 
@@ -178,12 +127,12 @@
 @layer components {
   /* Card styling */
   .card {
-    @apply bg-white rounded-lg border border-border shadow-sm overflow-hidden transition-all duration-300;
+    @apply bg-white rounded-lg border border-theme-border shadow-sm overflow-hidden transition-all duration-300;
     will-change: transform, box-shadow;
   }
 
   .card:hover {
-    @apply shadow-md transform -translate-y-1;
+    @apply shadow-md -translate-y-1;
   }
 
   /* Badge styling */
@@ -196,33 +145,28 @@
   }
 
   .badge-success {
-    @apply bg-success/10 text-success;
+    @apply bg-theme-success/10 text-theme-success;
   }
 
   .badge-warning {
-    @apply bg-warning/10 text-warning;
+    @apply bg-theme-warning/10 text-theme-warning;
   }
 
   .badge-danger {
-    @apply bg-action/10 text-action;
+    @apply bg-theme-action/10 text-theme-action;
   }
 
-  /* Active tab styling */
+  /* Tab styling */
   .tab {
     @apply px-4 py-2 font-medium rounded-md transition-colors duration-200;
   }
 
   .tab.active {
-    background-color: hsl(var(--theme-primary));
-    color: hsl(var(--theme-background));
+    @apply bg-theme-primary text-theme-background;
   }
 
   .tab:not(.active) {
-    color: hsl(var(--theme-text-light));
-  }
-
-  .tab:not(.active):hover {
-    background-color: hsl(var(--theme-surface));
+    @apply text-theme-text-light hover:bg-theme-surface;
   }
 
   /* Interactive elements */
@@ -232,15 +176,13 @@
   }
 
   .interactive-item:hover {
-    @apply transform scale-105;
+    @apply scale-105;
   }
 
   /* Month selector styling */
   .month-selector {
+    @apply bg-theme-background text-theme-primary rounded-xl my-4 shadow-md border border-theme-border;
     scrollbar-width: none;
-    background-color: hsl(var(--theme-background));
-    color: hsl(var(--theme-primary));
-    @apply rounded-xl my-4 shadow-md border border-border;
   }
 
   .month-selector::-webkit-scrollbar {
@@ -249,57 +191,44 @@
 
   /* Month button styles */
   .month-button {
-    @apply relative overflow-hidden transition-all duration-300 hover:scale-105;
-    color: hsl(var(--theme-text-light));
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105 text-theme-text-light;
   }
 
   .month-button.active {
-    background-color: hsl(var(--theme-primary)/10%);
-    color: hsl(var(--theme-primary));
-    @apply font-bold shadow-sm;
+    @apply bg-theme-primary/10 text-theme-primary font-bold shadow-sm;
   }
 
   .month-button.active::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-1;
-    background-color: hsl(var(--theme-primary));
-    animation: slide-in 0.3s ease-out;
+    @apply absolute bottom-0 left-0 w-full h-1 bg-theme-primary animate-slide-in;
   }
 
-  /* Card hover effects */
+  /* Spot card */
   .spot-card {
     @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
     background: linear-gradient(135deg, hsl(var(--theme-background)) 0%, hsl(var(--theme-surface) / 40%) 100%);
     will-change: transform, box-shadow;
   }
 
-  /* Wind quality indicators - unified naming */
+  /* Wind quality indicators */
   .wind-quality {
     @apply relative overflow-hidden;
   }
 
   .wind-quality-excellent {
-    @apply wind-quality;
-    background-color: hsl(var(--theme-wind-excellent));
-    color: hsl(var(--theme-text));
+    @apply wind-quality bg-theme-wind-excellent text-theme-text;
   }
 
   .wind-quality-good {
-    @apply wind-quality;
-    background-color: hsl(var(--theme-wind-good));
-    color: hsl(var(--theme-text));
+    @apply wind-quality bg-theme-wind-good text-theme-text;
   }
 
   .wind-quality-moderate {
-    @apply wind-quality;
-    background-color: hsl(var(--theme-wind-moderate));
-    color: hsl(var(--theme-text));
+    @apply wind-quality bg-theme-wind-moderate text-theme-text;
   }
 
   .wind-quality-poor {
-    @apply wind-quality;
-    background-color: hsl(var(--theme-wind-poor));
-    color: hsl(var(--theme-text));
+    @apply wind-quality bg-theme-wind-poor text-theme-text;
   }
 
   /* Wind indicator */
@@ -309,26 +238,19 @@
 
   .wind-indicator::before {
     content: '';
-    @apply absolute inset-0 opacity-20 bg-white;
-    animation: wind-wave 3s infinite ease-in-out;
+    @apply absolute inset-0 opacity-20 bg-white animate-wind-wave;
     will-change: transform;
   }
 
-  /* Fun wave animation */
+  /* Wave animation */
   .wave-bg {
-    position: relative;
-    overflow: hidden;
+    @apply relative overflow-hidden;
   }
 
   .wave-bg::after {
     content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;
+    @apply absolute bottom-0 left-0 w-full h-2 animate-wave;
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
-    animation: wave 2s infinite linear;
     will-change: transform;
   }
 }
@@ -336,13 +258,10 @@
 /* ===== MAP STYLES ===== */
 /* Map container styling */
 .map-container {
+  @apply shadow-lg rounded-xl overflow-hidden z-10;
   height: 75vh !important;
   min-height: 600px !important;
   width: 100% !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
-  z-index: 10;
 }
 
 @media (max-width: 768px) {
@@ -352,14 +271,14 @@
   }
 }
 
-/* Make sure modal is above leaflet map and controls */
+/* Modal z-index */
 .spot-detail-modal {
-  z-index: 1000 !important; /* Higher than leaflet's highest layers */
+  z-index: 1000 !important;
 }
 
-/* Custom map styling */
+/* Map marker styling */
 .custom-marker-icon {
-  transition: transform 0.3s ease;
+  @apply transition-transform duration-300;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   will-change: transform;
 }
@@ -373,97 +292,32 @@
   animation: marker-pulse 0.5s ease-out;
 }
 
-/* Custom popup styling */
-.spot-popup .leaflet-popup-content-wrapper {
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-}
-
-.spot-popup .leaflet-popup-content {
-  margin: 0;
-  padding: 0;
-}
-
-/* Custom Mapbox GL styles */
+/* Map popup styling */
 .mapboxgl-popup {
   padding: 12px !important;
-  max-width: 300px !important;;
+  max-width: 300px !important;
 }
 
 .mapboxgl-popup-content {
-  padding: 12px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08) !important;
-  border: 1px solid rgba(209, 213, 219, 0.4) !important;
+  @apply p-3 rounded-xl shadow-lg border border-theme-border;
   max-width: 300px !important;
 }
 
 .mapboxgl-popup-close-button {
-  font-size: 20px !important;
-  color: #64748b !important;
-  padding: 5px !important;
+  @apply text-xl text-gray-500 p-1;
   right: 5px !important;
   top: 5px !important;
 }
 
-/* Map controls styling */
+/* Map controls */
 .mapboxgl-ctrl-group {
-  border-radius: 12px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-  overflow: hidden !important;
+  @apply rounded-xl shadow-md overflow-hidden;
 }
 
 .mapboxgl-ctrl button {
   width: 36px !important;
   height: 36px !important;
 }
-
-/* ===== UTILITIES ===== */
-@layer utilities {
-  /* Background gradients */
-  .bg-ocean-gradient {
-    background: linear-gradient(135deg, hsl(var(--theme-primary)) 0%, hsl(var(--theme-primary-hover)) 100%);
-  }
-
-  /* Background colors */
-  .bg-primary {
-    background-color: hsl(var(--color-primary-500));
-  }
-
-  .bg-yellow {
-    background-color: hsl(var(--color-yellow));
-  }
-
-  .bg-coral {
-    background-color: hsl(var(--color-coral));
-  }
-
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes slide-in {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-
-@keyframes wind-wave {
-  0%, 100% { transform: translateX(-50%) translateZ(0); }
-  50% { transform: translateX(0) translateZ(0); }
-}
-
-@keyframes marker-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-  100% { transform: scale(1); }
-}
-
-@keyframes wave {
-  0% { transform: translateX(-100%) translateZ(0); }
-  100% { transform: translateX(100%) translateZ(0); }
-}
-
-
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 640px) {
