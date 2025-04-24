@@ -235,42 +235,54 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         <p className="leading-relaxed">{spotDetails.spot.description}</p>
                         
                         {/* Add kite schools in the kitesurfing info card - Top 5 rated only */}
-                        {spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
-                          <div className="mt-4 mb-2">
-                            <h4 className="font-bold text-theme-text mb-2 flex items-center">
-                              <svg className="w-4 h-4 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                              </svg>
-                              Top Rated Kite Schools:
-                            </h4>
-                            <ul className="text-sm">
-                              {spotDetails.spot.kiteSchools
-                                // Parse the school data for sorting
-                                .map((school: string) => {
-                                  const parts = school.split('|');
-                                  const name = parts[0];
-                                  const mapLink = parts[1] || null;
-                                  const rating = parts[2] ? parseFloat(parts[2]) : 0;
-                                  const reviews = parts[3] ? parseInt(parts[3], 10) : 0;
-                                  
-                                  return {
-                                    name,
-                                    mapLink,
-                                    rating,
-                                    reviews,
-                                    originalString: school
-                                  };
-                                })
-                                // Sort by rating (highest first), then by number of reviews
-                                .sort((a, b) => {
-                                  if (b.rating !== a.rating) {
-                                    return b.rating - a.rating;
-                                  }
-                                  return b.reviews - a.reviews;
-                                })
-                                // Take only the top 5
-                                .slice(0, 5)
-                                .map((school, idx) => {
+                        {(() => {
+                          // First check if we have any schools with rating data
+                          const hasRatedSchools = spotDetails.spot.kiteSchools && 
+                            spotDetails.spot.kiteSchools.some((school: string) => {
+                              const parts = school.split('|');
+                              return parts.length >= 3; // At least has a rating
+                            });
+                          
+                          const schoolsWithData = spotDetails.spot.kiteSchools
+                            // Parse the school data for sorting
+                            .map((school: string) => {
+                              const parts = school.split('|');
+                              const name = parts[0];
+                              const mapLink = parts[1] || null;
+                              const rating = parts.length >= 3 ? parseFloat(parts[2]) : 0;
+                              const reviews = parts.length >= 4 ? parseInt(parts[3], 10) : 0;
+                              
+                              return {
+                                name,
+                                mapLink,
+                                rating,
+                                reviews,
+                                hasRating: parts.length >= 3,
+                                originalString: school
+                              };
+                            })
+                            // Sort by rating (highest first), then by number of reviews
+                            .sort((a: any, b: any) => {
+                              if (b.rating !== a.rating) {
+                                return b.rating - a.rating;
+                              }
+                              return b.reviews - a.reviews;
+                            })
+                            // Take only the top 5
+                            .slice(0, 5);
+                          
+                          const title = hasRatedSchools ? "Top Rated Kite Schools:" : "Kite Schools:";
+                          
+                          return spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
+                            <div className="mt-4 mb-2">
+                              <h4 className="font-bold text-theme-text mb-2 flex items-center">
+                                <svg className="w-4 h-4 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                {title}
+                              </h4>
+                              <ul className="text-sm">
+                                {schoolsWithData.map((school: any, idx: number) => {
                                   return (
                                     <li key={idx} className="flex flex-col mb-3">
                                       <div className="flex items-center justify-between">
@@ -298,13 +310,13 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                                           )}
                                         </div>
                                         
-                                        {/* Always show rating badge if available */}
-                                        {school.rating > 0 && (
+                                        {/* Display rating badge if available */}
+                                        {school.hasRating && (
                                           <div className="px-2 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium flex items-center">
                                             <svg className="w-3 h-3 mr-1 text-theme-accent-warning" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
-                                            {school.rating} ({school.reviews})
+                                            {school.rating} {school.reviews > 0 && `(${school.reviews})`}
                                           </div>
                                         )}
                                       </div>
@@ -317,11 +329,11 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                                       )}
                                     </li>
                                   );
-                                })
-                              }
-                            </ul>
-                          </div>
-                        )}
+                                })}
+                              </ul>
+                            </div>
+                          );
+                        })()}
                         
                         <div className="flex flex-wrap gap-2 mt-4">
                           {spotDetails.spot.tags.map((tag: string, index: number) => (
