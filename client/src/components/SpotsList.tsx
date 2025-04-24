@@ -14,6 +14,7 @@ import {
   Check
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { getCountryFlag } from "@/lib/countryUtils";
 import { Toggle } from "@/components/ui/toggle";
 
 interface SpotsListProps {
@@ -81,8 +82,11 @@ export default function SpotsList({
                     <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center">
                       <Thermometer className="w-3 h-3 inline text-theme-primary/70 mr-1" /> {spot.tempRange}
                     </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center">
-                      <MapPin className="w-3 h-3 inline text-theme-primary/70 mr-1" /> {spot.country}
+                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center gap-1.5">
+                      <MapPin className="w-3 h-3 inline text-theme-primary/70" />
+                      <span className="flex items-center gap-1">
+                        {spot.country} {getCountryFlag(spot.country)}
+                      </span>
                     </div>
                   </div>
                   
