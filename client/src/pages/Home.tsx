@@ -106,35 +106,6 @@ export default function Home() {
               
               {/* Empty space on the right side - we now have a full background image */}
               <div className="w-full lg:w-1/2"></div>
-              
-              {/* Wind indicator animations */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2, duration: 0.8 }}
-                className="absolute right-0 bottom-0 left-0 h-20 pointer-events-none"
-              >
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <motion.div 
-                    key={i}
-                    className="absolute h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-                    style={{ 
-                      bottom: `${10 + i * 10}%`,
-                      left: 0,
-                      right: 0,
-                      height: '2px',
-                    }}
-                    animate={{
-                      x: ['-100%', '100%'],
-                      transition: {
-                        repeat: Infinity,
-                        duration: 5 + i,
-                        ease: 'linear'
-                      }
-                    }}
-                  />
-                ))}
-              </motion.div>
             </div>
           </div>
         </section>
