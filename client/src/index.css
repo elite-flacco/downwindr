@@ -37,7 +37,7 @@
   /* Semantic color roles - Use these in components */
   /* Primary UI elements */
   --theme-primary: var(--color-primary-700);
-  --theme-primary-hover: var(--color-primary-800);
+  --theme-primary-hover: var(--color-primary-500);
   --theme-secondary: var(--color-cerulean);
   --theme-accent: var(--color-yellow);
 
@@ -53,6 +53,8 @@
   --theme-text: var(--color-slate);
   --theme-text-light: var(--color-slate)/70%;
   --theme-border: var(--color-primary-100)/50%;
+  --theme-button: var(--color-primary-500);
+  --theme-button-hover: var(--color-primary-600);
 
   /* Wind quality indicators - Custom colors */
   --theme-wind-excellent: 359, 100%, 59%; /* Red */
@@ -62,8 +64,8 @@
 
   /* Font families */
   --font-fun: 'Kalam', cursive;
-  --font-heading: 'Baloo 2', cursive;
-  --font-title: 'Bangers', cursive;
+  --font-title: 'Baloo 2', cursive;
+  --font-heading: 'Bangers', cursive;
   --font-body: 'Quicksand', sans-serif;
 }
 
@@ -102,14 +104,20 @@
   h3 {
     font-family: var(--font-heading);
     color: hsl(var(--theme-secondary));
-    @apply text-xl md:text-2xl font-bold;
+    @apply text-xl md:text-2xl;
     letter-spacing: 0.5px;
   }
 
-  h4, h5, h6 {
+  h4 {
     font-family: var(--font-heading);
     color: hsl(var(--theme-primary-hover));
-    @apply font-bold;
+    @apply text-lg md:text-xl;
+  }
+
+  h5, h6 {
+    font-family: var(--font-heading);
+    color: hsl(var(--theme-primary-hover));
+    @apply text-lg md:text-lg;
   }
 
   p {

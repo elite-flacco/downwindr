@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getCountryFlag } from "@/lib/countryUtils";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { X, Wind, Waves, Thermometer, Calendar, Heart, ExternalLink } from "lucide-react";
+import { X, Wind, Waves, Thermometer, Calendar, Heart, MapPin, ExternalLink } from "lucide-react";
 import { MonthNames, WindQuality } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
 import ReviewsAndRatings from "./ReviewsAndRatings";
@@ -32,11 +32,11 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
       case WindQuality.Good:
         return "wind-quality-good text-theme-text";
       case WindQuality.Moderate:
-        return "wind-quality-moderate text-theme-background";
+        return "wind-quality-moderate text-theme-text";
       case WindQuality.Poor:
-        return "wind-quality-poor text-theme-background";
+        return "wind-quality-poor text-theme-text";
       default:
-        return "bg-theme-muted text-theme-background";
+        return "bg-theme-muted text-theme-text";
     }
   };
   
@@ -130,7 +130,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
               <div>
                 {/* Header section with gradient */}
                 <div className="relative">
-                  <div className="w-full h-72 bg-gradient-to-br from-theme-primary to-theme-primary-hover">
+                  <div className="w-full h-48 bg-gradient-to-br from-theme-primary to-theme-primary-hover">
                     {/* Wave patterns */}
                     <div className="absolute inset-0 opacity-30">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="absolute bottom-0">
@@ -148,26 +148,23 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <X className="h-4 w-4" />
                   </Button>
                   
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
-                    <motion.h2 
-                      className="text-3xl font-bold font-heading text-theme-background"
+                  <div className="flex absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
+                    <MapPin className="w-6 h-6 text-white mr-2" />
+                    <motion.h3 
+                      className="text-3xl text-theme-background"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.05 }}
                     >
                       {spotDetails.spot.name}
-                    </motion.h2>
+                    </motion.h3>
                     <motion.p 
                       className="text-theme-background text-opacity-90 flex items-center"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.05 }}
                     >
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {spotDetails.spot.country} {
+                      {
                         (() => {
                           const flag = getCountryFlag(spotDetails.spot.country);
                           return flag ? (
@@ -175,7 +172,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                               src={flag.url} 
                               alt={`${spotDetails.spot.country} flag`} 
                               title={spotDetails.spot.country}
-                              className="h-4 inline-block ml-1"
+                              className="h-4 inline-block ml-4"
                             />
                           ) : null
                         })()
@@ -195,14 +192,14 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   >
                     {renderCurrentWindBadge()}
                     
-                    <div className="flex items-center bg-theme-primary text-theme-background px-4 py-2 rounded-full text-sm font-medium shadow-sm">
+                    <div className="flex items-center bg-theme-primary/90 text-theme-background px-4 py-2 rounded-full text-sm font-medium shadow-sm">
                       <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves 🌊
                     </div>
                     
-                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">🌡️ {spotDetails.spot.tempRange} 
+                    <div className="flex items-center text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">🌡️ {spotDetails.spot.tempRange} 
                     </div>
                     
-                    <div className="flex items-center border border-theme-border text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">📅 Best: {spotDetails.spot.bestMonths}
+                    <div className="flex items-center text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">📅 Best: {spotDetails.spot.bestMonths}
                     </div>
                     
                     {spotDetails.spot.windguruCode != null && spotDetails.spot.windguruCode !== '' && (
@@ -210,9 +207,10 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         href={`https://www.windguru.cz/${spotDetails.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center bg-theme-accent-warning text-theme-text px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-theme-accent-warning/90 transition-colors border"
+                        className="flex items-center text-theme-text px-2 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-theme-accent-warning/90 transition-colors"
                       >
-                        <Wind className="mr-2 h-4 w-4" /> Windguru Forecast
+                        <Wind className="mr-2 h-4 w-4" /> Windguru
+                        <ExternalLink className="ml-2 h-4 w-4" />
                       </a>
                     )}
                   </motion.div>
@@ -225,14 +223,14 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="text-xl mb-3 text-theme-text flex items-center">
+                      <h3 className="mb-3 text-theme-text flex items-center">
                         <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Kitesurfing Info
                       </h3>
-                      <div className="space-y-3 text-theme-text-light">
-                        <p className="leading-relaxed">{spotDetails.spot.description}</p>
+                      <div className="space-y-3 text-sm text-theme">
+                        <p>{spotDetails.spot.description}</p>
                         
                         {/* Add kite schools in the kitesurfing info card - Top 5 rated only */}
                         {(() => {
@@ -274,13 +272,10 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                           const title = hasRatedSchools ? "Top Rated Kite Schools:" : "Kite Schools:";
                           
                           return spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
-                            <div className="mt-4 mb-2">
-                              <h4 className="font-bold text-theme-text mb-2 flex items-center">
-                                <svg className="w-4 h-4 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
+                            <div className="mt-8 mb-2">
+                              <h5 className="text-theme-text mb-2 flex items-center">
                                 {title}
-                              </h4>
+                              </h5>
                               <ul className="text-sm">
                                 {schoolsWithData.map((school: any, idx: number) => {
                                   return (
@@ -302,7 +297,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                                             </a>
                                           ) : (
                                             <div className="flex items-center">
-                                              <svg className="w-4 h-4 mr-2 flex-shrink-0 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                              <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                                               </svg>
                                               <span className="font-medium">{school.name}</span>
@@ -313,20 +308,13 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                                         {/* Display rating badge if available */}
                                         {school.hasRating && (
                                           <div className="px-2 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium flex items-center">
-                                            <svg className="w-3 h-3 mr-1 text-theme-accent-warning" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="w-3 h-3 mr-1 text-theme-wind-good" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
                                             {school.rating} {school.reviews > 0 && `(${school.reviews})`}
                                           </div>
                                         )}
                                       </div>
-                                      
-                                      {/* Show review count in a more subtle way under the school name */}
-                                      {school.reviews > 0 && (
-                                        <div className="ml-6 mt-1 text-xs text-theme-text-light">
-                                          Based on {school.reviews} student reviews
-                                        </div>
-                                      )}
                                     </li>
                                   );
                                 })}
@@ -339,7 +327,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                           {spotDetails.spot.tags.map((tag: string, index: number) => (
                             <div 
                               key={index} 
-                              className="text-sm border border-theme-border px-3 py-1 rounded-full bg-theme-surface text-theme-text-light"
+                              className="text-xs border border-theme-border px-3 py-1 rounded-full bg-theme-surface text-theme"
                             >
                               {tag}
                             </div>
@@ -354,14 +342,14 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="text-xl font-bold font-heading mb-3 text-theme-text flex items-center">
+                      <h3 className="mb-3 text-theme-text flex items-center">
                         <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Local Attractions
                       </h3>
-                      <div className="space-y-3 text-theme-text-light">
-                        <p className="leading-relaxed">{spotDetails.spot.localAttractions}</p>
+                      <div className="space-y-3 text-sm text-theme">
+                        <p>{spotDetails.spot.localAttractions}</p>
                       </div>
                       {/* Removed duplicate kite schools section */}
                     </motion.div>
@@ -374,7 +362,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.05 }}
                   >
-                    <h3 className="text-xl font-bold font-heading mb-4 text-theme-text flex items-center">
+                    <h3 className="mb-4 text-theme-text flex items-center">
                       <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
@@ -388,9 +376,9 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                             key={condition.id} 
                             className={`p-2 rounded-lg ${getWindQualityClass(condition.windQuality)} transition-all hover:shadow-md hover:scale-105`}
                           >
-                            <div className="text-white text-xs">{MonthNames[condition.month - 1].substring(0, 3)}</div>
-                            <div className="text-xs text-white opacity-90">{condition.windSpeed} knots</div>
-                            <div className="text-xs text-white mt-1">{getWindQualityEmoji(condition.windQuality)}</div>
+                            <div className="text-slate text-xs">{MonthNames[condition.month - 1].substring(0, 3)}</div>
+                            <div className="text-xs text-slate opacity-90">{condition.windSpeed} knots</div>
+                            <div className="text-xs mt-1">{getWindQualityEmoji(condition.windQuality)}</div>
                           </div>
                         ))}
                     </div>
@@ -403,7 +391,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     transition={{ duration: 0.05 }}
                     className="mt-8 mb-8 bg-theme-background rounded-xl p-5 shadow-md"
                   >
-                    <h3 className="text-xl font-bold font-heading mb-5 text-theme-text flex items-center">
+                    <h3 className="mb-5 text-theme-text flex items-center">
                       <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
                       </svg>
@@ -417,7 +405,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
                     <Button 
                       variant="outline" 
-                      className="w-full sm:w-auto px-5 py-3 border-theme-border hover:bg-theme-surface text-theme-text transition-colors duration-300"
+                      className="w-full sm:w-auto px-5 py-1 border-theme-text/50 text-xs bg-white hover:bg-theme-surface text-theme-text transition-colors duration-300"
                       onClick={handleClose}
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -426,12 +414,12 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       Back to Map
                     </Button>
                     
-                    <Button 
-                      className="w-full sm:w-auto px-5 py-3 bg-theme-accent-warning hover:bg-theme-accent-warning/90 text-theme-background transition-colors duration-300 shadow-sm"
+                    {/* <Button 
+                      className="w-full sm:w-auto px-5 py-3 hover:bg-theme-accent-warning/90 bg-coral hover:bg-coral/70 transition-colors duration-300 shadow-sm"
                     >
                       Add to Favorites 
                       <Heart className="ml-2 h-5 w-5 animate-pulse" />
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </div>

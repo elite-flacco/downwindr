@@ -294,14 +294,14 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   return (
     <div className="space-y-4">
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2">
+        {/* <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="reviews">
             Reviews ({spotDetails.reviews.length})
           </TabsTrigger>
           <TabsTrigger value="ratings">
             Ratings ({spotDetails.totalRatings})
           </TabsTrigger>
-        </TabsList>
+        </TabsList> */}
 
         {/* Reviews Tab */}
         <TabsContent value="reviews" className="space-y-4">
@@ -323,7 +323,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                   </Button>
                 ) : (
                   <Link href="/auth">
-                    <Button variant="outline" className="flex items-center gap-1">
+                    <Button variant="outline" className="flex items-center gap-1 bg-theme-button hover:bg-theme-button-hover">
                       Login to Review
                     </Button>
                   </Link>
@@ -483,7 +483,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                   </Button>
                 ) : (
                   <Link href="/auth">
-                    <Button variant="outline" className="flex items-center gap-1">
+                    <Button variant="outline" className="flex items-center gap-1 bg-theme-primary">
                       Login to Rate
                     </Button>
                   </Link>
