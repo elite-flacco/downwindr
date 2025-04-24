@@ -28,7 +28,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        // ShadCN default colors
+        // ShadCN UI System
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -41,17 +41,6 @@ export default {
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          '50': 'hsl(var(--color-primary-50))',
-          '100': 'hsl(var(--color-primary-100))',
-          '200': 'hsl(var(--color-primary-200))',
-          '300': 'hsl(var(--color-primary-300))',
-          '400': 'hsl(var(--color-primary-400))',
-          '500': 'hsl(var(--color-primary-500))',
-          '600': 'hsl(var(--color-primary-600))',
-          '700': 'hsl(var(--color-primary-700))',
-          '800': 'hsl(var(--color-primary-800))',
-          '900': 'hsl(var(--color-primary-900))',
-          '950': 'hsl(var(--color-primary-950))',
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -73,39 +62,14 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
-        wind: {
-          excellent: 'hsl(359, 100%, 59%)',
-          good: 'hsl(40, 100%, 53%)',
-          moderate: 'hsl(127, 100%, 52%)',
-          poor: 'hsl(177, 85%, 87%)',
-        },
         
-        // Theme color system - moved from CSS variables to Tailwind config
+        // Application Theme System
         "theme-primary": "hsl(var(--theme-primary))",
         "theme-primary-hover": "hsl(var(--theme-primary-hover))",
         "theme-secondary": "hsl(var(--theme-secondary))",
-        "theme-accent": "hsl(var(--theme-accent))",
         "theme-action": "hsl(var(--theme-action))",
         "theme-success": "hsl(var(--theme-success))",
         "theme-warning": "hsl(var(--theme-warning))",
-        "theme-info": "hsl(var(--theme-info))",
         "theme-background": "hsl(var(--theme-background))",
         "theme-surface": "hsl(var(--theme-surface))",
         "theme-text": "hsl(var(--theme-text))",
@@ -114,10 +78,11 @@ export default {
         "theme-button": "hsl(var(--theme-button))",
         "theme-button-hover": "hsl(var(--theme-button-hover))",
         
-        // Vibrant colors
-        "yellow": "hsl(var(--color-yellow))",
-        "coral": "hsl(var(--color-coral))",
-        "slate": "hsl(var(--color-slate))",
+        // Wind quality indicators for maps
+        "theme-wind-excellent": "hsl(var(--theme-wind-excellent))",
+        "theme-wind-good": "hsl(var(--theme-wind-good))",
+        "theme-wind-moderate": "hsl(var(--theme-wind-moderate))",
+        "theme-wind-poor": "hsl(var(--theme-wind-poor))",
       },
       
       // Additional background utilities

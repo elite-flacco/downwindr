@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Quicksand:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Quicksand:wght@400;500;600;700&family=Bangers&family=Fredoka:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,62 +6,55 @@
 
 /* ===== THEME CONFIGURATION ===== */
 :root {
-  /* Primary color scale */
-  --color-primary-50: 219 100% 97%;    /* #EFF6FF */
-  --color-primary-100: 217 100% 93%;   /* #DBEAFE */
-  --color-primary-200: 216 100% 87%;   /* #BFDBFE */
-  --color-primary-300: 216 100% 78%;   /* #93C5FD */
-  --color-primary-400: 217 100% 68%;   /* #60A5FA */
-  --color-primary-500: 217 97% 60%;    /* #3B82F6 */
-  --color-primary-600: 221 83% 53%;    /* #2563EB */
-  --color-primary-700: 224 76% 48%;    /* #1D4ED8 */
-  --color-primary-800: 226 71% 40%;    /* #1E40AF */
-  --color-primary-900: 224 64% 33%;    /* #1E3A8A */
-  --color-primary-950: 226 57% 21%;    /* #172554 */
-
-  /* Vibrant color palette */
-  --color-yellow: 49 100% 52%;         /* #FFD60A */
-  --color-coral: 1 100% 68%;           /* #FF5E5B */
-  --color-white: 0 0% 100%;            /* #FFFFFF */
-  --color-slate: 221 39% 20%;          /* #1F2A40 */
-
-  /* Semantic color roles */
-  --theme-primary: var(--color-primary-700);
-  --theme-primary-hover: var(--color-primary-500);
-  --theme-secondary: var(--color-primary-500);
-  --theme-accent: var(--color-yellow);
-  --theme-action: var(--color-coral);
-  --theme-success: 142 71% 45%;
-  --theme-warning: var(--color-yellow);
-  --theme-info: var(--color-primary-400);
-  --theme-background: var(--color-white);
-  --theme-surface: var(--color-primary-100);
-  --theme-text: var(--color-slate);
-  --theme-text-light: var(--color-slate)/70%;
-  --theme-border: var(--color-primary-100)/50%;
-  --theme-button: var(--color-primary-500);
-  --theme-button-hover: var(--color-primary-600);
-
-  /* For ShadCN UI compatibility */
-  --background: var(--color-white);
-  --foreground: var(--color-slate);
-  --card: var(--color-white);
-  --card-foreground: var(--color-slate);
-  --popover: var(--color-white);
-  --popover-foreground: var(--color-slate);
-  --primary: var(--color-primary-700);
-  --primary-foreground: var(--color-white);
-  --secondary: var(--color-primary-100);
-  --secondary-foreground: var(--color-primary-800);
-  --muted: var(--color-primary-100);
-  --muted-foreground: var(--color-slate)/70%;
-  --accent: var(--color-yellow);
-  --accent-foreground: var(--color-slate);
-  --destructive: var(--color-coral);
-  --destructive-foreground: var(--color-white);
-  --border: var(--color-primary-100)/50%;
-  --input: var(--color-primary-100);
-  --ring: var(--color-primary-500);
+  /* Core colors */
+  --primary: 217 97% 60%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Color palette */
+  --theme-warning: 49 100% 52%; /* Yellow */
+  --theme-action: 1 100% 68%; /* Coral/Red */
+  --theme-success: 142 71% 45%; /* Green */
+  
+  /* UI colors derived from primary */
+  --theme-primary: 224 76% 48%; /* Primary-700 */
+  --theme-primary-hover: 217 97% 60%; /* Primary-500 */
+  --theme-secondary: 217 97% 60%; /* Primary-500 */
+  --theme-surface: 217 100% 93%; /* Primary-100 */
+  --theme-border: 217 100% 93% / 50%; /* Primary-100/50% */
+  
+  /* General UI */
+  --theme-background: 0 0% 100%; /* White */
+  --theme-text: 221 39% 20%; /* Dark slate */
+  --theme-text-light: 221 39% 20% / 70%; /* Transparent slate */
+  
+  /* Map wind quality indicators */
+  --theme-wind-excellent: 359 100% 59%; /* Red */
+  --theme-wind-good: 40 100% 53%; /* Orange */
+  --theme-wind-moderate: 127 100% 52%; /* Green */
+  --theme-wind-poor: 177 85% 87%; /* Light blue */
+  
+  /* Button variants */
+  --theme-button: 217 97% 60%; /* Primary-500 */
+  --theme-button-hover: 221 83% 53%; /* Primary-600 */
+  
+  /* ShadCN compatibility (using our simplified palette) */
+  --background: var(--theme-background);
+  --foreground: var(--theme-text);
+  --card: var(--theme-background);
+  --card-foreground: var(--theme-text);
+  --popover: var(--theme-background);
+  --popover-foreground: var(--theme-text);
+  --secondary: var(--theme-surface);
+  --secondary-foreground: 226 71% 40%; 
+  --muted: var(--theme-surface);
+  --muted-foreground: var(--theme-text-light);
+  --accent: var(--theme-warning);
+  --accent-foreground: var(--theme-text);
+  --destructive: var(--theme-action);
+  --destructive-foreground: 0 0% 100%;
+  --border: var(--theme-border);
+  --input: var(--theme-surface);
+  --ring: var(--theme-secondary);
   --radius: 0.5rem;
 }
 
@@ -210,19 +199,19 @@
   }
 
   .wind-quality-excellent {
-    @apply wind-quality bg-wind-excellent text-white;
+    @apply wind-quality bg-theme-wind-excellent text-theme-text;
   }
 
   .wind-quality-good {
-    @apply wind-quality bg-wind-good text-theme-text;
+    @apply wind-quality bg-theme-wind-good text-theme-text;
   }
 
   .wind-quality-moderate {
-    @apply wind-quality bg-wind-moderate text-theme-text;
+    @apply wind-quality bg-theme-wind-moderate text-theme-text;
   }
 
   .wind-quality-poor {
-    @apply wind-quality bg-wind-poor text-theme-text;
+    @apply wind-quality bg-theme-wind-poor text-theme-text;
   }
 
   /* Wind indicator */
