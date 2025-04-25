@@ -59,7 +59,7 @@ export default function Header() {
               <h1 className="text-xl font-bold text-theme-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>
                 Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
               </h1>
-              <p className="text-xs text-theme-text-light font-medium">Ride the perfect breeze 💨</p>
+              <p className="text-xs text-theme-text font-medium">Ride the perfect breeze 💨</p>
             </div>
           </motion.div>
         </Link>
@@ -67,7 +67,7 @@ export default function Header() {
         <nav className="hidden md:flex space-x-2">
           <Link href="/">
             <motion.div 
-              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -81,7 +81,7 @@ export default function Header() {
           </Link>
           <Link href="/spots">
             <motion.div 
-              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/spots" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -95,7 +95,7 @@ export default function Header() {
           </Link>
           <Link href="/community">
             <motion.div 
-              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/community" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
@@ -109,7 +109,7 @@ export default function Header() {
           </Link>
           <Link href="/learn">
             <motion.div 
-              className={`text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                 location === "/learn" 
                   ? "bg-theme-primary text-theme-background shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"

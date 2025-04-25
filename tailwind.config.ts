@@ -6,7 +6,7 @@ export default {
   theme: {
     fontFamily: {
       // Define fonts using the Tailwind config instead of CSS variables
-      'title': ['Fredoka', 'cursive'],
+      'title': ['Permanent Marker', 'cursive'],
       'heading': ['Bangers', 'cursive'],
       'body': ['Quicksand', 'sans-serif'],
       'fun': ['Kalam', 'cursive'],

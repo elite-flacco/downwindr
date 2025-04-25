@@ -47,11 +47,11 @@ export default function Footer() {
               <Wind className="w-8 h-8 text-theme-background" />
             </div>
             <h3 className="text-2xl font-bold mb-2 text-theme-primary-hover" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
-            <p className="text-theme-text-light mb-6 leading-relaxed">Discover your dream kitesurfing experience worldwide.</p>
+            <p className="text-theme-text text-xs mb-4">Discover your dream kitesurfing experience worldwide.</p>
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
+            <h4 className="mb-6 flex items-center text-theme-text">
               <Compass className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Explore
             </h4>
@@ -59,7 +59,7 @@ export default function Footer() {
               <li>
                 <Link href="/spots">
                   <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text text-sm hover:text-theme-primary group flex items-center cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
@@ -71,7 +71,7 @@ export default function Footer() {
               <li>
                 <Link href="/community">
                   <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text text-sm hover:text-theme-primary group flex items-center cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
@@ -84,7 +84,7 @@ export default function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
+            <h4 className="mb-6 flex items-center text-theme-text">
               <Info className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Resources
             </h4>
@@ -92,7 +92,7 @@ export default function Footer() {
               <li>
                 <Link href="/learn">
                   <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text text-sm hover:text-theme-primary group flex items-center cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
@@ -101,23 +101,11 @@ export default function Footer() {
                   </motion.div>
                 </Link>
               </li>
-              <li>
-                <Link href="/learn">
-                  <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
-                    whileHover={{ x: 5 }}
-                  >
-                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
-                    Equipment Reviews
-                    <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </motion.div>
-                </Link>
-              </li>
             </ul>
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl mb-6 flex items-center text-theme-text font-bold">
+            <h4 className="mb-6 flex items-center text-theme-text">
               <Mail className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Get in Touch
             </h4>
@@ -125,7 +113,7 @@ export default function Footer() {
               <li>
                 <Link href="/contact">
                   <motion.div 
-                    className="text-theme-text-light hover:text-theme-primary group flex items-center cursor-pointer text-[15px]"
+                    className="text-theme-text text-sm hover:text-theme-primary group flex items-center cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
