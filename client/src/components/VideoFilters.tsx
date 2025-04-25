@@ -20,7 +20,7 @@ export default function VideoFilters({
   onSearchChange,
   selectedCategory,
   selectedLevel,
-  searchQuery
+  searchQuery,
 }: VideoFiltersProps) {
   return (
     <div className="mb-8 space-y-4">
@@ -33,7 +33,7 @@ export default function VideoFilters({
           className="pl-10 bg-white border-gray-200"
         />
       </div>
-      
+
       <div>
         <h3 className="text-sm font-medium mb-2 flex items-center">
           <Filter className="h-4 w-4 mr-1 text-theme-primary" />
@@ -44,22 +44,22 @@ export default function VideoFilters({
             key="all"
             variant={selectedCategory === "" ? "default" : "outline"}
             className={`cursor-pointer ${
-              selectedCategory === "" 
-                ? "bg-theme-primary hover:bg-theme-primary/80" 
+              selectedCategory === ""
+                ? "bg-theme-primary hover:bg-theme-primary/80"
                 : "hover:bg-theme-primary/10"
             }`}
             onClick={() => onCategoryChange("")}
           >
             All
           </Badge>
-          
+
           {videoCategories.map((category) => (
             <Badge
               key={category}
               variant={selectedCategory === category ? "default" : "outline"}
               className={`cursor-pointer capitalize ${
-                selectedCategory === category 
-                  ? "bg-theme-primary hover:bg-theme-primary/80" 
+                selectedCategory === category
+                  ? "bg-theme-primary hover:bg-theme-primary/80"
                   : "hover:bg-theme-primary/10"
               }`}
               onClick={() => onCategoryChange(category)}
@@ -69,30 +69,33 @@ export default function VideoFilters({
           ))}
         </div>
       </div>
-      
+
       <div>
-        <h3 className="text-sm font-medium mb-2">Experience Level</h3>
+        <h3 className="text-sm font-medium mb-2 flex items-center">
+          <Filter className="h-4 w-4 mr-1 text-theme-primary" />
+          Experience Level
+        </h3>
         <div className="flex flex-wrap gap-2">
           <Badge
             key="all"
             variant={selectedLevel === "" ? "default" : "outline"}
             className={`cursor-pointer ${
-              selectedLevel === "" 
-                ? "bg-theme-primary hover:bg-theme-primary/80" 
+              selectedLevel === ""
+                ? "bg-theme-primary hover:bg-theme-primary/80"
                 : "hover:bg-theme-primary/10"
             }`}
             onClick={() => onLevelChange("")}
           >
             All
           </Badge>
-          
+
           {videoLevels.map((level) => (
             <Badge
               key={level}
               variant={selectedLevel === level ? "default" : "outline"}
               className={`cursor-pointer capitalize ${
-                selectedLevel === level 
-                  ? "bg-theme-primary hover:bg-theme-primary/80" 
+                selectedLevel === level
+                  ? "bg-theme-primary hover:bg-theme-primary/80"
                   : "hover:bg-theme-primary/10"
               }`}
               onClick={() => onLevelChange(level)}

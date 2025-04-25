@@ -45,7 +45,7 @@ export default function Header() {
         scrolled ? "sticky top-0 z-50 shadow-md" : "shadow-sm"
       }`}
     >
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-6 flex items-center justify-between">
         <Link href="/">
           <motion.div 
             className="flex items-center cursor-pointer"

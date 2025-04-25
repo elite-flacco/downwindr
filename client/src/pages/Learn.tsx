@@ -39,16 +39,16 @@ export default function Learn() {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <main className="container mx-auto px-4 py-8 flex-grow">
+      <main className="container mx-auto px-4 py-0 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <h1 className="text-3xl font-bold text-theme-primary mb-2">Learn & Improve</h1>
             <p className="text-lg text-theme-text-light">Boost your kitesurfing skills with curated videos and resources</p>
-          </div>
+          </div> */}
 
           <Tabs 
             defaultValue="videos" 
@@ -56,7 +56,7 @@ export default function Learn() {
             onValueChange={setTabValue}
             className="mb-6"
           >
-            <TabsList className="grid w-full md:w-auto grid-cols-2">
+            {/* <TabsList className="grid w-full md:w-auto grid-cols-2">
               <TabsTrigger value="videos" className="flex items-center">
                 <Video className="h-4 w-4 mr-2" />
                 Video Library
@@ -65,7 +65,7 @@ export default function Learn() {
                 <GraduationCap className="h-4 w-4 mr-2" />
                 Learning Resources
               </TabsTrigger>
-            </TabsList>
+            </TabsList> */}
             
             <TabsContent value="videos" className="mt-6">
               <VideoFilters 

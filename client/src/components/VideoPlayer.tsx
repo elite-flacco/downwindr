@@ -97,7 +97,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
         )}
         
         <div className="p-4">
-          <h3 className="font-semibold text-lg mb-1 line-clamp-1">{video.title}</h3>
+          <h3 className="text-lg mb-1 line-clamp-1">{video.title}</h3>
           <p className="text-sm text-gray-600 mb-3 line-clamp-2">{video.description}</p>
           
           <div className="flex flex-wrap gap-2 mb-2">
