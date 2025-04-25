@@ -165,7 +165,7 @@ export default function Header() {
           ) : (
             <Link href="/auth">
               <Button 
-                variant="secondary" 
+                variant="action" 
                 className="flex items-center gap-1.5"
                 size="sm"
               >
