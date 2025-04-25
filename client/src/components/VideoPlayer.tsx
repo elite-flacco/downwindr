@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Clock, ExternalLink, AlertCircle, Youtube } from "lucide-react";
+import { Play, Clock, ExternalLink, AlertCircle } from "lucide-react";
+import { SiYoutube } from "react-icons/si";
 import type { LearnVideo } from "@/data/learnVideos";
 
 interface VideoPlayerProps {
@@ -54,15 +55,6 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
               </button>
             </div>
             
-            {/* External link button */}
-            <div 
-              className="absolute top-2 right-2 bg-black/70 text-white p-1.5 rounded-md flex items-center cursor-pointer hover:bg-black/90 transition-colors"
-              onClick={handleExternalLinkClick}
-              title="Open in YouTube"
-            >
-              <Youtube className="h-4 w-4" />
-            </div>
-            
             <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md flex items-center">
               <Clock className="h-3 w-3 mr-1" />
               {video.duration}
@@ -73,10 +65,10 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                 <AlertCircle className="h-8 w-8 text-red-500 mb-2" />
                 <p className="text-white text-sm mb-2">Unable to load embedded video</p>
                 <button 
-                  className="bg-theme-primary text-white px-3 py-1 rounded-md text-xs flex items-center"
+                  className="bg-red-600 text-white px-3 py-1 rounded-md text-xs flex items-center"
                   onClick={handleExternalLinkClick}
                 >
-                  <ExternalLink className="h-3 w-3 mr-1" />
+                  <SiYoutube className="h-4 w-4 mr-1" />
                   Watch on YouTube
                 </button>
               </div>
@@ -99,12 +91,11 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             {/* Fallback button if iframe doesn't trigger error event */}
             <div className="absolute top-2 right-2 z-10">
               <button 
-                className="bg-black/70 text-white text-xs px-2 py-1 rounded-md flex items-center"
+                className="bg-black/70 text-red-500 p-1 rounded-md flex items-center"
                 onClick={handleExternalLinkClick}
                 title="Open in YouTube"
               >
-                <ExternalLink className="h-3 w-3 mr-1" />
-                YouTube
+                <SiYoutube className="h-5 w-5" />
               </button>
             </div>
           </div>
@@ -122,7 +113,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             ))}
           </div>
           
-          <div className="flex items-center">
+          <div className="flex items-center justify-between">
             <Badge 
               variant="outline" 
               className={`
@@ -135,6 +126,21 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             >
               {video.level}
             </Badge>
+            
+            <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1">
+                <Clock className="h-3 w-3 text-gray-500" />
+                <span className="text-xs text-gray-500">{video.duration}</span>
+              </div>
+              
+              <button
+                onClick={handleExternalLinkClick}
+                className="text-red-600 hover:text-red-700 transition-colors ml-2"
+                title="Watch on YouTube"
+              >
+                <SiYoutube className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </div>
       </CardContent>
