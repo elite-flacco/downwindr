@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Clock, ExternalLink, AlertCircle } from "lucide-react";
+import { Play, Clock, ExternalLink, AlertCircle, Youtube } from "lucide-react";
 import type { LearnVideo } from "@/data/learnVideos";
 
 interface VideoPlayerProps {
@@ -56,12 +56,11 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             
             {/* External link button */}
             <div 
-              className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md flex items-center cursor-pointer"
+              className="absolute top-2 right-2 bg-black/70 text-white p-1.5 rounded-md flex items-center cursor-pointer hover:bg-black/90 transition-colors"
               onClick={handleExternalLinkClick}
               title="Open in YouTube"
             >
-              <ExternalLink className="h-3 w-3 mr-1" />
-              YouTube
+              <Youtube className="h-4 w-4" />
             </div>
             
             <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md flex items-center">
