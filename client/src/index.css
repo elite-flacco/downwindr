@@ -92,7 +92,7 @@
   }
 
   h3 {
-    @apply font-heading text-theme-secondary text-xl md:text-2xl tracking-wide;
+    @apply font-heading text-theme-secondary text-xl md:text-2xl;
   }
 
   h4 {

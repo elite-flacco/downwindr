@@ -18,7 +18,7 @@ export default function Community() {
           className="text-center max-w-3xl mx-auto"
         >
           <h1 className="text-4xl font-bold text-theme-primary mb-3">Downwindr Community</h1>
-          <p className="text-xl text-theme-text-light mb-8">Connect with fellow kiters worldwide</p>
+          <p className="text-md text-theme-text-light mb-8">Connect with fellow kiters worldwide</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
@@ -32,7 +32,7 @@ export default function Community() {
             <Card className="bg-gradient-to-br from-teal-50 to-teal-100 border-teal-200">
               <CardHeader>
                 <Users className="h-10 w-10 text-teal-500 mb-2" />
-                <CardTitle>Find Partners</CardTitle>
+                <CardTitle>Find Buddies</CardTitle>
                 <CardDescription>Connect with kiters at your destination</CardDescription>
               </CardHeader>
             </Card>
@@ -48,15 +48,14 @@ export default function Community() {
           
           <Card className="max-w-2xl mx-auto border-theme-primary/20 shadow-lg">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Coming Soon!</CardTitle>
+              <CardTitle className="text-2xl mb-4">Coming Soon!</CardTitle>
               <CardDescription>
                 We're working hard to build an amazing community platform for kitesurfers around the world.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-theme-text mb-4">
-                Be the first to know when we launch the Downwindr community features. 
-                Join our waitlist and get early access to forums, meetups, and exclusive content.
+              <p className="text-sm text-theme-text mb-4">
+                Want to be part of this journey? Get in touch with us! 👇
               </p>
             </CardContent>
             <CardFooter className="flex justify-center">
