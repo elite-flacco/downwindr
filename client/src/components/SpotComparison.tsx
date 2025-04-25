@@ -203,7 +203,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 {sortedSpots.map((spot) => (
                   <TableCell key={`wind-${spot.id}`} className="text-center">
                     {spot.currentWindCondition ? (
-                      <Badge className={`f${getWindQualityClass(spot.currentWindCondition.windQuality)} text-white px-4 py-2 rounded-full`}>
+                      <Badge className={`${getWindQualityClass(spot.currentWindCondition.windQuality)} text-white px-4 py-2 rounded-full`}>
                         {spot.currentWindCondition.windQuality} {getWindQualityEmoji(spot.currentWindCondition.windQuality as WindQuality)}
                       </Badge>
                     ) : (

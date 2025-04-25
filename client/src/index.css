@@ -7,7 +7,7 @@
 /* ===== COLOR SYSTEM ===== */
 :root {
   /* Core Brand Colors - Change these to update the entire theme */
-  --core-primary: 217 97% 60%;      /* Main blue - #3B82F6 */
+  --core-primary: 217 97% 60%;      /* Main blue - #3B82F6 #154d5b */ 
   --core-accent: 49 100% 52%;       /* Yellow - #FFD60A */
   --core-action: 1 100% 68%;        /* Coral/Red - #FF5E5B */
   --core-success: 142 71% 45%;      /* Green */
