@@ -108,7 +108,20 @@ export class DatabaseStorage implements IStorage {
         console.log(
           "No spots found in database. Initializing with sample data...",
         );
-        await this.initializeData();
+        
+        // Insert spots and their wind conditions
+        for (const data of kiteSpotsData) {
+          // Insert the spot
+          const [spot] = await db.insert(spots).values(data.spot).returning();
+          
+          // Insert wind conditions for this spot
+          const windConditionsWithSpotId = data.windConditions.map(wc => ({
+            ...wc,
+            spotId: spot.id
+          }));
+          await db.insert(windConditions).values(windConditionsWithSpotId);
+        }
+        
         console.log("Sample data initialization completed successfully");
       }
       
