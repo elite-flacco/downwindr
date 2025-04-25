@@ -87,9 +87,8 @@ export class DatabaseStorage implements IStorage {
 
     // Initialize data if spots table is empty
     // Using setTimeout to ensure this runs asynchronously after constructor completes
-    setTimeout(() => {
-      this.checkAndInitializeData();
-    }, 0);
+    // Only check once during construction
+    this.checkAndInitializeData();
   }
 
   private initializationInProgress = false;
