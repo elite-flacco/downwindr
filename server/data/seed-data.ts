@@ -1748,4 +1748,96 @@ export const kiteSpotsData: SpotSeedData[] = [
       { month: 12, windSpeed: 11, windQuality: WindQuality.Poor, airTemp: 15, waterTemp: 16, seasonalNotes: "Off-season. Many schools closed. Occasional good days possible." }
     ]
   },
+
+  // 16. Leucate, France
+  {
+    spot: {
+      name: "Leucate, France",
+      country: "France",
+      latitude: 42.9056,
+      longitude: 3.0333,
+      description:
+        "Located on the French Mediterranean coast, Leucate is one of Europe's leading kitesurfing spots. Benefiting from steady winds and mild weather conditions, Leucate is a favorite spot for kitesurfers of all levels.",
+      bestMonths: "March–October",
+      tempRange: "15–28°C",
+      waveSize: "Flat to 1m",
+      difficultyLevel: "All levels",
+      localAttractions: "Wine tasting, local markets, Mediterranean beaches",
+      tags: ["steady wind", "flat water", "lagoons"],
+      windguruCode: "234",
+      kiteSchools: [
+        "Leucate Kite Center|https://maps.google.com/?q=Leucate+Kite+Center|4.8|95",
+        "KSL Leucate|https://maps.google.com/?q=KSL+Leucate|4.7|88",
+        "Sky Fly Kiteschool|https://maps.google.com/?q=Sky+Fly+Kiteschool+Leucate|4.6|76"
+      ],
+      conditions: ["Tramontane Wind", "Flat Water Lagoons", "Chop and Small Waves"],
+      accommodationOptions: ["Beach Resorts", "Camping Sites", "Guesthouses"],
+      foodOptions: ["French Cuisine", "Seafood Restaurants", "Local Bistros"],
+      culture: "Mediterranean charm with a mix of French culture and kitesurfing community",
+      averageSchoolCost: 75,
+      averageAccommodationCost: 85,
+      numberOfSchools: 3,
+    },
+    windConditions: [
+      { month: 1, windSpeed: 14, windQuality: WindQuality.Moderate, airTemp: 10, waterTemp: 12, seasonalNotes: "Off-season with occasional Tramontane winds." },
+      { month: 2, windSpeed: 15, windQuality: WindQuality.Moderate, airTemp: 12, waterTemp: 12, seasonalNotes: "Cold water but rideable when Tramontane picks up." },
+      { month: 3, windSpeed: 17, windQuality: WindQuality.Good, airTemp: 15, waterTemp: 13, seasonalNotes: "Start of kiting season; frequent Tramontane makes for good sessions." },
+      { month: 4, windSpeed: 20, windQuality: WindQuality.Excellent, airTemp: 18, waterTemp: 15, seasonalNotes: "Reliable wind and pleasant temperatures; ideal for all levels." },
+      { month: 5, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 21, waterTemp: 17, seasonalNotes: "One of the best months with steady winds and warm days." },
+      { month: 6, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 24, waterTemp: 19, seasonalNotes: "Strong Tramontane continues; perfect for flat water freestyle." },
+      { month: 7, windSpeed: 20, windQuality: WindQuality.Good, airTemp: 27, waterTemp: 22, seasonalNotes: "Peak season with lighter winds but still many rideable days." },
+      { month: 8, windSpeed: 19, windQuality: WindQuality.Good, airTemp: 28, waterTemp: 24, seasonalNotes: "Crowded beaches but consistent sessions in the mornings." },
+      { month: 9, windSpeed: 21, windQuality: WindQuality.Excellent, airTemp: 25, waterTemp: 22, seasonalNotes: "Reliable wind returns; excellent for kiting with fewer tourists." },
+      { month: 10, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 20, waterTemp: 20, seasonalNotes: "End of season with crisp air and good Tramontane spells." },
+      { month: 11, windSpeed: 16, windQuality: WindQuality.Moderate, airTemp: 14, waterTemp: 17, seasonalNotes: "Fewer rideable days; wetsuit essential." },
+      { month: 12, windSpeed: 15, windQuality: WindQuality.Moderate, airTemp: 11, waterTemp: 13, seasonalNotes: "Cold but still kiteable during strong Tramontane episodes." }
+    ]
+  },
+
+  // 17. Porto Pollo, Sardinia
+  {
+    spot: {
+      name: "Porto Pollo, Sardinia",
+      country: "Italy",
+      latitude: 41.1861,
+      longitude: 9.3350,
+      description:
+        "Porto Pollo, located in northern Sardinia, is one of the most popular kitesurfing destinations in Italy. With two natural bays separated by a sandy isthmus, it offers both flat water and wave conditions ideal for all skill levels.",
+      bestMonths: "May–October",
+      tempRange: "18–30°C",
+      waveSize: "Flat to 1.5m",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions: "Maddalena Islands, Sardinian cuisine, mountain biking",
+      tags: ["flat water", "waves", "island vibes", "beginner friendly"],
+      windguruCode: "517",
+      kiteSchools: [
+        "Porto Pollo Kite Center|https://maps.google.com/?q=Porto+Pollo+Kite+Center|4.9|102",
+        "Sporting Club Sardinia|https://maps.google.com/?q=Sporting+Club+Sardinia|4.8|87",
+        "MB Pro Center|https://maps.google.com/?q=MB+Pro+Center+Porto+Pollo|4.7|66"
+      ],
+      conditions: ["Thermal Winds", "Flat and Wave Areas", "Sandy Beach"],
+      accommodationOptions: ["Beach Resorts", "Camping", "Agriturismos"],
+      foodOptions: ["Sardinian Cuisine", "Seafood Trattorias", "Pizza Places"],
+      culture: "Mediterranean island culture with rustic charm and watersport passion",
+      averageSchoolCost: 80,
+      averageAccommodationCost: 95,
+      numberOfSchools: 3,
+    },
+    windConditions: [
+      { month: 1, windSpeed: 14, windQuality: WindQuality.Moderate, airTemp: 12, waterTemp: 14, seasonalNotes: "Off-season with colder temps; occasional strong winds." },
+      { month: 2, windSpeed: 15, windQuality: WindQuality.Moderate, airTemp: 13, waterTemp: 13, seasonalNotes: "Some windy days for experienced riders in full wetsuits." },
+      { month: 3, windSpeed: 17, windQuality: WindQuality.Good, airTemp: 16, waterTemp: 14, seasonalNotes: "Spring awakens the wind season; early birds get uncrowded conditions." },
+      { month: 4, windSpeed: 19, windQuality: WindQuality.Good, airTemp: 19, waterTemp: 16, seasonalNotes: "Consistent winds and warming temps—season starts strong." },
+      { month: 5, windSpeed: 21, windQuality: WindQuality.Excellent, airTemp: 23, waterTemp: 18, seasonalNotes: "Thermal winds kick in; ideal month to visit." },
+      { month: 6, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 26, waterTemp: 21, seasonalNotes: "Summer thermal winds dominate, perfect for all levels." },
+      { month: 7, windSpeed: 21, windQuality: WindQuality.Good, airTemp: 29, waterTemp: 23, seasonalNotes: "Crowds increase, but thermal wind is reliable by afternoon." },
+      { month: 8, windSpeed: 20, windQuality: WindQuality.Good, airTemp: 30, waterTemp: 25, seasonalNotes: "Hot and busy, with afternoon thermals keeping sessions alive." },
+      { month: 9, windSpeed: 21, windQuality: WindQuality.Excellent, airTemp: 27, waterTemp: 24, seasonalNotes: "Sweet spot: warm, less crowded, and very consistent wind." },
+      { month: 10, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 22, waterTemp: 21, seasonalNotes: "Mellow fall days and rideable wind continue." },
+      { month: 11, windSpeed: 16, windQuality: WindQuality.Moderate, airTemp: 17, waterTemp: 18, seasonalNotes: "Wind becomes sporadic; off-season starts." },
+      { month: 12, windSpeed: 15, windQuality: WindQuality.Moderate, airTemp: 14, waterTemp: 15, seasonalNotes: "Quiet season with occasional stormy sessions for die-hards." }
+    ]
+  }
+
+
 ];
