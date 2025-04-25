@@ -72,21 +72,35 @@ export default function VideoFilters({
       
       <div>
         <h3 className="text-sm font-medium mb-2">Experience Level</h3>
-        <Tabs 
-          defaultValue="" 
-          value={selectedLevel} 
-          onValueChange={onLevelChange}
-          className="w-full"
-        >
-          <TabsList className="w-full grid grid-cols-4">
-            <TabsTrigger value="">All</TabsTrigger>
-            {videoLevels.map((level) => (
-              <TabsTrigger key={level} value={level} className="capitalize">
-                {level}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+        <div className="flex flex-wrap gap-2">
+          <Badge
+            key="all"
+            variant={selectedLevel === "" ? "default" : "outline"}
+            className={`cursor-pointer ${
+              selectedLevel === "" 
+                ? "bg-theme-primary hover:bg-theme-primary/80" 
+                : "hover:bg-theme-primary/10"
+            }`}
+            onClick={() => onLevelChange("")}
+          >
+            All
+          </Badge>
+          
+          {videoLevels.map((level) => (
+            <Badge
+              key={level}
+              variant={selectedLevel === level ? "default" : "outline"}
+              className={`cursor-pointer capitalize ${
+                selectedLevel === level 
+                  ? "bg-theme-primary hover:bg-theme-primary/80" 
+                  : "hover:bg-theme-primary/10"
+              }`}
+              onClick={() => onLevelChange(level)}
+            >
+              {level}
+            </Badge>
+          ))}
+        </div>
       </div>
     </div>
   );
