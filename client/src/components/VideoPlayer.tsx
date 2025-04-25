@@ -55,11 +55,6 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
               </button>
             </div>
             
-            <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md flex items-center">
-              <Clock className="h-3 w-3 mr-1" />
-              {video.duration}
-            </div>
-            
             {loadError && (
               <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center px-4 text-center">
                 <AlertCircle className="h-8 w-8 text-red-500 mb-2" />
