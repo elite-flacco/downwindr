@@ -7,7 +7,7 @@
 /* ===== COLOR SYSTEM ===== */
 :root {
   /* Core Brand Colors - Change these to update the entire theme */
-  --core-primary: 217 97% 60%;      /* Main blue - #3B82F6 #154d5b */ 
+  --core-primary: 190, 69%, 23%;      /* Main blue - #3B82F6 #154d5b */ 
   --core-accent: 49 100% 52%;       /* Yellow - #FFD60A */
   --core-action: 1 100% 68%;        /* Coral/Red - #FF5E5B */
   --core-success: 142 71% 45%;      /* Green */
@@ -15,20 +15,20 @@
   --core-white: 0 0% 100%;          /* White - #FFFFFF */
 
   /* Primary color scale - Generated from core-primary */
-  --color-primary-50: 219 100% 97%;   /* #EFF6FF - Lightest */
-  --color-primary-100: 217 100% 93%;  /* #DBEAFE */
-  --color-primary-200: 216 100% 87%;  /* #BFDBFE */
-  --color-primary-300: 216 100% 78%;  /* #93C5FD */
-  --color-primary-400: 217 100% 68%;  /* #60A5FA */
-  --color-primary-500: var(--core-primary); /* #3B82F6 - Base */
-  --color-primary-600: 221 83% 53%;   /* #2563EB */
-  --color-primary-700: 224 76% 48%;   /* #1D4ED8 */
-  --color-primary-800: 226 71% 40%;   /* #1E40AF */
-  --color-primary-900: 224 64% 33%;   /* #1E3A8A */
-  --color-primary-950: 226 57% 21%;   /* #172554 - Darkest */
+  --color-primary-50: 190 69% 93%;   /* #e6f7fb - Lightest */
+  --color-primary-100: 190 69% 85%;  /* #cceef6 */
+  --color-primary-200: 190 69% 75%;  /* #abdfed */
+  --color-primary-300: 190 69% 65%;  /* #8ad0e4 */
+  --color-primary-400: 190 69% 55%;  /* #69c0db */
+  --color-primary-500: 190 69% 43%;  /* #47accc - Mid-bright */
+  --color-primary-600: 190 69% 33%;  /* #2f8ba9 */
+  --color-primary-700: 190 69% 23%;  /* #165e74 - Your original color */
+  --color-primary-800: 190 69% 18%;  /* #154957 */
+  --color-primary-900: 190 69% 13%;  /* #0f333d */
+  --color-primary-950: 190 69% 8%;   /* #091e24 - Darkest */
 
   /* Semantic color mapping - These reference the core colors */
-  --theme-primary: var(--color-primary-700);
+  --theme-primary: var(--color-primary-600);
   --theme-primary-hover: var(--color-primary-500);
   --theme-secondary: var(--color-primary-500);
   --theme-accent: var(--core-accent);
