@@ -132,29 +132,6 @@ export class DatabaseStorage implements IStorage {
     }
   }
 
-  private async initializeData() {
-    try {
-      console.log(`Initializing database with ${kiteSpotsData.length} spots...`);
-      
-      // Insert each spot and its wind conditions
-      for (const spotData of kiteSpotsData) {
-        const spot = await this.createSpot(spotData.spot);
-        
-        // Add wind conditions for each month
-        for (const condition of spotData.windConditions) {
-          await this.createWindCondition({
-            ...condition,
-            spotId: spot.id
-          });
-        }
-        
-        console.log(`Added spot: ${spot.name} with ${spotData.windConditions.length} wind conditions`);
-      }
-    } catch (error) {
-      console.error("Error initializing database:", error);
-    }
-  }
-
   // Implement recommendation algorithm
   async getRecommendedSpots(
     preferences: UserPreferences,
