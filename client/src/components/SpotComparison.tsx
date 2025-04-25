@@ -30,7 +30,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
       case WindQuality.Excellent:
         return "wind-quality-excellent text-white";
       case WindQuality.Good:
-        return "bg-blue-600 text-white";
+        return "bg-theme-wind-good text-white";
       case WindQuality.Moderate:
         return "bg-slate-600 text-white";
       case WindQuality.Poor:
@@ -188,18 +188,18 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[180px]">Metric</TableHead>
+                <TableHead className="w-[180px] font-bold">Metric</TableHead>
                 {sortedSpots.map((spot) => (
-                  <TableHead key={spot.id} className="min-w-[200px] text-center">
+                  <TableHead key={spot.id} className="font-bold min-w-[200px] text-center">
                     {spot.name}
                   </TableHead>
                 ))}
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody className="font-semibold">
               {/* Wind conditions */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">Wind Quality</TableCell>
+                <TableCell>Wind Quality</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`wind-${spot.id}`} className="text-center">
                     {spot.currentWindCondition ? (
@@ -213,7 +213,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 ))}
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">Wind Speed</TableCell>
+                <TableCell>Wind Speed</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`speed-${spot.id}`} className="text-center">
                     {spot.currentWindCondition?.windSpeed ? 
@@ -225,9 +225,9 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Temperatures */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">
+                <TableCell>
                   <div className="flex items-center">
-                    <Thermometer className="mr-2 h-4 w-4" /> Air Temp
+                    <Thermometer className="mr-1 h-4 w-4" /> Air Temp
                   </div>
                 </TableCell>
                 {sortedSpots.map((spot) => (
@@ -239,9 +239,9 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 ))}
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">
+                <TableCell>
                   <div className="flex items-center">
-                    <Thermometer className="mr-2 h-4 w-4" /> Water Temp
+                    <Thermometer className="mr-1 h-4 w-4" /> Water Temp
                   </div>
                 </TableCell>
                 {sortedSpots.map((spot) => (
@@ -255,7 +255,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
               
               {/* Wetsuit Recommendation */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">
+                <TableCell>
                   <div className="flex items-center">
                     <Shirt className="mr-2 h-4 w-4" /> Wetsuit Recommendation
                   </div>
@@ -278,7 +278,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Schools */}
               <TableRow>
-                <TableCell className="font-medium">Number of Schools</TableCell>
+                <TableCell>Number of Schools</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`schools-${spot.id}`} className="text-center">
                     {spot.numberOfSchools ? `${spot.numberOfSchools} 🏫` : "N/A"}
@@ -288,7 +288,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Difficulty */}
               <TableRow>
-                <TableCell className="font-medium">Difficulty Level</TableCell>
+                <TableCell>Difficulty Level</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`diff-${spot.id}`} className="text-center">
                     <DifficultyBadge level={spot.difficultyLevel} />
@@ -298,7 +298,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Conditions */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">Conditions</TableCell>
+                <TableCell>Conditions</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`cond-${spot.id}`} className="text-center">
                     {spot.conditions ? (
@@ -323,7 +323,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Accommodation */}
               <TableRow>
-                <TableCell className="font-medium">Accommodation</TableCell>
+                <TableCell>Accommodation</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`accom-${spot.id}`} className="text-center">
                     {spot.accommodationOptions ? (
@@ -348,7 +348,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Food */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">Food Options</TableCell>
+                <TableCell>Food Options</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`food-${spot.id}`} className="text-center">
                     {spot.foodOptions ? (
@@ -373,7 +373,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Culture */}
               <TableRow>
-                <TableCell className="font-medium">Culture</TableCell>
+                <TableCell>Culture</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`cult-${spot.id}`} className="text-center">
                     {spot.culture || "N/A"}
@@ -383,9 +383,9 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Costs */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">
+                <TableCell >
                   <div className="flex items-center">
-                    <DollarSign className="mr-2 h-4 w-4" /> School Cost (avg)
+                    <DollarSign className="mr-1 h-4 w-4" /> School Cost (avg)
                   </div>
                 </TableCell>
                 {sortedSpots.map((spot) => (
@@ -397,9 +397,9 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
                 ))}
               </TableRow>
               <TableRow>
-                <TableCell className="font-medium">
+                <TableCell>
                   <div className="flex items-center">
-                    <DollarSign className="mr-2 h-4 w-4" /> Accommodation Cost (avg)
+                    <DollarSign className="mr-1 h-4 w-4" /> Accommodation Cost (avg)
                   </div>
                 </TableCell>
                 {sortedSpots.map((spot) => (
@@ -413,7 +413,7 @@ export default function SpotComparison({ spots, selectedMonth, onClose }: SpotCo
 
               {/* Notes */}
               <TableRow className="bg-slate-50">
-                <TableCell className="font-medium">Seasonal Notes</TableCell>
+                <TableCell>Seasonal Notes</TableCell>
                 {sortedSpots.map((spot) => (
                   <TableCell key={`notes-${spot.id}`} className="text-center">
                     {spot.currentWindCondition?.seasonalNotes || "No special notes"}
