@@ -292,7 +292,7 @@ export default function Spots() {
                 disabled={spotsToCompare.length < 2}
                 size="sm"
                 variant={spotsToCompare.length >= 2 ? "default" : "secondary"}
-                className={`h-9 text-xs font-medium px-3 ${spotsToCompare.length >= 2 ? "bg-yellow hover:bg-yellow/60 text-slate shadow-md" : "bg-white"}`}
+                className={`h-9 text-xs px-3 ${spotsToCompare.length >= 2 ? "bg-yellow hover:bg-yellow/60 text-slate shadow-md" : "bg-white"}`}
               >
                 <SplitSquareVertical className="h-4 w-4 mr-1.5" />
                 Compare {spotsToCompare.length > 0 && `(${spotsToCompare.length})`}
@@ -309,7 +309,7 @@ export default function Spots() {
                 }}
                 size="sm"
                 variant="action"
-                className="h-9 text-xs font-medium px-3"
+                className="h-9 text-xs px-3"
                 disabled={!filteredSpots || filteredSpots.length < 2}
               >
                 <SplitSquareVertical className="h-4 w-4 mr-1.5" />
