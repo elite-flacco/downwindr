@@ -276,7 +276,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                               <h5 className="text-theme-text mb-2 flex items-center">
                                 {title}
                               </h5>
-                              <ul className="text-sm mb-4">
+                              <ul className="text-sm mb-8">
                                 {schoolsWithData.map((school: any, idx: number) => {
                                   return (
                                     <li key={idx} className="flex flex-col mb-3">

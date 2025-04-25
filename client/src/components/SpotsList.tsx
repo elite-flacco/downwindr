@@ -61,7 +61,7 @@ export default function SpotsList({
                 transition={{ duration: 0.1 }}
                 whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
               >
-                <div className="flex justify-between items-start mb-3">
+                <div className="flex justify-between items-start mb-3 pt-4 px-3">
                   <h4 className="text-theme-primary">{spot.name}</h4>
                   <div className="px-3 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium">
                     <Wind className="w-3 h-3 inline mr-1" /> {spot.bestMonths}
@@ -69,13 +69,13 @@ export default function SpotsList({
                 </div>
                 
                 <div className="flex flex-col gap-3">
-                  <p className="text-sm text-theme-text-light leading-relaxed">
+                  <p className="text-sm text-theme-text-light leading-relaxed px-3">
                     {spot.description.length > 100 
                       ? `${spot.description.substring(0, 100)}...` 
                       : spot.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 mt-1">
+                  <div className="flex flex-wrap gap-2 mt-1 px-3">
                     <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center">
                       <Waves className="w-3 h-3 inline text-theme-primary/70 mr-1" /> {spot.waveSize}
                     </div>
@@ -83,9 +83,8 @@ export default function SpotsList({
                       <Thermometer className="w-3 h-3 inline text-theme-primary/70 mr-1" /> {spot.tempRange}
                     </div>
                     <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center gap-1.5">
-                      <MapPin className="w-3 h-3 inline text-theme-primary/70" />
                       <span className="flex items-center gap-1">
-                        {spot.country} {
+                        {
                           (() => {
                             const flag = getCountryFlag(spot.country);
                             return flag ? (
