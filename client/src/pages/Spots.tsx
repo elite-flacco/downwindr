@@ -214,7 +214,7 @@ export default function Spots() {
       <main className="container mx-auto px-4 py-6 flex-grow">
         {/* Page Title with more visual impact */}
         <div className="mb-2 pt-2">
-          <h2 className="text-xl text-ocean-dark mb-2">Find your dream spots</h2>
+          <h2 className="text-xl mb-2">Find your dream spots</h2>
           {/* <div className="flex items-center">
             <div className="h-1 w-12 bg-primary rounded-full mr-3"></div>
             <p className="text-slate-600">Discover the best kitesurfing locations worldwide based on optimal wind conditions</p>

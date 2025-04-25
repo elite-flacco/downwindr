@@ -13,7 +13,7 @@ export default function MonthSelector({ selectedMonth, onMonthChange }: MonthSel
     <div className="flex items-center">
       <div className="mr-3 whitespace-nowrap">
         <Calendar className="w-3.5 h-3.5 inline mr-1 text-primary" />
-        <span className="text-xs font-medium text-slate-600">Season:</span>
+        <span className="text-sm font-bold">Season:</span>
       </div>
       
       <Select
@@ -45,8 +45,8 @@ export default function MonthSelector({ selectedMonth, onMonthChange }: MonthSel
               size="sm"
               className={`px-2 py-1 h-7 text-xs ${
                 (selectedMonth >= month && selectedMonth < month + 3) || (month === 10 && (selectedMonth >= 10 || selectedMonth === 12))
-                  ? 'bg-primary/10 text-primary'
-                  : 'text-slate-500'
+                  ? 'bg-primary/10 text-theme-text'
+                  : 'text-theme-text'
               }`}
               onClick={() => onMonthChange(month)}
             >
