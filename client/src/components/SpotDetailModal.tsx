@@ -230,7 +230,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                         Kitesurfing Info
                       </h3>
                       <div className="space-y-3 text-sm text-theme">
-                        <p>{spotDetails.spot.description}</p>
+                        <p className="mb-4">{spotDetails.spot.description}</p>
                         
                         {/* Add kite schools in the kitesurfing info card - Top 5 rated only */}
                         {(() => {
