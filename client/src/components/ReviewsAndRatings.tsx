@@ -312,22 +312,24 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                 <p className="mb-4 text-sm">
                   Be the first to share your experience at this kitesurfing spot!
                 </p>
-                {user ? (
-                  <Button 
-                    onClick={() => setReviewDialogOpen(true)} 
-                    variant="outline" 
-                    className="flex items-center gap-1"
-                  >
-                    <PlusCircle className="w-4 h-4" />
-                    Write First Review
-                  </Button>
-                ) : (
-                  <Link href="/auth">
-                    <Button variant="outline" className="flex items-center gap-1">
-                      Login to Review
+                <div className="flex justify-center">
+                  {user ? (
+                    <Button 
+                      onClick={() => setReviewDialogOpen(true)} 
+                      variant="outline" 
+                      className="flex items-center gap-1"
+                    >
+                      <PlusCircle className="w-4 h-4" />
+                      Write First Review
                     </Button>
-                  </Link>
-                )}
+                  ) : (
+                    <Link href="/auth">
+                      <Button variant="outline" className="flex items-center gap-1">
+                        Login to Review
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </CardContent>
             </Card>
           ) : (
