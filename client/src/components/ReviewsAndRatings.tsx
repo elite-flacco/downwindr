@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Review, Rating, User } from "@shared/schema";
@@ -78,6 +78,10 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   const [activeTab, setActiveTab] = useState<string>("reviews");
   const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
   const [ratingDialogOpen, setRatingDialogOpen] = useState(false);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [editReviewDialogOpen, setEditReviewDialogOpen] = useState(false);
+  const [currentReviewId, setCurrentReviewId] = useState<number | null>(null);
+  const [currentReviewContent, setCurrentReviewContent] = useState("");
   const [selectedStars, setSelectedStars] = useState<Record<string, number>>({
     windReliability: 3,
     beginnerFriendly: 3,
@@ -165,6 +169,57 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
       });
     },
   });
+  
+  // Edit review mutation
+  const editReviewMutation = useMutation({
+    mutationFn: async ({ id, content }: { id: number; content: string }) => {
+      const res = await apiRequest("PATCH", `/api/reviews/${id}`, { content });
+      return await res.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Review updated",
+        description: "Your review has been successfully updated!",
+      });
+      queryClient.invalidateQueries({ queryKey: [`/api/spots/${spotId}/details`] });
+      refetch();
+      setEditReviewDialogOpen(false);
+      setCurrentReviewId(null);
+      setCurrentReviewContent("");
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update review. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Delete review mutation
+  const deleteReviewMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const res = await apiRequest("DELETE", `/api/reviews/${id}`);
+      return id;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Review deleted",
+        description: "Your review has been successfully deleted.",
+      });
+      queryClient.invalidateQueries({ queryKey: [`/api/spots/${spotId}/details`] });
+      refetch();
+      setDeleteConfirmOpen(false);
+      setCurrentReviewId(null);
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete review. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
   // Review form setup
   const reviewForm = useForm<z.infer<typeof reviewFormSchema>>({
@@ -173,6 +228,19 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
       content: "",
     },
   });
+  
+  // Edit review form setup
+  const editReviewForm = useForm<z.infer<typeof reviewFormSchema>>({
+    resolver: zodResolver(reviewFormSchema),
+    defaultValues: {
+      content: currentReviewContent,
+    },
+  });
+  
+  // Update the form value when currentReviewContent changes
+  useEffect(() => {
+    editReviewForm.setValue("content", currentReviewContent);
+  }, [currentReviewContent, editReviewForm]);
 
   // Rating form setup
   const ratingForm = useForm<z.infer<typeof ratingFormSchema>>({
@@ -215,6 +283,39 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
     }
     
     reviewMutation.mutate(values);
+  };
+
+  const onEditReviewSubmit = (values: z.infer<typeof reviewFormSchema>) => {
+    if (!user || !currentReviewId) {
+      toast({
+        title: "Error",
+        description: "Cannot edit review. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    editReviewMutation.mutate({
+      id: currentReviewId,
+      content: values.content,
+    });
+  };
+  
+  const handleEditClick = (review: Review) => {
+    setCurrentReviewId(review.id);
+    setCurrentReviewContent(review.content);
+    setEditReviewDialogOpen(true);
+  };
+  
+  const handleDeleteClick = (reviewId: number) => {
+    setCurrentReviewId(reviewId);
+    setDeleteConfirmOpen(true);
+  };
+  
+  const confirmDelete = () => {
+    if (currentReviewId) {
+      deleteReviewMutation.mutate(currentReviewId);
+    }
   };
 
   const onRatingSubmit = (values: z.infer<typeof ratingFormSchema>) => {
@@ -381,11 +482,21 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                   {/* Show edit/delete buttons if the review is by the current user */}
                   {user && user.id === review.userId && (
                     <CardFooter className="pt-0 flex justify-end gap-2">
-                      <Button size="sm" variant="outline" className="h-8">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="h-8"
+                        onClick={() => handleEditClick(review)}
+                      >
                         <Edit2 className="h-3.5 w-3.5 mr-1" />
                         Edit
                       </Button>
-                      <Button size="sm" variant="destructive" className="h-8">
+                      <Button 
+                        size="sm" 
+                        variant="destructive" 
+                        className="h-8"
+                        onClick={() => handleDeleteClick(review.id)}
+                      >
                         <Trash2 className="h-3.5 w-3.5 mr-1" />
                         Delete
                       </Button>
@@ -603,6 +714,115 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                 </div>
               </form>
             </Form>
+          </div>
+        </div>
+      )}
+      
+      {/* Edit Review Dialog */}
+      {editReviewDialogOpen && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-background border rounded-lg shadow-lg max-w-md w-full p-6 space-y-4">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-semibold">Edit Your Review</h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-8 w-8 p-0"
+                onClick={() => setEditReviewDialogOpen(false)} 
+              >
+                X
+              </Button>
+            </div>
+            
+            <Form {...editReviewForm}>
+              <form onSubmit={editReviewForm.handleSubmit(onEditReviewSubmit)} className="space-y-4">
+                <FormField
+                  control={editReviewForm.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="What was your experience like? How were the conditions?" 
+                          className="min-h-[120px]" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <div className="flex justify-end gap-2">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setEditReviewDialogOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    disabled={editReviewMutation.isPending}
+                  >
+                    {editReviewMutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Updating...
+                      </>
+                    ) : (
+                      "Save Changes"
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </div>
+        </div>
+      )}
+      
+      {/* Delete Confirmation Dialog */}
+      {deleteConfirmOpen && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-background border rounded-lg shadow-lg max-w-md w-full p-6 space-y-4">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-semibold">Delete Review</h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-8 w-8 p-0"
+                onClick={() => setDeleteConfirmOpen(false)} 
+              >
+                X
+              </Button>
+            </div>
+            
+            <p>Are you sure you want to delete this review? This action cannot be undone.</p>
+            
+            <div className="flex justify-end gap-2 pt-4">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={() => setDeleteConfirmOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button 
+                type="button"
+                variant="destructive"
+                onClick={confirmDelete}
+                disabled={deleteReviewMutation.isPending}
+              >
+                {deleteReviewMutation.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  "Delete Review"
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       )}
