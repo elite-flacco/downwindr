@@ -173,7 +173,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   // Edit review mutation
   const editReviewMutation = useMutation({
     mutationFn: async ({ id, content }: { id: number; content: string }) => {
-      const res = await apiRequest("PATCH", `/api/reviews/${id}`, { content });
+      const res = await apiRequest("PUT", `/api/reviews/${id}`, { content });
       return await res.json();
     },
     onSuccess: () => {
