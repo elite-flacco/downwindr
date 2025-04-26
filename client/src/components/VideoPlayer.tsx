@@ -80,31 +80,6 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                       </div>
                     </div>
                     
-                    {/* Category pill */}
-                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-theme-primary/90 to-theme-primary/80 text-white font-medium text-xs px-3 py-1 rounded-full shadow-sm">
-                      {video.categories[0] || "Kitesurfing"}
-                    </div>
-                    
-                    {/* Level indicator */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                      <div className={`text-xs px-3 py-0.5 rounded-full font-medium ${
-                        video.level === 'beginner' 
-                          ? 'bg-green-500 text-white' 
-                          : video.level === 'intermediate' 
-                          ? 'bg-amber-500 text-white' 
-                          : 'bg-rose-500 text-white'
-                      }`}>
-                        {video.level}
-                      </div>
-                    </div>
-                    
-                    {/* Branding watermark */}
-                    <div className="absolute top-4 right-4 text-theme-primary font-semibold text-xs tracking-tight">
-                      <span className="flex items-center">
-                        <span className="opacity-70">down</span>
-                        <span>windr</span>
-                      </span>
-                    </div>
                   </div>
                 </div>
                 
@@ -118,7 +93,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
 
             {/* Play button with consistent look */}
             <div 
-              className={`absolute inset-0 z-30 flex items-center justify-center cursor-pointer transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 z-30 flex items-center justify-center cursor-pointer transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-80'}`}
               onClick={handlePlayClick}
             >
               <div className="relative">
@@ -127,7 +102,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                 
                 {/* Actual button */}
                 <button 
-                  className="bg-white text-theme-primary p-3 rounded-full transform transition-all duration-300 shadow-md relative z-10 group-hover:bg-theme-primary group-hover:text-white"
+                  className="bg-white text-theme-primary p-3 rounded-full transform transition-all duration-300 shadow-lg relative z-10 group-hover:bg-theme-primary group-hover:text-white"
                 >
                   <Play className="h-6 w-6 fill-current" />
                 </button>
