@@ -314,14 +314,65 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                 </p>
                 <div className="flex justify-center">
                   {user ? (
-                    <Button 
-                      onClick={() => setReviewDialogOpen(true)} 
-                      variant="outline" 
-                      className="flex items-center gap-1"
-                    >
-                      <PlusCircle className="w-4 h-4" />
-                      Write First Review
-                    </Button>
+                    <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          className="flex items-center gap-1"
+                        >
+                          <PlusCircle className="w-4 h-4" />
+                          Write First Review
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Write Your Review</DialogTitle>
+                          <DialogDescription>
+                            Share your experience with other kitesurfers.
+                          </DialogDescription>
+                        </DialogHeader>
+                        
+                        <Form {...reviewForm}>
+                          <form onSubmit={reviewForm.handleSubmit(onReviewSubmit)} className="space-y-4">
+                            <FormField
+                              control={reviewForm.control}
+                              name="content"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormControl>
+                                    <Textarea 
+                                      placeholder="What was your experience like? How were the conditions?" 
+                                      className="min-h-[120px]" 
+                                      {...field} 
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <DialogFooter>
+                              <DialogClose asChild>
+                                <Button variant="outline" type="button">Cancel</Button>
+                              </DialogClose>
+                              <Button 
+                                type="submit" 
+                                disabled={reviewMutation.isPending}
+                              >
+                                {reviewMutation.isPending ? (
+                                  <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Submitting...
+                                  </>
+                                ) : (
+                                  "Submit Review"
+                                )}
+                              </Button>
+                            </DialogFooter>
+                          </form>
+                        </Form>
+                      </DialogContent>
+                    </Dialog>
                   ) : (
                     <Link href="/auth">
                       <Button variant="outline" className="flex items-center gap-1">
