@@ -46,15 +46,17 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           >
             <div className="overflow-hidden">
               {/* Custom styled thumbnail design with consistent appearance */}
-              <div className="relative aspect-video w-full bg-slate-50">
+              <div className="relative aspect-video w-full bg-white">
                 {/* Clean custom background with minimal thumbnail */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-full h-full overflow-hidden bg-gradient-to-br from-sky-50 to-slate-50">
-                    {/* Pattern overlay for texture */}
-                    <div className="absolute inset-0 opacity-10" 
+                  <div className="relative w-full h-full overflow-hidden bg-white">
+                    {/* Kitesurfer illustration background */}
+                    <div className="absolute inset-0 opacity-[0.15]" 
                       style={{ 
-                        backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230284c7\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'1.5\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'1.5\'/%3E%3C/g%3E%3C/svg%3E")',
-                        backgroundSize: '20px 20px'
+                        backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'1024\' height=\'1024\' viewBox=\'0 0 1024 1024\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M695 150c-4.667 1.333-14.6 4.4-29.8 9.2-22.8 7.2-45.367 15.4-67.7 24.6-33.533 13.733-67.4 28.733-101.6 45-34.2 16.267-63.267 31.533-87.2 45.8-35.933 21.467-69.133 43.667-99.6 66.6-30.467 22.933-56.867 44.733-79.2 65.4-29.867 27.733-56.733 54.933-80.6 81.6-23.867 26.667-43.733 51.733-59.6 75.2-21.2 31.333-39.133 61.467-53.8 90.4-14.667 28.933-25.8 55.867-33.4 80.8-10 32.667-16.533 63.867-19.6 93.6-3.067 29.733-2.8 57.333.8 82.8 4.8 34 13.6 64.8 26.4 92.4 12.8 27.6 29.2 51.8 49.2 72.6 26.8 27.867 58.4 49.6 94.8 65.2 36.4 15.6 76.4 24.4 120 26.4 58.4 2.667 121.2-4.4 188.4-21.2 67.2-16.8 137.733-42.533 211.6-77.2 110.4-51.733 227.6-121.733 351.6-210 82.667-58.933 159.333-121.2 230-186.8-70.667-65.6-147.333-127.867-230-186.8-124-88.267-241.2-158.267-351.6-210-73.867-34.667-144.4-60.4-211.6-77.2-67.2-16.8-130-23.867-188.4-21.2-43.6 2-83.6 10.8-120 26.4-36.4 15.6-68 37.333-94.8 65.2-20 20.8-36.4 45-49.2 72.6-12.8 27.6-21.6 58.4-26.4 92.4-3.6 25.467-3.867 53.067-.8 82.8 3.067 29.733 9.6 60.933 19.6 93.6 7.6 24.933 18.733 51.867 33.4 80.8 14.667 28.933 32.6 59.067 53.8 90.4 15.867 23.467 35.733 48.533 59.6 75.2 23.867 26.667 50.733 53.867 80.6 81.6 22.333 20.667 48.733 42.467 79.2 65.4 30.467 22.933 63.667 45.133 99.6 66.6 23.933 14.267 52.667 29.533 86.2 45.8 33.533 16.267 67.4 31.267 101.6 45 22.333 9.2 45.233 17.4 68.7 24.6 15.2 4.8 25.133 7.867 29.8 9.2\' stroke=\'%2315AABF\' stroke-width=\'2\'/%3E%3C/svg%3E")',
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
                       }}>
                     </div>
                     
