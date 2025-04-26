@@ -69,7 +69,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -83,7 +83,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -97,7 +97,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -111,7 +111,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -257,7 +257,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
-                      ? "bg-theme-primary text-theme-background" 
+                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
@@ -271,7 +271,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-theme-primary text-theme-background" 
+                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
@@ -285,7 +285,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-theme-primary text-theme-background" 
+                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}
@@ -299,7 +299,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-theme-primary text-theme-background" 
+                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5 }}

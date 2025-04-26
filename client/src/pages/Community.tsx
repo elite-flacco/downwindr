@@ -61,7 +61,7 @@ export default function Community() {
             <CardFooter className="flex justify-center">
               <Button 
                 size="lg"
-                className="bg-theme-primary hover:bg-theme-primary/80 text-white"
+                variant={"default"}
                 onClick={() => window.location.href = "mailto:hello@downwindr.com?subject=Community Interest"}
               >
                 <Mail className="mr-2 h-4 w-4" />
