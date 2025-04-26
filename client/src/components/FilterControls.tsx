@@ -87,8 +87,8 @@ export default function FilterControls({
       {/* Region Filter */}
       <div className="flex items-center flex-shrink-0">
         <select
-          value={props.selectedRegion}
-          onChange={(e) => props.onRegionChange(e.target.value)}
+          value={selectedRegion}
+          onChange={(e) => onRegionChange(e.target.value)}
           className="h-8 rounded-md border border-slate-200 bg-white px-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
         >
           {regions.map((region) => (
