@@ -1,8 +1,9 @@
 import * as countries from "i18n-iso-countries";
 import flags from "country-flag-emoji-json";
+import enLocale from "i18n-iso-countries/langs/en.json" assert { type: "json" };
 
 // Initialize the countries library with English locale
-countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+countries.registerLocale(enLocale);
 
 // Map countries to regions
 const countryRegions: Record<string, string> = {
