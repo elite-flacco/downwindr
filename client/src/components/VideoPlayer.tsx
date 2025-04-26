@@ -58,10 +58,10 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                       }}>
                     </div>
                     
-                    {/* Small YouTube thumbnail in circle with decorated border */}
-                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    {/* Small YouTube thumbnail in circle with decorated border - in bottom right */}
+                    <div className="absolute bottom-4 right-4">
                       {/* Decorative outer ring */}
-                      <div className="w-[68px] h-[68px] rounded-full bg-gradient-to-tr from-theme-primary/30 to-white p-[2px] shadow-lg">
+                      <div className="w-[60px] h-[60px] rounded-full bg-gradient-to-tr from-theme-primary/30 to-white p-[2px] shadow-lg">
                         {/* White inner ring */}
                         <div className="w-full h-full rounded-full p-[2px] bg-white">
                           {/* Actual thumbnail container */}
@@ -99,7 +99,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                     </div>
                     
                     {/* Branding watermark */}
-                    <div className="absolute bottom-2 right-2 text-theme-primary font-semibold text-xs tracking-tight">
+                    <div className="absolute top-4 right-4 text-theme-primary font-semibold text-xs tracking-tight">
                       <span className="flex items-center">
                         <span className="opacity-70">down</span>
                         <span>windr</span>
