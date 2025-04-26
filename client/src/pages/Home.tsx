@@ -18,6 +18,7 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
+import joinTheRideImage from "@/assets/join-the-ride.png";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -91,9 +92,17 @@ export default function Home() {
                       <Button 
                         variant="outline" 
                         size="lg" 
-                        className="text-white border-2 border-white bg-white/5 backdrop-blur-sm font-bold hover:bg-white/80"
+                        className="relative overflow-hidden flex items-center gap-1.5 px-6 py-5 group text-white"
+                        style={{
+                          backgroundImage: `url(${joinTheRideImage})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          border: 'none',
+                          textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
+                        }}
                       >
-                        Join the Ride <ArrowRight className="w-4 h-4 ml-2" />
+                        <span className="relative z-10 font-bold">Join the Ride</span> <ArrowRight className="w-4 h-4 ml-1 relative z-10" />
+                        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-200" />
                       </Button>
                     </Link>
                   </motion.div>
