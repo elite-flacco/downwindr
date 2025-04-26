@@ -212,6 +212,11 @@ export default function Spots() {
       <Header />
       
       <main className="container mx-auto px-4 pt-4 pb-20 flex-grow">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
         {/* Page Title with more visual impact */}
         <div className="mb-2 pt-2">
           <h3 className="mb-2">Find your dream spots</h3>
@@ -427,6 +432,7 @@ export default function Spots() {
             )}
           </div>
         )}
+      </motion.div>
       </main>
       
       {/* Spot Detail Modal */}
