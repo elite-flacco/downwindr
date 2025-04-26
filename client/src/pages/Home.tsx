@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TestImage from "@/components/TestImage";
 import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
 import joinTheRideImage from "@/assets/join-the-ride.png";
 import { Button } from "@/components/ui/button";
@@ -112,6 +113,14 @@ export default function Home() {
               {/* Empty space on the right side - we now have a full background image */}
               <div className="w-full lg:w-1/2"></div>
             </div>
+          </div>
+        </section>
+
+        {/* Debug section for image testing */}
+        <section className="py-12 bg-gray-100">
+          <div className="container mx-auto">
+            <h2 className="mb-4">Image Debug</h2>
+            <TestImage />
           </div>
         </section>
         
