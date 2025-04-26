@@ -55,13 +55,13 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="bg-white/80 backdrop-blur-md p-8 md:p-10 rounded-xl shadow-xl border border-white"
+                  className="max-w-2xl"
                 >
                   <motion.h1 
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-4xl md:text-5xl lg:text-6xl mb-6 text-theme-primary font-bold"
+                    className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white font-bold text-shadow-lg"
                   >
                     Catch the Perfect Wind
                   </motion.h1>
@@ -70,7 +70,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="text-lg md:text-xl text-slate-700 mb-8 leading-relaxed"
+                    className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed text-shadow"
                   >
                     Discover the world's best kitesurfing destinations, track real-time wind conditions, 
                     and connect with the global kitesurfing community.
