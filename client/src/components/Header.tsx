@@ -21,25 +21,14 @@ export default function Header() {
   const { user, isLoading, logoutMutation } = useAuth();
   
   // Handle logout click
-  const handleLogout = async (e: React.MouseEvent) => {
+  const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault();
     
-    try {
-      await logoutMutation.mutateAsync();
-      console.log("Logged out successfully");
-      
-      // Add a small delay before redirecting
-      setTimeout(() => {
-        // Force redirect to auth page
-        if (location !== "/auth") {
-          navigate("/auth");
-        }
-      }, 100);
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
+    // Just call the mutation - the auth hook handles all the navigation and state
+    logoutMutation.mutate();
     
-    setMobileMenuOpen(false); // Close mobile menu after logout click
+    // Close mobile menu after logout click
+    setMobileMenuOpen(false);
   };
 
   // Handle scroll effect for sticky header

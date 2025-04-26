@@ -37,16 +37,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
   const [location, navigate] = useLocation();
   
+  // Better refetching with refetchInterval and shorter staleTime
   const {
     data: user,
     error,
     isLoading,
+    refetch: refetchUser,
   } = useQuery<User | null, Error>({
     queryKey: ["/api/user"],
     queryFn: getQueryFn({ on401: "returnNull" }),
     refetchOnWindowFocus: true,
     refetchOnMount: true,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchInterval: 60 * 1000, // Refetch every minute
+    staleTime: 30 * 1000, // Consider data stale after 30 seconds
   });
 
   const loginMutation = useMutation({
@@ -54,20 +57,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await apiRequest("POST", "/api/login", credentials);
       return await res.json();
     },
-    onSuccess: (user: User) => {
-      // Update the query cache with the user data
+    onSuccess: async (user: User) => {
+      // Set the user data in cache
       queryClient.setQueryData(["/api/user"], user);
       
-      // Ensure any components using the auth query refetch
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Force an immediate refetch to ensure consistent state
+      await refetchUser();
       
       toast({
         title: "Logged in",
         description: `Welcome back, ${user.username}!`,
       });
       
-      // Redirect to home page after successful login
-      navigate("/");
+      // Small delay before redirecting to allow state to update
+      setTimeout(() => {
+        navigate("/");
+      }, 100);
     },
     onError: (error: Error) => {
       toast({
@@ -83,20 +88,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await apiRequest("POST", "/api/register", userData);
       return await res.json();
     },
-    onSuccess: (user: User) => {
-      // Update the query cache with the user data
+    onSuccess: async (user: User) => {
+      // Set the user data in cache
       queryClient.setQueryData(["/api/user"], user);
       
-      // Ensure any components using the auth query refetch
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Force an immediate refetch to ensure consistent state
+      await refetchUser();
       
       toast({
         title: "Registration successful",
         description: `Welcome to Downwindr, ${user.username}!`,
       });
       
-      // Redirect to home page after successful registration
-      navigate("/");
+      // Small delay before redirecting to allow state to update
+      setTimeout(() => {
+        navigate("/");
+      }, 100);
     },
     onError: (error: Error) => {
       toast({
@@ -116,27 +123,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw error;
       }
     },
-    onSuccess: () => {
+    onSuccess: async () => {
       // Force clear the user data from cache
       queryClient.setQueryData(["/api/user"], null);
       
-      // Make sure to update any components using the data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Force an immediate refetch to ensure consistent state
+      await refetchUser();
       
       toast({
         title: "Logged out",
         description: "You have been logged out successfully",
       });
       
-      // Note: We'll handle navigation in the component to avoid race conditions
-      // The Header component will handle the redirect with a small delay
+      // Redirect to auth page after a small delay
+      setTimeout(() => {
+        if (location !== "/auth") {
+          navigate("/auth");
+        }
+      }, 100);
     },
-    onError: (error: Error) => {
+    onError: async (error: Error) => {
       console.error("Logout error in mutation:", error);
       
       // Even if API call fails, clear user data from client
       queryClient.setQueryData(["/api/user"], null);
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
+      // Force an immediate refetch to ensure consistent state
+      await refetchUser();
       
       toast({
         title: "Logout had issues",
@@ -144,8 +157,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         variant: "destructive",
       });
       
-      // Note: We'll handle navigation in the component to avoid race conditions
-      // The Header component will handle the redirect with a small delay
+      // Redirect to auth page after a small delay
+      setTimeout(() => {
+        if (location !== "/auth") {
+          navigate("/auth");
+        }
+      }, 100);
     },
   });
 
