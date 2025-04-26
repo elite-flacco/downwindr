@@ -5,26 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium hand-drawn hand-drawn-texture transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 relative after:content-[''] after:absolute after:inset-0 after:opacity-10 after:bg-[radial-gradient(circle_at_top_right,white,transparent_70%)]",
   {
     variants: {
       variant: {
-        default: "font-semibold bg-blue-700 hover:bg-blue-800 text-primary-foreground bg-gradient-to-r from-theme-secondary to-theme-secondary/60 hover:from-theme-secondary/80 hover:to-theme-secondary/40",
+        default: "font-semibold text-primary-foreground bg-gradient-to-r from-theme-secondary to-theme-secondary/70 hover:from-theme-secondary/80 hover:to-theme-secondary/50 shadow-md hover:shadow",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "hand-drawn-chalk bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow",
         outline:
-          "font-semibold text-primary border border-input bg-background hover:bg-secondary hover:text-accent-foreground",
+          "font-semibold text-primary border-2 border-input bg-background hover:bg-secondary hover:text-accent-foreground border-dashed",
         secondary:
-          "font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-md hover:shadow",
         ghost: "font-semibold hover:bg-theme-surface hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70 wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,0,0,0.1),transparent_70%)]"
+        link: "text-primary underline-offset-4 hover:underline hand-drawn-none",
+        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70 wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,0,0,0.1),transparent_70%)] shadow-md hover:shadow hand-drawn-chalk"
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3 text-xs",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 px-3 py-1 text-xs",
+        lg: "h-12 px-8 py-3",
+        icon: "h-11 w-11",
       },
     },
     defaultVariants: {

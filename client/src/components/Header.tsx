@@ -52,7 +52,7 @@ export default function Header() {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
           >
-            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg p-2 rounded-full mr-3 shadow-md">
+            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md p-2 hand-drawn hand-drawn-chalk mr-3">
               <Wind className="w-6 h-6 text-theme-background " />
             </div>
             <div>
@@ -67,13 +67,13 @@ export default function Header() {
         <nav className="hidden md:flex space-x-2">
           <Link href="/">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              whileHover={{ y: -2, scale: 1.03 }}
+              whileTap={{ y: 0, scale: 0.98 }}
             >
               {/* <Wind className="w-4 h-4 mr-2" /> */}
               🏖️ Back to the Beach
@@ -81,13 +81,13 @@ export default function Header() {
           </Link>
           <Link href="/spots">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              whileHover={{ y: -2, scale: 1.03 }}
+              whileTap={{ y: 0, scale: 0.98 }}
             >
               {/* <Map className="w-4 h-4 mr-2" /> */}
               📍 Where to Shred
@@ -95,13 +95,13 @@ export default function Header() {
           </Link>
           <Link href="/community">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              whileHover={{ y: -2, scale: 1.03 }}
+              whileTap={{ y: 0, scale: 0.98 }}
             >
               {/* <Users className="w-4 h-4 mr-2" /> */}
               🌬️ Wind Fam
@@ -109,13 +109,13 @@ export default function Header() {
           </Link>
           <Link href="/learn">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              whileHover={{ y: -2, scale: 1.03 }}
+              whileTap={{ y: 0, scale: 0.98 }}
             >
               {/* <Info className="w-4 h-4 mr-2" /> */}
               🎓 Skill Up
@@ -228,9 +228,10 @@ export default function Header() {
           )}
           
           <motion.button 
-            className="text-theme-primary p-2 rounded-lg hover:bg-theme-surface" 
+            className="text-theme-primary p-2 hand-drawn hover:bg-theme-surface" 
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
           >
             {mobileMenuOpen ? (
@@ -255,13 +256,13 @@ export default function Header() {
             <nav className="container mx-auto px-4 flex flex-col space-y-2 py-2">
               <Link href="/">
                 <motion.div 
-                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
-                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ x: 0 }}
+                  whileHover={{ x: 5, scale: 1.02 }}
+                  whileTap={{ x: 0, scale: 0.98 }}
                 >
                   {/* <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   🏖️ Back to the Beach
@@ -269,13 +270,13 @@ export default function Header() {
               </Link>
               <Link href="/spots">
                 <motion.div 
-                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ x: 0 }}
+                  whileHover={{ x: 5, scale: 1.02 }}
+                  whileTap={{ x: 0, scale: 0.98 }}
                 >
                   {/* <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   📍 Where to Shred
@@ -283,13 +284,13 @@ export default function Header() {
               </Link>
               <Link href="/community">
                 <motion.div 
-                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ x: 0 }}
+                  whileHover={{ x: 5, scale: 1.02 }}
+                  whileTap={{ x: 0, scale: 0.98 }}
                 >
                   {/* <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   🌬️ Wind Fam
@@ -297,13 +298,13 @@ export default function Header() {
               </Link>
               <Link href="/learn">
                 <motion.div 
-                  className={`text-sm font-medium px-4 py-3 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-blue-700 hover:bg-blue-800 bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
+                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ x: 0 }}
+                  whileHover={{ x: 5, scale: 1.02 }}
+                  whileTap={{ x: 0, scale: 0.98 }}
                 >
                   {/* <Info className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   🎓 Skill Up
