@@ -83,7 +83,7 @@
   }
 
   body {
-    @apply text-theme-text font-body bg-page-gradient antialiased;
+    @apply text-theme-text font-body antialiased;
   }
 
   h1 {

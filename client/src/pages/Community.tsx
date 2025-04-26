@@ -24,7 +24,7 @@ export default function Community() {
             <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
               <CardHeader>
                 <UserPlus className="h-10 w-10 text-blue-500 mb-2" />
-                <CardTitle>Join Forums</CardTitle>
+                <CardTitle className="font-medium">Join Forums</CardTitle>
                 <CardDescription>Discuss gear, techniques, and travel</CardDescription>
               </CardHeader>
             </Card>
@@ -32,7 +32,7 @@ export default function Community() {
             <Card className="bg-gradient-to-br from-teal-50 to-teal-100 border-teal-200">
               <CardHeader>
                 <Users className="h-10 w-10 text-teal-500 mb-2" />
-                <CardTitle>Find Buddies</CardTitle>
+                <CardTitle className="font-medium">Find Buddies</CardTitle>
                 <CardDescription>Connect with kiters at your destination</CardDescription>
               </CardHeader>
             </Card>
@@ -40,7 +40,7 @@ export default function Community() {
             <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
               <CardHeader>
                 <Mail className="h-10 w-10 text-purple-500 mb-2" />
-                <CardTitle>Stay Updated</CardTitle>
+                <CardTitle className="font-medium">Stay Updated</CardTitle>
                 <CardDescription>Get notified about events and meetups</CardDescription>
               </CardHeader>
             </Card>
@@ -48,7 +48,7 @@ export default function Community() {
           
           <Card className="max-w-2xl mx-auto border-theme-primary/20 shadow-lg">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl mb-4">Coming Soon!</CardTitle>
+              <CardTitle className="text-2xl mb-4 font-medium">Coming Soon!</CardTitle>
               <CardDescription>
                 We're working hard to build an amazing community platform for kitesurfers around the world.
               </CardDescription>
