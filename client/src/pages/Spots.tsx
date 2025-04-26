@@ -23,6 +23,7 @@ export default function Spots() {
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [windQualityFilter, setWindQualityFilter] = useState<string[]>(["Excellent"]);
+  const [selectedRegion, setSelectedRegion] = useState<string>("all");
   const [selectedSpot, setSelectedSpot] = useState<number | null>(null);
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [showComparison, setShowComparison] = useState<boolean>(false);
@@ -101,9 +102,12 @@ export default function Spots() {
       spot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       spot.country.toLowerCase().includes(searchQuery.toLowerCase());
       
+    // Filter by region
+    const matchesRegion = selectedRegion === "all" || getSpotRegion(spot.country) === selectedRegion;
+      
     // Filter by wind quality is handled by the backend based on selected month
     
-    return matchesSearch;
+    return matchesSearch && matchesRegion;
   }) : [];
 
   // Handle month selection
@@ -287,6 +291,8 @@ export default function Spots() {
                 onWindQualityFilterChange={handleWindQualityFilterChange}
                 searchQuery={searchQuery}
                 onSearchChange={handleSearchChange}
+                selectedRegion={selectedRegion}
+                onRegionChange={setSelectedRegion}
               />
             </div>
             

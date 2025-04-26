@@ -1,4 +1,40 @@
 
+// Map countries to regions
+const countryRegions: Record<string, string> = {
+  // Europe
+  'Spain': 'europe',
+  'Greece': 'europe',
+  'Italy': 'europe',
+  'France': 'europe',
+  'Portugal': 'europe',
+  
+  // Asia
+  'Philippines': 'asia',
+  'Thailand': 'asia',
+  'Vietnam': 'asia',
+  'Indonesia': 'asia',
+  
+  // Americas
+  'Brazil': 'americas',
+  'Mexico': 'americas',
+  'United States': 'americas',
+  
+  // Africa
+  'Egypt': 'africa',
+  'Morocco': 'africa',
+  'South Africa': 'africa',
+  
+  // Oceania
+  'Australia': 'oceania',
+  'New Zealand': 'oceania',
+  'Fiji': 'oceania',
+};
+
+export function getSpotRegion(country: string): string {
+  return countryRegions[country] || 'other';
+}
+
+
 // Map of country names to their ISO 3166-1 alpha-2 codes
 const countryToCode: { [key: string]: string } = {
   "Spain": "ES",
