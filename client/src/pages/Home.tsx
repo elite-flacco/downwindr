@@ -40,9 +40,6 @@ export default function Home() {
             {/* Darkening overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/10 mix-blend-multiply"></div>
             {/* Attribution */}
-            <div className="absolute bottom-2 right-2 text-white/70 text-xs bg-black/30 px-2 py-1 rounded backdrop-blur-sm z-10">
-              Photo by Marcreation on Unsplash
-            </div>
           </div>
           
           {/* Main container for layout */}
@@ -70,7 +67,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed text-shadow"
+                    className="text-lg md:text-xl text-white/90 mb-16 leading-relaxed text-shadow"
                   >
                     Discover the world's best kitesurfing destinations, track real-time wind conditions, 
                     and connect with the global kitesurfing community.
@@ -86,16 +83,16 @@ export default function Home() {
                       <Button 
                         variant="secondary"
                         size="lg" 
-                        className="font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                        className="font-bold text-white bg-blue-700 hover:bg-blue-800 shadow-md hover:shadow-lg transition-all duration-300"
                       >
                         🌎 Find Your Spot
                       </Button>
                     </Link>
-                    <Link href="/learn">
+                    <Link href="/community">
                       <Button 
                         variant="outline" 
                         size="lg" 
-                        className="bg-white/50 backdrop-blur-sm font-medium hover:bg-white/80"
+                        className="text-white border-2 bg-white/5 backdrop-blur-sm font-bold hover:bg-white/80"
                       >
                         Join the Ride <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
