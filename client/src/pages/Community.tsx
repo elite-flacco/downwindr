@@ -62,7 +62,7 @@ export default function Community() {
               <Button 
                 size="lg"
                 variant="action"
-                className="text-white" 
+                className="text-white chalk-drawn" 
                 onClick={() => window.location.href = "mailto:hello@downwindr.com?subject=Community Interest"}
               >
                 <Mail className="mr-2 h-4 w-4" />
