@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import joinTheRideImage from '@/assets/join-the-ride.png';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -169,7 +170,9 @@ export default function Header() {
                 className="flex items-center gap-1.5 px-6 py-2 relative overflow-hidden group"
                 size="sm"
                 style={{
-                  background: 'linear-gradient(45deg, #ff7066, #ff5e5b)',
+                  backgroundImage: `url(${joinTheRideImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                   border: 'none',
                   color: 'white',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
