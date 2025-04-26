@@ -321,6 +321,25 @@
   100% { transform: translateX(100%) rotate(-45deg) translateZ(0); opacity: 0; }
 }
 
+@keyframes chalk-draw {
+  0% { 
+    stroke-dashoffset: 1000;
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  100% { 
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes chalk-fade {
+  0% { opacity: 0; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* ===== COMPONENTS ===== */
 @layer components {
   /* Card styling */
@@ -451,6 +470,32 @@
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
     will-change: transform;
   }
+}
+
+/* ===== CHALK ANIMATION ELEMENTS ===== */
+.chalk-drawn-element {
+  @apply relative;
+  animation: chalk-fade 0.5s ease-out forwards;
+}
+
+.chalk-drawn-element.delayed {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.chalk-drawn-element.long-delay {
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.chalk-drawn-svg {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: chalk-draw 1.5s ease-out forwards;
+}
+
+.chalk-drawn-svg.delayed {
+  animation-delay: 0.3s;
 }
 
 /* ===== MAP STYLES ===== */

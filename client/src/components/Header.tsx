@@ -83,7 +83,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-theme-secondary text-white shadow-md" 
+                  ? "bg-theme-secondary text-white shadow-md chalk-drawn wobbly-border chalk-drawn-element" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -97,7 +97,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-theme-secondary text-white shadow-md" 
+                  ? "bg-theme-secondary text-white shadow-md chalk-drawn wobbly-border chalk-drawn-element delayed" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -111,7 +111,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-theme-secondary text-white shadow-md" 
+                  ? "bg-theme-secondary text-white shadow-md chalk-drawn wobbly-border chalk-drawn-element long-delay" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -166,7 +166,7 @@ export default function Header() {
             <Link href="/auth">
               <Button 
                 variant="action" 
-                className="flex items-center gap-1.5"
+                className="flex items-center gap-1.5 chalk-drawn wobbly-border"
                 size="sm"
               >
                 <LogIn className="h-4 w-4" />
@@ -228,7 +228,7 @@ export default function Header() {
           )}
           
           <motion.button 
-            className="text-theme-primary p-2 hand-drawn hover:bg-theme-surface" 
+            className="text-theme-primary p-2 hand-drawn chalk-drawn wobbly-border hover:bg-theme-surface" 
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
             whileHover={{ scale: 1.05 }}
