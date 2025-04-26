@@ -21,9 +21,24 @@ export default function Header() {
   const { user, isLoading, logoutMutation } = useAuth();
   
   // Handle logout click
-  const handleLogout = (e: React.MouseEvent) => {
+  const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
-    logoutMutation.mutate();
+    
+    try {
+      await logoutMutation.mutateAsync();
+      console.log("Logged out successfully");
+      
+      // Add a small delay before redirecting
+      setTimeout(() => {
+        // Force redirect to auth page
+        if (location !== "/auth") {
+          navigate("/auth");
+        }
+      }, 100);
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+    
     setMobileMenuOpen(false); // Close mobile menu after logout click
   };
 

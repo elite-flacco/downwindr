@@ -117,8 +117,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     },
     onSuccess: () => {
-      // Force clear the user data
+      // Force clear the user data from cache
       queryClient.setQueryData(["/api/user"], null);
+      
+      // Make sure to update any components using the data
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       
       toast({
@@ -126,12 +128,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         description: "You have been logged out successfully",
       });
       
-      // Redirect to auth page after logout
-      if (location !== "/auth") {
-        navigate("/auth");
-      }
+      // Note: We'll handle navigation in the component to avoid race conditions
+      // The Header component will handle the redirect with a small delay
     },
     onError: (error: Error) => {
+      console.error("Logout error in mutation:", error);
+      
       // Even if API call fails, clear user data from client
       queryClient.setQueryData(["/api/user"], null);
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
@@ -142,8 +144,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         variant: "destructive",
       });
       
-      // Still redirect to auth page
-      navigate("/auth");
+      // Note: We'll handle navigation in the component to avoid race conditions
+      // The Header component will handle the redirect with a small delay
     },
   });
 
