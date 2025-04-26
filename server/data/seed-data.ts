@@ -51,7 +51,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         "Spanish coastal culture with strong flamenco influences and Moorish heritage",
       averageSchoolCost: 60,
       averageAccommodationCost: 90,
-      numberOfSchools: 30,
+      numberOfSchools: 30+,
     },
     windConditions: [
       {
