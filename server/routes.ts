@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage, UserPreferences } from "./storage";
 import { z } from "zod";
 import { MonthNames, insertReviewSchema, insertRatingSchema, WindQuality } from "@shared/schema";
-import { setupAuth } from "./auth";
+import { setupAuth, comparePasswords, hashPassword } from "./auth";
 
 // Define user preferences schema for validation
 const userPreferencesSchema = z.object({
@@ -27,6 +27,12 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
   }
   res.status(401).json({ message: "Authentication required" });
 }
+
+// Password change schema for validation
+const passwordChangeSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z.string().min(6, "New password must be at least 6 characters")
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes
@@ -439,6 +445,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error deleting rating:", error);
       res.status(500).json({ message: "Error deleting rating" });
+    }
+  });
+
+  // Get user's reviews (requires authentication)
+  app.get("/api/user/reviews", isAuthenticated, async (req, res) => {
+    try {
+      const userId = (req.user as Express.User).id;
+      const reviews = await storage.getReviewsByUserId(userId);
+      res.json(reviews);
+    } catch (error) {
+      console.error("Error fetching user reviews:", error);
+      res.status(500).json({ message: "Error fetching your reviews" });
+    }
+  });
+  
+  // Update user password (requires authentication)
+  app.post("/api/user/password", isAuthenticated, async (req, res) => {
+    try {
+      const userId = (req.user as Express.User).id;
+      
+      // Validate request body
+      const parseResult = passwordChangeSchema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          message: "Invalid password data", 
+          errors: parseResult.error.errors 
+        });
+      }
+      
+      const { currentPassword, newPassword } = parseResult.data;
+      
+      // Get current user
+      const user = await storage.getUserById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Verify current password
+      const isCorrectPassword = await comparePasswords(currentPassword, user.password);
+      if (!isCorrectPassword) {
+        return res.status(401).json({ message: "Current password is incorrect" });
+      }
+      
+      // Hash new password
+      const hashedPassword = await hashPassword(newPassword);
+      
+      // For now, let's update the user's password directly in storage
+      user.password = hashedPassword;
+      
+      res.json({ message: "Password updated successfully" });
+    } catch (error) {
+      console.error("Error updating password:", error);
+      res.status(500).json({ message: "Error updating password" });
     }
   });
 
