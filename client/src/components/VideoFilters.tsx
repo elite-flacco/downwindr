@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
 import { videoCategories, videoLevels } from "@/data/learnVideos";
 import { Search, Filter } from "lucide-react";
 
@@ -23,23 +24,24 @@ export default function VideoFilters({
   searchQuery,
 }: VideoFiltersProps) {
   return (
-    <div className="mb-8 space-y-4">
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-        <Input
-          placeholder="Search videos..."
-          value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10 bg-white border-gray-200"
-        />
-      </div>
+    <Card className="w-full rounded-xl border border-theme-border shadow-sm mb-8">
+      <CardContent className="p-6 space-y-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+          <Input
+            placeholder="Search videos..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            className="pl-10 bg-white border-gray-200"
+          />
+        </div>
 
-      <div>
-        <h3 className="text-sm font-medium mb-2 flex items-center">
-          <Filter className="h-4 w-4 mr-1 text-theme-primary" />
-          Categories
-        </h3>
-        <div className="flex flex-wrap gap-2">
+        <div>
+          <h3 className="text-sm font-medium mb-2 flex items-center">
+            <Filter className="h-4 w-4 mr-1 text-theme-primary" />
+            Categories
+          </h3>
+          <div className="flex flex-wrap gap-2">
           <Badge
             key="all"
             variant={selectedCategory === "" ? "default" : "outline"}
