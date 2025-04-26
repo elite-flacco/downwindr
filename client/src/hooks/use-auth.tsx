@@ -7,6 +7,7 @@ import {
 import { User } from "@shared/schema";
 import { getQueryFn, apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "wouter";
 
 type AuthContextType = {
   user: User | null;
@@ -34,6 +35,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
+  const [location, navigate] = useLocation();
   
   const {
     data: user,
@@ -55,6 +57,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         title: "Logged in",
         description: `Welcome back, ${user.username}!`,
       });
+      // Redirect to home page after successful login
+      navigate("/");
     },
     onError: (error: Error) => {
       toast({
@@ -76,6 +80,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         title: "Registration successful",
         description: `Welcome to Downwindr, ${user.username}!`,
       });
+      // Redirect to home page after successful registration
+      navigate("/");
     },
     onError: (error: Error) => {
       toast({
@@ -96,6 +102,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         title: "Logged out",
         description: "You have been logged out successfully",
       });
+      // Redirect to auth page after logout
+      if (location !== "/auth") {
+        navigate("/auth");
+      }
     },
     onError: (error: Error) => {
       toast({

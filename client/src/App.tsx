@@ -15,7 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/spots" component={Spots} />
       <Route path="/auth" component={AuthPage} />
-      <Route path="/community" component={Community} />
+      <ProtectedRoute path="/community" component={Community} />
       <Route path="/learn" component={Learn} />
       <Route path="/about" component={NotFound} />
       <Route component={NotFound} />

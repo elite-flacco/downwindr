@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useLocation } from "wouter";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,12 +31,22 @@ const registerFormSchema = z.object({
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
   const [location, navigate] = useLocation();
-  const { user, loginMutation, registerMutation } = useAuth();
+  const { user, isLoading, loginMutation, registerMutation } = useAuth();
 
-  // Redirect if already logged in
-  if (user) {
-    navigate("/");
-    return null;
+  // Redirect if already logged in - but only after the initial loading is complete
+  useEffect(() => {
+    if (user && !isLoading) {
+      navigate("/");
+    }
+  }, [user, isLoading, navigate]);
+  
+  // Early return while checking auth status or if redirecting
+  if (isLoading || user) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
   }
 
   // Login form setup
