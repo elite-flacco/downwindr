@@ -61,7 +61,8 @@ export default function Community() {
             <CardFooter className="flex justify-center">
               <Button 
                 size="lg"
-                variant={"default"}
+                variant="action"
+                className="text-white" 
                 onClick={() => window.location.href = "mailto:hello@downwindr.com?subject=Community Interest"}
               >
                 <Mail className="mr-2 h-4 w-4" />
