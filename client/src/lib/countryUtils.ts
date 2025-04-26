@@ -24,6 +24,7 @@ const countryRegions: Record<string, string> = {
   'Brazil': 'americas',
   'Mexico': 'americas',
   'United States': 'americas',
+  'Dominican Republic': 'americas',
 
   // Africa
   'Egypt': 'africa',

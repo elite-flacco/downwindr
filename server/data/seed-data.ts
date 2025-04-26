@@ -51,7 +51,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         "Spanish coastal culture with strong flamenco influences and Moorish heritage",
       averageSchoolCost: 60,
       averageAccommodationCost: 90,
-      numberOfSchools: 15,
+      numberOfSchools: 30+,
     },
     windConditions: [
       {
@@ -1224,158 +1224,144 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Kalpitiya, Sri Lanka",
       country: "Sri Lanka",
-      latitude: 8.2375,
-      longitude: 79.7564,
+      latitude: 8.2295281,          // :contentReference[oaicite:0]{index=0}
+      longitude: 79.7596142,        // :contentReference[oaicite:1]{index=1}
       description:
-        "Kalpitiya is a quiet peninsula on Sri Lanka’s northwest coast that has become a kitesurfing hotspot thanks to its reliable winds, warm waters, and diverse conditions. The main lagoon offers flat water ideal for beginners and freestylers, while nearby spots like Vella Island provide pristine conditions for advanced riders.",
-      bestMonths: "May-Sep, Dec-Mar",
-      tempRange: "26–32°C",
-      waveSize: "Flat in lagoons, small chop on ocean side",
-      difficultyLevel: "All levels",
+        "A world-class kitesurfing destination on Sri Lanka’s northwest coast, Kalpitiya features a vast shallow lagoon, reliable seasonal winds, and rich coastal wildlife including dolphins and turtles. Its mix of flat-water lagoons and nearby ocean waves, plus eco-lodges and cultural tours into mangroves and Dutch-era forts, make it ideal for kiters of all levels.",  // :contentReference[oaicite:2]{index=2}
+      bestMonths: "May–Oct (SW monsoon) & Dec–Feb (NE monsoon)",  // :contentReference[oaicite:3]{index=3}
+      tempRange: "25.5–28.1°C",    // :contentReference[oaicite:4]{index=4}
+      waveSize: "Flat to Small Chop",
+      difficultyLevel: "Beginner to Advanced",
       localAttractions:
-        "Dolphin watching, Wilpattu National Park safaris, temple visits",
-      tags: ["Flatwater", "Remote", "Consistent Wind", "Warm Water"],
-      windguruCode: "190458",
+        "Kalpitiya Lagoon, Dutch Bay, Alankuda dolphin-watching, Wilpattu National Park, mangrove tours",
+      tags: ["Kite Schools", "Eco-Lodges", "Wildlife Tours", "Lagoon Flatwater"],
+      windguruCode: "115722",       // :contentReference[oaicite:5]{index=5}
       kiteSchools: [
-        "KiteCenter Sri Lanka|https://maps.google.com/?q=KiteCenter+Sri+Lanka",
-        "Kite Surfing Lanka|https://maps.google.com/?q=Kite+Surfing+Lanka",
-        "Ruuk Village Kite School|https://maps.google.com/?q=Ruuk+Village+Kalpitiya",
-        "Sri Lanka Kite|https://maps.google.com/?q=Sri+Lanka+Kite",
-        "Sun Wind Beach Kite School|https://maps.google.com/?q=Sun+Wind+Beach+Kalpitiya",
+        "Kite Center Sri Lanka|https://maps.google.com/?q=Kite+Center+Sri+Lanka|5.0|150",                 // :contentReference[oaicite:6]{index=6}
+        "Margarita Kite School Sri Lanka|https://maps.google.com/?q=Margarita+Kite+School+Sri+Lanka|5.0|89",  // :contentReference[oaicite:7]{index=7}
+        "Surfpoint Srilanka Kite Village|https://maps.google.com/?q=Surfpoint+Srilanka+Kite+Village|5.0|75",   // :contentReference[oaicite:8]{index=8}
+        "De Silva Kite School|https://maps.google.com/?q=De+Silva+Kite+School+Kalpitiya|5.0|80",            // :contentReference[oaicite:9]{index=9}
+        "Kitesurfing Lanka Resort|https://maps.google.com/?q=Kitesurfing+Lanka+Resort|5.0|98"             // :contentReference[oaicite:10]{index=10}
       ],
-      conditions: [
-        "Flatwater Lagoons",
-        "Side-onshore Trade Winds",
-        "Ocean Swells (optional)",
-      ],
-      accommodationOptions: [
-        "Eco-lodges",
-        "Beach Cabins",
-        "Kite Camps",
-        "Local Guesthouses",
-      ],
-      foodOptions: [
-        "Sri Lankan Curry",
-        "Seafood BBQs",
-        "Vegetarian Cafes",
-        "Kite Camp Dining",
-      ],
+      conditions: ["Flat Lagoon", "Side-On Shore Wind", "Warm Water"],
+      accommodationOptions: ["Eco-Lodges", "Beachfront Camps", "Boutique Guesthouses"],
+      foodOptions: ["Sri Lankan Seafood", "Local Spices", "International Café"],
       culture:
-        "Kalpitiya has a small fishing village vibe mixed with growing eco-tourism. Expect a relaxed pace, warm hospitality, and a tight-knit kite community.",
-      averageSchoolCost: 55,
-      averageAccommodationCost: 60,
-      numberOfSchools: 5,
+        "Blend of coastal Sinhala heritage, fishing-village life, and eco-tourism initiatives",
+      averageSchoolCost: 40,          // USD per hour (~€38/hr private lessons) :contentReference[oaicite:11]{index=11}
+      averageAccommodationCost: 20,   // USD per night (~€15–20) :contentReference[oaicite:12]{index=12}
+      numberOfSchools: 25             // approx. 25 kite-focused venues listed online :contentReference[oaicite:13]{index=13}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 16,
+        windSpeed: 17,
         windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
+        airTemp: 25.5,
+        waterTemp: 27.5,
         seasonalNotes:
-          "Start of the winter season with lighter winds, good for beginners and foiling.",
+          "Winter NE-monsoon phase brings 15–20 kt winds; warm air and flat lagoon spots."  // :contentReference[oaicite:14]{index=14}
       },
       {
         month: 2,
         windSpeed: 17,
         windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 28,
+        airTemp: 26.5,
+        waterTemp: 27.8,
         seasonalNotes:
-          "Consistent thermal winds. One of the most relaxed months to kite with few crowds.",
+          "Steady NE winds and rising temperatures; ideal for learners."  // :contentReference[oaicite:15]{index=15}
       },
       {
         month: 3,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 31,
-        waterTemp: 29,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 27.8,
+        waterTemp: 29.0,
         seasonalNotes:
-          "End of the winter season with fading winds. Still kitable most days.",
+          "Transition to SW monsoon; afternoon breezes pick up around 18 kt."  // :contentReference[oaicite:16]{index=16}
       },
       {
         month: 4,
-        windSpeed: 12,
-        windQuality: WindQuality.Poor,
-        airTemp: 32,
-        waterTemp: 30,
+        windSpeed: 19,
+        windQuality: WindQuality.Good,
+        airTemp: 28.0,
+        waterTemp: 30.1,
         seasonalNotes:
-          "Hot and humid with low wind. Not a great month for kiting in Kalpitiya.",
+          "Early SW monsoon brings reliable 18–20 kt winds; fewer crowds."  // :contentReference[oaicite:17]{index=17}
       },
       {
         month: 5,
         windSpeed: 20,
         windQuality: WindQuality.Excellent,
-        airTemp: 31,
-        waterTemp: 29,
+        airTemp: 28.1,
+        waterTemp: 29.4,
         seasonalNotes:
-          "Kickoff of the main season. Strong side-onshore winds blow daily through the month.",
+          "Peak SW monsoon strength 20–25 kt; perfect flatwater conditions."  // :contentReference[oaicite:18]{index=18}
       },
       {
         month: 6,
-        windSpeed: 24,
+        windSpeed: 22,
         windQuality: WindQuality.Excellent,
-        airTemp: 30,
-        waterTemp: 28,
+        airTemp: 27.6,
+        waterTemp: 28.3,
         seasonalNotes:
-          "Prime month with strong, reliable winds and consistent flatwater conditions.",
+          "Strong thermal breezes of 20–25 kt; kite sizes 7–10 m common."  // :contentReference[oaicite:19]{index=19}
       },
       {
         month: 7,
-        windSpeed: 25,
+        windSpeed: 23,
         windQuality: WindQuality.Excellent,
-        airTemp: 29,
-        waterTemp: 28,
+        airTemp: 27.4,
+        waterTemp: 27.5,
         seasonalNotes:
-          "High season in full force. Ideal for advanced tricks and island downwinders.",
+          "Mid-season peak with 22–27 kt winds; very consistent."  // :contentReference[oaicite:20]{index=20}
       },
       {
         month: 8,
-        windSpeed: 24,
+        windSpeed: 23,
         windQuality: WindQuality.Excellent,
-        airTemp: 29,
-        waterTemp: 28,
+        airTemp: 27.3,
+        waterTemp: 27.3,
         seasonalNotes:
-          "Still epic wind and relatively few crowds. Vella Island is often at its best.",
+          "Lagoons flush with steady SW trade winds; great for all levels."  // :contentReference[oaicite:21]{index=21}
       },
       {
         month: 9,
         windSpeed: 22,
         windQuality: WindQuality.Excellent,
-        airTemp: 30,
-        waterTemp: 28,
+        airTemp: 27.3,
+        waterTemp: 27.7,
         seasonalNotes:
-          "Late-season conditions still strong and reliable. Good time to visit before the monsoon.",
+          "Late SW season winds taper to 20–25 kt; fewer crowds."  // :contentReference[oaicite:22]{index=22}
       },
       {
         month: 10,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
+        windSpeed: 21,
+        windQuality: WindQuality.Good,
+        airTemp: 26.7,
+        waterTemp: 28.3,
         seasonalNotes:
-          "Winds begin to taper. Sessions still possible but not daily.",
+          "End of SW monsoon; winds around 18–22 kt still reliable."  // :contentReference[oaicite:23]{index=23}
       },
       {
         month: 11,
-        windSpeed: 14,
-        windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 26.1,
+        waterTemp: 28.6,
         seasonalNotes:
-          "Low wind transition month. Some foiling and occasional thermal wind days.",
+          "Transition month; 15–20 kt breezes return from NE monsoon."  // :contentReference[oaicite:24]{index=24}
       },
       {
         month: 12,
-        windSpeed: 16,
-        windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 28,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 25.7,
+        waterTemp: 28.0,
         seasonalNotes:
-          "Start of the winter season with light to moderate winds. Great for beginners and relaxed vibes.",
-      },
-    ],
+          "Early NE monsoon phase with moderate 15–18 kt winds."  // :contentReference[oaicite:25]{index=25}
+      }
+    ]
   },
 
   // 10. Punta San Carlos, Mexico"
@@ -1383,139 +1369,44 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Punta San Carlos, Mexico",
       country: "Mexico",
-      latitude: 29.6983,
-      longitude: -115.5274,
+      latitude: 29.61944,
+      longitude: -115.50333,
       description:
-        "A remote Baja California gem, Punta San Carlos is world-renowned for its powerful Pacific swells and steady wind, drawing advanced wave riders and wind junkies alike. This rugged and off-grid destination offers epic down-the-line riding in a breathtaking desert-meets-ocean setting.",
-      bestMonths: "Apr–Sep",
-      tempRange: "17–28°C",
-      waveSize: "1–3m (can exceed 4m during big swell)",
+        "A remote Baja outpost famous for a world-class long left point wave and steady thermal winds, perfect for wave riding and kitesurfing in an off-grid desert setting.",
+      bestMonths: "Mar–May & Sep–Nov",
+      tempRange: "17–33°C",
+      waveSize: "Medium to Large",
       difficultyLevel: "Intermediate to Advanced",
-      localAttractions: "Surfing, mountain biking, desert camping, star gazing",
-      tags: ["wave riding", "remote", "advanced", "camping"],
-      windguruCode: "157",
+      localAttractions:
+        "Desert dunes, Isla San Pedro Nolasco marine reserve, remote camping & surf camp",
+      tags: ["Wave Riding", "Kitesurfing", "Camping", "Off-grid Adventures"],
+      windguruCode: "208958",
       kiteSchools: [
-        "SoloSports Adventure Holidays|https://maps.google.com/?q=SoloSports+Adventure+Holidays+Punta+San+Carlos|4.9|56",
+        "SoloSports Adventure Holidays|https://maps.google.com/?q=SoloSports+Adventure+Holidays|5.0|29"
       ],
-      conditions: ["Pacific Swell", "Side-Offshore Winds", "Rocky Shoreline"],
-      accommodationOptions: ["On-site camps (SoloSports)", "Van camping"],
-      foodOptions: ["Camp kitchens", "BYO supplies"],
+      conditions: ["Point Break", "Consistent Thermal Winds", "Desert Dunes Launch"],
+      accommodationOptions: ["Surf Camp Tents", "Basic Cabins"],
+      foodOptions: ["Camp Mess Hall", "Self-catered BBQ"],
       culture:
-        "Off-grid adventure culture with a tight-knit kite and surf community",
-      averageSchoolCost: 110,
-      averageAccommodationCost: 120,
-      numberOfSchools: 1,
+        "Laid-back surf-camp community with an adventurous, off-grid vibe",
+      averageSchoolCost: 65,
+      averageAccommodationCost: 80,
+      numberOfSchools: 1
     },
     windConditions: [
-      {
-        month: 1,
-        windSpeed: 14,
-        windQuality: WindQuality.Moderate,
-        airTemp: 18,
-        waterTemp: 16,
-        seasonalNotes:
-          "Cooler temps and lighter winds make this month less reliable, though swell still rolls in.",
-      },
-      {
-        month: 2,
-        windSpeed: 15,
-        windQuality: WindQuality.Moderate,
-        airTemp: 18,
-        waterTemp: 15,
-        seasonalNotes:
-          "Early springtime brings longer days and building swell, but wind remains hit or miss.",
-      },
-      {
-        month: 3,
-        windSpeed: 17,
-        windQuality: WindQuality.Good,
-        airTemp: 19,
-        waterTemp: 16,
-        seasonalNotes:
-          "Winds start turning on more consistently, with excellent surf potential.",
-      },
-      {
-        month: 4,
-        windSpeed: 20,
-        windQuality: WindQuality.Excellent,
-        airTemp: 21,
-        waterTemp: 17,
-        seasonalNotes:
-          "Kicking off the prime season — strong winds and excellent down-the-line wave conditions.",
-      },
-      {
-        month: 5,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 23,
-        waterTemp: 18,
-        seasonalNotes:
-          "Consistent wind, warm days, and classic Baja swell setups. Camps fill up fast.",
-      },
-      {
-        month: 6,
-        windSpeed: 23,
-        windQuality: WindQuality.Excellent,
-        airTemp: 24,
-        waterTemp: 19,
-        seasonalNotes:
-          "Peak season continues with daily rides and epic waves. Bring your wave kite.",
-      },
-      {
-        month: 7,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 26,
-        waterTemp: 20,
-        seasonalNotes:
-          "Strong thermals and solid SSW swell keep sessions reliable and long-lasting.",
-      },
-      {
-        month: 8,
-        windSpeed: 21,
-        windQuality: WindQuality.Excellent,
-        airTemp: 27,
-        waterTemp: 21,
-        seasonalNotes:
-          "Endless rides continue with lighter crowds and warm water. Sunset sessions are gold.",
-      },
-      {
-        month: 9,
-        windSpeed: 20,
-        windQuality: WindQuality.Good,
-        airTemp: 26,
-        waterTemp: 21,
-        seasonalNotes:
-          "Conditions still solid, though wind begins to taper later in the month.",
-      },
-      {
-        month: 10,
-        windSpeed: 18,
-        windQuality: WindQuality.Good,
-        airTemp: 24,
-        waterTemp: 20,
-        seasonalNotes:
-          "End of the prime season with occasional sessions and leftover south swells.",
-      },
-      {
-        month: 11,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 21,
-        waterTemp: 18,
-        seasonalNotes:
-          "Shoulder season with mixed results. Good for surf trips with a kite on standby.",
-      },
-      {
-        month: 12,
-        windSpeed: 14,
-        windQuality: WindQuality.Moderate,
-        airTemp: 19,
-        waterTemp: 17,
-        seasonalNotes:
-          "Calm winds and cooler temps make this off-season, though still stunning for adventure camping.",
-      },
-    ],
+      { month: 1, windSpeed: 15, windQuality: WindQuality.Good, airTemp: 20, waterTemp: 16, seasonalNotes: "Cool winter breezes; quieter camps" },
+      { month: 2, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 22, waterTemp: 15, seasonalNotes: "Increasing winds; still cool water" },
+      { month: 3, windSpeed: 20, windQuality: WindQuality.Excellent, airTemp: 24, waterTemp: 17, seasonalNotes: "Start of peak wave & wind season" },
+      { month: 4, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 27, waterTemp: 18, seasonalNotes: "Strong south swells; warm air" },
+      { month: 5, windSpeed: 24, windQuality: WindQuality.Excellent, airTemp: 29, waterTemp: 19, seasonalNotes: "Prime conditions; long waves & steady wind" },
+      { month: 6, windSpeed: 23, windQuality: WindQuality.Good, airTemp: 31, waterTemp: 20, seasonalNotes: "Slight taper but still very reliable" },
+      { month: 7, windSpeed: 20, windQuality: WindQuality.Good, airTemp: 33, waterTemp: 21, seasonalNotes: "Hot summer months; afternoon onshores" },
+      { month: 8, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 32, waterTemp: 23, seasonalNotes: "Warm water; occasional calm mornings" },
+      { month: 9, windSpeed: 20, windQuality: WindQuality.Excellent, airTemp: 30, waterTemp: 23, seasonalNotes: "Renewed south swell season; excellent waves" },
+      { month: 10, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 27, waterTemp: 21, seasonalNotes: "Steady wind & waves; ideal tie-ins" },
+      { month: 11, windSpeed: 20, windQuality: WindQuality.Good, airTemp: 24, waterTemp: 19, seasonalNotes: "End of season; fewer crowds" },
+      { month: 12, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 21, waterTemp: 17, seasonalNotes: "Cooler temps; quieter vibe" }
+    ]
   },
 
   // 11. Guincho, Portugal
