@@ -46,7 +46,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           >
             <div className="overflow-hidden">
               {/* Custom styled thumbnail design with consistent appearance */}
-              <div className="relative aspect-video w-full bg-white">
+              <div className="relative aspect-video w-full bg-[url('/attached_assets/d2598bca-0fed-425d-8ccf-e9e18a8f0b43.png')] bg-contain bg-center bg-no-repeat">
                 {/* Clean custom background with minimal thumbnail */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative w-full h-full overflow-hidden bg-white">
