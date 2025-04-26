@@ -134,45 +134,47 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           {/* Unified metadata style */}
           <div>
             {/* Unified tag row */}
-            <div className="flex flex-wrap items-center gap-1 mb-3">
-              <Badge 
-                variant="outline" 
-                className={`
-                  text-xs px-2 py-0 h-5
-                  ${video.level === 'beginner' 
-                    ? 'bg-green-50 text-green-700 border-green-100' 
-                    : video.level === 'intermediate' 
-                    ? 'bg-amber-50 text-amber-700 border-amber-100' 
-                    : 'bg-rose-50 text-rose-700 border-rose-100'}
-                `}
-              >
-                {video.level}
-              </Badge>
-              
-              {video.categories.slice(0, 2).map((category) => (
-                <Badge key={category} variant="outline" className="bg-slate-50 text-slate-600 border-slate-100 text-xs px-2 py-0 h-5">
-                  {category}
+            <div className="flex flex-wrap items-center justify-between gap-1 mb-3">
+              <div className="flex flex-wrap items-center gap-1">
+                <Badge 
+                  variant="outline" 
+                  className={`
+                    text-xs px-2 py-0 h-5
+                    ${video.level === 'beginner' 
+                      ? 'bg-green-50 text-green-700 border-green-100' 
+                      : video.level === 'intermediate' 
+                      ? 'bg-amber-50 text-amber-700 border-amber-100' 
+                      : 'bg-rose-50 text-rose-700 border-rose-100'}
+                  `}
+                >
+                  {video.level}
                 </Badge>
-              ))}
-              
-              {video.categories.length > 2 && (
-                <span className="text-xs text-slate-400">+{video.categories.length - 2}</span>
-              )}
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1">
-                <Clock className="h-3 w-3 text-slate-400" />
-                <span className="text-xs text-slate-400">{video.duration}</span>
+                
+                {video.categories.slice(0, 2).map((category) => (
+                  <Badge key={category} variant="outline" className="bg-slate-50 text-slate-600 border-slate-100 text-xs px-2 py-0 h-5">
+                    {category}
+                  </Badge>
+                ))}
+                
+                {video.categories.length > 2 && (
+                  <span className="text-xs text-slate-400">+{video.categories.length - 2}</span>
+                )}
               </div>
               
-              <button
-                onClick={handleExternalLinkClick}
-                className="text-red-500/80 hover:text-red-600 transition-colors"
-                title="Watch on YouTube"
-              >
-                <SiYoutube className="h-4 w-4" />
-              </button>
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Clock className="h-3 w-3 text-slate-400" />
+                  <span className="text-xs text-slate-400">{video.duration}</span>
+                </div>
+                
+                <button
+                  onClick={handleExternalLinkClick}
+                  className="text-red-500/80 hover:text-red-600 transition-colors"
+                  title="Watch on YouTube"
+                >
+                  <SiYoutube className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
