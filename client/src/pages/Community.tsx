@@ -10,7 +10,7 @@ export default function Community() {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <main className="container mx-auto px-4 pt-12 flex-grow flex flex-col items-center justify-center">
+      <main className="container mx-auto px-4 pt-12 pb-20 flex-grow flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
