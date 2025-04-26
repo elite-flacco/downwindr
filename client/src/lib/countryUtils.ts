@@ -1,4 +1,4 @@
-import countries from "i18n-iso-countries";
+import * as countries from "i18n-iso-countries";
 import flags from "country-flag-emoji-json";
 
 // Initialize the countries library with English locale
