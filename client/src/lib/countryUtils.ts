@@ -1,3 +1,27 @@
+import countries from "i18n-iso-countries";
+import flags from "country-flag-emoji-json";
+
+// Initialize the countries library with English locale
+countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+
+// Region mappings
+const regionCountries = {
+  europe: ["Spain", "Greece", "Portugal", "Italy", "France", "Croatia", "Netherlands"],
+  asia: ["Thailand", "Vietnam", "Philippines", "Indonesia", "Sri Lanka", "Malaysia"],
+  americas: ["Brazil", "United States", "Mexico", "Dominican Republic", "Venezuela"],
+  africa: ["Egypt", "Morocco", "South Africa", "Cape Verde", "Mauritius"],
+  oceania: ["Australia", "New Zealand", "Fiji"]
+};
+
+export function getSpotRegion(country: string): string {
+  for (const [region, countries] of Object.entries(regionCountries)) {
+    if (countries.includes(country)) {
+      return region;
+    }
+  }
+  return "other";
+}
+
 
 // Map countries to regions
 const countryRegions: Record<string, string> = {
@@ -7,33 +31,28 @@ const countryRegions: Record<string, string> = {
   'Italy': 'europe',
   'France': 'europe',
   'Portugal': 'europe',
-  
+
   // Asia
   'Philippines': 'asia',
   'Thailand': 'asia',
   'Vietnam': 'asia',
   'Indonesia': 'asia',
-  
+
   // Americas
   'Brazil': 'americas',
   'Mexico': 'americas',
   'United States': 'americas',
-  
+
   // Africa
   'Egypt': 'africa',
   'Morocco': 'africa',
   'South Africa': 'africa',
-  
+
   // Oceania
   'Australia': 'oceania',
   'New Zealand': 'oceania',
   'Fiji': 'oceania',
 };
-
-export function getSpotRegion(country: string): string {
-  return countryRegions[country] || 'other';
-}
-
 
 // Map of country names to their ISO 3166-1 alpha-2 codes
 const countryToCode: { [key: string]: string } = {
@@ -78,10 +97,10 @@ export type CountryFlag = {
  */
 export function getCountryFlag(country: string): CountryFlag | null {
   if (!country) return null;
-  
+
   const code = countryToCode[country];
   if (!code) return null;
-  
+
   const lowerCode = code.toLowerCase();
   return {
     code: code,
