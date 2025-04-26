@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Wind, Compass, Users, Info, Menu, X, Map, Activity, Sun, LogIn, LogOut, User } from 'lucide-react';
+import { Wind, Menu, X, LogIn, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -23,7 +23,6 @@ export default function Header() {
   // Handle logout click
   const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (logoutMutation.isPending) return;
     logoutMutation.mutate();
     setMobileMenuOpen(false); // Close mobile menu after logout click
   };
@@ -83,7 +82,6 @@ export default function Header() {
               whileHover={{ y: -2, scale: 1.03 }}
               whileTap={{ y: 0, scale: 0.98 }}
             >
-              {/* <Wind className="w-4 h-4 mr-2" /> */}
               🏖️ Back to the Beach
             </motion.div>
           </Link>
@@ -97,7 +95,6 @@ export default function Header() {
               whileHover={{ y: -2, scale: 1.03 }}
               whileTap={{ y: 0, scale: 0.98 }}
             >
-              {/* <Map className="w-4 h-4 mr-2" /> */}
               📍 Where to Shred
             </motion.div>
           </Link>
@@ -111,7 +108,6 @@ export default function Header() {
               whileHover={{ y: -2, scale: 1.03 }}
               whileTap={{ y: 0, scale: 0.98 }}
             >
-              {/* <Users className="w-4 h-4 mr-2" /> */}
               🌬️ Wind Fam
             </motion.div>
           </Link>
@@ -125,7 +121,6 @@ export default function Header() {
               whileHover={{ y: -2, scale: 1.03 }}
               whileTap={{ y: 0, scale: 0.98 }}
             >
-              {/* <Info className="w-4 h-4 mr-2" /> */}
               🎓 Skill Up
             </motion.div>
           </Link>
@@ -163,7 +158,7 @@ export default function Header() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
                   className="cursor-pointer text-destructive focus:text-destructive"
-                  onClick={() => logoutMutation.mutate()}
+                  onClick={handleLogout}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Log out</span>
@@ -216,7 +211,7 @@ export default function Header() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
                   className="cursor-pointer text-destructive focus:text-destructive"
-                  onClick={() => logoutMutation.mutate()}
+                  onClick={handleLogout}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Log out</span>
@@ -271,8 +266,8 @@ export default function Header() {
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
                   whileTap={{ x: 0, scale: 0.98 }}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  {/* <Wind className={`w-5 h-5 mr-3 ${location === "/" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   🏖️ Back to the Beach
                 </motion.div>
               </Link>
@@ -285,8 +280,8 @@ export default function Header() {
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
                   whileTap={{ x: 0, scale: 0.98 }}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  {/* <Map className={`w-5 h-5 mr-3 ${location === "/spots" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   📍 Where to Shred
                 </motion.div>
               </Link>
@@ -299,8 +294,8 @@ export default function Header() {
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
                   whileTap={{ x: 0, scale: 0.98 }}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  {/* <Users className={`w-5 h-5 mr-3 ${location === "/community" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   🌬️ Wind Fam
                 </motion.div>
               </Link>
@@ -313,8 +308,8 @@ export default function Header() {
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
                   whileTap={{ x: 0, scale: 0.98 }}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  {/* <Info className={`w-5 h-5 mr-3 ${location === "/learn" ? "text-theme-background" : "text-theme-primary"}`} /> */}
                   🎓 Skill Up
                 </motion.div>
               </Link>
