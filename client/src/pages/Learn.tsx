@@ -6,7 +6,7 @@ import VideoFilters from "@/components/VideoFilters";
 import { learnVideos } from "@/data/learnVideos";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { GraduationCap, Video, Lightbulb } from "lucide-react";
+import { GraduationCap, Video, Lightbulb, BookOpen } from "lucide-react";
 
 export default function Learn() {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -36,19 +36,22 @@ export default function Learn() {
   }, [selectedCategory, selectedLevel, searchQuery]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
       
-      <main className="container mx-auto px-4 py-0 flex-grow">
+      <main className="container mx-auto px-4 py-6 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* <div className="mb-6">
-            <h1 className="text-3xl font-bold text-theme-primary mb-2">Learn & Improve</h1>
-            <p className="text-lg text-theme-text-light">Boost your kitesurfing skills with curated videos and resources</p>
-          </div> */}
+          <div className="mb-8">
+            <h1 className="text-2xl font-medium text-slate-800 mb-2 flex items-center">
+              <BookOpen className="h-5 w-5 mr-2 text-theme-primary" />
+              Learn Kitesurfing
+            </h1>
+            <p className="text-sm text-slate-500">Curated videos and resources to help you improve your skills</p>
+          </div>
 
           <Tabs 
             defaultValue="videos" 
@@ -82,7 +85,7 @@ export default function Learn() {
                   <p className="text-lg text-gray-500">No videos match your filters. Try adjusting your search criteria.</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
                   {filteredVideos.map((video) => (
                     <VideoPlayer key={video.id} video={video} />
                   ))}
@@ -91,13 +94,15 @@ export default function Learn() {
             </TabsContent>
             
             <TabsContent value="resources" className="mt-6">
-              <div className="bg-theme-primary/5 border border-theme-primary/20 rounded-lg p-6 mb-6">
+              <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 shadow-sm">
                 <div className="flex items-start mb-4">
-                  <Lightbulb className="h-6 w-6 text-theme-primary mr-3 mt-1" />
+                  <div className="bg-amber-50 p-2 rounded-full mr-4">
+                    <Lightbulb className="h-5 w-5 text-amber-500" />
+                  </div>
                   <div>
-                    <h2 className="text-xl font-semibold mb-2">Coming Soon!</h2>
-                    <p className="text-theme-text-light">
-                      We're building a comprehensive learning section with articles, tutorials, and interactive lessons.
+                    <h2 className="text-lg font-medium text-slate-800 mb-2">Resources Coming Soon</h2>
+                    <p className="text-sm text-slate-500">
+                      We're developing comprehensive learning resources including articles, step-by-step tutorials, and interactive lessons.
                       Check back soon for more educational content to enhance your kitesurfing journey.
                     </p>
                   </div>

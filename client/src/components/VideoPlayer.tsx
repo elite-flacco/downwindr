@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Clock, ExternalLink, AlertCircle } from "lucide-react";
+import { Play, Clock, AlertCircle } from "lucide-react";
 import { SiYoutube } from "react-icons/si";
 import type { LearnVideo } from "@/data/learnVideos";
 
@@ -12,6 +12,7 @@ interface VideoPlayerProps {
 export default function VideoPlayer({ video }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [loadError, setLoadError] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Reset error state when video changes
   useEffect(() => {
@@ -35,21 +36,37 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
   };
 
   return (
-    <Card className="overflow-hidden">
-      <CardContent className="p-0">
+    <Card className="overflow-hidden h-full transition-all duration-200 hover:shadow-md group">
+      <CardContent className="p-0 h-full flex flex-col">
         {!isPlaying || loadError ? (
-          <div className="relative group">
-            <img 
-              src={video.thumbnailUrl} 
-              alt={video.title} 
-              className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" 
-            />
+          <div 
+            className="relative" 
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="aspect-video overflow-hidden rounded-t-md">
+              {/* Thumbnail with overlay */}
+              <div className="relative w-full h-full">
+                <img 
+                  src={video.thumbnailUrl} 
+                  alt={video.title} 
+                  className="w-full h-full object-cover" 
+                />
+                {/* Consistent overlay gradient */}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"
+                  onClick={handlePlayClick}
+                ></div>
+              </div>
+            </div>
+
+            {/* Play button */}
             <div 
-              className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer"
+              className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               onClick={handlePlayClick}
             >
               <button 
-                className="bg-theme-primary text-white p-3 rounded-full transform transition-transform duration-300 group-hover:scale-110"
+                className="bg-theme-primary text-white p-3 rounded-full transform transition-transform duration-300 shadow-lg group-hover:scale-110"
               >
                 <Play className="h-6 w-6" />
               </button>
@@ -60,7 +77,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                 <AlertCircle className="h-8 w-8 text-red-500 mb-2" />
                 <p className="text-white text-sm mb-2">Unable to load embedded video</p>
                 <button 
-                  className="bg-red-600 text-white px-3 py-1 rounded-md text-xs flex items-center"
+                  className="bg-red-600/80 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs flex items-center"
                   onClick={handleExternalLinkClick}
                 >
                   <SiYoutube className="h-4 w-4 mr-1" />
@@ -70,7 +87,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             )}
           </div>
         ) : (
-          <div className="h-48 w-full relative">
+          <div className="aspect-video w-full relative">
             <iframe
               width="100%"
               height="100%"
@@ -86,7 +103,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             {/* Fallback button if iframe doesn't trigger error event */}
             <div className="absolute top-2 right-2 z-10">
               <button 
-                className="bg-black/70 text-red-500 p-1 rounded-md flex items-center"
+                className="bg-black/70 text-red-600/80 hover:text-red-600 p-1 rounded-md flex items-center"
                 onClick={handleExternalLinkClick}
                 title="Open in YouTube"
               >
@@ -96,44 +113,56 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           </div>
         )}
         
-        <div className="p-4">
-          <h3 className="text-lg mb-1 line-clamp-1">{video.title}</h3>
-          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{video.description}</p>
-          
-          <div className="flex flex-wrap gap-2 mb-2">
-            {video.categories.map((category) => (
-              <Badge key={category} variant="outline" className="bg-theme-primary/10 text-theme-primary">
-                {category}
-              </Badge>
-            ))}
+        <div className="p-4 flex-grow flex flex-col justify-between">
+          {/* Simplified title */}
+          <div>
+            <h3 className="text-base font-medium mb-1 line-clamp-1" title={video.title}>
+              {video.title}
+            </h3>
+            <p className="text-xs text-gray-500 mb-2 line-clamp-2">{video.description}</p>
           </div>
           
-          <div className="flex items-center justify-between">
-            <Badge 
-              variant="outline" 
-              className={`
-                ${video.level === 'beginner' 
-                  ? 'bg-green-100 text-green-800 border-green-200' 
-                  : video.level === 'intermediate' 
-                  ? 'bg-yellow-100 text-yellow-800 border-yellow-200' 
-                  : 'bg-red-100 text-red-800 border-red-200'}
-              `}
-            >
-              {video.level}
-            </Badge>
+          {/* Unified metadata style */}
+          <div>
+            {/* Unified tag row */}
+            <div className="flex flex-wrap items-center gap-1 mb-3">
+              <Badge 
+                variant="outline" 
+                className={`
+                  text-xs px-2 py-0 h-5
+                  ${video.level === 'beginner' 
+                    ? 'bg-green-50 text-green-700 border-green-100' 
+                    : video.level === 'intermediate' 
+                    ? 'bg-amber-50 text-amber-700 border-amber-100' 
+                    : 'bg-rose-50 text-rose-700 border-rose-100'}
+                `}
+              >
+                {video.level}
+              </Badge>
+              
+              {video.categories.slice(0, 2).map((category) => (
+                <Badge key={category} variant="outline" className="bg-slate-50 text-slate-600 border-slate-100 text-xs px-2 py-0 h-5">
+                  {category}
+                </Badge>
+              ))}
+              
+              {video.categories.length > 2 && (
+                <span className="text-xs text-slate-400">+{video.categories.length - 2}</span>
+              )}
+            </div>
             
-            <div className="flex items-center gap-1">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-1">
-                <Clock className="h-3 w-3 text-gray-500" />
-                <span className="text-xs text-gray-500">{video.duration}</span>
+                <Clock className="h-3 w-3 text-slate-400" />
+                <span className="text-xs text-slate-400">{video.duration}</span>
               </div>
               
               <button
                 onClick={handleExternalLinkClick}
-                className="text-red-600 hover:text-red-700 transition-colors ml-2"
+                className="text-red-500/80 hover:text-red-600 transition-colors"
                 title="Watch on YouTube"
               >
-                <SiYoutube className="h-5 w-5" />
+                <SiYoutube className="h-4 w-4" />
               </button>
             </div>
           </div>
