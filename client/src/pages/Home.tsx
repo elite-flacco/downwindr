@@ -17,9 +17,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import TestImage from "@/components/TestImage";
 import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
-import joinTheRideImage from "@/assets/join-the-ride.png";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -95,9 +93,7 @@ export default function Home() {
                         size="lg" 
                         className="relative overflow-hidden flex items-center gap-1.5 px-6 py-5 group text-white"
                         style={{
-                          backgroundImage: `url(${joinTheRideImage})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
+                          background: 'linear-gradient(45deg, #ff7066, #ff5e5b)',
                           border: 'none',
                           textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
                         }}
@@ -116,13 +112,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Debug section for image testing */}
-        <section className="py-12 bg-gray-100">
-          <div className="container mx-auto">
-            <h2 className="mb-4">Image Debug</h2>
-            <TestImage />
-          </div>
-        </section>
+
         
       </main>
       
