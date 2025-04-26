@@ -17,7 +17,9 @@ export default function FilterControls({
   windQualityFilter,
   onWindQualityFilterChange,
   searchQuery,
-  onSearchChange
+  onSearchChange,
+  selectedRegion,
+  onRegionChange
 }: FilterControlsProps) {
   
   // Handle search input change
