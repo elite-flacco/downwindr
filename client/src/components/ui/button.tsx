@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent_70%)]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "font-semibold hover:bg-theme-surface hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70"
+        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70 wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,0,0,0.1),transparent_70%)]"
       },
       size: {
         default: "h-10 px-4 py-2",

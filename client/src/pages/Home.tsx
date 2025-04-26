@@ -69,8 +69,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="text-lg md:text-xl text-white/90 mb-16 leading-relaxed text-shadow"
                   >
-                    Discover the world's best kitesurfing destinations, track real-time wind conditions, 
-                    and connect with the global kitesurfing community.
+                    Plan your next kitesurfing trip, discover epic spots, and join a global wind fam.
                   </motion.p>
                   
                   <motion.div 
