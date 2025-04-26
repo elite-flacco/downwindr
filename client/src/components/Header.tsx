@@ -19,6 +19,14 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
   const { user, logoutMutation } = useAuth();
+  
+  // Handle logout click
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (logoutMutation.isPending) return;
+    logoutMutation.mutate();
+    setMobileMenuOpen(false); // Close mobile menu after logout click
+  };
 
   // Handle scroll effect for sticky header
   useEffect(() => {

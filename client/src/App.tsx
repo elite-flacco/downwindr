@@ -9,26 +9,28 @@ import Learn from "@/pages/Learn";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/spots" component={Spots} />
-      <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/community" component={Community} />
-      <Route path="/learn" component={Learn} />
-      <Route path="/about" component={NotFound} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
 function App() {
   return (
     <AuthProvider>
-      <Router />
-      <Toaster />
+      <AppContent />
     </AuthProvider>
+  );
+}
+
+function AppContent() {
+  return (
+    <>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/spots" component={Spots} />
+        <Route path="/auth" component={AuthPage} />
+        <ProtectedRoute path="/community" component={Community} />
+        <Route path="/learn" component={Learn} />
+        <Route path="/about" component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+      <Toaster />
+    </>
   );
 }
 
