@@ -44,6 +44,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   } = useQuery<User | null, Error>({
     queryKey: ["/api/user"],
     queryFn: getQueryFn({ on401: "returnNull" }),
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   const loginMutation = useMutation({
@@ -52,11 +55,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return await res.json();
     },
     onSuccess: (user: User) => {
+      // Update the query cache with the user data
       queryClient.setQueryData(["/api/user"], user);
+      
+      // Ensure any components using the auth query refetch
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
       toast({
         title: "Logged in",
         description: `Welcome back, ${user.username}!`,
       });
+      
       // Redirect to home page after successful login
       navigate("/");
     },
@@ -75,11 +84,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return await res.json();
     },
     onSuccess: (user: User) => {
+      // Update the query cache with the user data
       queryClient.setQueryData(["/api/user"], user);
+      
+      // Ensure any components using the auth query refetch
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
       toast({
         title: "Registration successful",
         description: `Welcome to Downwindr, ${user.username}!`,
       });
+      
       // Redirect to home page after successful registration
       navigate("/");
     },

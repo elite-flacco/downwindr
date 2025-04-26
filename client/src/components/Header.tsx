@@ -18,7 +18,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
-  const { user, logoutMutation } = useAuth();
+  const { user, isLoading, logoutMutation } = useAuth();
   
   // Handle logout click
   const handleLogout = (e: React.MouseEvent) => {
@@ -128,7 +128,13 @@ export default function Header() {
         
         {/* Auth Section */}
         <div className="hidden md:flex items-center space-x-2">
-          {user ? (
+          {isLoading ? (
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <div className="h-8 w-8 flex items-center justify-center">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+              </div>
+            </Button>
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -181,7 +187,13 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-2">
-          {user ? (
+          {isLoading ? (
+            <Button variant="ghost" className="h-8 w-8 p-0 mr-1">
+              <div className="h-8 w-8 flex items-center justify-center">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+              </div>
+            </Button>
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full mr-1">
