@@ -46,10 +46,9 @@ export default function Learn() {
           transition={{ duration: 0.5 }}
         >
           <div className="mb-8">
-            <h1 className="text-2xl font-medium text-slate-800 mb-2 flex items-center">
-              <BookOpen className="h-5 w-5 mr-2 text-theme-primary" />
-              Learn Kitesurfing
-            </h1>
+            <h3 className="mb-2 flex items-center">
+              From Zeros to Heros
+            </h3>
             <p className="text-sm text-slate-500">Curated videos and resources to help you improve your skills</p>
           </div>
 
