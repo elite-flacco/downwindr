@@ -69,7 +69,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                  ? "bg-theme-secondary text-white shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -83,7 +83,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                  ? "bg-theme-secondary text-white shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -97,7 +97,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                  ? "bg-theme-secondary text-white shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -111,7 +111,7 @@ export default function Header() {
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                  ? "bg-theme-secondary text-white shadow-md" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2, scale: 1.03 }}
@@ -258,7 +258,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/" 
-                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                      ? "bg-theme-secondary text-white shadow-md" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -272,7 +272,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                      ? "bg-theme-secondary text-white shadow-md" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -286,7 +286,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                      ? "bg-theme-secondary text-white shadow-md" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -300,7 +300,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md hand-drawn-texture" 
+                      ? "bg-theme-secondary text-white shadow-md" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
