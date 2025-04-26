@@ -44,7 +44,7 @@ export default function SpotsList({
         
         {spots.length === 0 && !isLoading ? (
           <div className="text-center py-12 px-4">
-            <Wind className="w-16 h-16 mx-auto mb-4 text-theme-muted" />
+            <Wind className="w-16 h-16 mx-auto mb-4 text-theme-primary" />
             <p className="text-theme-text font-medium">No kitesurfing spots found for {MonthNames[selectedMonth - 1]}.</p>
             <p className="text-theme-text-light mt-2">Wind conditions may be better in other months!</p>
           </div>

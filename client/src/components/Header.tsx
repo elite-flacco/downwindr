@@ -166,20 +166,11 @@ export default function Header() {
             <Link href="/auth">
               <Button 
                 variant="action" 
-                className="flex items-center gap-1.5 px-6 py-2 relative overflow-hidden group"
+                className="flex items-center gap-1.5 px-6 py-2 relative overflow-hidden group wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent_70%)]"
                 size="sm"
-                style={{
-                  backgroundImage: 'url(/src/assets/join-the-ride.png)',
-                  backgroundSize: 'contain',
-                  backgroundPosition: 'center',
-                  border: 'none',
-                  color: 'white',
-                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
-                }}
               >
                 <LogIn className="h-4 w-4 relative z-10" />
                 <span className="relative z-10">Join the Ride</span>
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-200" />
               </Button>
             </Link>
           )}
