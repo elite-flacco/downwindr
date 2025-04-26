@@ -37,11 +37,11 @@ export default function VideoFilters({
           />
         </div>
 
-        <div>
-          <h3 className="text-sm font-medium mb-2 flex items-center">
+        <div className="flex items-center">
+          <p className="text-xs font-semibold mr-3 flex items-center">
             <Filter className="h-4 w-4 mr-1 text-theme-primary" />
-            Categories
-          </h3>
+            Categories: 
+          </p>
           <div className="flex flex-wrap gap-2">
             <Badge
               key="all"
@@ -73,11 +73,11 @@ export default function VideoFilters({
           </div>
         </div>
 
-        <div>
-          <h3 className="text-sm font-medium mb-2 flex items-center">
+        <div className="flex items-center">
+          <p className="text-xs font-semibold mr-3 flex items-center">
             <Filter className="h-4 w-4 mr-1 text-theme-primary" />
-            Experience Level
-          </h3>
+            Experience Level:
+          </p>
           <div className="flex flex-wrap gap-2">
             <Badge
               key="all"
