@@ -61,6 +61,7 @@ export interface IStorage {
   
   // Review operations
   getReviewsForSpot(spotId: number): Promise<ReviewWithUser[]>;
+  getReviewsByUserId(userId: number): Promise<ReviewWithUser[]>;
   getReviewByUserAndSpot(userId: number, spotId: number): Promise<Review | undefined>;
   createReview(review: InsertReview): Promise<Review>;
   updateReview(id: number, content: string): Promise<Review | undefined>;
@@ -463,6 +464,32 @@ export class MemStorage implements IStorage {
           avatarUrl: user.avatarUrl,
           experience: user.experience
         }
+      };
+    });
+  }
+  
+  async getReviewsByUserId(userId: number): Promise<ReviewWithUser[]> {
+    const userReviews = Array.from(this.reviews.values())
+      .filter(review => review.userId === userId)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    
+    return userReviews.map(review => {
+      const user = this.users.get(review.userId);
+      if (!user) throw new Error(`User not found for review: ${review.id}`);
+      
+      // Add spot information for context
+      const spot = this.spots.get(review.spotId);
+      
+      return {
+        ...review,
+        user: {
+          id: user.id,
+          username: user.username,
+          displayName: user.displayName,
+          avatarUrl: user.avatarUrl,
+          experience: user.experience
+        },
+        spot // Add spot information to the review
       };
     });
   }

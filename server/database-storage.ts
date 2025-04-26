@@ -502,6 +502,32 @@ export class DatabaseStorage implements IStorage {
       user,
     }));
   }
+  
+  async getReviewsByUserId(userId: number): Promise<ReviewWithUser[]> {
+    const reviewsWithDetails = await db
+      .select({
+        review: reviews,
+        user: {
+          id: users.id,
+          username: users.username,
+          displayName: users.displayName,
+          avatarUrl: users.avatarUrl,
+          experience: users.experience,
+        },
+        spot: spots,
+      })
+      .from(reviews)
+      .innerJoin(users, eq(reviews.userId, users.id))
+      .innerJoin(spots, eq(reviews.spotId, spots.id))
+      .where(eq(reviews.userId, userId))
+      .orderBy(desc(reviews.createdAt));
+
+    return reviewsWithDetails.map(({ review, user, spot }) => ({
+      ...review,
+      user,
+      spot,
+    }));
+  }
 
   async getReviewByUserAndSpot(
     userId: number,
