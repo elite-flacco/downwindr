@@ -4,25 +4,6 @@ import flags from "country-flag-emoji-json";
 // Initialize the countries library with English locale
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
-// Region mappings
-const regionCountries = {
-  europe: ["Spain", "Greece", "Portugal", "Italy", "France", "Croatia", "Netherlands"],
-  asia: ["Thailand", "Vietnam", "Philippines", "Indonesia", "Sri Lanka", "Malaysia"],
-  americas: ["Brazil", "United States", "Mexico", "Dominican Republic", "Venezuela"],
-  africa: ["Egypt", "Morocco", "South Africa", "Cape Verde", "Mauritius"],
-  oceania: ["Australia", "New Zealand", "Fiji"]
-};
-
-export function getSpotRegion(country: string): string {
-  for (const [region, countries] of Object.entries(regionCountries)) {
-    if (countries.includes(country)) {
-      return region;
-    }
-  }
-  return "other";
-}
-
-
 // Map countries to regions
 const countryRegions: Record<string, string> = {
   // Europe
@@ -95,6 +76,10 @@ export type CountryFlag = {
  * @param country The country name
  * @returns A CountryFlag object or null if country not found
  */
+export function getSpotRegion(country: string): string {
+  return countryRegions[country] || 'other';
+}
+
 export function getCountryFlag(country: string): CountryFlag | null {
   if (!country) return null;
 
