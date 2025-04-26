@@ -33,22 +33,6 @@ export default function AuthPage() {
   const [location, navigate] = useLocation();
   const { user, isLoading, loginMutation, registerMutation } = useAuth();
 
-  // Redirect if already logged in - but only after the initial loading is complete
-  useEffect(() => {
-    if (user && !isLoading) {
-      navigate("/");
-    }
-  }, [user, isLoading, navigate]);
-  
-  // Early return while checking auth status or if redirecting
-  if (isLoading || user) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
   // Login form setup
   const loginForm = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -69,6 +53,22 @@ export default function AuthPage() {
       experience: undefined,
     },
   });
+  
+  // Redirect if already logged in - but only after the initial loading is complete
+  useEffect(() => {
+    if (user && !isLoading) {
+      navigate("/");
+    }
+  }, [user, isLoading, navigate]);
+  
+  // Early return while checking auth status or if redirecting
+  if (isLoading || user) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   // Form submission handlers
   function onLoginSubmit(values: z.infer<typeof loginFormSchema>) {
