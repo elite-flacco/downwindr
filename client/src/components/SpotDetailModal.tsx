@@ -89,14 +89,16 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
               <div>
                 <div className="relative">
                   <Skeleton className="w-full h-64" />
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    className="absolute top-4 right-4 rounded-full p-2 shadow-md"
-                    onClick={handleClose}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
+                  <div className="absolute top-2 right-2 z-50">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-8 w-8 rounded-full bg-theme-background/90 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300 hand-drawn"
+                      onClick={handleClose}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
                 <div className="p-6">
                   <Skeleton className="h-8 w-64 mb-4" />
@@ -139,14 +141,16 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     </div>
                   </div>
                   
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className="fixed top-4 right-4 z-50 bg-theme-background/80 rounded-full p-2 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300"
-                    onClick={handleClose}
-                  >
-                    <X className="h-5 w-5" />
-                  </Button>
+                  <div className="absolute top-2 right-2 z-50">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-8 w-8 rounded-full bg-theme-background/90 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300 hand-drawn"
+                      onClick={handleClose}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
                   
                   <div className="flex absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
                     <MapPin className="w-6 h-6 text-white mr-2" />
