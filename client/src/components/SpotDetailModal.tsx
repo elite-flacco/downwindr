@@ -93,7 +93,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="h-8 w-8 rounded-full bg-theme-background/90 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300 hand-drawn"
+                      className="h-8 w-8 rounded-full bg-theme-background/90 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300 chalk-drawn wobbly-border"
                       onClick={handleClose}
                     >
                       <X className="h-4 w-4" />
@@ -145,7 +145,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="h-8 w-8 rounded-full bg-theme-background/90 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300 hand-drawn"
+                      className="h-8 w-8 rounded-full bg-theme-background/90 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300 chalk-drawn wobbly-border"
                       onClick={handleClose}
                     >
                       <X className="h-4 w-4" />
