@@ -141,11 +141,11 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   
                   <Button
                     size="icon"
-                    variant="outline"
-                    className="absolute top-4 right-4 bg-theme-background rounded-full p-2 shadow-sm hover:bg-theme-primary hover:text-theme-background transition-colors duration-300"
+                    variant="ghost"
+                    className="fixed top-4 right-4 z-50 bg-theme-background/80 rounded-full p-2 shadow-md hover:bg-theme-primary hover:text-white transition-colors duration-300"
                     onClick={handleClose}
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-5 w-5" />
                   </Button>
                   
                   <div className="flex absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
