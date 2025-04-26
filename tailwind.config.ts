@@ -131,6 +131,7 @@ export default {
         "wind-wave": "wind-wave 3s infinite ease-in-out",
         "marker-pulse": "marker-pulse 0.5s ease-out",
         "wave": "wave 2s infinite linear",
+        "wave-slow": "wave-slow 20s infinite ease-in-out",
       },
       
       // Typography scales

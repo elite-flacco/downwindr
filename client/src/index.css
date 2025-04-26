@@ -322,6 +322,19 @@
   100% { opacity: 1; transform: scale(1); }
 }
 
+/* Wave animations for auth page */
+@keyframes wave-slow {
+  0% { transform: translateX(-2%) translateY(0); }
+  50% { transform: translateX(0%) translateY(2%); }
+  100% { transform: translateX(-2%) translateY(0); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0%) translateY(0); }
+  50% { transform: translateX(-1%) translateY(1%); }
+  100% { transform: translateX(0%) translateY(0); }
+}
+
 /* ===== COMPONENTS ===== */
 @layer components {
   /* Card styling */
