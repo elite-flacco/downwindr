@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -42,71 +43,72 @@ export default function VideoFilters({
             Categories
           </h3>
           <div className="flex flex-wrap gap-2">
-          <Badge
-            key="all"
-            variant={selectedCategory === "" ? "default" : "outline"}
-            className={`cursor-pointer ${
-              selectedCategory === ""
-                ? "bg-theme-primary hover:bg-theme-primary/80"
-                : "hover:bg-theme-primary/10"
-            }`}
-            onClick={() => onCategoryChange("")}
-          >
-            All
-          </Badge>
-
-          {videoCategories.map((category) => (
             <Badge
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              className={`cursor-pointer capitalize ${
-                selectedCategory === category
+              key="all"
+              variant={selectedCategory === "" ? "default" : "outline"}
+              className={`cursor-pointer ${
+                selectedCategory === ""
                   ? "bg-theme-primary hover:bg-theme-primary/80"
                   : "hover:bg-theme-primary/10"
               }`}
-              onClick={() => onCategoryChange(category)}
+              onClick={() => onCategoryChange("")}
             >
-              {category}
+              All
             </Badge>
-          ))}
+
+            {videoCategories.map((category) => (
+              <Badge
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                className={`cursor-pointer capitalize ${
+                  selectedCategory === category
+                    ? "bg-theme-primary hover:bg-theme-primary/80"
+                    : "hover:bg-theme-primary/10"
+                }`}
+                onClick={() => onCategoryChange(category)}
+              >
+                {category}
+              </Badge>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div>
-        <h3 className="text-sm font-medium mb-2 flex items-center">
-          <Filter className="h-4 w-4 mr-1 text-theme-primary" />
-          Experience Level
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          <Badge
-            key="all"
-            variant={selectedLevel === "" ? "default" : "outline"}
-            className={`cursor-pointer ${
-              selectedLevel === ""
-                ? "bg-theme-primary hover:bg-theme-primary/80"
-                : "hover:bg-theme-primary/10"
-            }`}
-            onClick={() => onLevelChange("")}
-          >
-            All
-          </Badge>
-
-          {videoLevels.map((level) => (
+        <div>
+          <h3 className="text-sm font-medium mb-2 flex items-center">
+            <Filter className="h-4 w-4 mr-1 text-theme-primary" />
+            Experience Level
+          </h3>
+          <div className="flex flex-wrap gap-2">
             <Badge
-              key={level}
-              variant={selectedLevel === level ? "default" : "outline"}
-              className={`cursor-pointer capitalize ${
-                selectedLevel === level
+              key="all"
+              variant={selectedLevel === "" ? "default" : "outline"}
+              className={`cursor-pointer ${
+                selectedLevel === ""
                   ? "bg-theme-primary hover:bg-theme-primary/80"
                   : "hover:bg-theme-primary/10"
               }`}
-              onClick={() => onLevelChange(level)}
+              onClick={() => onLevelChange("")}
             >
-              {level}
+              All
             </Badge>
-          ))}
+
+            {videoLevels.map((level) => (
+              <Badge
+                key={level}
+                variant={selectedLevel === level ? "default" : "outline"}
+                className={`cursor-pointer capitalize ${
+                  selectedLevel === level
+                    ? "bg-theme-primary hover:bg-theme-primary/80"
+                    : "hover:bg-theme-primary/10"
+                }`}
+                onClick={() => onLevelChange(level)}
+              >
+                {level}
+              </Badge>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
