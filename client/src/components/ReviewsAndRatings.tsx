@@ -308,7 +308,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
           {spotDetails.reviews.length === 0 ? (
             <Card className="border border-dashed">
               <CardContent className="pt-6 text-center py-10">
-                <h4 className="mb-2">No Reviews Yet</h4>
+                <h5 className="mb-2">No Reviews Yet</h5>
                 <p className="mb-4 text-sm">
                   Be the first to share your experience at this kitesurfing spot!
                 </p>

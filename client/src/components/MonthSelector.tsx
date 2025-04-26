@@ -13,7 +13,7 @@ export default function MonthSelector({ selectedMonth, onMonthChange }: MonthSel
     <div className="flex items-center">
       <div className="mr-3 whitespace-nowrap">
         <Calendar className="w-3.5 h-3.5 inline mr-1 text-primary" />
-        <span className="text-sm font-bold">Season:</span>
+        <span className="text-xs font-bold">Season:</span>
       </div>
       
       <Select

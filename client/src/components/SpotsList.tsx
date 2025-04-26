@@ -37,8 +37,8 @@ export default function SpotsList({
   return (
     <Card className="w-full rounded-xl border border-theme-border shadow-sm">
       <CardContent className="p-6">
-        <h3 className="mb-4 text-theme-text flex items-center">
-          <Sparkles className="w-5 h-5 mr-2 text-theme-primary" />
+        <h3 className="mb-4 flex items-center">
+          <Sparkles className="w-6 h-6 mr-2 text-theme-accent" />
           Top Spots in {MonthNames[selectedMonth - 1]}
         </h3>
         
@@ -70,19 +70,19 @@ export default function SpotsList({
                 
                 <div className="flex flex-col gap-3">
                   <p className="text-sm text-theme-text-light leading-relaxed px-3">
-                    {spot.description.length > 100 
-                      ? `${spot.description.substring(0, 100)}...` 
+                    {spot.description.length > 300 
+                      ? `${spot.description.substring(0, 300)}...` 
                       : spot.description}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mt-1 px-3">
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center">
-                      <Waves className="w-3 h-3 inline text-theme-primary/70 mr-1" /> {spot.waveSize}
+                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center">
+                      <Waves className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.waveSize}
                     </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center">
-                      <Thermometer className="w-3 h-3 inline text-theme-primary/70 mr-1" /> {spot.tempRange}
+                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center">
+                      <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.tempRange}
                     </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text-light flex items-center gap-1.5">
+                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center gap-1.5">
                       <span className="flex items-center gap-1">
                         {
                           (() => {

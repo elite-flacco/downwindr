@@ -27,7 +27,7 @@ export default function FilterControls({
     <div className="mb-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
       {/* Wind Quality Filter */}
       <div className="flex items-center flex-shrink-0 flex-nowrap">
-        <p className="text-sm font-bold text-theme-text mr-2 whitespace-nowrap">
+        <p className="text-xs font-bold mr-3 text-theme-text mr-2 whitespace-nowrap">
           <Filter className="w-3.5 h-3.5 inline mr-1 text-primary align-text-bottom" />
           Wind:
         </p>

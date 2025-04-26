@@ -16,9 +16,9 @@ const buttonVariants = cva(
           "font-semibold text-primary border border-input bg-background hover:bg-secondary hover:text-accent-foreground",
         secondary:
           "font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "font-semibold hover:bg-primary/30 hover:text-accent-foreground",
+        ghost: "font-semibold hover:bg-theme-surface hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/80 hover:from-theme-action/90 hover:to-theme-action/70"
+        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70"
       },
       size: {
         default: "h-10 px-4 py-2",

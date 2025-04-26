@@ -223,13 +223,13 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="mb-3 text-theme-text flex items-center">
+                      <h3 className="mb-3 flex items-center">
                         <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Kitesurfing Info
                       </h3>
-                      <div className="space-y-3 text-sm text-theme">
+                      <div className="space-y-3 text-sm">
                         <p className="mb-4">{spotDetails.spot.description}</p>
                         
                         {/* Add kite schools in the kitesurfing info card - Top 5 rated only */}
@@ -273,7 +273,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                           
                           return spotDetails.spot.kiteSchools && spotDetails.spot.kiteSchools.length > 0 && (
                             <div className="mt-8 mb-2">
-                              <h5 className="text-theme-text mb-2 flex items-center">
+                              <h5 className="mb-2 flex items-center">
                                 {title}
                               </h5>
                               <ul className="text-sm mb-8">
@@ -342,7 +342,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       transition={{ duration: 0.05 }}
                       className="bg-theme-background rounded-xl p-5 shadow-md"
                     >
-                      <h3 className="mb-3 text-theme-text flex items-center">
+                      <h3 className="mb-3 flex items-center">
                         <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -362,7 +362,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.05 }}
                   >
-                    <h3 className="mb-4 text-theme-text flex items-center">
+                    <h3 className="mb-4 flex items-center">
                       <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
@@ -391,7 +391,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                     transition={{ duration: 0.05 }}
                     className="mt-8 mb-8 bg-theme-background rounded-xl p-5 shadow-md"
                   >
-                    <h3 className="mb-5 text-theme-text flex items-center">
+                    <h3 className="mb-5 flex items-center">
                       <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
                       </svg>

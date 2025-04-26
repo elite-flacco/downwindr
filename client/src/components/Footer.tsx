@@ -43,10 +43,10 @@ export default function Footer() {
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div variants={itemVariants}>
-            <div className="bg-ocean-gradient p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md">
+            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md">
               <Wind className="w-8 h-8 text-theme-background" />
             </div>
-            <h3 className="text-2xl font-bold mb-2 text-theme-primary-hover" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
+            <h3 className="text-2xl font-bold mb-2 text-theme-primary">Downwindr</h3>
             <p className="text-theme-text text-xs mb-4">Discover your dream kitesurfing experience worldwide.</p>
           </motion.div>
           

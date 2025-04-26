@@ -7,25 +7,27 @@
 /* ===== COLOR SYSTEM ===== */
 :root {
   /* Core Brand Colors - Change these to update the entire theme */
-  --core-primary: 190, 69%, 23%;      /* Main blue - #3B82F6 #154d5b */ 
+  --core-primary: 190 75% 45%;      /* Main blue - #3B82F6 #154d5b */ 
   --core-accent: 49 100% 52%;       /* Yellow - #FFD60A */
   --core-action: 1 100% 68%;        /* Coral/Red - #FF5E5B */
   --core-success: 142 71% 45%;      /* Green */
-  --core-neutral: 0, 0%, 5%;      /* Slate - #0d0d0d */
+  --core-text: 0, 0%, 5%;      /* Slate - #0d0d0d */
+  --core-text-light: 0, 0%, 5%, 0.7;      /* Slate - #0d0d0d */
+  --core-text-dark: 190 90% 18%;      /* Slate - #0d0d0d */
   --core-white: 0 0% 100%;          /* White - #FFFFFF */
 
   /* Primary color scale - Generated from core-primary */
-  --color-primary-50: 190 69% 93%;   /* #e6f7fb - Lightest */
-  --color-primary-100: 190 69% 85%;  /* #cceef6 */
-  --color-primary-200: 190 69% 75%;  /* #abdfed */
-  --color-primary-300: 190 69% 65%;  /* #8ad0e4 */
-  --color-primary-400: 190 69% 55%;  /* #69c0db */
-  --color-primary-500: 190 69% 43%;  /* #47accc - Mid-bright */
-  --color-primary-600: 190 69% 33%;  /* #2f8ba9 */
-  --color-primary-700: 190 69% 23%;  /* #165e74 - Your original color */
-  --color-primary-800: 190 69% 18%;  /* #154957 */
-  --color-primary-900: 190 69% 13%;  /* #0f333d */
-  --color-primary-950: 190 69% 8%;   /* #091e24 - Darkest */
+  --color-primary-50: 190 85% 95%;   /* #e8faff - Brighter lightest */
+  --color-primary-100: 190 85% 88%;  /* #cff2fa */
+  --color-primary-200: 190 85% 78%;  /* #a5e6f4 */
+  --color-primary-300: 190 75% 65%;  /* #71d4e7 */
+  --color-primary-400: 190 75% 55%;  /* #4cc6dc */
+  --color-primary-500: 190 75% 45%;  /* #26b8d1 - More vibrant mid */
+  --color-primary-600: 190 80% 35%;  /* #1696ac */
+  --color-primary-700: 190 85% 25%;  /* #0a748a - Richer version of original */
+  --color-primary-800: 190 90% 18%;  /* #055466 - More saturated dark */
+  --color-primary-900: 190 95% 12%;  /* #023544 */
+  --color-primary-950: 190 100% 7%;  /* #001a22 - Darker contrast */
 
   /* Semantic color mapping - These reference the core colors */
   --theme-primary: var(--color-primary-600);
@@ -37,8 +39,9 @@
   --theme-warning: var(--core-accent);
   --theme-background: var(--core-white);
   --theme-surface: var(--color-primary-100);
-  --theme-text: var(--core-neutral);
-  --theme-text-light: var(--core-neutral) / 90%;
+  --theme-text: var(--core-text);
+  --theme-text-light: var(--core-text-light);
+  --theme-text-dark: var(--core-text-dark);
   --theme-border: var(--color-primary-100) / 50%;
   --theme-button: var(--color-primary-500);
   --theme-button-hover: var(--color-primary-600);
@@ -88,15 +91,15 @@
   }
 
   h2 {
-    @apply font-heading text-theme-primary text-2xl md:text-3xl tracking-wide;
+    @apply font-heading text-theme-text-dark text-2xl md:text-3xl tracking-wide;
   }
 
   h3 {
-    @apply font-heading text-theme-secondary text-xl md:text-2xl;
+    @apply font-heading text-theme-text-dark text-xl md:text-2xl;
   }
 
   h4 {
-    @apply font-heading text-theme-primary text-lg md:text-xl;
+    @apply font-heading text-theme-text-dark text-lg md:text-xl;
   }
 
   h5, h6 {

@@ -52,8 +52,8 @@ export default function Header() {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
           >
-            <div className="bg-ocean-gradient p-2 rounded-full mr-3 shadow-md">
-              <Wind className="w-6 h-6 text-theme-background" />
+            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg p-2 rounded-full mr-3 shadow-md">
+              <Wind className="w-6 h-6 text-theme-background " />
             </div>
             <div>
               <h1 className="text-xl font-bold text-theme-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>
@@ -67,9 +67,9 @@ export default function Header() {
         <nav className="hidden md:flex space-x-2">
           <Link href="/">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/" 
-                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -81,9 +81,9 @@ export default function Header() {
           </Link>
           <Link href="/spots">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/spots" 
-                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -95,9 +95,9 @@ export default function Header() {
           </Link>
           <Link href="/community">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/community" 
-                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
@@ -109,9 +109,9 @@ export default function Header() {
           </Link>
           <Link href="/learn">
             <motion.div 
-              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-300 flex items-center cursor-pointer ${
+              className={`text-sm font-bold px-4 py-2 rounded-md transition-all duration-100 flex items-center cursor-pointer ${
                 location === "/learn" 
-                  ? "bg-theme-primary text-theme-background shadow-md" 
+                  ? "bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg" 
                   : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
               }`}
               whileHover={{ y: -2 }}
