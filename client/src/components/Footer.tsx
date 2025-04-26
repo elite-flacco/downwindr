@@ -19,7 +19,7 @@ export default function Footer() {
     visible: { 
       opacity: 1,
       transition: { 
-        staggerChildren: 0.1,
+        // staggerChildren: 0.1,
         delayChildren: 0.3
       }
     }
@@ -32,8 +32,8 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-theme-border text-theme-text pt-16 pb-8 bg-gradient-to-br from-theme-background to-theme-surface/30">      
-      <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-r from-theme-primary-hover/10 via-theme-primary-hover to-theme-primary-hover/10 opacity-40"></div>
-      
+      {/* <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-r from-theme-primary-hover/10 via-theme-primary-hover to-theme-primary-hover/10 opacity-40"></div>
+       */}
       <div className="container mx-auto px-4">
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-4 gap-10"
