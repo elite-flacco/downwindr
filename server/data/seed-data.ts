@@ -51,7 +51,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         "Spanish coastal culture with strong flamenco influences and Moorish heritage",
       averageSchoolCost: 60,
       averageAccommodationCost: 90,
-      numberOfSchools: 30+,
+      numberOfSchools: 40,
     },
     windConditions: [
       {
@@ -1412,156 +1412,146 @@ export const kiteSpotsData: SpotSeedData[] = [
   // 11. Guincho, Portugal
   {
     spot: {
-      name: "Guincho, Portugal",
+      name: "Praia do Guincho, Portugal",
       country: "Portugal",
-      latitude: 38.7312,
-      longitude: -9.4722,
+      latitude: 38.733056,
+      longitude: -9.472778,
       description:
-        "Located near Lisbon, Guincho is a world-renowned spot for strong Atlantic winds and waves. Nestled in the Estoril coast within the Sintra-Cascais Natural Park (a UNESCO World Heritage Site), it features a beautiful wide beach with powerful shore break. Popular among advanced riders and wave lovers, the spot is known for its thermal 'Nortada' winds that can reach extreme intensities in the afternoons.",
+        "Praia do Guincho is one of Europe’s premier kitesurfing destinations, famed for its powerful Atlantic swells, consistent north (‘Nortada’) winds in summer and dramatic dunes. Located within the Sintra-Cascais Natural Park, it offers both wave riding and flat-water spots for intermediate to advanced kiters.",
       bestMonths: "May–September",
-      tempRange: "17–28°C",
-      waveSize: "1–3m",
+      tempRange: "14–27°C",
+      waveSize: "Medium to Large",
       difficultyLevel: "Intermediate to Advanced",
       localAttractions:
-        "Cascais old town, Sintra castles and palaces, Lisbon nightlife, Sintra-Cascais Natural Park hiking trails",
-      tags: ["wave", "strong wind", "Atlantic", "thermal winds", "shore break"],
-      windguruCode: "116",
+        "Sintra-Cascais Natural Park, Cabo da Roca, Cascais historic center, Boca do Inferno",
+      tags: ["Wave Riding", "Nortada Winds", "Protected Park", "Beach Break"],
+      windguruCode: "31",
       kiteSchools: [
-        "Gustykite|https://maps.google.com/?q=Gustykite+Guincho|4.9|89",
-        "Kite Adventures|https://maps.google.com/?q=Kite+Adventures+Guincho|4.8|76",
-        "SBKiteboarding School|https://maps.google.com/?q=SBKiteboarding+School+Guincho|5.0|5",
-        "Nortada Aventura|https://maps.google.com/?q=Nortada+Aventura+Kitesurf+Guincho|4.7|62",
-        "Ocean Adventure|https://maps.google.com/?q=Ocean+Adventure+Guincho|4.8|54",
+        // Only schools with more than 25 reviews
+        "Kitesurf Adventures|https://maps.google.com/?q=Kitesurf+Adventures|4.5|237"
       ],
-      conditions: [
-        "Atlantic Swell",
-        "Sandy Beach with Rocks",
-        "Cross-shore Wind",
-        "Shore Break",
-        "Strong Thermal Effects",
-      ],
-      accommodationOptions: [
-        "Beach Hotels",
-        "Surf Hostels",
-        "Boutique Guesthouses",
-        "Vacation Rentals in Cascais",
-      ],
-      foodOptions: [
-        "Portuguese Seafood",
-        "Tapas Bars",
-        "Local Bakeries",
-        "Beach Restaurants",
-      ],
+      conditions: ["Powerful Beach Break", "Consistent Nortada", "Strong Offshore Currents"],
+      accommodationOptions: ["Beachside Guesthouses", "Cascais Hotels", "Sintra Countryside Villas"],
+      foodOptions: ["Beach Bars (Chiringuitos)", "Seafood Restaurants in Cascais", "International Cafés"],
       culture:
-        "Portuguese coastal culture with rich history and laid-back surf vibes",
-      averageSchoolCost: 85,
-      averageAccommodationCost: 100,
-      numberOfSchools: 7,
+        "Blend of Portuguese coastal heritage, surf culture, and protected-park ecotourism",
+      averageSchoolCost: 80,
+      averageAccommodationCost: 120,
+      // Total number of kite schools in the Guincho/Cascais area, regardless of review counts
+      numberOfSchools: 6
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 14,
+        windSpeed: 25,
         windQuality: WindQuality.Moderate,
         airTemp: 15,
         waterTemp: 15,
         seasonalNotes:
-          "Off-season. Wind is less reliable but still rideable on good days.",
+          "Winter south-westerlies; cooler water and less consistent nortada winds."
       },
       {
         month: 2,
-        windSpeed: 15,
-        windQuality: WindQuality.Moderate,
+        windSpeed: 26,
+        windQuality: WindQuality.Good,
         airTemp: 16,
-        waterTemp: 15,
+        waterTemp: 14,
         seasonalNotes:
-          "Cool temps with chance of Atlantic storms bringing strong gusts.",
+          "Still cool but with occasional strong nortada gusts in late afternoons."
       },
       {
         month: 3,
-        windSpeed: 17,
+        windSpeed: 27,
         windQuality: WindQuality.Good,
-        airTemp: 17,
-        waterTemp: 16,
+        airTemp: 18,
+        waterTemp: 15,
         seasonalNotes:
-          "Spring begins with gradually improving wind consistency.",
+          "Spring transition; winds build steadily—good for intermediate riders."
       },
       {
         month: 4,
-        windSpeed: 19,
+        windSpeed: 27,
         windQuality: WindQuality.Good,
-        airTemp: 19,
-        waterTemp: 17,
+        airTemp: 20,
+        waterTemp: 15,
         seasonalNotes:
-          "Reliable winds start kicking in. Conditions improve steadily.",
+          "Winds pick up; wave size moderate—ideal for wave-riding progression."
       },
       {
         month: 5,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 21,
-        waterTemp: 18,
-        seasonalNotes: "Beginning of peak season with thermal winds and waves.",
+        windSpeed: 29,
+        windQuality: WindQuality.Good,
+        airTemp: 22,
+        waterTemp: 16,
+        seasonalNotes:
+          "Start of peak nortada season; strong, reliable winds by early afternoon."
       },
       {
         month: 6,
-        windSpeed: 24,
-        windQuality: WindQuality.Excellent,
+        windSpeed: 30,
+        windQuality: WindQuality.Good,
         airTemp: 24,
-        waterTemp: 19,
-        seasonalNotes: "Strongest and most consistent winds of the year.",
+        waterTemp: 17,
+        seasonalNotes:
+          "Midsummer north winds strengthen; kite sizes 7–9 m common."
       },
       {
         month: 7,
-        windSpeed: 25,
+        windSpeed: 34,
         windQuality: WindQuality.Excellent,
         airTemp: 26,
-        waterTemp: 20,
+        waterTemp: 18,
         seasonalNotes:
-          "Peak kitesurfing season with strong northerlies and clean waves.",
+          "Peak season—daily 20–30 kt nortada; intense waves for experienced riders."
       },
       {
         month: 8,
-        windSpeed: 23,
-        windQuality: WindQuality.Excellent,
-        airTemp: 27,
-        waterTemp: 20,
-        seasonalNotes: "Continued strong winds with warm water. Busy season.",
+        windSpeed: 31,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 19,
+        seasonalNotes:
+          "Consistent strong winds; popular but still plenty of space on the 800 m beach."
       },
       {
         month: 9,
-        windSpeed: 21,
+        windSpeed: 26,
         windQuality: WindQuality.Good,
-        airTemp: 25,
-        waterTemp: 20,
-        seasonalNotes: "Season starts winding down but still great conditions.",
+        airTemp: 24,
+        waterTemp: 19,
+        seasonalNotes:
+          "Late-season nortada; waves mellow slightly with weaker currents."
       },
       {
         month: 10,
-        windSpeed: 18,
-        windQuality: WindQuality.Good,
+        windSpeed: 24,
+        windQuality: WindQuality.Moderate,
         airTemp: 22,
-        waterTemp: 19,
-        seasonalNotes: "Mellow vibes, still ridable winds and fewer crowds.",
+        waterTemp: 18,
+        seasonalNotes:
+          "Autumn transition; winds taper off but remain dependable."
       },
       {
         month: 11,
-        windSpeed: 16,
+        windSpeed: 23,
         windQuality: WindQuality.Moderate,
         airTemp: 18,
         waterTemp: 17,
-        seasonalNotes: "Wind becomes less predictable. Wetsuits needed.",
+        seasonalNotes:
+          "Increasing swells from Atlantic storms; choppier conditions."
       },
       {
         month: 12,
-        windSpeed: 14,
+        windSpeed: 23,
         windQuality: WindQuality.Moderate,
-        airTemp: 16,
-        waterTemp: 16,
-        seasonalNotes: "Off-season but possible sessions when storms roll in.",
-      },
-    ],
-  },
+        airTemp: 15,
+        waterTemp: 15,
+        seasonalNotes:
+          "Cooler temps; occasional nortada days but overall less consistent."
+      }
+    ]
+  }
+,
 
   // 12. Lefkada, Greece
   {
