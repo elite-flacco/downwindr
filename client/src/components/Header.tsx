@@ -169,7 +169,7 @@ export default function Header() {
                 className="flex items-center gap-1.5 px-6 py-2 relative overflow-hidden group"
                 size="sm"
                 style={{
-                  backgroundImage: 'url(/src/assets/join-the-ride.png)',
+                  backgroundImage: 'url(/join-the-ride.png)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   border: 'none',
