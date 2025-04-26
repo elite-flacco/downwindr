@@ -11,14 +11,14 @@ const buttonVariants = cva(
       variant: {
         default: "font-semibold text-primary-foreground bg-gradient-to-r from-theme-secondary to-theme-secondary/70 hover:from-theme-secondary/80 hover:to-theme-secondary/50 shadow-md hover:shadow",
         destructive:
-          "hand-drawn-chalk bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow",
+          "font-semibold bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow",
         outline:
           "font-semibold text-primary border-2 border-input bg-background hover:bg-secondary hover:text-accent-foreground border-dashed",
         secondary:
           "font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-md hover:shadow",
         ghost: "font-semibold hover:bg-theme-surface hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline hand-drawn-none",
-        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70 wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,0,0,0.1),transparent_70%)] shadow-md hover:shadow hand-drawn-chalk"
+        link: "text-primary underline-offset-4 hover:underline",
+        action: "font-bold text-white bg-gradient-to-r from-theme-action to-theme-action/60 hover:from-theme-action/90 hover:to-theme-action/70 wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,0,0,0.1),transparent_70%)] shadow-md hover:shadow"
       },
       size: {
         default: "h-10 px-5 py-2",
