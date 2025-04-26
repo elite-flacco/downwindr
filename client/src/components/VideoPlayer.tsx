@@ -45,40 +45,66 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             onMouseLeave={() => setIsHovered(false)}
           >
             <div className="overflow-hidden">
-              {/* Clean, minimalist thumbnail design */}
-              <div className="relative aspect-video w-full bg-white">
-                {/* Loading background */}
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-50">
-                  <div className="animate-pulse w-full h-full bg-slate-100"></div>
+              {/* Custom styled thumbnail design with consistent appearance */}
+              <div className="relative aspect-video w-full bg-slate-100">
+                {/* Base background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-theme-primary/5 to-slate-50"></div>
+                
+                {/* Thumbnail in standardized frame */}
+                <div className="absolute inset-0 p-6 flex items-center justify-center">
+                  <div className="relative w-full h-full overflow-hidden rounded-md shadow-md bg-white">
+                    {/* Loading placeholder */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
+                      <div className="animate-pulse w-full h-full bg-slate-200"></div>
+                    </div>
+                    
+                    {/* YouTube thumbnail masked with consistent size/positioning */}
+                    <img 
+                      src={video.thumbnailUrl} 
+                      alt={video.title} 
+                      className="absolute inset-0 w-full h-full object-cover object-center" 
+                    />
+                    
+                    {/* Semi-transparent overlay for consistent brightness/contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-black/20"></div>
+                    
+                    {/* Video type indicator badge */}
+                    <div className="absolute top-2 left-2 bg-white/90 text-slate-700 text-xs px-1.5 py-0.5 rounded shadow-sm flex items-center">
+                      <SiYoutube className="h-3 w-3 text-red-500 mr-1" />
+                      <span className="font-medium">Tutorial</span>
+                    </div>
+                    
+                    {/* Custom branded corner label */}
+                    <div className="absolute bottom-2 right-2 bg-theme-primary text-white text-xs px-1.5 py-0.5 rounded shadow-sm">
+                      <span className="font-medium tracking-tight">Downwindr</span>
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Actual thumbnail with subtle refinement */}
-                <div className="absolute inset-0 p-0.5">
-                  <img 
-                    src={video.thumbnailUrl} 
-                    alt={video.title} 
-                    className="w-full h-full object-cover relative z-10 rounded-sm" 
-                  />
-                </div>
-                
-                {/* Hover effect - subtle brightness change instead of border */}
+                {/* Interactive overlay */}
                 <div 
-                  className="absolute inset-0 z-20 bg-black opacity-0 group-hover:opacity-5 transition-opacity duration-300 cursor-pointer"
+                  className="absolute inset-0 z-20 cursor-pointer"
                   onClick={handlePlayClick}
                 ></div>
               </div>
             </div>
 
-            {/* Improved play button */}
+            {/* Play button with consistent look */}
             <div 
-              className={`absolute inset-0 z-30 flex items-center justify-center cursor-pointer transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 z-30 flex items-center justify-center cursor-pointer transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               onClick={handlePlayClick}
             >
-              <button 
-                className="bg-white text-theme-primary p-3 rounded-full transform transition-all duration-300 shadow-lg group-hover:scale-110 group-hover:bg-theme-primary group-hover:text-white"
-              >
-                <Play className="h-6 w-6 fill-current" />
-              </button>
+              <div className="relative">
+                {/* White ring for emphasis */}
+                <div className="absolute -inset-1 bg-white/40 rounded-full"></div>
+                
+                {/* Actual button */}
+                <button 
+                  className="bg-white text-theme-primary p-3 rounded-full transform transition-all duration-300 shadow-md relative z-10 group-hover:bg-theme-primary group-hover:text-white"
+                >
+                  <Play className="h-6 w-6 fill-current" />
+                </button>
+              </div>
             </div>
             
             {loadError && (
@@ -125,10 +151,10 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
         <div className="p-4 flex-grow flex flex-col justify-between">
           {/* Simplified title */}
           <div>
-            <h3 className="text-base font-medium mb-1 line-clamp-1" title={video.title}>
+            <p className="text-base font-semibold mb-2 line-clamp-1" title={video.title}>
               {video.title}
-            </h3>
-            <p className="text-xs text-gray-500 mb-2 line-clamp-2">{video.description}</p>
+            </p>
+            <p className="text-xs text-gray-500 mb-4 line-clamp-2">{video.description}</p>
           </div>
           
           {/* Unified metadata style */}
