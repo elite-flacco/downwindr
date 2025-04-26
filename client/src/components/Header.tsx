@@ -42,7 +42,7 @@ export default function Header() {
   return (
     <header 
       className={`bg-theme-background border-b border-theme-border w-full transition-all duration-300 ${
-        scrolled ? "sticky top-0 z-50 shadow-md" : "shadow-sm"
+        scrolled ? "sticky top-0 z-50 shadow-xl" : "shadow-lg"
       }`}
     >
       <div className="container mx-auto px-4 py-6 flex items-center justify-between">
