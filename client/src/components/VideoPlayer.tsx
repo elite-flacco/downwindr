@@ -36,7 +36,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
   };
 
   return (
-    <Card className="overflow-hidden h-full transition-all duration-200 hover:shadow-md group">
+    <Card className="overflow-hidden h-full transition-all duration-200 hover:shadow-md group bg-white border border-slate-200">
       <CardContent className="p-0 h-full flex flex-col">
         {!isPlaying || loadError ? (
           <div 
@@ -44,31 +44,40 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="aspect-video overflow-hidden rounded-t-md">
-              {/* Thumbnail with overlay */}
-              <div className="relative w-full h-full">
-                <img 
-                  src={video.thumbnailUrl} 
-                  alt={video.title} 
-                  className="w-full h-full object-cover" 
-                />
-                {/* Consistent overlay gradient */}
+            <div className="overflow-hidden">
+              {/* Clean, minimalist thumbnail design */}
+              <div className="relative aspect-video w-full bg-white">
+                {/* Loading background */}
+                <div className="absolute inset-0 flex items-center justify-center bg-slate-50">
+                  <div className="animate-pulse w-full h-full bg-slate-100"></div>
+                </div>
+                
+                {/* Actual thumbnail with subtle refinement */}
+                <div className="absolute inset-0 p-0.5">
+                  <img 
+                    src={video.thumbnailUrl} 
+                    alt={video.title} 
+                    className="w-full h-full object-cover relative z-10 rounded-sm" 
+                  />
+                </div>
+                
+                {/* Hover effect - subtle brightness change instead of border */}
                 <div 
-                  className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"
+                  className="absolute inset-0 z-20 bg-black opacity-0 group-hover:opacity-5 transition-opacity duration-300 cursor-pointer"
                   onClick={handlePlayClick}
                 ></div>
               </div>
             </div>
 
-            {/* Play button */}
+            {/* Improved play button */}
             <div 
-              className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 z-30 flex items-center justify-center cursor-pointer transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               onClick={handlePlayClick}
             >
               <button 
-                className="bg-theme-primary text-white p-3 rounded-full transform transition-transform duration-300 shadow-lg group-hover:scale-110"
+                className="bg-white text-theme-primary p-3 rounded-full transform transition-all duration-300 shadow-lg group-hover:scale-110 group-hover:bg-theme-primary group-hover:text-white"
               >
-                <Play className="h-6 w-6" />
+                <Play className="h-6 w-6 fill-current" />
               </button>
             </div>
             
