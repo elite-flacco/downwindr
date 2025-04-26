@@ -74,7 +74,7 @@ export default function AuthPage() {
       {/* Left side: Auth forms */}
       <div className="flex-1 flex flex-col justify-center p-8 sm:p-12 bg-background">
         <div className="mx-auto w-full max-w-md">
-          <h1 className="text-3xl font-bold text-center mb-6 text-foreground">Welcome to Downwindr</h1>
+          <h1 className="text-3xl font-bold text-center mb-6">Welcome to Downwindr</h1>
           
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -86,7 +86,7 @@ export default function AuthPage() {
             <TabsContent value="login">
               <Card>
                 <CardHeader>
-                  <CardTitle>Login to your account</CardTitle>
+                  <CardTitle className="font-body">Login to your account</CardTitle>
                   <CardDescription>Enter your credentials to access your account</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -154,7 +154,7 @@ export default function AuthPage() {
             <TabsContent value="register">
               <Card>
                 <CardHeader>
-                  <CardTitle>Create an account</CardTitle>
+                  <CardTitle className="font-body">Create an account</CardTitle>
                   <CardDescription>Enter your details to create a new account</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -212,31 +212,6 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      <FormField
-                        control={registerForm.control}
-                        name="experience"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Kitesurfing Experience (optional)</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select your experience level" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="Beginner">Beginner</SelectItem>
-                                <SelectItem value="Intermediate">Intermediate</SelectItem>
-                                <SelectItem value="Advanced">Advanced</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormDescription>
-                              This helps personalize your experience on the platform
-                            </FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
                       <Button 
                         type="submit" 
                         className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
@@ -280,9 +255,6 @@ export default function AuthPage() {
             Join our community of kitesurfers to discover, rate, and review the best spots around the world.
             Share your experiences and get personalized recommendations.
           </p>
-          <div className="w-full max-w-md mx-auto">
-            <KitesurferIllustration className="w-full h-auto" />
-          </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-50" />
       </div>

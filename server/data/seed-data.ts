@@ -773,156 +773,155 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Boracay, Philippines",
       country: "Philippines",
-      latitude: 11.9674,
-      longitude: 121.927,
+      latitude: 11.9674, //
+      longitude: 121.9245, //
       description:
-        "Boracay is a tropical paradise renowned for its powdery white sand beaches and consistent wind conditions, making it a top kitesurfing destination in Southeast Asia. The island offers flat water in the lagoon and small to medium waves on the ocean side, making it suitable for all levels of kitesurfers.",
-      bestMonths: "Nov-May",
-      tempRange: "25–32°C",
-      waveSize: "Flat in Lagoon, Small to Medium on Ocean Side",
+        "A world-class kitesurfing destination on the island’s east coast, Boracay’s Bulabog Beach offers shallow turquoise flats, steady Amihan trade winds, and a lively beach-bar scene. With a compact lagoon perfectly suited for learners and freestylers, plus vibrant island nightlife just steps away, Boracay combines perfect wind conditions with tropical resort comforts.",
+      bestMonths: "Oct–Apr",
+      tempRange: "24–32°C",
+      waveSize: "Flat to Small Chop",
       difficultyLevel: "Beginner to Advanced",
       localAttractions:
-        "White Beach, Puka Beach, Mount Luho, Island Hopping, Vibrant Nightlife",
-      tags: ["Kite Schools", "Flat Water", "Waves", "Tropical Paradise"],
-      windguruCode: "552",
+        "White Beach sunset strolls, Puka Shell Beach, Mount Luho viewpoint, island-hopping boat tours",
+      tags: ["Kite Schools", "Equipment Rental", "Beach Bars", "Island Dining"],
+      windguruCode: "576", // :contentReference[oaicite:0]{index=0}
       kiteSchools: [
-        "Kitesurfing Boracay|https://maps.google.com/?q=Kitesurfing+Boracay|4.8|136",
-        "Willy's Rock Kite School|https://maps.google.com/?q=Willy's+Rock+Kite+School|4.7|124",
-        "Bulabog Beach Kitesurfing School|https://maps.google.com/?q=Bulabog+Beach+Kitesurfing+School|4.9|112",
-        "Kiteboarding Philippines|https://maps.google.com/?q=Kiteboarding+Philippines|4.6|96",
-        "Aquafree Kitesurfing|https://maps.google.com/?q=Aquafree+Kitesurfing|4.5|82",
+        "Isla Kitesurfing|https://maps.google.com/?q=Isla+Kitesurfing|5.0|340", //
+        "Freestyle Academy Kitesurfing|https://maps.google.com/?q=Freestyle+Academy+Kitesurfing|5.0|79", //
+        "Boracay Kite Center|https://maps.google.com/?q=Boracay+Kite+Center|4.9|127", //
+        "Padayon Kite Center Boracay|https://maps.google.com/?q=Padayon+Kite+Center+Boracay|5.0|240", //
+        "Funboard Center Boracay|https://maps.google.com/?q=Funboard+Center+Boracay|4.7|58", //
       ],
       conditions: [
-        "Trade Winds",
-        "Flat Water in Lagoon",
-        "Small to Medium Waves on Ocean Side",
+        "Flat Water Lagoon",
+        "Side-On Shore Wind",
+        "Warm Water",
+        "Protected Reef",
       ],
       accommodationOptions: [
-        "Beachfront Hotels",
-        "Resorts",
-        "Boutique Guesthouses",
-        "Vacation Rentals",
+        "Beachfront Resorts",
+        "Boutique Villas",
+        "Guesthouses",
       ],
       foodOptions: [
-        "Seafood Restaurants",
-        "International Cuisine",
-        "Beachfront Bars",
-        "Local Filipino Cuisine",
+        "Seafood Shacks",
+        "International Cafés",
+        "Filipino Diner Stalls",
       ],
       culture:
-        "A mix of Filipino coastal life with strong influences from tourists, famous for its laid-back atmosphere and vibrant nightlife.",
-      averageSchoolCost: 50,
-      averageAccommodationCost: 80,
-      numberOfSchools: 5,
+        "Warm Filipino island hospitality with a mix of local and international influences in music, food, and nightlife",
+      averageSchoolCost: 47, // USD per hour (approx. from $94 for 2 h)
+      averageAccommodationCost: 100,
+      numberOfSchools: 10,
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 20,
-        windQuality: WindQuality.Excellent,
-        airTemp: 28,
-        waterTemp: 28,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 27,
         seasonalNotes:
-          "Ideal conditions for kitesurfing with steady trade winds and warm water temperatures.",
+          "Peak Amihan season with reliable 15–20 kt northeast winds and clear skies.",
       },
       {
         month: 2,
-        windSpeed: 22,
+        windSpeed: 19,
         windQuality: WindQuality.Excellent,
-        airTemp: 28,
-        waterTemp: 28,
+        airTemp: 26,
+        waterTemp: 27,
         seasonalNotes:
-          "Strong and consistent winds with good conditions for both beginners and advanced kiters.",
+          "Strong, steady trade winds offer ideal flat-water conditions for all levels.",
       },
       {
         month: 3,
-        windSpeed: 23,
+        windSpeed: 20,
         windQuality: WindQuality.Excellent,
-        airTemp: 29,
-        waterTemp: 29,
+        airTemp: 27,
+        waterTemp: 28,
         seasonalNotes:
-          "March brings steady winds and comfortable temperatures, perfect for kitesurfing.",
+          "Consistent 18–22 kt winds; great for progression and freestyle.",
       },
       {
         month: 4,
-        windSpeed: 24,
-        windQuality: WindQuality.Excellent,
-        airTemp: 30,
-        waterTemp: 30,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 28,
         seasonalNotes:
-          "High season with optimal wind conditions and warm water temperatures. Expect good crowd but great conditions.",
+          "Winds taper slightly but remain suitable; water stays warm.",
       },
       {
         month: 5,
-        windSpeed: 23,
-        windQuality: WindQuality.Excellent,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
         airTemp: 30,
-        waterTemp: 30,
+        waterTemp: 29,
         seasonalNotes:
-          "End of the dry season with stable winds and warm temperatures, making for excellent kiteboarding conditions.",
+          "Transition toward Habagat; winds still reliable for early season.",
       },
       {
         month: 6,
-        windSpeed: 21,
-        windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 30,
+        windSpeed: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 31,
+        waterTemp: 29,
         seasonalNotes:
-          "The start of the rainy season brings slightly weaker winds, but conditions are still great for beginners and intermediates.",
+          "Swing toward southwest monsoon; wind consistency starts to drop.",
       },
       {
         month: 7,
-        windSpeed: 20,
-        windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 30,
+        windSpeed: 14,
+        windQuality: WindQuality.Moderate,
+        airTemp: 31,
+        waterTemp: 29,
         seasonalNotes:
-          "Wind remains moderate but still great for kitesurfing. Expect fewer tourists in the off-peak season.",
+          "Lower wind reliability; still rideable, but plan around morning lulls.",
       },
       {
         month: 8,
-        windSpeed: 19,
-        windQuality: WindQuality.Good,
+        windSpeed: 13,
+        windQuality: WindQuality.Moderate,
         airTemp: 30,
-        waterTemp: 30,
+        waterTemp: 28,
         seasonalNotes:
-          "Moderate winds with warm waters make it an ideal time for intermediate to advanced riders.",
+          "Often light; suited for learners and freestyle in flat lagoons.",
       },
       {
         month: 9,
-        windSpeed: 20,
-        windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 30,
+        windSpeed: 14,
+        windQuality: WindQuality.Moderate,
+        airTemp: 29,
+        waterTemp: 28,
         seasonalNotes:
-          "Wind starts to pick up again as the rainy season winds down. Ideal for a quieter kitesurfing experience.",
+          "Gradual wind increase as Amihan returns; prepare for mid-month shift.",
       },
       {
         month: 10,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
         airTemp: 29,
-        waterTemp: 29,
+        waterTemp: 28,
         seasonalNotes:
-          "Excellent conditions with stable winds and warm temperatures. Great for both beginners and experienced kiters.",
+          "First strong northeast winds of the season kick in—excellent conditions.",
       },
       {
         month: 11,
-        windSpeed: 23,
-        windQuality: WindQuality.Excellent,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
         airTemp: 28,
-        waterTemp: 28,
+        waterTemp: 27,
         seasonalNotes:
-          "One of the best months for kitesurfing in Boracay with perfect conditions.",
+          "Solid early Amihan winds; comfortable air and water temperatures.",
       },
       {
         month: 12,
-        windSpeed: 21,
-        windQuality: WindQuality.Excellent,
-        airTemp: 28,
-        waterTemp: 28,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 27,
         seasonalNotes:
-          "December marks the start of the peak season with strong winds and warm, consistent water conditions.",
+          "Peak season approaches; reliable winds and festive island vibe.",
       },
     ],
   },
@@ -932,155 +931,143 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Jericoacoara, Brazil",
       country: "Brazil",
-      latitude: -2.7966,
-      longitude: -40.5127,
+      latitude: -2.796403, // :contentReference[oaicite:0]{index=0}
+      longitude: -40.514378, // :contentReference[oaicite:1]{index=1}
       description:
-        "Jericoacoara (aka Jeri) is a legendary kitesurfing and windsurfing destination in Brazil. Known for its incredibly consistent wind, wide sandy beaches, and laid-back village vibes, it attracts kiters from all over the world from July to January.",
-      bestMonths: "Jul-Jan",
-      tempRange: "26–33°C",
-      waveSize: "Flat to Small Waves",
-      difficultyLevel: "All levels",
+        "Jericoacoara, often called Jeri, is a remote fishing village set amid dunes on Brazil’s northeast coast, famed for its consistent trade winds, shallow bays, and world-class downwind runs. Surrounded by the Jericoacoara National Park and dotted with vibrant beach barracas, it offers ideal conditions for learners in the lagoons and thrilling wave spots farther downwind.", // :contentReference[oaicite:2]{index=2}
+      bestMonths: "June–January", // :contentReference[oaicite:3]{index=3}
+      tempRange: "26–32°C",
+      waveSize: "Flat to Medium",
+      difficultyLevel: "Beginner to Advanced",
       localAttractions:
-        "Sand dune sunsets, Pedra Furada, Capoeira shows, ATV tours, vibrant nightlife",
-      tags: ["consistent wind", "wide beach", "Brazil", "flat", "small waves"],
-      windguruCode: "231",
+        "Jericoacoara National Park, Pedra Furada arch, Sunset Dune, Lagoa do Paraíso, Tatajuba downwind",
+      tags: [
+        "Kite Schools",
+        "Equipment Rental",
+        "Sand Dunes",
+        "Downwind Trips",
+      ],
+      windguruCode: "743", // :contentReference[oaicite:4]{index=4}
       kiteSchools: [
-        "Rancho do Kite|https://maps.google.com/?q=Rancho+do+Kite",
-        "ClubVentos Jeri|https://maps.google.com/?q=ClubVentos+Jericoacoara",
-        "Jeri250 Kite School|https://maps.google.com/?q=Jeri250+Kite+School",
-        "Bloco do Kite|https://maps.google.com/?q=Bloco+do+Kite",
-        "Kiteiscool|https://maps.google.com/?q=Kiteiscool+Jericoacoara",
+        "Info Kitesurfschool|https://maps.google.com/?q=Info+Kitesurfschool+Jeri|5.0|1021", // :contentReference[oaicite:5]{index=5}
+        "Jerisports Kiteboarding School|https://maps.google.com/?q=Jerisports+Kiteboarding+School|5.0|206", // :contentReference[oaicite:6]{index=6}
+        "MH Kiteschool|https://maps.google.com/?q=MH+Kiteschool+Jericoacoara|5.0|289", // :contentReference[oaicite:7]{index=7}
+        "Blu Kitesurfing Jericoacoara|https://maps.google.com/?q=Blu+Kitesurfing+Jericoacoara|5.0|155", // :contentReference[oaicite:8]{index=8}
+        "Sunset Kiteboarding Jericoacoara|https://maps.google.com/?q=Sunset+Kiteboarding+Jericoacoara|5.0|116", // :contentReference[oaicite:9]{index=9}
       ],
-      conditions: [
-        "Trade Winds",
-        "Tide-dependent spots",
-        "Flat and Small Wave sections",
-      ],
+      conditions: ["Flat Water Bay", "Lagoon Kitespots", "Side-Shore Wind"],
       accommodationOptions: [
-        "Pousadas",
-        "Boutique Hotels",
-        "Kite Hostels",
-        "Vacation Rentals",
+        "Dune-Backed Pousadas",
+        "Beachfront Hostels",
+        "Eco Lodges",
       ],
-      foodOptions: [
-        "Brazilian BBQ",
-        "Seafood",
-        "Vegan Cafes",
-        "Beachfront Bars",
-      ],
+      foodOptions: ["Beach Barracas", "Local Desserts", "Brazilian Seafood"],
       culture:
-        "Mix of traditional fishing village with strong kite and windsurf tourism culture. Known for its music, art, and laid-back vibe.",
-      averageSchoolCost: 60,
-      averageAccommodationCost: 70,
-      numberOfSchools: 5,
+        "Bohemian beach village ambiance blending local Cearense hospitality with international traveler vibes",
+      averageSchoolCost: 50,
+      averageAccommodationCost: 80,
+      numberOfSchools: 54, // :contentReference[oaicite:10]{index=10}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 30,
-        waterTemp: 28,
+        windSpeed: 9,
+        windQuality: WindQuality.Moderate,
+        airTemp: 28,
+        waterTemp: 27,
         seasonalNotes:
-          "Peak season with strong consistent trade winds and warm water. One of the best months to visit.",
+          "Light winds; great for beginner lessons in the lagoons.",
       },
       {
         month: 2,
-        windSpeed: 18,
-        windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 28,
-        seasonalNotes:
-          "Wind starts to taper off but still rideable. Less crowded. Some risk of light wind days.",
+        windSpeed: 13,
+        windQuality: WindQuality.Moderate,
+        airTemp: 29,
+        waterTemp: 27,
+        seasonalNotes: "Moderate winds picking up; ideal for progression.",
       },
       {
         month: 3,
         windSpeed: 15,
-        windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
-        seasonalNotes:
-          "Off-season. Generally not reliable for kiting. Good for relaxing and exploring.",
-      },
-      {
-        month: 4,
-        windSpeed: 13,
-        windQuality: WindQuality.Poor,
-        airTemp: 30,
-        waterTemp: 28,
-        seasonalNotes: "Low wind season. Not recommended for kiting.",
-      },
-      {
-        month: 5,
-        windSpeed: 15,
-        windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 27,
-        seasonalNotes:
-          "Wind beginning to return. Still early for kiting but decent off-season conditions.",
-      },
-      {
-        month: 6,
-        windSpeed: 18,
         windQuality: WindQuality.Good,
         airTemp: 30,
         waterTemp: 27,
+        seasonalNotes: "Steady trade winds build; warm conditions.",
+      },
+      {
+        month: 4,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 31,
+        waterTemp: 28,
         seasonalNotes:
-          "Wind picks up, especially late in the month. Pre-season is good for fewer crowds.",
+          "Winds strengthen ahead of peak season; perfect for all levels.",
+      },
+      {
+        month: 5,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 32,
+        waterTemp: 28,
+        seasonalNotes: "Reliable thermal breezes; ideal flat-water kiting.",
+      },
+      {
+        month: 6,
+        windSpeed: 23,
+        windQuality: WindQuality.Excellent,
+        airTemp: 31,
+        waterTemp: 28,
+        seasonalNotes: "Start of wind guarantee season—strong and consistent.", // :contentReference[oaicite:11]{index=11}
       },
       {
         month: 7,
-        windSpeed: 22,
+        windSpeed: 25,
         windQuality: WindQuality.Excellent,
-        airTemp: 31,
+        airTemp: 30,
         waterTemp: 27,
-        seasonalNotes:
-          "Start of the high season with strong daily winds. Great time to kite and explore.",
+        seasonalNotes: "Peak wind season with reliable 25+ knot afternoons.", // :contentReference[oaicite:12]{index=12}
       },
       {
         month: 8,
-        windSpeed: 24,
+        windSpeed: 28,
         windQuality: WindQuality.Excellent,
-        airTemp: 32,
+        airTemp: 29,
         waterTemp: 27,
-        seasonalNotes:
-          "One of the best months in Jeri with consistent wind and sunny skies.",
+        seasonalNotes: "Strong thermal winds; perfect for downwinds and waves.", // :contentReference[oaicite:13]{index=13}
       },
       {
         month: 9,
-        windSpeed: 25,
+        windSpeed: 30,
         windQuality: WindQuality.Excellent,
-        airTemp: 33,
+        airTemp: 29,
         waterTemp: 27,
         seasonalNotes:
-          "Peak wind season. Expect reliable wind every day. Perfect for advanced tricks.",
+          "Highest wind reliability; world-class kiting conditions.", // :contentReference[oaicite:14]{index=14}
       },
       {
         month: 10,
-        windSpeed: 24,
+        windSpeed: 28,
         windQuality: WindQuality.Excellent,
-        airTemp: 33,
+        airTemp: 29,
         waterTemp: 27,
-        seasonalNotes:
-          "Still very strong wind. October is prime season for all levels.",
+        seasonalNotes: "Still strong winds; fewer crowds as high season wanes.", // :contentReference[oaicite:15]{index=15}
       },
       {
         month: 11,
         windSpeed: 23,
-        windQuality: WindQuality.Excellent,
-        airTemp: 32,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
         waterTemp: 27,
-        seasonalNotes:
-          "Reliable wind continues, great vibe in the town. One of the most popular months.",
+        seasonalNotes: "Winds taper slightly but remain very reliable.", // :contentReference[oaicite:16]{index=16}
       },
       {
         month: 12,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 31,
-        waterTemp: 28,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 27,
         seasonalNotes:
-          "End of peak season but still strong wind. Holiday vibe adds extra energy to the village.",
+          "End of wind season; great conditions before quieter months.", // :contentReference[oaicite:17]{index=17}
       },
     ],
   },
@@ -1090,151 +1077,144 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Cape Town, South Africa",
       country: "South Africa",
-      latitude: -33.918861,
-      longitude: 18.4233,
+      latitude: -33.92528, // :contentReference[oaicite:6]{index=6}
+      longitude: 18.42389, // :contentReference[oaicite:7]{index=7}
       description:
-        "Cape Town is a world-renowned kitesurfing destination, particularly known for its strong and consistent summer winds. The city offers a variety of spots suitable for all levels, from flat water lagoons to challenging wave spots.",
-      bestMonths: "Nov-Mar",
-      tempRange: "20–30°C",
-      waveSize: "Flat to Large Waves",
-      difficultyLevel: "Intermediate to Advanced",
+        "Framed by Table Mountain and the iconic Cape Doctor southeaster, Cape Town offers world-class kiting at spots like Kite Beach and Bloubergstrand. The combination of consistent thermal winds, flat and wave-ridden water, plus vibrant city culture makes it a year-round kiteboarding hub.",
+      bestMonths: "Nov–Feb",
+      tempRange: "13–27.3°C", // :contentReference[oaicite:8]{index=8}
+      waveSize: "Flat to Medium",
+      difficultyLevel: "Beginner to Advanced",
       localAttractions:
-        "Table Mountain, Robben Island, Cape Point, Wine Tours, Vibrant Nightlife",
-      tags: ["Strong Winds", "Wave Riding", "Scenic Views", "Diverse Spots"],
-      windguruCode: "91",
+        "Table Mountain cableway, V&A Waterfront, Robben Island tours, Cape Point scenic drives",
+      tags: ["Kite Schools", "Equipment Rental", "City & Mountain Views"],
+      windguruCode: "91", // :contentReference[oaicite:9]{index=9}
       kiteSchools: [
-        "Kiteboarding Cape Town|https://maps.google.com/?q=Kiteboarding+Cape+Town",
-        "High Five Kitesurf School|https://maps.google.com/?q=High+Five+Kitesurf+School",
-        "Cape Town Kite Club|https://maps.google.com/?q=Cape+Town+Kite+Club",
-        "KiteWorldWide Cape Town|https://maps.google.com/?q=KiteWorldWide+Cape+Town",
-        "Kitekahunas|https://maps.google.com/?q=Kitekahunas",
+        "Kitesurfschool Capetown|https://maps.google.com/?q=Kitesurfschool+capetown|5.0|652", // :contentReference[oaicite:10]{index=10}
+        "SA Kitesurf|https://maps.google.com/?q=SA+Kitesurf|5.0|374", // :contentReference[oaicite:11]{index=11}
+        "Board and Kite Africa|https://maps.google.com/?q=Board+and+Kite+Africa|5.0|246", // :contentReference[oaicite:12]{index=12}
+        "Kite Lab|https://maps.google.com/?q=Kite+Lab|4.9|128", // :contentReference[oaicite:13]{index=13}
+        "High Five Kite Surf School|https://maps.google.com/?q=High+Five+Kite+Surf+School|4.9|164", // :contentReference[oaicite:14]{index=14}
       ],
-      conditions: ["Strong SE Trade Winds", "Wave Spots", "Flat Water Lagoons"],
+      conditions: ["Thermal Trade Winds", "Flat Water Lagoon", "Beach Break"],
       accommodationOptions: [
-        "Beachfront Hotels",
-        "Guesthouses",
-        "Kite Lodges",
-        "Vacation Rentals",
+        "Waterfront Hotels",
+        "Bloubergstrand Guesthouses",
+        "City Apartments",
       ],
       foodOptions: [
-        "Seafood Restaurants",
-        "International Cuisine",
-        "Local South African Dishes",
-        "Beachfront Cafes",
+        "Seafood at the Waterfront",
+        "Cape Malay Cuisine",
+        "Craft Breweries",
       ],
       culture:
-        "A melting pot of cultures with a rich history, Cape Town offers a vibrant arts scene, diverse culinary experiences, and a laid-back coastal lifestyle.",
-      averageSchoolCost: 70,
-      averageAccommodationCost: 90,
-      numberOfSchools: 5,
+        "Dynamic mix of modern South African urban life, historic Table Mountain heritage, and vibrant beach-town community",
+      averageSchoolCost: 60, // :contentReference[oaicite:15]{index=15}
+      averageAccommodationCost: 120,
+      numberOfSchools: 12, // :contentReference[oaicite:16]{index=16}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 25,
+        windSpeed: 22,
         windQuality: WindQuality.Excellent,
-        airTemp: 27,
-        waterTemp: 18,
+        airTemp: 26,
+        waterTemp: 22,
         seasonalNotes:
-          "Peak summer season with strong and consistent southeasterly winds, ideal for kitesurfing.",
+          "Peak summer winds often reach 20–25 kt; ideal for freestylers.",
       },
       {
         month: 2,
-        windSpeed: 24,
+        windSpeed: 23,
         windQuality: WindQuality.Excellent,
-        airTemp: 27,
-        waterTemp: 18,
+        airTemp: 26,
+        waterTemp: 22,
         seasonalNotes:
-          "Continued strong winds with warm temperatures, perfect for both wave and flat water riding.",
+          "Strong Cape Doctor winds in the afternoons; perfect flat-water sessions.",
       },
       {
         month: 3,
-        windSpeed: 22,
-        windQuality: WindQuality.Good,
-        airTemp: 25,
-        waterTemp: 17,
-        seasonalNotes:
-          "Winds start to decrease slightly but still offer good kiting conditions with fewer crowds.",
+        windSpeed: 21,
+        windQuality: WindQuality.Excellent,
+        airTemp: 24,
+        waterTemp: 21,
+        seasonalNotes: "Late-season warmth with reliable 18–22 kt winds.",
       },
       {
         month: 4,
         windSpeed: 18,
-        windQuality: WindQuality.Moderate,
-        airTemp: 23,
-        waterTemp: 17,
+        windQuality: WindQuality.Good,
+        airTemp: 20,
+        waterTemp: 19,
         seasonalNotes:
-          "Transition month with variable wind conditions; some good days for kiting.",
+          "Autumn transition sees winds around 15–18 kt; less crowded.",
       },
       {
         month: 5,
         windSpeed: 15,
         windQuality: WindQuality.Moderate,
-        airTemp: 20,
-        waterTemp: 16,
-        seasonalNotes:
-          "Off-season begins; wind becomes less reliable, but occasional kiting days are possible.",
+        airTemp: 16,
+        waterTemp: 17,
+        seasonalNotes: "Cooling temperatures; occasional strong southeaster.",
       },
       {
         month: 6,
         windSpeed: 12,
-        windQuality: WindQuality.Poor,
-        airTemp: 18,
-        waterTemp: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 13.5,
+        waterTemp: 16,
         seasonalNotes:
-          "Winter season with minimal wind; not ideal for kitesurfing.",
+          "Winter lows with lighter winds; best for sheltered lagoons.",
       },
       {
         month: 7,
-        windSpeed: 12,
-        windQuality: WindQuality.Poor,
-        airTemp: 17,
-        waterTemp: 14,
-        seasonalNotes: "Continued winter conditions with low wind activity.",
+        windSpeed: 10,
+        windQuality: WindQuality.Moderate,
+        airTemp: 13,
+        waterTemp: 16,
+        seasonalNotes: "Coolest month; wind around 10–12 kt, quieter beaches.",
       },
       {
         month: 8,
-        windSpeed: 14,
-        windQuality: WindQuality.Moderate,
-        airTemp: 18,
-        waterTemp: 14,
+        windSpeed: 12,
+        windQuality: WindQuality.Good,
+        airTemp: 13.4,
+        waterTemp: 16,
         seasonalNotes:
-          "Wind starts to pick up towards the end of the month; early season kiting possible.",
+          "Late-winter sees thermal winds pick back up to mid-teens.",
       },
       {
         month: 9,
-        windSpeed: 18,
+        windSpeed: 15,
         windQuality: WindQuality.Good,
-        airTemp: 20,
-        waterTemp: 15,
-        seasonalNotes:
-          "Spring season with increasing wind reliability; good for early kiting sessions.",
+        airTemp: 14.9,
+        waterTemp: 17,
+        seasonalNotes: "Spring warming; reliable 15–18 kt winds builds.",
       },
       {
         month: 10,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 23,
-        waterTemp: 16,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 17.3,
+        waterTemp: 18,
         seasonalNotes:
-          "Pre-summer conditions with strong winds returning; great time to visit before peak season.",
+          "October breezes pick up to 18–22 kt; scenic downwind runs.",
       },
       {
         month: 11,
-        windSpeed: 24,
+        windSpeed: 21,
         windQuality: WindQuality.Excellent,
-        airTemp: 25,
-        waterTemp: 17,
-        seasonalNotes:
-          "Start of the peak kiting season with consistent strong winds and warm weather.",
+        airTemp: 19,
+        waterTemp: 19,
+        seasonalNotes: "Pre-summer surge; consistent 20+ kt Cape Doctor.",
       },
       {
         month: 12,
-        windSpeed: 25,
+        windSpeed: 23,
         windQuality: WindQuality.Excellent,
-        airTemp: 26,
-        waterTemp: 18,
-        seasonalNotes:
-          "High season continues with excellent wind conditions and festive atmosphere.",
+        airTemp: 21.1,
+        waterTemp: 20,
+        seasonalNotes: "Early summer peak; wind daily from SSE at 22–28 kt.",
       },
     ],
   },
