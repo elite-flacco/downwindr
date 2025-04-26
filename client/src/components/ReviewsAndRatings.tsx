@@ -91,7 +91,8 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   const { 
     data: spotDetails, 
     isLoading,
-    error
+    error,
+    refetch
   } = useQuery<SpotDetails>({
     queryKey: [`/api/spots/${spotId}/details`],
   });
@@ -119,7 +120,11 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
         title: "Review submitted",
         description: "Your review has been successfully submitted!",
       });
+      // First invalidate the query cache
       queryClient.invalidateQueries({ queryKey: [`/api/spots/${spotId}/details`] });
+      // Then explicitly refetch to ensure UI updates
+      refetch();
+      // Close the dialog
       setReviewDialogOpen(false);
     },
     onError: (error) => {
@@ -145,7 +150,11 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
         title: "Rating submitted",
         description: "Your rating has been successfully submitted!",
       });
+      // First invalidate the query cache
       queryClient.invalidateQueries({ queryKey: [`/api/spots/${spotId}/details`] });
+      // Then explicitly refetch to ensure UI updates
+      refetch();
+      // Close the dialog
       setRatingDialogOpen(false);
     },
     onError: (error) => {
