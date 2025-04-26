@@ -46,37 +46,64 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           >
             <div className="overflow-hidden">
               {/* Custom styled thumbnail design with consistent appearance */}
-              <div className="relative aspect-video w-full bg-slate-100">
-                {/* Base background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-theme-primary/5 to-slate-50"></div>
-                
-                {/* Thumbnail in standardized frame */}
-                <div className="absolute inset-0 p-6 flex items-center justify-center">
-                  <div className="relative w-full h-full overflow-hidden rounded-md shadow-md bg-white">
-                    {/* Loading placeholder */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
-                      <div className="animate-pulse w-full h-full bg-slate-200"></div>
+              <div className="relative aspect-video w-full bg-slate-50">
+                {/* Clean custom background with minimal thumbnail */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative w-full h-full overflow-hidden bg-gradient-to-br from-sky-50 to-slate-50">
+                    {/* Pattern overlay for texture */}
+                    <div className="absolute inset-0 opacity-10" 
+                      style={{ 
+                        backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230284c7\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'1.5\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'1.5\'/%3E%3C/g%3E%3C/svg%3E")',
+                        backgroundSize: '20px 20px'
+                      }}>
                     </div>
                     
-                    {/* YouTube thumbnail masked with consistent size/positioning */}
-                    <img 
-                      src={video.thumbnailUrl} 
-                      alt={video.title} 
-                      className="absolute inset-0 w-full h-full object-cover object-center" 
-                    />
-                    
-                    {/* Semi-transparent overlay for consistent brightness/contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-black/20"></div>
-                    
-                    {/* Video type indicator badge */}
-                    <div className="absolute top-2 left-2 bg-white/90 text-slate-700 text-xs px-1.5 py-0.5 rounded shadow-sm flex items-center">
-                      <SiYoutube className="h-3 w-3 text-red-500 mr-1" />
-                      <span className="font-medium">Tutorial</span>
+                    {/* Small YouTube thumbnail in circle with decorated border */}
+                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      {/* Decorative outer ring */}
+                      <div className="w-[68px] h-[68px] rounded-full bg-gradient-to-tr from-theme-primary/30 to-white p-[2px] shadow-lg">
+                        {/* White inner ring */}
+                        <div className="w-full h-full rounded-full p-[2px] bg-white">
+                          {/* Actual thumbnail container */}
+                          <div className="w-full h-full rounded-full overflow-hidden">
+                            {/* Loading placeholder */}
+                            <div className="absolute inset-0 bg-slate-200 animate-pulse"></div>
+                            
+                            {/* Cropped thumbnail */}
+                            <img 
+                              src={video.thumbnailUrl} 
+                              alt="" 
+                              className="absolute inset-0 w-full h-full object-cover" 
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     
-                    {/* Custom branded corner label */}
-                    <div className="absolute bottom-2 right-2 bg-theme-primary text-white text-xs px-1.5 py-0.5 rounded shadow-sm">
-                      <span className="font-medium tracking-tight">Downwindr</span>
+                    {/* Category pill */}
+                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-theme-primary/90 to-theme-primary/80 text-white font-medium text-xs px-3 py-1 rounded-full shadow-sm">
+                      {video.categories[0] || "Kitesurfing"}
+                    </div>
+                    
+                    {/* Level indicator */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                      <div className={`text-xs px-3 py-0.5 rounded-full font-medium ${
+                        video.level === 'beginner' 
+                          ? 'bg-green-500 text-white' 
+                          : video.level === 'intermediate' 
+                          ? 'bg-amber-500 text-white' 
+                          : 'bg-rose-500 text-white'
+                      }`}>
+                        {video.level}
+                      </div>
+                    </div>
+                    
+                    {/* Branding watermark */}
+                    <div className="absolute bottom-2 right-2 text-theme-primary font-semibold text-xs tracking-tight">
+                      <span className="flex items-center">
+                        <span className="opacity-70">down</span>
+                        <span>windr</span>
+                      </span>
                     </div>
                   </div>
                 </div>
