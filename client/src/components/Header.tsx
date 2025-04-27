@@ -14,6 +14,13 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 
+// Helper function to handle profile image cache busting
+const getTimestampedUrl = (url: string | null): string | undefined => {
+  if (!url) return undefined;
+  const timestamp = new Date().getTime();
+  return `${url}?t=${timestamp}`;
+};
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -143,7 +150,7 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={user.avatarUrl || undefined} alt={user.username} />
+                    <AvatarImage src={getTimestampedUrl(user.avatarUrl)} alt={user.username} />
                     <AvatarFallback className="bg-theme-primary text-theme-background">
                       {user.username.substring(0, 2).toUpperCase()}
                     </AvatarFallback>
@@ -202,7 +209,7 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full mr-1">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={user.avatarUrl || undefined} alt={user.username} />
+                    <AvatarImage src={getTimestampedUrl(user.avatarUrl)} alt={user.username} />
                     <AvatarFallback className="bg-theme-primary text-theme-background">
                       {user.username.substring(0, 2).toUpperCase()}
                     </AvatarFallback>
