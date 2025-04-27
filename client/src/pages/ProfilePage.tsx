@@ -78,7 +78,6 @@ type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 export default function ProfilePage() {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [avatarKey, setAvatarKey] = useState(0); // Force avatar refresh
   const [activeTab, setActiveTab] = useState("reviews");
   const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
   const [reviewContent, setReviewContent] = useState("");
@@ -89,9 +88,14 @@ export default function ProfilePage() {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  // Refresh function to update avatars
-  const refreshAvatars = () => {
-    setAvatarKey(prev => prev + 1);
+  // Force a complete refetch on profile picture changes
+  const [updateCounter, setUpdateCounter] = useState(0);
+  const forceReload = () => {
+    setUpdateCounter(prev => prev + 1);
+    // Force cache invalidation
+    queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    // Force a hard refetch
+    window.location.reload();
   };
 
   // Fetch user reviews
@@ -194,16 +198,8 @@ export default function ProfilePage() {
       // Close the modal
       setShowProfileImageModal(false);
       
-      // Force update the user data in the cache to reflect the removed avatar
-      if (response && response.user) {
-        queryClient.setQueryData(["/api/user"], response.user);
-      } 
-      
-      // Always invalidate the cache to ensure all components reflect the change
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      
-      // Force avatar refresh
-      refreshAvatars();
+      // Hard reload the page to ensure all components reflect the change
+      forceReload();
     },
     onError: (error) => {
       toast({
@@ -231,16 +227,8 @@ export default function ProfilePage() {
       setAvatarUrl("");
       setImagePreview(null);
       
-      // Force update the user data in the cache to reflect the new avatar
-      if (response && response.user) {
-        queryClient.setQueryData(["/api/user"], response.user);
-      } 
-      
-      // Always invalidate the cache to ensure all components reflect the change
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      
-      // Force avatar refresh
-      refreshAvatars();
+      // Hard reload the page to ensure all components reflect the change
+      forceReload();
     },
     onError: (error) => {
       toast({
@@ -281,16 +269,8 @@ export default function ProfilePage() {
       setImagePreview(null);
       setIsUploading(false);
       
-      // Force update the user data in the cache to reflect the new avatar
-      if (response && response.user) {
-        queryClient.setQueryData(["/api/user"], response.user);
-      }
-      
-      // Always invalidate the cache to ensure all components reflect the change
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      
-      // Force avatar refresh
-      refreshAvatars();
+      // Hard reload the page to ensure all components reflect the change
+      forceReload();
     },
     onError: (error) => {
       toast({
