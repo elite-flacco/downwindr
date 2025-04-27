@@ -214,11 +214,18 @@ export default function ProfilePage() {
         title: "Profile picture updated",
         description: "Your profile picture has been successfully updated.",
       });
+      
+      // Reset state
       setShowProfileImageModal(false);
       setAvatarUrl("");
       setImagePreview(null);
-      // Refresh user data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
+      // Force refresh user data
+      queryClient.removeQueries({ queryKey: ["/api/user"] });
+      queryClient.refetchQueries({ queryKey: ["/api/user"] });
+      
+      // Reload the window to ensure fresh state and clear any cached images
+      window.location.reload();
     },
     onError: (error) => {
       toast({
@@ -248,15 +255,23 @@ export default function ProfilePage() {
       
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       toast({
         title: "Profile picture uploaded",
         description: "Your profile picture has been successfully uploaded.",
       });
+      
+      // Close modal and reset state
       setShowProfileImageModal(false);
       setImagePreview(null);
-      // Refresh user data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      setIsUploading(false);
+      
+      // Force refresh all user data
+      queryClient.removeQueries({ queryKey: ["/api/user"] });
+      queryClient.refetchQueries({ queryKey: ["/api/user"] });
+      
+      // Reload the window to ensure fresh state and clear image caches
+      window.location.reload();
     },
     onError: (error) => {
       toast({
