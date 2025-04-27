@@ -478,6 +478,19 @@ export class DatabaseStorage implements IStorage {
     const [newUser] = await db.insert(users).values(user).returning();
     return newUser;
   }
+  
+  async updateUser(id: number, userData: Partial<User>): Promise<User | undefined> {
+    const [updatedUser] = await db
+      .update(users)
+      .set({
+        ...userData,
+        updatedAt: new Date()
+      })
+      .where(eq(users.id, id))
+      .returning();
+    
+    return updatedUser;
+  }
 
   // Review operations
   async getReviewsForSpot(spotId: number): Promise<ReviewWithUser[]> {
