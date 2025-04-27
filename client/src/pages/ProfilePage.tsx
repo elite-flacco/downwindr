@@ -179,9 +179,20 @@ export default function ProfilePage() {
         title: "Profile picture removed",
         description: "Your profile picture has been successfully removed.",
       });
+      
+      // Clear local image preview and avatar url
+      setImagePreview(null);
+      setAvatarUrl('');
+      
+      // Close the modal
       setShowProfileImageModal(false);
-      // Refresh user data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
+      // Force refresh user data by removing the entry completely and fetching fresh data
+      queryClient.removeQueries({ queryKey: ["/api/user"] });
+      queryClient.refetchQueries({ queryKey: ["/api/user"] });
+      
+      // Refresh the entire window to guarantee a fresh state
+      window.location.reload();
     },
     onError: (error) => {
       toast({
