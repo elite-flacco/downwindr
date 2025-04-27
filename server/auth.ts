@@ -97,7 +97,15 @@ export function setupAuth(app: Express) {
         if (err) return next(err);
         // Return user data without sensitive information
         const { password, ...userWithoutPassword } = user;
-        res.status(201).json(userWithoutPassword);
+        
+        // Ensure consistent property naming, converting snake_case to camelCase
+        const transformedUser = {
+          ...userWithoutPassword,
+          // Ensure the avatar_url property is properly mapped to avatarUrl
+          avatarUrl: (user as any).avatar_url || userWithoutPassword.avatarUrl
+        };
+        
+        res.status(201).json(transformedUser);
       });
     } catch (error) {
       next(error);
@@ -114,7 +122,15 @@ export function setupAuth(app: Express) {
         if (loginErr) return next(loginErr);
         // Return user data without sensitive information
         const { password, ...userWithoutPassword } = user;
-        return res.json(userWithoutPassword);
+        
+        // Ensure consistent property naming, converting snake_case to camelCase
+        const transformedUser = {
+          ...userWithoutPassword,
+          // Ensure the avatar_url property is properly mapped to avatarUrl
+          avatarUrl: (user as any).avatar_url || userWithoutPassword.avatarUrl
+        };
+        
+        return res.json(transformedUser);
       });
     })(req, res, next);
   });
@@ -132,8 +148,18 @@ export function setupAuth(app: Express) {
     if (!req.isAuthenticated()) {
       return res.status(401).json({ error: "Not authenticated" });
     }
+    
     // Return user data without sensitive information
     const { password, ...userWithoutPassword } = req.user as SchemaUser;
-    res.json(userWithoutPassword);
+    
+    // Convert snake_case to camelCase for client consumption
+    // This ensures avatar_url is returned as avatarUrl to match the frontend expectations
+    const transformedUser = { 
+      ...userWithoutPassword,
+      // Ensure the avatar_url property is properly mapped to avatarUrl
+      avatarUrl: (req.user as any).avatar_url || userWithoutPassword.avatarUrl
+    };
+    
+    res.json(transformedUser);
   });
 }
