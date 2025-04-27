@@ -88,7 +88,8 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   // Calculate match percentage display (more realistic range)
   const getMatchPercent = (score: number) => {
     // Maximum theoretical score from server-side algorithm:
-    // Wind speed: 20 (optimal), Wind quality: 15 (excellent), Temperature: 15 (perfect match)
+    // Wind speed: 20 (optimal), Wind quality: 15 (excellent)
+    // Air temp: 8 (perfect match), Water temp: 7 (perfect match)
     // Difficulty: 10, Budget: 10 (exact match), Region: 10, Kite Schools: 7
     // Waves: 7, Food: 5, Culture: 5
     // Total max possible: 94
