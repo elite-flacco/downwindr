@@ -56,6 +56,7 @@ import {
   X,
   Upload,
   Camera,
+  UploadCloud,
 } from "lucide-react";
 
 // Password change form schema
