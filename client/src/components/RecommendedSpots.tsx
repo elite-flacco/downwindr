@@ -85,18 +85,10 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
     }
   };
 
-  // Calculate match percentage display (direct percentage)
+  // Direct pass-through of the raw score as the percentage
   const getMatchPercent = (score: number) => {
-    // Maximum theoretical score from server-side algorithm is now exactly 100 points
-    // This means the score directly represents the percentage match
-    
-    // Simple direct percentage calculation
-    let percentage = Math.round(score);
-    
-    // Only minimum threshold to ensure recommended spots don't show too low
-    if (percentage < 40 && percentage > 0) percentage = 40;
-    
-    return percentage;
+    // No adjustments at all - show the exact score as provided by the server
+    return score;
   };
 
   // Progress bar color based on match score

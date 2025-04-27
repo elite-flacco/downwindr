@@ -428,23 +428,12 @@ export class DatabaseStorage implements IStorage {
     // Sort by match score descending
     results.sort((a, b) => b.matchScore - a.matchScore);
 
-    // Normalize scores to a 100-point scale
-    results.forEach(spot => {
-      // Original score range is approximately 0-104, normalize to 0-100
-      // Wind: 35 → 34, Air temp: 8 → 8, Water temp: 7 → 7, Difficulty: 10 → 10, 
-      // Budget: 10 → 10, Region: 10 → 10, Schools: 7 → 7, Waves: 7 → 7, 
-      // Food: 5 → 4, Culture: 5 → 3
-      // Minor adjustments to bring the total to exactly 100
-      const originalScore = spot.matchScore;
-      
-      // Simple direct percentage conversion
-      spot.matchScore = Math.round((originalScore / 104) * 100);
-    });
-    
+    // No score normalization - we want the raw scores exactly as calculated
     // Log scores for debugging
     console.log("Recommended spots with scores:");
     results.forEach(spot => {
-      console.log(`${spot.name}: Score ${spot.matchScore}%`);
+      // Log the pure scores without any conversion - these will match exactly what the user sees
+      console.log(`${spot.name}: Score ${spot.matchScore} (raw score)`);
     });
     
     // Return top matches (limited to 8)
