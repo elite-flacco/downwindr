@@ -86,9 +86,12 @@ export default function ProfilePage() {
     data: userReviews = [],
     isLoading: reviewsLoading,
     error: reviewsError,
+    refetch: refetchReviews,
   } = useQuery<any[]>({
     queryKey: ["/api/user/reviews"],
     enabled: !!user,
+    refetchOnWindowFocus: true,
+    staleTime: 0, // Always refetch when requested
   });
 
   // Password change form
@@ -133,14 +136,21 @@ export default function ProfilePage() {
       const res = await apiRequest("PUT", `/api/reviews/${id}`, { content });
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (updatedReview) => {
       toast({
         title: "Review updated",
         description: "Your review has been successfully updated.",
       });
       setEditingReviewId(null);
-      // Refetch reviews
+      
+      // Explicitly refetch reviews to ensure data is fresh
       queryClient.invalidateQueries({ queryKey: ["/api/user/reviews"] });
+      
+      // Use the refetch function from useQuery to immediately refresh the data
+      refetchReviews();
+      
+      // Update spot details reviews as well
+      queryClient.invalidateQueries({ queryKey: [`/api/spots/${updatedReview.spotId}/details`] });
     },
     onError: (error) => {
       toast({
@@ -318,11 +328,45 @@ export default function ProfilePage() {
             {/* Reviews Tab */}
             <TabsContent value="reviews" className="mt-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Your Reviews</CardTitle>
-                  <CardDescription>
-                    Reviews you've written for kitesurfing spots
-                  </CardDescription>
+                <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <CardTitle>Your Reviews</CardTitle>
+                    <CardDescription>
+                      Reviews you've written for kitesurfing spots
+                    </CardDescription>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="mt-2 sm:mt-0" 
+                    onClick={() => refetchReviews()}
+                    disabled={reviewsLoading}
+                  >
+                    {reviewsLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <span className="flex items-center">
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="14" 
+                          height="14" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          className="mr-1.5"
+                        >
+                          <path d="M21 2v6h-6"></path>
+                          <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+                          <path d="M3 12a9 9 0 0 0 6.7 15L13 21"></path>
+                          <path d="M13 21h6v-6"></path>
+                        </svg>
+                        Refresh
+                      </span>
+                    )}
+                  </Button>
                 </CardHeader>
                 <CardContent>
                   {reviewsLoading ? (
