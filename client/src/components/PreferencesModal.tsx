@@ -15,7 +15,8 @@ import {
   Utensils,
   Home,
   Globe,
-  SendHorizonal
+  SendHorizonal,
+  Droplet
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -32,6 +33,7 @@ interface UserPreferences {
   windSpeedMin: number;
   windSpeedMax: number;
   temperature: "cold" | "moderate" | "warm" | "hot";
+  waterTemperature: "cold" | "moderate" | "warm" | "hot";
   difficulty: string;
   budget: "budget" | "moderate" | "luxury";
   preferredRegion: string;
@@ -56,7 +58,8 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
   const [preferences, setPreferences] = useState<UserPreferences>({
     windSpeedMin: 15,
     windSpeedMax: 25,
-    temperature: "moderate",
+    temperature: "moderate", // air temperature
+    waterTemperature: "moderate", // water temperature
     difficulty: "all",
     budget: "moderate",
     preferredRegion: "any",
@@ -208,11 +211,11 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                   </div>
                 </div>
 
-                {/* Temperature Preference */}
+                {/* Air Temperature Preference */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-slate-800 font-medium">
                     <ThermometerSun className="h-5 w-5" />
-                    <p>Temperature Preference</p>
+                    <p>Air Temperature Preference</p>
                   </div>
                   <div className="px-2">
                     <Select 
@@ -220,7 +223,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                       onValueChange={(value: "cold" | "moderate" | "warm" | "hot") => handleChange("temperature", value)}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select temperature range" />
+                        <SelectValue placeholder="Select air temperature range" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
@@ -229,6 +232,32 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                               {temp.label}
                             </SelectItem>
                           ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                {/* Water Temperature Preference */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-slate-800 font-medium">
+                    <Droplet className="h-5 w-5" />
+                    <p>Water Temperature Preference</p>
+                  </div>
+                  <div className="px-2">
+                    <Select 
+                      value={preferences.waterTemperature} 
+                      onValueChange={(value: "cold" | "moderate" | "warm" | "hot") => handleChange("waterTemperature", value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select water temperature range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="cold">Cold (&lt; 20°C)</SelectItem>
+                          <SelectItem value="moderate">Moderate (20-25°C)</SelectItem>
+                          <SelectItem value="warm">Warm (25-28°C)</SelectItem>
+                          <SelectItem value="hot">Hot (&gt; 28°C)</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

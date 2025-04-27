@@ -16,7 +16,8 @@ import { pool } from "./db";
 export interface UserPreferences {
   windSpeedMin: number;
   windSpeedMax: number;
-  temperature: "cold" | "moderate" | "warm" | "hot";
+  temperature: "cold" | "moderate" | "warm" | "hot"; // air temperature
+  waterTemperature: "cold" | "moderate" | "warm" | "hot"; // water temperature
   difficulty: string;
   budget: "budget" | "moderate" | "luxury";
   preferredRegion: string;

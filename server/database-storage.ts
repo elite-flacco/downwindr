@@ -209,45 +209,88 @@ export class DatabaseStorage implements IStorage {
         reasons.push(`Wind quality is below your preferences`);
       }
 
-      // Match temperature preferences with more granularity
+      // Match air temperature preferences with more granularity
       if (windCondition.airTemp) {
         let tempMatchScore = 0;
         let tempReason = "";
         
         // Define ideal temperature ranges for each preference
-        const tempRanges = {
+        const airTempRanges = {
           cold: { min: 5, ideal: 15, max: 20 },
           moderate: { min: 18, ideal: 22, max: 25 },
           warm: { min: 23, ideal: 27, max: 30 },
           hot: { min: 28, ideal: 33, max: 40 }
         };
         
-        const preferredRange = tempRanges[preferences.temperature];
+        const preferredAirRange = airTempRanges[preferences.temperature];
         
-        if (preferredRange) {
+        if (preferredAirRange) {
           const airTemp = windCondition.airTemp;
           
           // Perfect match - within ideal range +/- 2 degrees
-          if (Math.abs(airTemp - preferredRange.ideal) <= 2) {
-            tempMatchScore = 15;
+          if (Math.abs(airTemp - preferredAirRange.ideal) <= 2) {
+            tempMatchScore = 8; // Reduced from 15 to account for water temp
             tempReason = `${airTemp}°C air temperature is ideal for your '${preferences.temperature}' preference`;
           } 
           // Good match - within the range
-          else if (airTemp >= preferredRange.min && airTemp <= preferredRange.max) {
-            tempMatchScore = 10;
+          else if (airTemp >= preferredAirRange.min && airTemp <= preferredAirRange.max) {
+            tempMatchScore = 5; // Reduced from 10 to account for water temp
             tempReason = `${airTemp}°C air temperature is good for your '${preferences.temperature}' preference`;
           }
           // Close match - within 3 degrees outside the range
           else if (
-            airTemp >= preferredRange.min - 3 && airTemp <= preferredRange.max + 3
+            airTemp >= preferredAirRange.min - 3 && airTemp <= preferredAirRange.max + 3
           ) {
-            tempMatchScore = 5;
+            tempMatchScore = 3; // Reduced from 5 to account for water temp
             tempReason = `${airTemp}°C air temperature is close to your '${preferences.temperature}' preference`;
           }
           
           if (tempMatchScore > 0) {
             score += tempMatchScore;
             reasons.push(tempReason);
+          }
+        }
+      }
+      
+      // Match water temperature preferences
+      if (windCondition.waterTemp && preferences.waterTemperature) {
+        let waterTempMatchScore = 0;
+        let waterTempReason = "";
+        
+        // Define ideal water temperature ranges for each preference
+        const waterTempRanges = {
+          cold: { min: 10, ideal: 16, max: 20 },
+          moderate: { min: 19, ideal: 22, max: 25 },
+          warm: { min: 24, ideal: 26, max: 28 },
+          hot: { min: 27, ideal: 29, max: 32 }
+        };
+        
+        const preferredWaterRange = waterTempRanges[preferences.waterTemperature];
+        
+        if (preferredWaterRange) {
+          const waterTemp = windCondition.waterTemp;
+          
+          // Perfect match - within ideal range +/- 1 degrees
+          if (Math.abs(waterTemp - preferredWaterRange.ideal) <= 1) {
+            waterTempMatchScore = 7;
+            waterTempReason = `${waterTemp}°C water temperature is ideal for your '${preferences.waterTemperature}' preference`;
+          } 
+          // Good match - within the range
+          else if (waterTemp >= preferredWaterRange.min && waterTemp <= preferredWaterRange.max) {
+            waterTempMatchScore = 5;
+            waterTempReason = `${waterTemp}°C water temperature is good for your '${preferences.waterTemperature}' preference`;
+          }
+          // Close match - within 2 degrees outside the range
+          else if (
+            waterTemp >= preferredWaterRange.min - 2 && waterTemp <= preferredWaterRange.max + 2
+          ) {
+            waterTempMatchScore = 2;
+            waterTempReason = `${waterTemp}°C water temperature is close to your '${preferences.waterTemperature}' preference`;
+          }
+          
+          if (waterTempMatchScore > 0) {
+            score += waterTempMatchScore;
+            reasons.push(waterTempReason);
           }
         }
       }
