@@ -318,52 +318,48 @@ export class MemStorage implements IStorage {
   }
 
   async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { windCondition?: { windQuality: WindQuality }})[]> {
-    const eligibleSpotIds = new Set<number>();
-    
     // Get all wind conditions for the specified month
-    const conditions = Array.from(this.windConditions.values()).filter(
+    const allMonthConditions = Array.from(this.windConditions.values()).filter(
       condition => condition.month === month
     );
     
     // Create a map of spot ID to wind condition for quick lookup
-    const spotWindConditions = new Map<number, { windQuality: WindQuality }>();
+    const allSpotWindConditions = new Map<number, { windQuality: WindQuality }>();
+    allMonthConditions.forEach(condition => {
+      allSpotWindConditions.set(condition.spotId, { 
+        windQuality: condition.windQuality as WindQuality 
+      });
+    });
     
-    // Filter by wind quality if specified
+    // Get all spots
+    const allSpots = Array.from(this.spots.values());
+    
+    // Find spots that are suitable for this month based on best months text
+    const spotsForThisMonth = allSpots.filter(spot => {
+      // For the memory storage implementation, we'll consider all spots eligible
+      // for all months to simplify testing
+      return true;
+    });
+    
+    // Attach wind condition data to all eligible spots
+    const spotsWithMonthConditions = spotsForThisMonth.map(spot => {
+      const windCondition = allSpotWindConditions.get(spot.id);
+      return {
+        ...spot,
+        windCondition
+      };
+    });
+    
+    // If wind quality filter is provided, apply it to the spots that have wind conditions
+    let filteredSpots = spotsWithMonthConditions;
     if (windQualityFilter && windQualityFilter.length > 0) {
-      // Only include spots with wind quality matching the filter
-      conditions.forEach(condition => {
-        if (windQualityFilter.includes(condition.windQuality as WindQuality)) {
-          eligibleSpotIds.add(condition.spotId);
-          spotWindConditions.set(condition.spotId, { 
-            windQuality: condition.windQuality as WindQuality 
-          });
-        }
-      });
-    } else {
-      // Default: filter for good or excellent wind conditions
-      conditions.forEach(condition => {
-        if (
-          condition.windQuality === WindQuality.Good ||
-          condition.windQuality === WindQuality.Excellent
-        ) {
-          eligibleSpotIds.add(condition.spotId);
-          spotWindConditions.set(condition.spotId, { 
-            windQuality: condition.windQuality as WindQuality 
-          });
-        }
-      });
+      filteredSpots = spotsWithMonthConditions.filter(spot => 
+        spot.windCondition && 
+        windQualityFilter.includes(spot.windCondition.windQuality)
+      );
     }
     
-    // Get the spots with matching conditions and attach wind condition data
-    return Array.from(this.spots.values())
-      .filter(spot => eligibleSpotIds.has(spot.id))
-      .map(spot => {
-        const windCondition = spotWindConditions.get(spot.id);
-        return {
-          ...spot,
-          windCondition
-        };
-      });
+    return filteredSpots;
   }
 
   async getSpotWithWindConditions(id: number): Promise<{spot: Spot, windConditions: WindCondition[]} | undefined> {
