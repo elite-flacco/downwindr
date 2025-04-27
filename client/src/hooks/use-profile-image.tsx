@@ -36,7 +36,7 @@ export function useProfileImage() {
 }
 
 // Helper function to add cache-busting to avatar URLs
-export function getTimestampedUrl(url: string | null, imageVersion: number): string | undefined {
+export function getTimestampedUrl(url: string | null, imageVersion: number = 0): string | undefined {
   if (!url) return undefined;
   return `${url}?v=${imageVersion}&t=${new Date().getTime()}`;
 }

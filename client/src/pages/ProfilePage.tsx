@@ -286,6 +286,9 @@ export default function ProfilePage() {
       
       // Always invalidate the cache to ensure all components reflect the change
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
+      // Refresh profile image in all components using the context
+      refreshImage();
     },
     onError: (error) => {
       toast({
@@ -415,7 +418,7 @@ export default function ProfilePage() {
                 <div className="relative group">
                   <Avatar className="h-24 w-24 mb-3">
                     <AvatarImage
-                      src={getTimestampedUrl(user.avatarUrl)}
+                      src={getTimestampedUrl(user.avatarUrl, imageVersion)}
                       alt={user.username}
                     />
                     <AvatarFallback className="text-lg bg-primary text-primary-foreground">
@@ -771,7 +774,7 @@ export default function ProfilePage() {
             <div className="flex items-center justify-center">
               <Avatar className="h-32 w-32">
                 <AvatarImage 
-                  src={imagePreview || avatarUrl || getTimestampedUrl(user.avatarUrl)} 
+                  src={imagePreview || avatarUrl || getTimestampedUrl(user.avatarUrl, imageVersion)} 
                   alt={user.username}
                 />
                 <AvatarFallback className="text-2xl">
