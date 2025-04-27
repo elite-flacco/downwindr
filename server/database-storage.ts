@@ -496,9 +496,11 @@ export class DatabaseStorage implements IStorage {
       
       // Make the filter more lenient for testing
       return monthRanges.some(range => {
-        // Handle ranges like "Apr-Oct"
-        if (range.includes("-")) {
-          const [startMonth, endMonth] = range.split("-").map(m => m.trim());
+        // Handle ranges with any type of dash or hyphen (including en dash, em dash, etc.)
+        const normalizedRange = range.replace(/[‐‑‒–—―]/g, "-"); // Replace all types of dashes with standard hyphen
+        
+        if (normalizedRange.includes("-")) {
+          const [startMonth, endMonth] = normalizedRange.split("-").map(m => m.trim());
           
           // Convert month abbreviations to month numbers (1-12)
           const startIdx = MonthNames.findIndex(m => m.substring(0, 3).toLowerCase() === startMonth.toLowerCase());
@@ -515,7 +517,7 @@ export class DatabaseStorage implements IStorage {
         }
         // Handle single months - more lenient matching (includes instead of exact match)
         else {
-          return range.toLowerCase().includes(currentMonthAbbr.toLowerCase());
+          return normalizedRange.toLowerCase().includes(currentMonthAbbr.toLowerCase());
         }
         return false;
       });
