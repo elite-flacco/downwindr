@@ -6,6 +6,7 @@ import Spots from "@/pages/Spots";
 import AuthPage from "@/pages/auth-page";
 import Community from "@/pages/Community";
 import Learn from "@/pages/Learn";
+import ProfilePage from "@/pages/ProfilePage";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
@@ -25,6 +26,7 @@ function AppContent() {
         <Route path="/spots" component={Spots} />
         <Route path="/auth" component={AuthPage} />
         <ProtectedRoute path="/community" component={Community} />
+        <ProtectedRoute path="/profile" component={ProfilePage} />
         <Route path="/learn" component={Learn} />
         <Route path="/about" component={NotFound} />
         <Route component={NotFound} />

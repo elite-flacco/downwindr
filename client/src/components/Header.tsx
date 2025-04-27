@@ -329,6 +329,23 @@ export default function Header() {
                   🎓 Skill Up
                 </motion.div>
               </Link>
+              
+              {user && (
+                <Link href="/profile">
+                  <motion.div 
+                    className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
+                      location === "/profile" 
+                        ? "bg-theme-secondary text-white shadow-md" 
+                        : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
+                    }`}
+                    whileHover={{ x: 5, scale: 1.02 }}
+                    whileTap={{ x: 0, scale: 0.98 }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    👤 Your Profile
+                  </motion.div>
+                </Link>
+              )}
             </nav>
           </motion.div>
         )}
