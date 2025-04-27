@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Wind, Menu, X, LogIn, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/use-auth';
+import { useProfileImage, getTimestampedUrl } from '@/hooks/use-profile-image';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { 
@@ -14,18 +15,12 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 
-// Helper function to handle profile image cache busting
-const getTimestampedUrl = (url: string | null): string | undefined => {
-  if (!url) return undefined;
-  const timestamp = new Date().getTime();
-  return `${url}?t=${timestamp}`;
-};
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
   const { user, isLoading, logoutMutation } = useAuth();
+  const { imageVersion } = useProfileImage();
   
   // Handle logout click
   const handleLogout = (e: React.MouseEvent) => {
