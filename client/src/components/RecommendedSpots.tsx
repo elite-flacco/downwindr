@@ -87,9 +87,10 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
 
   // Calculate match percentage display (80-100%)
   const getMatchPercent = (score: number) => {
-    // Score will be between 0-1, convert to 80-100% range for better UX
-    // This makes all recommendations seem good but with meaningful differences
-    return Math.round(80 + score * 20);
+    // Normalize the score to be between 0 and 1
+    const normalizedScore = Math.min(Math.max(score, 0), 1);
+    // Convert to 80-100% range
+    return Math.round(80 + normalizedScore * 20);
   };
 
   // Progress bar color based on match score
