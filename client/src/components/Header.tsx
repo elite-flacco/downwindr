@@ -146,8 +146,9 @@ export default function Header() {
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
                     <AvatarImage 
-                      src={getTimestampedUrl(user.avatarUrl, imageVersion)} 
-                      alt={user.username} 
+                      src={getTimestampedUrl(user.avatarUrl)} 
+                      alt={user.username}
+                      key={`avatar-header-${imageVersion}`} // Force re-render when image version changes
                     />
                     <AvatarFallback className="bg-theme-primary text-theme-background">
                       {user.username.substring(0, 2).toUpperCase()}
@@ -208,8 +209,9 @@ export default function Header() {
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full mr-1">
                   <Avatar className="h-8 w-8">
                     <AvatarImage 
-                      src={getTimestampedUrl(user.avatarUrl, imageVersion)} 
-                      alt={user.username} 
+                      src={getTimestampedUrl(user.avatarUrl)} 
+                      alt={user.username}
+                      key={`avatar-mobile-${imageVersion}`} // Force re-render when image version changes
                     />
                     <AvatarFallback className="bg-theme-primary text-theme-background">
                       {user.username.substring(0, 2).toUpperCase()}

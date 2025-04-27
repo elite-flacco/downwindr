@@ -418,8 +418,9 @@ export default function ProfilePage() {
                 <div className="relative group">
                   <Avatar className="h-24 w-24 mb-3">
                     <AvatarImage
-                      src={getTimestampedUrl(user.avatarUrl, imageVersion)}
+                      src={getTimestampedUrl(user.avatarUrl)}
                       alt={user.username}
+                      key={`profile-${imageVersion}`} // Force re-render when version changes
                     />
                     <AvatarFallback className="text-lg bg-primary text-primary-foreground">
                       {user.username.substring(0, 2).toUpperCase()}
@@ -693,7 +694,7 @@ export default function ProfilePage() {
                             <FormControl>
                               <Input
                                 type="password"
-                                placeholder="Confirm new password"
+                                placeholder="Confirm your new password"
                                 {...field}
                               />
                             </FormControl>
@@ -704,7 +705,7 @@ export default function ProfilePage() {
 
                       <Button
                         type="submit"
-                        className="mt-4"
+                        className="mt-2"
                         disabled={passwordMutation.isPending}
                       >
                         {passwordMutation.isPending ? (
@@ -724,49 +725,32 @@ export default function ProfilePage() {
           </Tabs>
         </div>
       </div>
-      
-      {/* Profile Picture Edit Dialog */}
-      <Dialog 
-        open={showProfileImageModal} 
-        onOpenChange={(open) => {
-          setShowProfileImageModal(open);
-          if (!open) resetProfilePictureModal();
-        }}
-      >
-        <DialogContent className="sm:max-w-md">
+
+      {/* Profile Picture Modal */}
+      <Dialog open={showProfileImageModal} onOpenChange={setShowProfileImageModal}>
+        <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Update Profile Picture</DialogTitle>
             <DialogDescription>
-              Choose an image for your profile
+              Choose a new profile picture or remove your current one.
             </DialogDescription>
           </DialogHeader>
           
-          {/* Upload method tabs */}
-          <div className="border-b mb-4">
-            <div className="flex">
-              <button
-                type="button"
-                className={`px-4 py-2 text-sm font-medium border-b-2 ${
-                  uploadMethod === 'url'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
-                }`}
-                onClick={() => setUploadMethod('url')}
-              >
-                Image URL
-              </button>
-              <button
-                type="button"
-                className={`px-4 py-2 text-sm font-medium border-b-2 ${
-                  uploadMethod === 'file'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
-                }`}
-                onClick={() => setUploadMethod('file')}
-              >
-                Upload File
-              </button>
-            </div>
+          <div className="flex justify-center space-x-3 pt-2">
+            <Button 
+              variant={uploadMethod === 'url' ? 'default' : 'outline'} 
+              className="flex-1"
+              onClick={() => setUploadMethod('url')}
+            >
+              URL
+            </Button>
+            <Button 
+              variant={uploadMethod === 'file' ? 'default' : 'outline'} 
+              className="flex-1"
+              onClick={() => setUploadMethod('file')}
+            >
+              Upload
+            </Button>
           </div>
           
           <div className="space-y-4 py-4">
@@ -774,8 +758,9 @@ export default function ProfilePage() {
             <div className="flex items-center justify-center">
               <Avatar className="h-32 w-32">
                 <AvatarImage 
-                  src={imagePreview || avatarUrl || getTimestampedUrl(user.avatarUrl, imageVersion)} 
+                  src={imagePreview || avatarUrl || getTimestampedUrl(user.avatarUrl)} 
                   alt={user.username}
+                  key={`preview-${imageVersion}`} // Force re-render when version changes
                 />
                 <AvatarFallback className="text-2xl">
                   {user.username.substring(0, 2).toUpperCase()}
