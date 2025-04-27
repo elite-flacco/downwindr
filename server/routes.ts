@@ -513,21 +513,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid avatar URL" });
       }
       
-      // Get current user
-      const user = await storage.getUserById(userId);
-      if (!user) {
+      // Update user's avatar URL in the database
+      const updatedUser = await storage.updateUser(userId, { avatarUrl });
+      if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
       }
-      
-      // Update user's avatar URL
-      user.avatarUrl = avatarUrl;
       
       // Update session user data
       (req.user as Express.User).avatarUrl = avatarUrl;
       
       res.json({ 
         message: "Profile picture updated successfully",
-        user: req.user
+        user: updatedUser
       });
     } catch (error) {
       console.error("Error updating profile picture:", error);
@@ -556,21 +553,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
           return res.status(500).json({ message: "Error processing uploaded file" });
         }
         
-        // Get current user
-        const user = await storage.getUserById(userId);
-        if (!user) {
+        // Update user in the database
+        const updatedUser = await storage.updateUser(userId, { avatarUrl: fileUrl });
+        if (!updatedUser) {
           return res.status(404).json({ message: "User not found" });
         }
-        
-        // Update user's avatar URL with the processed image path
-        user.avatarUrl = fileUrl;
         
         // Update session user data
         (req.user as Express.User).avatarUrl = fileUrl;
         
         res.json({ 
           message: "Profile picture uploaded successfully",
-          user: req.user,
+          user: updatedUser,
           avatarUrl: fileUrl
         });
       } catch (error) {

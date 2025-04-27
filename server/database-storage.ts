@@ -480,10 +480,14 @@ export class DatabaseStorage implements IStorage {
   }
   
   async updateUser(id: number, userData: Partial<User>): Promise<User | undefined> {
+    // Create a new object without the updatedAt property to avoid SQL errors
+    const { updatedAt, ...userDataWithoutTimestamp } = userData;
+    
     const [updatedUser] = await db
       .update(users)
       .set({
-        ...userData,
+        ...userDataWithoutTimestamp,
+        // Set updatedAt explicitly as a new Date
         updatedAt: new Date()
       })
       .where(eq(users.id, id))
