@@ -317,7 +317,7 @@ export class MemStorage implements IStorage {
     return this.spots.get(id);
   }
 
-  async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]> {
+  async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { windCondition?: { windQuality: WindQuality }})[]> {
     const eligibleSpotIds = new Set<number>();
     
     // Get all wind conditions for the specified month
@@ -325,12 +325,18 @@ export class MemStorage implements IStorage {
       condition => condition.month === month
     );
     
+    // Create a map of spot ID to wind condition for quick lookup
+    const spotWindConditions = new Map<number, { windQuality: WindQuality }>();
+    
     // Filter by wind quality if specified
     if (windQualityFilter && windQualityFilter.length > 0) {
       // Only include spots with wind quality matching the filter
       conditions.forEach(condition => {
         if (windQualityFilter.includes(condition.windQuality as WindQuality)) {
           eligibleSpotIds.add(condition.spotId);
+          spotWindConditions.set(condition.spotId, { 
+            windQuality: condition.windQuality as WindQuality 
+          });
         }
       });
     } else {
@@ -341,14 +347,23 @@ export class MemStorage implements IStorage {
           condition.windQuality === WindQuality.Excellent
         ) {
           eligibleSpotIds.add(condition.spotId);
+          spotWindConditions.set(condition.spotId, { 
+            windQuality: condition.windQuality as WindQuality 
+          });
         }
       });
     }
     
-    // Get the spots with matching conditions
-    return Array.from(this.spots.values()).filter(
-      spot => eligibleSpotIds.has(spot.id)
-    );
+    // Get the spots with matching conditions and attach wind condition data
+    return Array.from(this.spots.values())
+      .filter(spot => eligibleSpotIds.has(spot.id))
+      .map(spot => {
+        const windCondition = spotWindConditions.get(spot.id);
+        return {
+          ...spot,
+          windCondition
+        };
+      });
   }
 
   async getSpotWithWindConditions(id: number): Promise<{spot: Spot, windConditions: WindCondition[]} | undefined> {
