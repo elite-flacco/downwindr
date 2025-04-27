@@ -450,7 +450,7 @@ export class DatabaseStorage implements IStorage {
     return spot;
   }
 
-  async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]> {
+  async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { windCondition?: { windQuality: WindQuality }})[]> {
     console.log(`Getting spots for month: ${month}, filter: ${windQualityFilter ? windQualityFilter.join(',') : 'none'}`);
     
     // First, get all spots to ensure we don't lose any due to our filtering
@@ -481,6 +481,14 @@ export class DatabaseStorage implements IStorage {
     // Get unique spot IDs from matching conditions
     const spotIds = new Set(matchingConditions.map(condition => condition.spotId));
     console.log(`Found ${spotIds.size} distinct spots with matching conditions`);
+    
+    // Create a map of spot ID to wind condition for quick lookup
+    const spotWindConditions = new Map<number, { windQuality: WindQuality }>();
+    matchingConditions.forEach(condition => {
+      spotWindConditions.set(condition.spotId, { 
+        windQuality: condition.windQuality as WindQuality 
+      });
+    });
     
     // Get the full spot info for these IDs
     const spotsWithConditions = allSpots.filter(spot => spotIds.has(spot.id));
@@ -525,7 +533,16 @@ export class DatabaseStorage implements IStorage {
     
     console.log(`After filtering by best months: ${filteredByBestMonths.length} spots`);
     
-    return filteredByBestMonths;
+    // Attach wind condition data to each spot
+    const spotsWithMonthConditions = filteredByBestMonths.map(spot => {
+      const windCondition = spotWindConditions.get(spot.id);
+      return {
+        ...spot,
+        windCondition
+      };
+    });
+    
+    return spotsWithMonthConditions;
   }
 
   async getSpotWithWindConditions(

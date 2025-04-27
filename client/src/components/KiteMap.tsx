@@ -20,6 +20,12 @@ interface KiteMapProps {
   isLoading: boolean;
 }
 
+interface SpotWithWindCondition extends Spot {
+  windCondition?: {
+    windQuality: WindQuality;
+  };
+}
+
 export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps) {
   // State for the map
   const [viewState, setViewState] = useState({
@@ -32,7 +38,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
   
   // State for popup
   const [popupInfo, setPopupInfo] = useState<{
-    spot: Spot;
+    spot: SpotWithWindCondition;
     quality: WindQuality;
   } | null>(null);
   
@@ -70,29 +76,54 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
     }
   }, [spots, isLoading]);
   
-  // Generate a "month quality" for each spot based on current month
-  const getSpotQuality = (spot: Spot): WindQuality => {
+  // Get the spot quality from the wind condition data if available,
+  // otherwise fall back to a calculated value based on best months
+  const getSpotQuality = (spot: SpotWithWindCondition): WindQuality => {
+    // If the spot has a wind condition for the current month, use that quality
+    if (spot.windCondition && spot.windCondition.windQuality) {
+      return spot.windCondition.windQuality as WindQuality;
+    }
+    
+    // Otherwise, fall back to a calculation based on best months
     const currentMonth = new Date().getMonth() + 1; // 1-12
     const currentMonthName = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date());
     
-    // Check if best months text includes the current month name
-    if (spot.bestMonths && spot.bestMonths.includes(currentMonthName)) {
-      return WindQuality.Excellent;
-    }
-    
-    // For simplicity in this demo, determine quality based on current selection
-    const monthRange = spot.bestMonths?.split('-') || [];
-    if (monthRange.length >= 2) {
-      // If we're within 1 month of the range
-      if (spot.bestMonths && (
-          spot.bestMonths.includes(currentMonthName) || 
-          spot.bestMonths.includes(new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(new Date().setMonth(new Date().getMonth() - 1))))
-      )) {
-        return WindQuality.Good;
+    if (spot.bestMonths) {
+      // Normalize the dash character in best months to handle different dash types
+      const normalizedBestMonths = spot.bestMonths.replace(/[‐‑‒–—―]/g, "-");
+      
+      // Check if best months text includes the current month name
+      if (normalizedBestMonths.includes(currentMonthName)) {
+        return WindQuality.Excellent;
+      }
+      
+      // Check for month ranges
+      const monthRanges = normalizedBestMonths.split(",").map(range => range.trim());
+      for (const range of monthRanges) {
+        if (range.includes("-")) {
+          const [startMonth, endMonth] = range.split("-").map(m => m.trim());
+          
+          // Convert month abbreviations to month numbers (1-12)
+          const startIdx = new Date(`${startMonth} 1, 2000`).getMonth();
+          const endIdx = new Date(`${endMonth} 1, 2000`).getMonth();
+          
+          if (startIdx !== -1 && endIdx !== -1) {
+            // Handle wrapping around the year (e.g., "Nov-Feb")
+            if (startIdx > endIdx) {
+              if (currentMonth - 1 >= startIdx || currentMonth - 1 <= endIdx) {
+                return WindQuality.Good;
+              }
+            } else {
+              if (currentMonth - 1 >= startIdx && currentMonth - 1 <= endIdx) {
+                return WindQuality.Good;
+              }
+            }
+          }
+        }
       }
     }
     
-    // For demo purposes, give coastal spots better quality
+    // For any spots with beach or coastal tags, give them moderate rating
     if (spot.tags && (
         spot.tags.includes('beach') || 
         spot.tags.includes('coastal') ||
@@ -102,7 +133,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
       return WindQuality.Moderate;
     }
     
-    // Otherwise it's poor for this demo
+    // Otherwise consider it poor
     return WindQuality.Poor;
   };
 

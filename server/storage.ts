@@ -41,7 +41,7 @@ export interface IStorage {
   // Spot operations
   getAllSpots(): Promise<Spot[]>;
   getSpotById(id: number): Promise<Spot | undefined>;
-  getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<Spot[]>;
+  getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { windCondition?: { windQuality: WindQuality }})[]>;
   getSpotWithWindConditions(id: number): Promise<{spot: Spot, windConditions: WindCondition[]} | undefined>;
   searchSpots(query: string): Promise<Spot[]>;
   createSpot(spot: InsertSpot): Promise<Spot>;
