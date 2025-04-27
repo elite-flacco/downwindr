@@ -167,6 +167,30 @@ export default function ProfilePage() {
     },
   });
   
+  // Profile picture remove mutation
+  const removeProfilePictureMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("DELETE", "/api/user/profile-picture");
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Profile picture removed",
+        description: "Your profile picture has been successfully removed.",
+      });
+      setShowProfileImageModal(false);
+      // Refresh user data
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to remove profile picture. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   // Profile picture update mutation (URL based)
   const updateProfilePictureMutation = useMutation({
     mutationFn: async (url: string) => {
@@ -183,6 +207,13 @@ export default function ProfilePage() {
       setImagePreview(null);
       // Refresh user data
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update profile picture. Please try again.",
+        variant: "destructive",
+      });
     },
   });
   

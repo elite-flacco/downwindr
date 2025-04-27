@@ -503,6 +503,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Delete user profile picture (requires authentication)
+  app.delete("/api/user/profile-picture", isAuthenticated, async (req, res) => {
+    try {
+      const userId = (req.user as Express.User).id;
+      
+      // Set avatarUrl to null to remove profile picture
+      const updatedUser = await storage.updateUser(userId, { avatarUrl: null });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Update session user data
+      (req.user as Express.User).avatarUrl = null;
+      
+      res.json({ 
+        message: "Profile picture removed successfully",
+        user: updatedUser
+      });
+    } catch (error) {
+      console.error("Error removing profile picture:", error);
+      res.status(500).json({ message: "Error removing profile picture" });
+    }
+  });
+
   // Update user profile picture with URL (requires authentication)
   app.post("/api/user/profile-picture", isAuthenticated, async (req, res) => {
     try {
