@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
+import { useProfileImage, getTimestampedUrl } from "@/hooks/use-profile-image";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,13 +10,6 @@ import { Link } from "wouter";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
-
-// Helper function to handle profile image cache busting
-const getTimestampedUrl = (url: string | null): string | undefined => {
-  if (!url) return undefined;
-  const timestamp = new Date().getTime();
-  return `${url}?t=${timestamp}`;
-};
 import {
   Dialog,
   DialogContent,
@@ -84,6 +78,7 @@ type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 export default function ProfilePage() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { imageVersion, refreshImage } = useProfileImage();
   const [activeTab, setActiveTab] = useState("reviews");
   const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
   const [reviewContent, setReviewContent] = useState("");
@@ -202,6 +197,9 @@ export default function ProfilePage() {
       
       // Always invalidate the cache to ensure all components reflect the change
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
+      // Refresh profile image in all components using the context
+      refreshImage();
     },
     onError: (error) => {
       toast({
@@ -237,6 +235,9 @@ export default function ProfilePage() {
       
       // Always invalidate the cache to ensure all components reflect the change
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      
+      // Refresh profile image in all components using the context
+      refreshImage();
     },
     onError: (error) => {
       toast({

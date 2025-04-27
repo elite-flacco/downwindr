@@ -145,7 +145,10 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={getTimestampedUrl(user.avatarUrl)} alt={user.username} />
+                    <AvatarImage 
+                      src={getTimestampedUrl(user.avatarUrl, imageVersion)} 
+                      alt={user.username} 
+                    />
                     <AvatarFallback className="bg-theme-primary text-theme-background">
                       {user.username.substring(0, 2).toUpperCase()}
                     </AvatarFallback>
@@ -204,7 +207,10 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full mr-1">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={getTimestampedUrl(user.avatarUrl)} alt={user.username} />
+                    <AvatarImage 
+                      src={getTimestampedUrl(user.avatarUrl, imageVersion)} 
+                      alt={user.username} 
+                    />
                     <AvatarFallback className="bg-theme-primary text-theme-background">
                       {user.username.substring(0, 2).toUpperCase()}
                     </AvatarFallback>
@@ -293,7 +299,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/spots" 
-                      ? "bg-theme-secondary text-white shadow-md" 
+                      ? "bg-theme-secondary text-white shadow-md chalk-drawn wobbly-border" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -307,7 +313,7 @@ export default function Header() {
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/community" 
-                      ? "bg-theme-secondary text-white shadow-md" 
+                      ? "bg-theme-secondary text-white shadow-md chalk-drawn wobbly-border" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -319,9 +325,9 @@ export default function Header() {
               </Link>
               <Link href="/learn">
                 <motion.div 
-                  className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
+                  className={`text-sm font-medium px-4 py-3 hand-drawn transition-all duration-300 flex items-center cursor-pointer ${
                     location === "/learn" 
-                      ? "bg-theme-secondary text-white shadow-md" 
+                      ? "bg-theme-secondary text-white shadow-md hand-drawn chalk-texture chalk-drawn wobbly-border" 
                       : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
                   }`}
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -331,23 +337,6 @@ export default function Header() {
                   🎓 Skill Up
                 </motion.div>
               </Link>
-              
-              {user && (
-                <Link href="/profile">
-                  <motion.div 
-                    className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${
-                      location === "/profile" 
-                        ? "bg-theme-secondary text-white shadow-md" 
-                        : "text-theme-text hover:text-theme-primary hover:bg-theme-surface"
-                    }`}
-                    whileHover={{ x: 5, scale: 1.02 }}
-                    whileTap={{ x: 0, scale: 0.98 }}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    👤 Your Profile
-                  </motion.div>
-                </Link>
-              )}
             </nav>
           </motion.div>
         )}
