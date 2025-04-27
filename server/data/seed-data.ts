@@ -2393,136 +2393,140 @@ export const kiteSpotsData: SpotSeedData[] = [
   // 17. Porto Pollo, Sardinia
   {
     spot: {
-      name: "Porto Pollo, Sardinia",
+      name: "Porto Pollo, Italy",
       country: "Italy",
-      latitude: 41.1861,
-      longitude: 9.335,
+      latitude: 41.18444, // :contentReference[oaicite:2]{index=2}
+      longitude: 9.32417, // :contentReference[oaicite:3]{index=3}
       description:
-        "Porto Pollo, located in northern Sardinia, is one of the most popular kitesurfing destinations in Italy. With two natural bays separated by a sandy isthmus, it offers both flat water and wave conditions ideal for all skill levels.",
-      bestMonths: "May–October",
-      tempRange: "18–30°C",
-      waveSize: "Flat to 1.5m",
+        "A wind-surfing and kitesurfing mecca on Sardinia’s northern shore, Porto Pollo offers flat-water bays, strong Mistral winds, and a sheltered lagoon ideal for all levels.", // :contentReference[oaicite:4]{index=4}
+      bestMonths: "Apr–Oct",
+      tempRange: "14–28°C", // :contentReference[oaicite:5]{index=5}
+      waveSize: "Flat to Small Chop",
       difficultyLevel: "Beginner to Advanced",
-      localAttractions: "Maddalena Islands, Sardinian cuisine, mountain biking",
-      tags: ["flat water", "waves", "island vibes", "beginner friendly"],
-      windguruCode: "517",
+      localAttractions:
+        "Isola dei Gabbiani (L’Isuledda), Baia di Levante & Ponente, Palau historic center", // :contentReference[oaicite:6]{index=6}
+      tags: ["Kite Schools", "Flatwater Bays", "Mistral Winds"],
+      windguruCode: "49162", // :contentReference[oaicite:7]{index=7}
       kiteSchools: [
-        "Porto Pollo Kite Center|https://maps.google.com/?q=Porto+Pollo+Kite+Center|4.9|102",
-        "Sporting Club Sardinia|https://maps.google.com/?q=Sporting+Club+Sardinia|4.8|87",
-        "MB Pro Center|https://maps.google.com/?q=MB+Pro+Center+Porto+Pollo|4.7|66",
+        "FH Academy|https://maps.google.com/?q=FH+Academy+Porto+Pollo|5.0|165", // :contentReference[oaicite:8]{index=8}
+        "Wind Windsurf Porto Pollo|https://maps.google.com/?q=Wind+Windsurf+Porto+Pollo|3.5|58", // :contentReference[oaicite:9]{index=9}
+        "Pollo Diving ASD|https://maps.google.com/?q=Pollo+Diving+ASD|4.8|38", // :contentReference[oaicite:10]{index=10}
+        "PKS Sardegna|https://maps.google.com/?q=PKS+Sardegna|5.0|30", // :contentReference[oaicite:11]{index=11}
+        "MB Pro Center|https://maps.google.com/?q=MB+Pro+Center+Porto+Pollo|4.7|45", // :contentReference[oaicite:12]{index=12}
       ],
-      conditions: ["Thermal Winds", "Flat and Wave Areas", "Sandy Beach"],
-      accommodationOptions: ["Beach Resorts", "Camping", "Agriturismos"],
-      foodOptions: ["Sardinian Cuisine", "Seafood Trattorias", "Pizza Places"],
+      conditions: [
+        "Side-On Shore Wind",
+        "Flat Lagoon Bays",
+        "Choppy Outer Bay",
+      ],
+      accommodationOptions: [
+        "Beachfront Guesthouses",
+        "Barrabisa Villas",
+        "Palau B&Bs",
+      ],
+      foodOptions: ["Seafood Trattorie", "Beach Bars", "Italian Gelaterie"],
       culture:
-        "Mediterranean island culture with rustic charm and watersport passion",
-      averageSchoolCost: 80,
-      averageAccommodationCost: 95,
-      numberOfSchools: 3,
+        "Laid-back Sardinian fishing-village vibe with strong wind-sports heritage",
+      averageSchoolCost: 65, // USD per hour :contentReference[oaicite:13]{index=13}
+      averageAccommodationCost: 100, // USD per night (approx.)
+      numberOfSchools: 6, // all local water-sports centers
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 14,
+        windSpeed: 16,
         windQuality: WindQuality.Moderate,
-        airTemp: 12,
+        airTemp: 14,
         waterTemp: 14,
-        seasonalNotes: "Off-season with colder temps; occasional strong winds.",
+        seasonalNotes: "Cool winter Mistral winds; lagoon sessions safest.",
       },
       {
         month: 2,
-        windSpeed: 15,
-        windQuality: WindQuality.Moderate,
-        airTemp: 13,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 15,
         waterTemp: 13,
-        seasonalNotes:
-          "Some windy days for experienced riders in full wetsuits.",
+        seasonalNotes: "Building spring thermals; flat-water bays favored.",
       },
       {
         month: 3,
-        windSpeed: 17,
-        windQuality: WindQuality.Good,
-        airTemp: 16,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 17,
         waterTemp: 14,
-        seasonalNotes:
-          "Spring awakens the wind season; early birds get uncrowded conditions.",
+        seasonalNotes: "Reliable 18–22 kt winds by midday.",
       },
       {
         month: 4,
-        windSpeed: 19,
-        windQuality: WindQuality.Good,
-        airTemp: 19,
-        waterTemp: 16,
-        seasonalNotes:
-          "Consistent winds and warming temps—season starts strong.",
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 20,
+        waterTemp: 15,
+        seasonalNotes: "Start of peak season—daily 20+ kt Mistral.",
       },
       {
         month: 5,
-        windSpeed: 21,
+        windSpeed: 24,
         windQuality: WindQuality.Excellent,
-        airTemp: 23,
-        waterTemp: 18,
-        seasonalNotes: "Thermal winds kick in; ideal month to visit.",
+        airTemp: 24,
+        waterTemp: 17,
+        seasonalNotes: "Strong thermals; prime flat-water freeride.",
       },
       {
         month: 6,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 26,
-        waterTemp: 21,
-        seasonalNotes: "Summer thermal winds dominate, perfect for all levels.",
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 19,
+        seasonalNotes: "Summer breezes ease slightly; plenty of space.",
       },
       {
         month: 7,
-        windSpeed: 21,
+        windSpeed: 18,
         windQuality: WindQuality.Good,
-        airTemp: 29,
-        waterTemp: 23,
-        seasonalNotes:
-          "Crowds increase, but thermal wind is reliable by afternoon.",
+        airTemp: 28,
+        waterTemp: 22,
+        seasonalNotes: "Warmer air & water; afternoon sea breezes.",
       },
       {
         month: 8,
-        windSpeed: 20,
-        windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 25,
-        seasonalNotes:
-          "Hot and busy, with afternoon thermals keeping sessions alive.",
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 28,
+        waterTemp: 24,
+        seasonalNotes: "Gentler winds; ideal for beginners.",
       },
       {
         month: 9,
-        windSpeed: 21,
-        windQuality: WindQuality.Excellent,
-        airTemp: 27,
-        waterTemp: 24,
-        seasonalNotes:
-          "Sweet spot: warm, less crowded, and very consistent wind.",
+        windSpeed: 19,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 23,
+        seasonalNotes: "End of season thermals return.",
       },
       {
         month: 10,
-        windSpeed: 18,
+        windSpeed: 21,
         windQuality: WindQuality.Good,
         airTemp: 22,
         waterTemp: 21,
-        seasonalNotes: "Mellow fall days and rideable wind continue.",
+        seasonalNotes: "Autumn Mistral picks up; fewer crowds.",
       },
       {
         month: 11,
-        windSpeed: 16,
+        windSpeed: 18,
         windQuality: WindQuality.Moderate,
-        airTemp: 17,
+        airTemp: 18,
         waterTemp: 18,
-        seasonalNotes: "Wind becomes sporadic; off-season starts.",
+        seasonalNotes: "Cooling temperatures; intermittent winds.",
       },
       {
         month: 12,
-        windSpeed: 15,
+        windSpeed: 16,
         windQuality: WindQuality.Moderate,
-        airTemp: 14,
-        waterTemp: 15,
-        seasonalNotes:
-          "Quiet season with occasional stormy sessions for die-hards.",
+        airTemp: 15,
+        waterTemp: 16,
+        seasonalNotes: "Quieter winter lagoon conditions.",
       },
     ],
   },
@@ -2530,151 +2534,141 @@ export const kiteSpotsData: SpotSeedData[] = [
   // Maui, Hawaii, USA
   {
     spot: {
-      name: "Maui, Hawaii, USA",
+      name: "Maui, USA",
       country: "United States",
-      latitude: 20.7984,
-      longitude: -156.3319,
+      latitude: 20.8, // :contentReference[oaicite:0]{index=0}
+      longitude: -156.3333, // :contentReference[oaicite:1]{index=1}
       description:
-        "The ultimate destination for advanced kitesurfers, Maui's North Shore offers legendary wave riding conditions with powerful swells and strong trade winds. Home to 'Kite Beach' and regular professional competitions.",
-      bestMonths: "May–Oct",
-      tempRange: "26–31°C",
-      waveSize: "Large (2-4m+)",
-      difficultyLevel: "Advanced",
+        "Famed for its reliable tradewinds funneling through the West Maui Mountains, Maui offers world-class kitesurfing at Kanaha Beach Park and beyond, with flat to choppy water suited to all levels.", // :contentReference[oaicite:2]{index=2}
+      bestMonths: "Apr–Oct",
+      tempRange: "24–31°C", // :contentReference[oaicite:3]{index=3}
+      waveSize: "Flat to Small Chop",
+      difficultyLevel: "Beginner to Advanced",
       localAttractions:
-        "Road to Hana, Haleakalā National Park, Surfing at Jaws, Luau cultural shows",
-      tags: ["Wave Riding", "Pro Spot", "Tropical Paradise"],
-      windguruCode: "150",
+        "Road to Hana, Haleakalā National Park, Lahaina Historic District, Molokini Crater snorkel trips", // :contentReference[oaicite:4]{index=4}
+      tags: ["Kite Schools", "Tradewinds", "Kanaha Beach"],
+      windguruCode: "92740", // :contentReference[oaicite:5]{index=5}
       kiteSchools: [
-        "Maui Kitesurfing School|https://maps.google.com/?q=Maui+Kitesurfing+School|4.9|214",
-        "Kiteboarding School Maui|https://maps.google.com/?q=Kiteboarding+School+Maui|4.8|192",
-        "Action Sports Maui|https://maps.google.com/?q=Action+Sports+Maui|4.7|165",
-        "Hawaii Kiteboarding Academy|https://maps.google.com/?q=Hawaii+Kiteboarding+Academy|4.6|137",
-        "Pacific Kite Co.|https://maps.google.com/?q=Pacific+Kite+Co.+Maui|4.5|112",
+        "Kiteboarding School of Maui|https://maps.google.com/?q=Kiteboarding+School+of+Maui|5.0|148", // :contentReference[oaicite:6]{index=6}
+        "Maui Kiteboarding Lessons by Aqua Sports Maui|https://maps.google.com/?q=Maui+Kiteboarding+Lessons+by+Aqua+Sports+Maui|5.0|85", // :contentReference[oaicite:7]{index=7}
       ],
-      conditions: ["Powerful Waves", "Strong Trade Winds", "Reef Breaks"],
+      conditions: [
+        "Side-On Shore Wind",
+        "Flat Lagoon Bays",
+        "Choppy Outer Channels",
+      ],
       accommodationOptions: [
-        "Luxury Resorts",
+        "3-star Hotels ($300–600/night)",
         "Vacation Rentals",
-        "Beachfront Condos",
-      ],
+        "Beachfront Resorts",
+      ], // :contentReference[oaicite:8]{index=8}
       foodOptions: [
-        "Hawaiian BBQ",
-        "Fresh Seafood",
-        "Farm-to-Table Restaurants",
-        "Food Trucks",
+        "Poke Bowls",
+        "Farm-to-Table Hawaiian Cuisine",
+        "Beach Bars",
       ],
       culture:
-        "Aloha spirit blended with Polynesian traditions and modern surf culture",
-      averageSchoolCost: 120,
-      averageAccommodationCost: 250,
-      numberOfSchools: 8,
+        "A blend of Native Hawaiian, Polynesian, and surfer town vibes, with lu‘au feasts and hula shows", // :contentReference[oaicite:9]{index=9}
+      averageSchoolCost: 115, // USD per hour :contentReference[oaicite:10]{index=10}
+      averageAccommodationCost: 450, // USD per night :contentReference[oaicite:11]{index=11}
+      numberOfSchools: 15, // :contentReference[oaicite:12]{index=12}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 14,
+        windSpeed: 10, // 11.7 mph ≈10 kt :contentReference[oaicite:13]{index=13}
         windQuality: WindQuality.Moderate,
-        airTemp: 26,
-        waterTemp: 24,
-        seasonalNotes:
-          "Winter swells dominate; wind less consistent. Wetsuit recommended for cooler water.",
+        airTemp: 26, // 79°F :contentReference[oaicite:14]{index=14}
+        waterTemp: 24.6, // :contentReference[oaicite:15]{index=15}
+        seasonalNotes: "Cool winter tradewinds; fewer crowds.", // :contentReference[oaicite:16]{index=16}
       },
       {
         month: 2,
-        windSpeed: 16,
+        windSpeed: 11, // 12.5 mph ≈11 kt :contentReference[oaicite:17]{index=17}
         windQuality: WindQuality.Moderate,
-        airTemp: 26,
-        waterTemp: 23,
-        seasonalNotes: "Transition period with occasional strong trade winds.",
+        airTemp: 26, // 79°F :contentReference[oaicite:18]{index=18}
+        waterTemp: 24.2, // :contentReference[oaicite:19]{index=19}
+        seasonalNotes: "Late winter winds remain steady; water still cool.", // :contentReference[oaicite:20]{index=20}
       },
       {
         month: 3,
-        windSpeed: 18,
+        windSpeed: 12, // 14.0 mph ≈12 kt :contentReference[oaicite:21]{index=21}
         windQuality: WindQuality.Good,
-        airTemp: 27,
-        waterTemp: 23,
-        seasonalNotes:
-          "Trade winds strengthen; early spring offers reliable wave riding.",
+        airTemp: 26, // 79°F :contentReference[oaicite:22]{index=22}
+        waterTemp: 24.1, // :contentReference[oaicite:23]{index=23}
+        seasonalNotes: "Spring trade winds strengthen; warming water.", // :contentReference[oaicite:24]{index=24}
       },
       {
         month: 4,
-        windSpeed: 20,
-        windQuality: WindQuality.Excellent,
-        airTemp: 28,
-        waterTemp: 24,
-        seasonalNotes:
-          "Peak wind season begins; powerful waves attract advanced riders.",
+        windSpeed: 13, // 15.0 mph ≈13 kt :contentReference[oaicite:25]{index=25}
+        windQuality: WindQuality.Good,
+        airTemp: 28, // 82°F :contentReference[oaicite:26]{index=26}
+        waterTemp: 24.4, // :contentReference[oaicite:27]{index=27}
+        seasonalNotes: "Start of peak season—consistent spring breezes.", // :contentReference[oaicite:28]{index=28}
       },
       {
         month: 5,
-        windSpeed: 24,
-        windQuality: WindQuality.Excellent,
-        airTemp: 29,
-        waterTemp: 25,
-        seasonalNotes:
-          "Consistent 20-30kt trade winds; ideal for pro competitions.",
+        windSpeed: 12, // 14.0 mph ≈12 kt :contentReference[oaicite:29]{index=29}
+        windQuality: WindQuality.Good,
+        airTemp: 29, // 84°F :contentReference[oaicite:30]{index=30}
+        waterTemp: 24.9, // :contentReference[oaicite:31]{index=31}
+        seasonalNotes: "Warm air & water; ideal freeride conditions.", // :contentReference[oaicite:32]{index=32}
       },
       {
         month: 6,
-        windSpeed: 25,
+        windSpeed: 14, // 15.5 mph ≈14 kt :contentReference[oaicite:33]{index=33}
         windQuality: WindQuality.Excellent,
-        airTemp: 30,
-        waterTemp: 26,
-        seasonalNotes:
-          "Summer peak with strong, steady winds and massive swells.",
+        airTemp: 30, // 86°F :contentReference[oaicite:34]{index=34}
+        waterTemp: 25.4, // :contentReference[oaicite:35]{index=35}
+        seasonalNotes: "Early summer thermals; strong midday winds.", // :contentReference[oaicite:36]{index=36}
       },
       {
         month: 7,
-        windSpeed: 24,
+        windSpeed: 14, // 15.9 mph ≈14 kt :contentReference[oaicite:37]{index=37}
         windQuality: WindQuality.Excellent,
-        airTemp: 31,
-        waterTemp: 27,
-        seasonalNotes:
-          "Prime conditions continue; crowded during July 4th holiday.",
+        airTemp: 31, // 88°F :contentReference[oaicite:38]{index=38}
+        waterTemp: 25.9, // :contentReference[oaicite:39]{index=39}
+        seasonalNotes: "Peak summer winds; warmest conditions.", // :contentReference[oaicite:40]{index=40}
       },
       {
         month: 8,
-        windSpeed: 23,
-        windQuality: WindQuality.Excellent,
-        airTemp: 31,
-        waterTemp: 27,
-        seasonalNotes:
-          "Slightly warmer water; wind remains strong through August.",
+        windSpeed: 13, // 15.2 mph ≈13 kt :contentReference[oaicite:41]{index=41}
+        windQuality: WindQuality.Good,
+        airTemp: 31, // 88°F :contentReference[oaicite:42]{index=42}
+        waterTemp: 26.3, // :contentReference[oaicite:43]{index=43}
+        seasonalNotes: "Warm seas; slightly lighter trade winds.", // :contentReference[oaicite:44]{index=44}
       },
       {
         month: 9,
-        windSpeed: 22,
+        windSpeed: 12, // 13.7 mph ≈12 kt :contentReference[oaicite:45]{index=45}
         windQuality: WindQuality.Good,
-        airTemp: 30,
-        waterTemp: 27,
-        seasonalNotes: "Early autumn still delivers reliable winds and waves.",
+        airTemp: 30, // 85°F :contentReference[oaicite:46]{index=46}
+        waterTemp: 26.7, // :contentReference[oaicite:47]{index=47}
+        seasonalNotes: "Late summer thermals return; fewer crowds.", // :contentReference[oaicite:48]{index=48}
       },
       {
         month: 10,
-        windSpeed: 20,
+        windSpeed: 12, // 13.3 mph ≈12 kt :contentReference[oaicite:49]{index=49}
         windQuality: WindQuality.Good,
-        airTemp: 29,
-        waterTemp: 26,
-        seasonalNotes:
-          "Transition to winter swells; wind quality declines gradually.",
+        airTemp: 29, // 84°F :contentReference[oaicite:50]{index=50}
+        waterTemp: 26.7, // :contentReference[oaicite:51]{index=51}
+        seasonalNotes: "Autumn winds steady; pleasant temperatures.", // :contentReference[oaicite:52]{index=52}
       },
       {
         month: 11,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 28,
-        waterTemp: 25,
-        seasonalNotes:
-          "Unpredictable winds; focus shifts to surfing larger swells.",
+        windSpeed: 12, // 14.1 mph ≈12 kt :contentReference[oaicite:53]{index=53}
+        windQuality: WindQuality.Good,
+        airTemp: 28, // 82°F :contentReference[oaicite:54]{index=54}
+        waterTemp: 26.1, // :contentReference[oaicite:55]{index=55}
+        seasonalNotes: "Early winter trade winds; mild crowds.", // :contentReference[oaicite:56]{index=56}
       },
       {
         month: 12,
-        windSpeed: 15,
+        windSpeed: 11, // 13.2 mph ≈11 kt :contentReference[oaicite:57]{index=57}
         windQuality: WindQuality.Moderate,
-        airTemp: 27,
-        waterTemp: 24,
-        seasonalNotes:
-          "Winter storms create big wave conditions; kiting less consistent.",
+        airTemp: 26, // 79°F :contentReference[oaicite:58]{index=58}
+        waterTemp: 25.1, // :contentReference[oaicite:59]{index=59}
+        seasonalNotes: "Quiet winter lagoon sessions; moderate winds.", // :contentReference[oaicite:60]{index=60}
       },
     ],
   },
