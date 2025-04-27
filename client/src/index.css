@@ -7,31 +7,31 @@
 /* ===== COLOR SYSTEM ===== */
 :root {
   /* Core Brand Colors - Change these to update the entire theme */
-  --core-primary: 185 82% 42%;      /* More vibrant teal */
-  --core-accent: 45 100% 65%;       /* Brighter sunshine yellow */
-  --core-action: 12 100% 65%;       /* More energetic coral/red */
-  --core-success: 145 70% 50%;      /* Slightly adjusted green */
-  --core-text: 200 30% 25%;         /* Richer text color */
-  --core-text-light: 200, 30%, 25%, 0.6;  /* Adjusted transparency */
-  --core-text-dark: 185 85% 20%;    /* Deeper teal for contrast */
+  --core-primary: 185 82% 42%;      /* Vibrant teal (keep) */
+  --core-accent: 42 100% 65%;       /* Stronger sunshine yellow */
+  --core-action: 10 90% 60%;        /* More energetic coral-red */
+  --core-success: 145 70% 50%;      /* Bright green (keep) */
+  --core-text: 200 25% 20%;         /* Richer, deeper text color */
+  --core-text-light: 200, 25%, 20%, 0.7;  /* Adjusted transparency */
+  --core-text-dark: 185 90% 18%;    /* Deeper teal for contrast */
   --core-white: 0 0% 100%;          /* White - unchanged */
 
   /* Primary color scale - Generated from core-primary */
-  --color-primary-50: 184 85% 95%;   /* #e4fbfc - Brighter lightest */
-  --color-primary-100: 184 85% 88%;  /* #c1f4f7 */
-  --color-primary-200: 184 85% 78%;  /* #95eaef */
-  --color-primary-300: 185 77% 65%;  /* #60dbe3 */
+  --color-primary-50: 184 95% 97%;   /* #e9fdfe - Brighter lightest */
+  --color-primary-100: 184 90% 92%;  /* #c9f7fa */
+  --color-primary-200: 184 85% 85%;  /* #a2eff5 */
+  --color-primary-300: 185 80% 70%;  /* #64dfe9 */
   --color-primary-400: 185 77% 55%;  /* #32cfd9 */
-  --color-primary-500: 185 82% 42%;  /* #18b5c1 - Vibrant mid */
+  --color-primary-500: 185 82% 42%;  /* #18b5c1 */
   --color-primary-600: 185 85% 35%;  /* #0e99a4 */
-  --color-primary-700: 186 85% 28%;  /* #0a7b84 - Deeper, vibrant */
-  --color-primary-800: 187 90% 20%;  /* #055c64 - Rich dark */
+  --color-primary-700: 186 85% 28%;  /* #0a7b84 */
+  --color-primary-800: 187 90% 20%;  /* #055c64 */
   --color-primary-900: 188 95% 14%;  /* #024047 */
-  --color-primary-950: 190 100% 8%;  /* #00171c - Dark contrast */
+  --color-primary-950: 190 100% 8%;  /* #00171c */
 
   /* Semantic color mapping - These reference the core colors */
-  --theme-primary: var(--color-primary-600);
-  --theme-primary-hover: var(--color-primary-500);
+  --theme-primary: var(--color-primary-500);
+  --theme-primary-hover: var(--color-primary-400);
   --theme-secondary: var(--color-primary-500);
   --theme-accent: var(--core-accent);
   --theme-action: var(--core-action);
@@ -45,6 +45,7 @@
   --theme-border: var(--color-primary-100) / 50%;
   --theme-button: var(--color-primary-500);
   --theme-button-hover: var(--color-primary-600);
+  --theme-highlight: 210 95% 65%;   /* #4db8ff - Electric blue */
 
   /* Wind quality indicators */
   --theme-wind-excellent: 359 100% 59%; /* Red */
