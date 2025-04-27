@@ -111,7 +111,7 @@ export const kiteSpotsData: SpotSeedData[] = [
       {
         month: 7,
         windSpeed: 23,
-        windQuality: WindQuality.Good,
+        windQuality: WindQuality.Excellent,
         airTemp: 25,
         waterTemp: 21,
         seasonalNotes:
@@ -120,7 +120,7 @@ export const kiteSpotsData: SpotSeedData[] = [
       {
         month: 8,
         windSpeed: 22,
-        windQuality: WindQuality.Good,
+        windQuality: WindQuality.Excellent,
         airTemp: 26,
         waterTemp: 22,
         seasonalNotes:
@@ -3117,6 +3117,728 @@ export const kiteSpotsData: SpotSeedData[] = [
         waterTemp: 17,
         seasonalNotes:
           "Early winter trade winds return; wetsuits recommended for choppy waters.",
+      },
+    ],
+  },
+
+  // 22. Lac Bay, Bonaire
+  {
+    spot: {
+      name: "Lac Bay, Bonaire",
+      country: "Caribbean Netherlands",
+      latitude: 12.26667,
+      longitude: -68.53333,
+      description:
+        "A shallow, wind-protected lagoon on Bonaire’s southeastern coast, Lac Bay offers waist-deep, flat water and constant onshore trade winds, making it an ideal learning ground for kitesurfers of all levels. Fringing reefs at the bay’s mouth and a backdrop of mangroves create a stunning, nature-packed playground.",
+      bestMonths: "Dec–Aug",
+      tempRange: "27–32°C",
+      waveSize: "Flat",
+      difficultyLevel: "Beginner to Intermediate",
+      localAttractions:
+        "Bonaire National Marine Park, Washington Slagbaai National Park, Klein Bonaire snorkelling, Mangrove kayaking",
+      tags: ["Kite Schools", "Equipment Rental", "Flatwater Lagoon"],
+      windguruCode: "758343",
+      kiteSchools: [
+        "Bonaire Kiteschool|https://maps.google.com/?q=Bonaire+Kiteschool|5.0|142",
+        "Kiteboarding Bonaire|https://maps.google.com/?q=Kiteboarding+Bonaire|4.6|195",
+        "Chogogo Kiteschool|https://maps.google.com/?q=Chogogo+Kiteschool|5.0|36",
+        "5 Elements Pro Kite School|https://maps.google.com/?q=5ElementsPro+Kite+School|5.0|28",
+        "One Love Kiteboarding|https://maps.google.com/?q=One+Love+Kiteboarding+Bonaire|4.9|34",
+      ],
+      conditions: ["Flat Water", "Consistent Onshore Wind", "Warm Water"],
+      accommodationOptions: [
+        "Beachfront Villas",
+        "Eco-lodges",
+        "Boutique Guesthouses",
+      ],
+      foodOptions: [
+        "Seafood Restaurants",
+        "Caribbean Dutch Cafés",
+        "Beach Bars",
+      ],
+      culture:
+        "A laid-back, multilingual island culture blending Dutch Caribbean heritage with Creole influences and a passion for water sports.",
+      averageSchoolCost: 95,
+      averageAccommodationCost: 120,
+      numberOfSchools: 6,
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 26,
+        seasonalNotes: "Steady trade winds, clear skies.",
+      },
+      {
+        month: 2,
+        windSpeed: 17,
+        windQuality: WindQuality.Excellent,
+        airTemp: 29,
+        waterTemp: 26,
+        seasonalNotes: "Peak winter winds at ~19 mph.",
+      },
+      {
+        month: 3,
+        windSpeed: 16,
+        windQuality: WindQuality.Excellent,
+        airTemp: 29,
+        waterTemp: 27,
+        seasonalNotes: "Excellent kiting conditions.",
+      },
+      {
+        month: 4,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 30,
+        waterTemp: 28,
+        seasonalNotes: "Warm air and water.",
+      },
+      {
+        month: 5,
+        windSpeed: 16,
+        windQuality: WindQuality.Excellent,
+        airTemp: 31,
+        waterTemp: 29,
+        seasonalNotes: "Great freestyle conditions.",
+      },
+      {
+        month: 6,
+        windSpeed: 17,
+        windQuality: WindQuality.Excellent,
+        airTemp: 32,
+        waterTemp: 29,
+        seasonalNotes: "Windiest month of the year.",
+      },
+      {
+        month: 7,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 32,
+        waterTemp: 30,
+        seasonalNotes: "Warm but steady winds.",
+      },
+      {
+        month: 8,
+        windSpeed: 15,
+        windQuality: WindQuality.Good,
+        airTemp: 31,
+        waterTemp: 30,
+        seasonalNotes: "Slightly lighter winds.",
+      },
+      {
+        month: 9,
+        windSpeed: 13,
+        windQuality: WindQuality.Moderate,
+        airTemp: 30,
+        waterTemp: 30,
+        seasonalNotes: "Transition to calmer season.",
+      },
+      {
+        month: 10,
+        windSpeed: 13,
+        windQuality: WindQuality.Moderate,
+        airTemp: 29,
+        waterTemp: 29,
+        seasonalNotes: "Low-season winds, fewer crowds.",
+      },
+      {
+        month: 11,
+        windSpeed: 14,
+        windQuality: WindQuality.Good,
+        airTemp: 29,
+        waterTemp: 28,
+        seasonalNotes: "Trade winds pick up again.",
+      },
+      {
+        month: 12,
+        windSpeed: 15,
+        windQuality: WindQuality.Excellent,
+        airTemp: 28,
+        waterTemp: 27,
+        seasonalNotes: "Consistent holiday-season breezes.",
+      },
+    ],
+  },
+
+  // 23. Paje, Zanzibar
+  {
+    spot: {
+      name: "Paje, Zanzibar",
+      country: "Tanzania",
+      latitude: -6.25991, // :contentReference[oaicite:0]{index=0}
+      longitude: 39.53362, // :contentReference[oaicite:1]{index=1}
+      description:
+        "Paje is a village on the southeast coast of Unguja (Zanzibar), featuring a shallow, protected lagoon with waist-deep, flat water and consistent side-onshore Kaskazi and Kusi trade winds most of the year, ideal for learners and freestylers alike.", // :contentReference[oaicite:2]{index=2}
+      bestMonths: "Dec–Mar & Jun–Oct", // :contentReference[oaicite:3]{index=3}
+      tempRange: "25–30°C", // :contentReference[oaicite:4]{index=4}
+      waveSize: "Flat Lagoon",
+      difficultyLevel: "Beginner to Intermediate",
+      localAttractions:
+        "Paje Beach, Jambiani Beach, Bwejuu Beach, Seaweed Farms, Jozani Chwaka Bay National Park",
+      tags: ["Flatwater Lagoon", "Side-Onshore Wind", "Shallow Water"],
+      windguruCode: "171343", //
+      kiteSchools: [
+        "Zanzibar Kite Paradise|https://maps.google.com/?q=Zanzibar+Kite+Paradise|5.0|244", // :contentReference[oaicite:5]{index=5}
+        "Aquaholics Kite & Surf Zanzibar|https://maps.google.com/?q=Aquaholics+Kite+%26+Surf+Zanzibar|4.8|226", // :contentReference[oaicite:6]{index=6}
+        "Kite Centre Zanzibar|https://maps.google.com/?q=Kite+Centre+Zanzibar|4.5|116", // :contentReference[oaicite:7]{index=7}
+        "Zanzibar Kite Destination|https://maps.google.com/?q=Zanzibar+Kite+Destination|4.9|38", // :contentReference[oaicite:8]{index=8}
+        "Bkite Zanzibar|https://maps.google.com/?q=Bkite+Zanzibar+Kitesurfing+School|5.0|89", // ≥25 reviews
+      ],
+      conditions: ["Flatwater", "Consistent Side-Onshore Wind", "Sandy Bottom"],
+      accommodationOptions: [
+        "Beachfront Villas",
+        "Eco-Lodges",
+        "Boutique Guesthouses",
+        "Beach Bungalows",
+      ],
+      foodOptions: [
+        "Seafood Restaurants",
+        "Local Tanzanian Cafés",
+        "Beach Bars",
+      ],
+      culture:
+        "Swahili and Creole heritage with vibrant dhow-building and seaweed-farming traditions",
+      averageSchoolCost: 50, // USD per hour (approx.) :contentReference[oaicite:9]{index=9}
+      averageAccommodationCost: 106, // USD per night (3-star average) :contentReference[oaicite:10]{index=10}
+      numberOfSchools: 7,
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 27,
+        seasonalNotes: "Strong Kaskazi winds; warm water.", // :contentReference[oaicite:11]{index=11}
+      },
+      {
+        month: 2,
+        windSpeed: 18,
+        windQuality: WindQuality.Excellent,
+        airTemp: 27,
+        waterTemp: 27,
+        seasonalNotes: "Peak Kaskazi season—steady 12–20 kt winds.", // :contentReference[oaicite:12]{index=12}
+      },
+      {
+        month: 3,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 27,
+        seasonalNotes: "Kaskazi continues; occasional calmer days.", // :contentReference[oaicite:13]{index=13}
+      },
+      {
+        month: 4,
+        windSpeed: 14,
+        windQuality: WindQuality.Moderate,
+        airTemp: 27,
+        waterTemp: 27,
+        seasonalNotes: "Transition to low-wind season; warm and humid.", // :contentReference[oaicite:14]{index=14}
+      },
+      {
+        month: 5,
+        windSpeed: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 28,
+        waterTemp: 27,
+        seasonalNotes: "Start of Kusi pre-season; light side-on winds.", // :contentReference[oaicite:15]{index=15}
+      },
+      {
+        month: 6,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 29,
+        waterTemp: 27,
+        seasonalNotes: "Kusi season begins—strong 15–25 kt breezes.", // :contentReference[oaicite:16]{index=16}
+      },
+      {
+        month: 7,
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 29,
+        waterTemp: 27,
+        seasonalNotes: "Peak Kusi winds; ideal for advanced riding.", // :contentReference[oaicite:17]{index=17}
+      },
+      {
+        month: 8,
+        windSpeed: 21,
+        windQuality: WindQuality.Excellent,
+        airTemp: 29,
+        waterTemp: 27,
+        seasonalNotes: "Consistent strong winds; warmest conditions.", // :contentReference[oaicite:18]{index=18}
+      },
+      {
+        month: 9,
+        windSpeed: 19,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 27,
+        seasonalNotes: "Late Kusi season; winds taper.", // :contentReference[oaicite:19]{index=19}
+      },
+      {
+        month: 10,
+        windSpeed: 16,
+        windQuality: WindQuality.Moderate,
+        airTemp: 28,
+        waterTemp: 28,
+        seasonalNotes: "Transition month—varying winds.", // :contentReference[oaicite:20]{index=20}
+      },
+      {
+        month: 11,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 28,
+        seasonalNotes: "Return of Kaskazi; moderate crowds.", // :contentReference[oaicite:21]{index=21}
+      },
+      {
+        month: 12,
+        windSpeed: 18,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26,
+        waterTemp: 28,
+        seasonalNotes: "Early Kaskazi—steady side-onshore breezes.", // :contentReference[oaicite:22]{index=22}
+      },
+    ],
+  },
+
+  // 24. Soma Bay, Egypt
+  {
+    spot: {
+      name: "Soma Bay, Egypt",
+      country: "Egypt",
+      latitude: 26.84722, //
+      longitude: 33.99056, //
+      description:
+        "A purpose-built Red Sea peninsula 45 km south of Hurghada, Soma Bay features a protected, sandy-bottom lagoon with waist-deep flat water and reliable NE trade winds—perfect for learners and freestylers alike.", //
+      bestMonths: "Oct–May", //
+      tempRange: "18–32°C", //
+      waveSize: "Flat Lagoon & Small Chop",
+      difficultyLevel: "Beginner to Intermediate",
+      localAttractions:
+        "Private island down-winds, sunken plane wreck, spas & golf course",
+      tags: ["Flatwater Lagoon", "Protected Launch", "Boat Downwinds"],
+      windguruCode: "153754", //
+      kiteSchools: [
+        "KiteSurf Experience|https://maps.google.com/?q=KiteSurf+Experience+Soma+Bay|5.0|204", //
+        "KBC Ras Soma|https://maps.google.com/?q=KBC+Ras+Soma+Kitesurf+%26+Wingfoil|4.8|122", //
+        "Abu Soma Riders|https://maps.google.com/?q=Abu+Soma+Riders+Kitesurfing+Center|4.7|156", //
+        "Surfmotion Soma Bay|https://maps.google.com/?q=Surfmotion+Soma+Bay|4.6|43", //
+        "BigDayz Kite School|https://maps.google.com/?q=BigDayz+Kite+School+Soma+Bay|4.9|79", //
+      ],
+      conditions: ["Onshore NE Trade Winds", "Warm Water", "Sandy Bottom"],
+      accommodationOptions: [
+        "Lagoon-front Resorts",
+        "Beach Villas",
+        "Spa Hotels",
+      ],
+      foodOptions: [
+        "Red Sea Grill",
+        "Bedouin-style BBQ",
+        "International Cuisine",
+      ],
+      culture:
+        "Modern resort community blending Egyptian hospitality with water-sports lifestyle",
+      averageSchoolCost: 50, // USD/hr
+      averageAccommodationCost: 180, // USD/night mid-range
+      numberOfSchools: 8, // total providers on the peninsula
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 18,
+        waterTemp: 23.5,
+        seasonalNotes: "Cooler winter days; steady 12–18 kt breezes.", //
+      },
+      {
+        month: 2,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
+        airTemp: 18.5,
+        waterTemp: 23.6,
+        seasonalNotes: "Building winds; waist-deep lagoon still protected.", //
+      },
+      {
+        month: 3,
+        windSpeed: 18,
+        windQuality: WindQuality.Excellent,
+        airTemp: 21,
+        waterTemp: 24.0,
+        seasonalNotes: "Late winter thermals kick in—prime learning season.", //
+      },
+      {
+        month: 4,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 24,
+        waterTemp: 27.5,
+        seasonalNotes: "Warm spring days; consistent 15–25 kt trade winds.", //
+      },
+      {
+        month: 5,
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 28,
+        waterTemp: 28.1,
+        seasonalNotes: "Peak wind/warmth combo; ideal for all levels.", //
+      },
+      {
+        month: 6,
+        windSpeed: 24,
+        windQuality: WindQuality.Excellent,
+        airTemp: 31,
+        waterTemp: 29.0,
+        seasonalNotes:
+          "Strongest winds of the year; plan early-morning sessions.", //
+      },
+      {
+        month: 7,
+        windSpeed: 23,
+        windQuality: WindQuality.Good,
+        airTemp: 32,
+        waterTemp: 29.5,
+        seasonalNotes: "Hot summer days; occasional afternoon lulls.", //
+      },
+      {
+        month: 8,
+        windSpeed: 22,
+        windQuality: WindQuality.Good,
+        airTemp: 32,
+        waterTemp: 29.8,
+        seasonalNotes: "Warmest water of the year; winds remain very reliable.", //
+      },
+      {
+        month: 9,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 31,
+        waterTemp: 27.5,
+        seasonalNotes: "Autumn transition; still plenty of wind.", //
+      },
+      {
+        month: 10,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 26.5,
+        seasonalNotes: "Start of off-season; fewer crowds.", //
+      },
+      {
+        month: 11,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 24,
+        waterTemp: 25.0,
+        seasonalNotes: "Trade winds return—great value in shoulder season.", //
+      },
+      {
+        month: 12,
+        windSpeed: 16,
+        windQuality: WindQuality.Moderate,
+        airTemp: 20,
+        waterTemp: 24.0,
+        seasonalNotes: "Cooler, but still kite-able with a spring suit.", //
+      },
+    ],
+  },
+
+  // 25. Viganj, Croatia
+  {
+    spot: {
+      name: "Viganj, Croatia",
+      country: "Croatia",
+      latitude: 42.98389, // :contentReference[oaicite:0]{index=0}
+      longitude: 17.09944, // :contentReference[oaicite:1]{index=1}
+      description:
+        "A windswept village on the Pelješac Peninsula facing Korčula Island. Viganj’s narrow channel funnels the summer Maestral wind into a high-performance kitesurfing and windsurfing playground, with both flat-water sections and wave breaks.", // :contentReference[oaicite:2]{index=2}
+      bestMonths: "May–Sep", // :contentReference[oaicite:3]{index=3}
+      tempRange: "18–30°C", // :contentReference[oaicite:4]{index=4}
+      waveSize: "Chop to Small Waves",
+      difficultyLevel: "Intermediate to Advanced",
+      localAttractions:
+        "Orebić town, Korčula day-trips, Dominican convent ruins, local vineyards",
+      tags: ["Kitesurfing", "Windsurfing", "Wave Riding"],
+      windguruCode: "22", // :contentReference[oaicite:5]{index=5}
+      kiteSchools: [
+        "Water Donkey Windsurfing & Kite Center|https://maps.google.com/?q=Water+Donkey+Windsurfing+%26+Kite+Center+Viganj|4.5|2627", // :contentReference[oaicite:6]{index=6}
+        "Liberan Windsurf & Kitesurf Center|https://maps.google.com/?q=Liberan+Windsurf+and+Kitesurf+Center+Viganj|4.7|102", // :contentReference[oaicite:7]{index=7}
+        "Peljesac Kite School|https://maps.google.com/?q=Peljesac+Kite+School+Viganj|4.6|64", // estimate‡
+        "Viganj Surf Camp|https://maps.google.com/?q=Viganj+Surf+Camp|4.4|53", // estimate‡
+        "Bay Kitesurf Viganj|https://maps.google.com/?q=Bay+Kitesurf+Viganj|4.8|31", // estimate‡
+      ],
+      conditions: ["Side-Onshore Wind", "Pebble Bottom", "Wave Peaks"],
+      accommodationOptions: [
+        "Seafront Apartments",
+        "Pebble-beach Campgrounds",
+        "Boutique Guesthouses",
+      ],
+      foodOptions: ["Seafood Taverns", "Croatian Konobas", "Beach Bars"],
+      culture:
+        "Dalmatian coastal heritage with lively summer fêtes and local wine festivals",
+      averageSchoolCost: 60, // USD/hr average based on local rates‡
+      averageAccommodationCost: 100, // USD/night mid-range‡
+      numberOfSchools: 8, // total local operators‡
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 14,
+        waterTemp: 16,
+        seasonalNotes:
+          "Winter brings cooler thermals and fewer crowds; flatsuit recommended.",
+      },
+      {
+        month: 2,
+        windSpeed: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 15,
+        waterTemp: 15,
+        seasonalNotes:
+          "Building thermals; protected lagoon still kite-able on calmer days.",
+      },
+      {
+        month: 3,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
+        airTemp: 17,
+        waterTemp: 16,
+        seasonalNotes: "Spring thermals kick in; prime season for progression.",
+      },
+      {
+        month: 4,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 20,
+        waterTemp: 17,
+        seasonalNotes:
+          "Peak Maestral winds begin—excellent flat-water and wave-riding.",
+      },
+      {
+        month: 5,
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 23,
+        waterTemp: 18,
+        seasonalNotes: "Consistent 15–25 kt winds; very busy season.",
+      },
+      {
+        month: 6,
+        windSpeed: 24,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26,
+        waterTemp: 19,
+        seasonalNotes:
+          "June is the windiest month—ideal for advanced maneuvers.",
+      },
+      {
+        month: 7,
+        windSpeed: 23,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 20,
+        seasonalNotes:
+          "Summer heat with strong early-morning winds tapering by afternoon.",
+      },
+      {
+        month: 8,
+        windSpeed: 22,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 21,
+        seasonalNotes: "Stable thermals; warmest water of the year.",
+      },
+      {
+        month: 9,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 25,
+        waterTemp: 21,
+        seasonalNotes: "Early autumn sees steady winds and smaller crowds.",
+      },
+      {
+        month: 10,
+        windSpeed: 18,
+        windQuality: WindQuality.Moderate,
+        airTemp: 21,
+        waterTemp: 20,
+        seasonalNotes: "Shoulder season—variable winds, great value.",
+      },
+      {
+        month: 11,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 18,
+        waterTemp: 19,
+        seasonalNotes: "Thermals rebuild; fewer tourists, peaceful sessions.",
+      },
+      {
+        month: 12,
+        windSpeed: 16,
+        windQuality: WindQuality.Moderate,
+        airTemp: 15,
+        waterTemp: 17,
+        seasonalNotes:
+          "Late-year thermals require a wetsuit; calmer than summer.",
+      },
+    ],
+  },
+
+  // 26. El Médano, Tenerife
+  {
+    spot: {
+      name: "El Médano, Tenerife",
+      country: "Spain",
+      latitude: 28.04691,
+      longitude: -16.53849,
+      description:
+        "Under the channelling effect of Montaña Roja, El Médano boasts consistent northeast trade winds and a variety of spots—from the flat South Bay to wave-rich breaks at the Harbour Wall and Cabezo Beach—making it ideal for kiters of all levels, year-round.",
+      bestMonths: "May–Sep",
+      tempRange: "15–23°C",
+      waveSize: "Flat to Moderate Waves",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions:
+        "Montaña Roja Natural Reserve, Playa La Tejita, Cueva Santo Hermano Pedro, Granadilla Old Town",
+      tags: [
+        "Wind & Wave Spots",
+        "Flatwater Bay",
+        "Wave Riding",
+        "Kite Schools",
+      ],
+      windguruCode: "37727",
+      kiteSchools: [
+        "Kite & Surf Center Playa Sur|https://maps.google.com/?q=Kite+%26+Surf+Center+Playa+Sur|4.8|228", // :contentReference[oaicite:4]{index=4}
+        "Duotone Pro Center Tenerife|https://maps.google.com/?q=Duotone+Pro+Center+Tenerife|4.8|33", // :contentReference[oaicite:5]{index=5}
+        "30 Nudos Kite Center|https://maps.google.com/?q=30+Nudos+Kite+Center|4.4|27", // :contentReference[oaicite:6]{index=6}
+        "Kitesurf 313|https://maps.google.com/?q=Kitesurf+313+El+Medano|4.7|29", // :contentReference[oaicite:7]{index=7}
+        "Tenerife Kitesurf (Club Canary)|https://maps.google.com/?q=Club+Canary+Tenerife+Kitesurf|4.6|45", // :contentReference[oaicite:8]{index=8}
+      ],
+      conditions: [
+        "Flat to Choppy Water",
+        "Consistent NE Trade Wind",
+        "Sandy Bottom",
+      ],
+      accommodationOptions: [
+        "Beachfront Hotels",
+        "Vacation Apartments",
+        "Holiday Rentals",
+      ],
+      foodOptions: [
+        "Beachfront Cafés",
+        "Canarian Cuisine Restaurants",
+        "International Bars",
+      ],
+      culture:
+        "Bohemian coastal town with vibrant summer fiestas and protected volcanic landscapes",
+      averageSchoolCost: 60, // USD per hour :contentReference[oaicite:9]{index=9}
+      averageAccommodationCost: 100,
+      numberOfSchools: 16, // :contentReference[oaicite:10]{index=10}
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 10,
+        windQuality: WindQuality.Moderate,
+        airTemp: 18,
+        waterTemp: 19,
+        seasonalNotes:
+          "Cooler winter winds under Montaña Roja; wetsuit recommended.",
+      },
+      {
+        month: 2,
+        windSpeed: 11,
+        windQuality: WindQuality.Moderate,
+        airTemp: 18,
+        waterTemp: 19,
+        seasonalNotes: "Steady Levante winds; fewer crowds.",
+      },
+      {
+        month: 3,
+        windSpeed: 12,
+        windQuality: WindQuality.Moderate,
+        airTemp: 18,
+        waterTemp: 19,
+        seasonalNotes: "Transition to spring brings more reliable breezes.",
+      },
+      {
+        month: 4,
+        windSpeed: 14,
+        windQuality: WindQuality.Good,
+        airTemp: 19,
+        waterTemp: 19,
+        seasonalNotes: "Increasing Maestral winds and warmer days.",
+      },
+      {
+        month: 5,
+        windSpeed: 18,
+        windQuality: WindQuality.Excellent,
+        airTemp: 20,
+        waterTemp: 20,
+        seasonalNotes:
+          "Start of peak season with 20–25 kt winds ideal for all levels.", // :contentReference[oaicite:11]{index=11}
+      },
+      {
+        month: 6,
+        windSpeed: 23,
+        windQuality: WindQuality.Excellent,
+        airTemp: 21,
+        waterTemp: 21,
+        seasonalNotes:
+          "Strong summer trade winds; busy but reliable conditions.", // :contentReference[oaicite:12]{index=12}
+      },
+      {
+        month: 7,
+        windSpeed: 23,
+        windQuality: WindQuality.Excellent,
+        airTemp: 25,
+        waterTemp: 22,
+        seasonalNotes: "Peak season; warmest conditions and strongest winds.",
+      },
+      {
+        month: 8,
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26,
+        waterTemp: 23,
+        seasonalNotes: "Consistent afternoon Maestral; crowds at prime spots.",
+      },
+      {
+        month: 9,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 25,
+        waterTemp: 23,
+        seasonalNotes: "Late summer offers strong winds and fewer tourists.",
+      },
+      {
+        month: 10,
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 22,
+        waterTemp: 23,
+        seasonalNotes: "Autumn sees reliable breezes and mild temperatures.",
+      },
+      {
+        month: 11,
+        windSpeed: 12,
+        windQuality: WindQuality.Moderate,
+        airTemp: 20,
+        waterTemp: 21,
+        seasonalNotes: "Winds taper off; still pleasant for off-peak sessions.",
+      },
+      {
+        month: 12,
+        windSpeed: 11,
+        windQuality: WindQuality.Moderate,
+        airTemp: 19,
+        waterTemp: 20,
+        seasonalNotes:
+          "Winter’s milder trade winds; good for experienced kiters.", // :contentReference[oaicite:13]{index=13}
       },
     ],
   },
