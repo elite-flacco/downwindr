@@ -1370,7 +1370,7 @@ export const kiteSpotsData: SpotSeedData[] = [
     ],
   },
 
-  // 10. Punta San Carlos, Mexico"
+  // 10. Punta San Carlos, Mexico
   {
     spot: {
       name: "Punta San Carlos, Mexico",
@@ -2531,7 +2531,7 @@ export const kiteSpotsData: SpotSeedData[] = [
     ],
   },
 
-  // Maui, Hawaii, USA
+  // 18. Maui, Hawaii, USA
   {
     spot: {
       name: "Maui, USA",
@@ -2669,6 +2669,454 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 26, // 79°F :contentReference[oaicite:58]{index=58}
         waterTemp: 25.1, // :contentReference[oaicite:59]{index=59}
         seasonalNotes: "Quiet winter lagoon sessions; moderate winds.", // :contentReference[oaicite:60]{index=60}
+      },
+    ],
+  },
+
+  // 19. Aruba, Caribbean
+  {
+    spot: {
+      name: "Aruba",
+      country: "Aruba",
+      latitude: 12.5,
+      longitude: -69.97,
+      description:
+        "Aruba is a premier Caribbean kitesurfing destination, renowned for its consistent trade winds, warm turquoise waters, and diverse conditions suitable for all skill levels. The island offers a mix of flat-water lagoons and wave spots, making it ideal for both beginners and advanced riders.",
+      bestMonths: "May–July",
+      tempRange: "26–32°C",
+      waveSize: "Flat to Moderate Chop",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions:
+        "Arikok National Park, Eagle Beach, Palm Beach, Flamingo Beach, Oranjestad shopping",
+      tags: ["Trade Winds", "Flatwater Lagoons", "Wave Spots"],
+      windguruCode: "5124",
+      kiteSchools: [
+        "Kiteboarding Aruba|https://maps.google.com/?q=Kiteboarding+Aruba+-+Kitesurfing+school|5.0|129",
+        "Aruba Active Vacations|https://maps.google.com/?q=Aruba+Active+Vacations|4.7|91",
+        "Aruba Kitesurfing School|https://maps.google.com/?q=Aruba+Kitesurfing+School|4.7|81",
+        "Vela Windsurf & Kitesurf|https://maps.google.com/?q=Vela+Windsurf+%26+Kitesurf+Aruba|4.5|97",
+        "Pro Kite School Aruba|https://maps.google.com/?q=Pro+Kite+School+Aruba|4.7|27",
+      ],
+      conditions: [
+        "Consistent Trade Winds",
+        "Flat Lagoons",
+        "Choppy Wave Spots",
+      ],
+      accommodationOptions: [
+        "Beachfront Resorts",
+        "Vacation Rentals",
+        "Boutique Hotels",
+      ],
+      foodOptions: [
+        "Seafood Shacks",
+        "Local Eateries",
+        "International Cuisine",
+      ],
+      culture:
+        "A vibrant blend of Dutch and Caribbean influences, with Papiamento heritage and lively festivals.",
+      averageSchoolCost: 150,
+      averageAccommodationCost: 250,
+      numberOfSchools: 20,
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 16.5,
+        windQuality: WindQuality.Excellent,
+        airTemp: 25.8,
+        waterTemp: 26.3,
+        seasonalNotes: "Steady trade winds; ideal for consistent sessions.",
+      },
+      {
+        month: 2,
+        windSpeed: 17.0,
+        windQuality: WindQuality.Excellent,
+        airTemp: 25.6,
+        waterTemp: 25.9,
+        seasonalNotes: "Trade winds strengthen through late winter.",
+      },
+      {
+        month: 3,
+        windSpeed: 17.4,
+        windQuality: WindQuality.Excellent,
+        airTemp: 25.8,
+        waterTemp: 26.0,
+        seasonalNotes: "Winds remain strong; low rainfall.",
+      },
+      {
+        month: 4,
+        windSpeed: 17.4,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26.2,
+        waterTemp: 26.5,
+        seasonalNotes: "Spring brings warm temperatures and reliable winds.",
+      },
+      {
+        month: 5,
+        windSpeed: 18.3,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26.8,
+        waterTemp: 27.0,
+        seasonalNotes: "Late spring sees optimal kitesurfing conditions.",
+      },
+      {
+        month: 6,
+        windSpeed: 18.4,
+        windQuality: WindQuality.Excellent,
+        airTemp: 27.1,
+        waterTemp: 27.3,
+        seasonalNotes: "June is the windiest month of the year.",
+      },
+      {
+        month: 7,
+        windSpeed: 18.3,
+        windQuality: WindQuality.Excellent,
+        airTemp: 27.0,
+        waterTemp: 27.2,
+        seasonalNotes: "Mid-summer brings consistent high winds.",
+      },
+      {
+        month: 8,
+        windSpeed: 17.4,
+        windQuality: WindQuality.Good,
+        airTemp: 27.6,
+        waterTemp: 27.9,
+        seasonalNotes: "Late summer winds remain strong; occasional lulls.",
+      },
+      {
+        month: 9,
+        windSpeed: 16.0,
+        windQuality: WindQuality.Good,
+        airTemp: 27.9,
+        waterTemp: 28.6,
+        seasonalNotes: "Early autumn offers balanced wind and warmth.",
+      },
+      {
+        month: 10,
+        windSpeed: 13.5,
+        windQuality: WindQuality.Moderate,
+        airTemp: 27.6,
+        waterTemp: 28.7,
+        seasonalNotes: "October sees the calmest winds; perfect for learners.",
+      },
+      {
+        month: 11,
+        windSpeed: 15.2,
+        windQuality: WindQuality.Moderate,
+        airTemp: 27.1,
+        waterTemp: 28.4,
+        seasonalNotes: "Late autumn winds pick up again; fewer crowds.",
+      },
+      {
+        month: 12,
+        windSpeed: 16.0,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26.4,
+        waterTemp: 27.3,
+        seasonalNotes: "Early winter trade winds return; mild temperatures.",
+      },
+    ],
+  },
+
+  // 20. Sal, Cape Verde
+  {
+    spot: {
+      name: "Sal, Cape Verde",
+      country: "Cape Verde",
+      latitude: 16.755,
+      longitude: -22.945,
+      description:
+        "Sal Island is renowned for its reliable northeast trade winds, warm Atlantic waters and world-class wave spot at Ponta Preta, making it ideal for both beginners and advanced wave riders year-round.",
+      bestMonths: "Dec–May",
+      tempRange: "24–30°C",
+      waveSize: "Flat to Medium Waves",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions:
+        "Santa Maria Beach, Ponta Preta Wave Break, Pedra de Lume Salt Ponds, Turtle Nesting Sites",
+      tags: ["Kite Schools", "Boat Lessons", "Wave Riding"],
+      windguruCode: "412",
+      kiteSchools: [
+        "ION Club Sal|https://maps.google.com/?q=ION+Club+Sal|4.9|154",
+        "Island Kite School|https://maps.google.com/?q=Island+Kite+School+Santa+Maria|5.0|60",
+        "Mitu & Djo Kite Surf School Cabo Verde|https://maps.google.com/?q=Mitu+and+Djo+Kite+Surf+School+Cape+Verde|4.3|139",
+        "Planet Allsports|https://maps.google.com/?q=Planet+Allsports+Boavista+Cape+Verde|4.8|97",
+        "ION Club Cape Verde|https://maps.google.com/?q=ION+Club+Cape+Verde|4.2|25",
+      ],
+      conditions: ["Side-Onshore Wind", "Warm Water", "Sandy Bottom"],
+      accommodationOptions: [
+        "Beachfront Resorts",
+        "Guesthouses in Santa Maria",
+        "Apartments near Kite Beach",
+      ],
+      foodOptions: [
+        "Cape Verdean Seafood",
+        "Creole Cafés",
+        "Beachside Bars",
+        "Portuguese-African Fusion",
+      ],
+      culture:
+        "Creole heritage blending African, Portuguese and Brazilian influences, with vibrant music and salt-harvesting history",
+      averageSchoolCost: 80,
+      averageAccommodationCost: 120,
+      numberOfSchools: 7,
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 24,
+        waterTemp: 23,
+        seasonalNotes:
+          "Peak season with strong, consistent trade winds and warm temperatures. Ideal for all levels.",
+      },
+      {
+        month: 2,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 25,
+        waterTemp: 22,
+        seasonalNotes:
+          "Continued reliable winds; slightly cooler water. Perfect for wave riding at Ponta Preta.",
+      },
+      {
+        month: 3,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26,
+        waterTemp: 22,
+        seasonalNotes:
+          "Late winter brings steady winds and minimal rain—one of the best months to visit.",
+      },
+      {
+        month: 4,
+        windSpeed: 19,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 22,
+        seasonalNotes:
+          "Transition to spring sees slightly lighter winds but very pleasant conditions.",
+      },
+      {
+        month: 5,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 23,
+        seasonalNotes:
+          "Early summer still offers reliable winds; water temperatures begin to rise.",
+      },
+      {
+        month: 6,
+        windSpeed: 17,
+        windQuality: WindQuality.Good,
+        airTemp: 28,
+        waterTemp: 23,
+        seasonalNotes:
+          "Start of warmer months; winds taper off slightly but remain kite-able.",
+      },
+      {
+        month: 7,
+        windSpeed: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 29,
+        waterTemp: 24,
+        seasonalNotes:
+          "Midsummer brings the hottest air and water temps; winds are lighter and more variable.",
+      },
+      {
+        month: 8,
+        windSpeed: 13,
+        windQuality: WindQuality.Moderate,
+        airTemp: 29,
+        waterTemp: 25,
+        seasonalNotes:
+          "Warmest month of the year; wind conditions can be inconsistent—plan lessons accordingly.",
+      },
+      {
+        month: 9,
+        windSpeed: 11,
+        windQuality: WindQuality.Poor,
+        airTemp: 28,
+        waterTemp: 26,
+        seasonalNotes:
+          "Rainy season begins; wind picks up in late September but expect occasional calm days.",
+      },
+      {
+        month: 10,
+        windSpeed: 13,
+        windQuality: WindQuality.Moderate,
+        airTemp: 27,
+        waterTemp: 26,
+        seasonalNotes:
+          "Post-rain transitional month; winds start to return to winter norms by mid-October.",
+      },
+      {
+        month: 11,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 25,
+        seasonalNotes:
+          "Season opening—winds build back to reliable trade patterns, great for early bookings.",
+      },
+      {
+        month: 12,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 25,
+        waterTemp: 24,
+        seasonalNotes:
+          "High season resumes with strong, consistent winds and ideal kiting conditions.",
+      },
+    ],
+  },
+
+  // 21. Sidi Kaouki, Morocco
+  {
+    spot: {
+      name: "Sidi Kaouki, Morocco",
+      country: "Morocco",
+      latitude: 31.35556,
+      longitude: -9.79722,
+      description:
+        "A long, open sandy beach blessed with strong, stable N–NE trade winds and rolling waves—ideal for freestyle, wave riding, and beginners seeking progression.",
+      bestMonths: "Apr–Oct",
+      tempRange: "16–28°C",
+      waveSize: "Small to Medium Waves",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions:
+        "Sidi Kaouki Shrine, Rock Pools, Camel & Quad Biking on the Beach",
+      tags: ["Beach Launch", "Wave Riding", "Freestyle"],
+      windguruCode: "26", // :contentReference[oaicite:10]{index=10}
+      kiteSchools: [
+        "Kitesurfing Lessons in Essaouira Beach|https://maps.google.com/?q=Kitesurfing+Lessons+in+Essaouira+Beach|5.0|204", // :contentReference[oaicite:11]{index=11}
+        "KiteSurfing or Surfing Experience in Essaouira|https://maps.google.com/?q=KiteSurfing+or+Surfing+Experience+in+Essaouira|4.8|91", // :contentReference[oaicite:12]{index=12}
+        "Kitesurf Maroc Essaouira|https://maps.google.com/?q=Kitesurf+Maroc|5.0|85", // :contentReference[oaicite:13]{index=13}
+        "Individual kitesurfing lessons in Essaouira|https://maps.google.com/?q=Individual+kitesurfing+lessons+in+Essaouira|4.9|38", // :contentReference[oaicite:14]{index=14}
+        "2h surfing in uncrowded spots|https://maps.google.com/?q=2h+surfing+in+uncrowded+spots|5.0|44", // :contentReference[oaicite:15]{index=15}
+      ],
+      conditions: ["Side-Onshore Wind", "Warm Water", "Sandy Bottom"],
+      accommodationOptions: [
+        "Beachfront Guesthouses",
+        "Eco-lodges near the dunes",
+        "Campgrounds by the beach",
+      ],
+      foodOptions: ["Local Cafés", "Beach Shacks", "Moroccan Tagine Houses"],
+      culture:
+        "Laid-back Berber village vibe with live Gnawa music and traditional camel-farm heritage",
+      averageSchoolCost: 35, // :contentReference[oaicite:16]{index=16}
+      averageAccommodationCost: 80,
+      numberOfSchools: 12, // :contentReference[oaicite:17]{index=17}
+    },
+    windConditions: [
+      {
+        month: 1,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 18,
+        waterTemp: 17,
+        seasonalNotes:
+          "Cool winter breezes—great for wave sessions but require a thicker wetsuit.",
+      },
+      {
+        month: 2,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 18,
+        waterTemp: 16,
+        seasonalNotes:
+          "Consistent N–NE trades with fewer tourists; ideal for focused training.",
+      },
+      {
+        month: 3,
+        windSpeed: 15,
+        windQuality: WindQuality.Moderate,
+        airTemp: 19,
+        waterTemp: 16,
+        seasonalNotes:
+          "Spring transition—winds steady but slightly lighter; water still cool.",
+      },
+      {
+        month: 4,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 21,
+        waterTemp: 17,
+        seasonalNotes:
+          "Winds pick up strongly; water warms—prime time for learning and freestyle.",
+      },
+      {
+        month: 5,
+        windSpeed: 22,
+        windQuality: WindQuality.Good,
+        airTemp: 23,
+        waterTemp: 18,
+        seasonalNotes:
+          "Late spring offers optimal conditions with strong, reliable winds.",
+      },
+      {
+        month: 6,
+        windSpeed: 24,
+        windQuality: WindQuality.Excellent,
+        airTemp: 26,
+        waterTemp: 19,
+        seasonalNotes:
+          "June is the windiest month—perfect for advanced maneuvers and downwinders.",
+      },
+      {
+        month: 7,
+        windSpeed: 25,
+        windQuality: WindQuality.Excellent,
+        airTemp: 28,
+        waterTemp: 20,
+        seasonalNotes:
+          "Mid-summer with peak wind and warmest air/water—very popular spot.",
+      },
+      {
+        month: 8,
+        windSpeed: 25,
+        windQuality: WindQuality.Excellent,
+        airTemp: 28,
+        waterTemp: 21,
+        seasonalNotes:
+          "Stable high winds; ideal for kite-surfers seeking challenge in waves.",
+      },
+      {
+        month: 9,
+        windSpeed: 23,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
+        waterTemp: 21,
+        seasonalNotes:
+          "Early autumn sees slight tapering of wind—still excellent conditions.",
+      },
+      {
+        month: 10,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 24,
+        waterTemp: 20,
+        seasonalNotes:
+          "October brings milder winds; great for progression before crowds return.",
+      },
+      {
+        month: 11,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 22,
+        waterTemp: 19,
+        seasonalNotes:
+          "Late autumn—winds rebuild; fewer kiters, perfect for uninterrupted sessions.",
+      },
+      {
+        month: 12,
+        windSpeed: 17,
+        windQuality: WindQuality.Moderate,
+        airTemp: 19,
+        waterTemp: 17,
+        seasonalNotes:
+          "Early winter trade winds return; wetsuits recommended for choppy waters.",
       },
     ],
   },
