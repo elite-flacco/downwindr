@@ -761,7 +761,7 @@ export default function ProfilePage() {
                   <AvatarImage src={avatarUrl} alt={user.username} />
                 ) : user.avatarUrl ? (
                   <AvatarImage 
-                    src={`${user.avatarUrl}?t=${new Date().getTime()}`} 
+                    src={`${user.avatarUrl}?t=${Date.now()}`} 
                     alt={user.username} 
                   />
                 ) : null}

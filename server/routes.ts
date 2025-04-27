@@ -6,6 +6,7 @@ import { MonthNames, insertReviewSchema, insertRatingSchema, WindQuality } from 
 import { setupAuth, comparePasswords, hashPassword } from "./auth";
 import { upload, processProfileImage } from "./uploads";
 import path from "path";
+import { WebSocketServer, WebSocket } from 'ws';
 
 // Define user preferences schema for validation
 const userPreferencesSchema = z.object({
@@ -42,6 +43,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // HTTP server
   const httpServer = createServer(app);
+  
+  // WebSocket server
+  const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
+  
+  // Connected WebSocket clients
+  const clients: Set<WebSocket> = new Set();
+  
+  // Handle WebSocket connections
+  wss.on('connection', (ws) => {
+    console.log('WebSocket client connected');
+    clients.add(ws);
+    
+    // Send initial connection message
+    ws.send(JSON.stringify({ type: 'connected' }));
+    
+    // Handle client disconnection
+    ws.on('close', () => {
+      console.log('WebSocket client disconnected');
+      clients.delete(ws);
+    });
+  });
+  
+  // Helper function to broadcast avatar updates to all connected clients
+  const broadcastAvatarUpdate = (userId: number) => {
+    const message = JSON.stringify({
+      type: 'avatar_update',
+      userId,
+      timestamp: Date.now()
+    });
+    
+    clients.forEach(client => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  };
 
   // Get all spots
   app.get("/api/spots", async (req, res) => {
@@ -517,6 +554,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Update session user data
       (req.user as Express.User).avatarUrl = null;
       
+      // Broadcast profile picture update event to all connected clients
+      broadcastAvatarUpdate(userId);
+      
       res.json({ 
         message: "Profile picture removed successfully",
         user: updatedUser
@@ -545,6 +585,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Update session user data
       (req.user as Express.User).avatarUrl = avatarUrl;
+      
+      // Broadcast profile picture update event to all connected clients
+      broadcastAvatarUpdate(userId);
       
       res.json({ 
         message: "Profile picture updated successfully",
@@ -585,6 +628,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         // Update session user data
         (req.user as Express.User).avatarUrl = fileUrl;
+        
+        // Broadcast profile picture update event to all connected clients
+        broadcastAvatarUpdate(userId);
         
         res.json({ 
           message: "Profile picture uploaded successfully",
