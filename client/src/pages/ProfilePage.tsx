@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,13 @@ import { Link } from "wouter";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
+
+// Helper function to handle profile image cache busting
+const getTimestampedUrl = (url: string | null): string | undefined => {
+  if (!url) return undefined;
+  const timestamp = new Date().getTime();
+  return `${url}?t=${timestamp}`;
+};
 import {
   Dialog,
   DialogContent,
@@ -174,7 +181,7 @@ export default function ProfilePage() {
       const res = await apiRequest("DELETE", "/api/user/profile-picture");
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       toast({
         title: "Profile picture removed",
         description: "Your profile picture has been successfully removed.",
@@ -187,8 +194,14 @@ export default function ProfilePage() {
       // Close the modal
       setShowProfileImageModal(false);
       
-      // Simple full page reload - sometimes the most reliable approach
-      window.location.reload();
+      // Force update the user data in the cache to reflect the removed avatar
+      if (response && response.user) {
+        // Update the user in the cache with the new data
+        queryClient.setQueryData(["/api/user"], response.user);
+      } else {
+        // If no user data in response, just invalidate the cache
+        queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      }
     },
     onError: (error) => {
       toast({
@@ -205,7 +218,7 @@ export default function ProfilePage() {
       const res = await apiRequest("POST", "/api/user/profile-picture", { avatarUrl: url });
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       toast({
         title: "Profile picture updated",
         description: "Your profile picture has been successfully updated.",
@@ -216,8 +229,14 @@ export default function ProfilePage() {
       setAvatarUrl("");
       setImagePreview(null);
       
-      // Simple full page reload - sometimes the most reliable approach
-      window.location.reload();
+      // Force update the user data in the cache to reflect the new avatar
+      if (response && response.user) {
+        // Update the user in the cache with the new data
+        queryClient.setQueryData(["/api/user"], response.user);
+      } else {
+        // If no user data in response, just invalidate the cache
+        queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      }
     },
     onError: (error) => {
       toast({
@@ -258,8 +277,14 @@ export default function ProfilePage() {
       setImagePreview(null);
       setIsUploading(false);
       
-      // Simple full page reload - sometimes the most reliable approach
-      window.location.reload();
+      // Force update the user data in the cache to reflect the new avatar
+      if (response && response.user) {
+        // Update the user in the cache with the new data
+        queryClient.setQueryData(["/api/user"], response.user);
+      } else {
+        // If no user data in response, just invalidate the cache
+        queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      }
     },
     onError: (error) => {
       toast({
@@ -389,7 +414,7 @@ export default function ProfilePage() {
                 <div className="relative group">
                   <Avatar className="h-24 w-24 mb-3">
                     <AvatarImage
-                      src={user.avatarUrl || undefined}
+                      src={getTimestampedUrl(user.avatarUrl)}
                       alt={user.username}
                     />
                     <AvatarFallback className="text-lg bg-primary text-primary-foreground">
