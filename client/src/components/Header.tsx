@@ -3,9 +3,8 @@ import { Link, useLocation } from 'wouter';
 import { Wind, Menu, X, LogIn, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/use-auth';
-import { useProfileImage, getTimestampedUrl } from '@/hooks/use-profile-image';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AvatarWithRefresh } from '@/components/AvatarWithRefresh';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -20,7 +19,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
   const { user, isLoading, logoutMutation } = useAuth();
-  const { imageVersion } = useProfileImage();
   
   // Handle logout click
   const handleLogout = (e: React.MouseEvent) => {
@@ -144,16 +142,12 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage 
-                      src={getTimestampedUrl(user.avatarUrl)} 
-                      alt={user.username}
-                      key={`avatar-header-${imageVersion}`} // Force re-render when image version changes
-                    />
-                    <AvatarFallback className="bg-theme-primary text-theme-background">
-                      {user.username.substring(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+                  <AvatarWithRefresh 
+                    userAvatarUrl={user.avatarUrl}
+                    userName={user.username}
+                    className="h-8 w-8"
+                    fallbackClassName="bg-theme-primary text-theme-background"
+                  />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -207,16 +201,12 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full mr-1">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage 
-                      src={getTimestampedUrl(user.avatarUrl)} 
-                      alt={user.username}
-                      key={`avatar-mobile-${imageVersion}`} // Force re-render when image version changes
-                    />
-                    <AvatarFallback className="bg-theme-primary text-theme-background">
-                      {user.username.substring(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+                  <AvatarWithRefresh 
+                    userAvatarUrl={user.avatarUrl}
+                    userName={user.username}
+                    className="h-8 w-8"
+                    fallbackClassName="bg-theme-primary text-theme-background"
+                  />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>

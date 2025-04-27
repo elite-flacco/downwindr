@@ -8,15 +8,12 @@ import Community from "@/pages/Community";
 import Learn from "@/pages/Learn";
 import ProfilePage from "@/pages/ProfilePage";
 import { AuthProvider } from "@/hooks/use-auth";
-import { ProfileImageProvider } from "@/hooks/use-profile-image";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 function App() {
   return (
     <AuthProvider>
-      <ProfileImageProvider>
-        <AppContent />
-      </ProfileImageProvider>
+      <AppContent />
     </AuthProvider>
   );
 }

@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { useProfileImage, getTimestampedUrl } from "@/hooks/use-profile-image";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +9,7 @@ import { Link } from "wouter";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
+import { AvatarWithRefresh } from "@/components/AvatarWithRefresh";
 import {
   Dialog,
   DialogContent,
@@ -78,7 +78,7 @@ type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 export default function ProfilePage() {
   const { user } = useAuth();
   const { toast } = useToast();
-  const { imageVersion, refreshImage } = useProfileImage();
+  const [avatarKey, setAvatarKey] = useState(0); // Force avatar refresh
   const [activeTab, setActiveTab] = useState("reviews");
   const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
   const [reviewContent, setReviewContent] = useState("");
@@ -88,6 +88,11 @@ export default function ProfilePage() {
   const [uploadMethod, setUploadMethod] = useState<"url" | "file">("url");
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Refresh function to update avatars
+  const refreshAvatars = () => {
+    setAvatarKey(prev => prev + 1);
+  };
 
   // Fetch user reviews
   const {
@@ -191,15 +196,14 @@ export default function ProfilePage() {
       
       // Force update the user data in the cache to reflect the removed avatar
       if (response && response.user) {
-        // Update the user in the cache with the new data
         queryClient.setQueryData(["/api/user"], response.user);
       } 
       
       // Always invalidate the cache to ensure all components reflect the change
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       
-      // Refresh profile image in all components using the context
-      refreshImage();
+      // Force avatar refresh
+      refreshAvatars();
     },
     onError: (error) => {
       toast({
@@ -229,15 +233,14 @@ export default function ProfilePage() {
       
       // Force update the user data in the cache to reflect the new avatar
       if (response && response.user) {
-        // Update the user in the cache with the new data
         queryClient.setQueryData(["/api/user"], response.user);
       } 
       
       // Always invalidate the cache to ensure all components reflect the change
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       
-      // Refresh profile image in all components using the context
-      refreshImage();
+      // Force avatar refresh
+      refreshAvatars();
     },
     onError: (error) => {
       toast({
@@ -280,15 +283,14 @@ export default function ProfilePage() {
       
       // Force update the user data in the cache to reflect the new avatar
       if (response && response.user) {
-        // Update the user in the cache with the new data
         queryClient.setQueryData(["/api/user"], response.user);
       }
       
       // Always invalidate the cache to ensure all components reflect the change
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       
-      // Refresh profile image in all components using the context
-      refreshImage();
+      // Force avatar refresh
+      refreshAvatars();
     },
     onError: (error) => {
       toast({
@@ -416,16 +418,12 @@ export default function ProfilePage() {
             <CardContent className="pt-4">
               <div className="flex flex-col items-center mb-6">
                 <div className="relative group">
-                  <Avatar className="h-24 w-24 mb-3">
-                    <AvatarImage
-                      src={getTimestampedUrl(user.avatarUrl)}
-                      alt={user.username}
-                      key={`profile-${imageVersion}`} // Force re-render when version changes
-                    />
-                    <AvatarFallback className="text-lg bg-primary text-primary-foreground">
-                      {user.username.substring(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+                  <AvatarWithRefresh
+                    userAvatarUrl={user.avatarUrl} 
+                    userName={user.username}
+                    className="h-24 w-24 mb-3"
+                    fallbackClassName="text-lg bg-primary text-primary-foreground"
+                  />
                   <button 
                     onClick={() => setShowProfileImageModal(true)}
                     className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-full"
@@ -757,11 +755,16 @@ export default function ProfilePage() {
             {/* Profile picture preview */}
             <div className="flex items-center justify-center">
               <Avatar className="h-32 w-32">
-                <AvatarImage 
-                  src={imagePreview || avatarUrl || getTimestampedUrl(user.avatarUrl)} 
-                  alt={user.username}
-                  key={`preview-${imageVersion}`} // Force re-render when version changes
-                />
+                {imagePreview ? (
+                  <AvatarImage src={imagePreview} alt={user.username} />
+                ) : avatarUrl ? (
+                  <AvatarImage src={avatarUrl} alt={user.username} />
+                ) : user.avatarUrl ? (
+                  <AvatarImage 
+                    src={`${user.avatarUrl}?t=${new Date().getTime()}`} 
+                    alt={user.username} 
+                  />
+                ) : null}
                 <AvatarFallback className="text-2xl">
                   {user.username.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
