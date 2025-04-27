@@ -187,8 +187,8 @@ export default function ProfilePage() {
       // Close the modal
       setShowProfileImageModal(false);
       
-      // Force fetch fresh user data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Simple full page reload - sometimes the most reliable approach
+      window.location.reload();
     },
     onError: (error) => {
       toast({
@@ -216,8 +216,8 @@ export default function ProfilePage() {
       setAvatarUrl("");
       setImagePreview(null);
       
-      // Force refresh user data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Simple full page reload - sometimes the most reliable approach
+      window.location.reload();
     },
     onError: (error) => {
       toast({
@@ -258,8 +258,8 @@ export default function ProfilePage() {
       setImagePreview(null);
       setIsUploading(false);
       
-      // Force refresh user data
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Simple full page reload - sometimes the most reliable approach
+      window.location.reload();
     },
     onError: (error) => {
       toast({
