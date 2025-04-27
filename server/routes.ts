@@ -501,5 +501,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Update user profile picture (requires authentication)
+  app.post("/api/user/profile-picture", isAuthenticated, async (req, res) => {
+    try {
+      const userId = (req.user as Express.User).id;
+      const { avatarUrl } = req.body;
+      
+      if (!avatarUrl || typeof avatarUrl !== 'string') {
+        return res.status(400).json({ message: "Invalid avatar URL" });
+      }
+      
+      // Get current user
+      const user = await storage.getUserById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Update user's avatar URL
+      user.avatarUrl = avatarUrl;
+      
+      // Update session user data
+      (req.user as Express.User).avatarUrl = avatarUrl;
+      
+      res.json({ 
+        message: "Profile picture updated successfully",
+        user: req.user
+      });
+    } catch (error) {
+      console.error("Error updating profile picture:", error);
+      res.status(500).json({ message: "Error updating profile picture" });
+    }
+  });
+
   return httpServer;
 }
