@@ -178,6 +178,39 @@ export default function ProfilePage() {
         description: "Your profile picture has been successfully updated.",
       });
       setShowProfileImageModal(false);
+      setAvatarUrl("");
+      setImagePreview(null);
+      // Refresh user data
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    },
+  });
+  
+  // Profile picture upload mutation (File upload based)
+  const uploadProfilePictureMutation = useMutation({
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append('profileImage', file);
+      
+      const response = await fetch('/api/user/profile-picture-upload', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to upload image');
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Profile picture uploaded",
+        description: "Your profile picture has been successfully uploaded.",
+      });
+      setShowProfileImageModal(false);
+      setImagePreview(null);
       // Refresh user data
       queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
@@ -212,11 +245,57 @@ export default function ProfilePage() {
     setEditingReviewId(null);
   };
 
+  // Handle file selection
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file",
+        description: "Please select an image file.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Check file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Please select an image smaller than 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Create a preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+    
+    // Set file for upload
+    setIsUploading(true);
+    uploadProfilePictureMutation.mutate(file);
+  };
+  
   // Handle update profile picture
   const updateProfilePicture = () => {
-    if (avatarUrl.trim()) {
+    if (uploadMethod === 'url' && avatarUrl.trim()) {
       updateProfilePictureMutation.mutate(avatarUrl);
+    } else if (uploadMethod === 'file') {
+      fileInputRef.current?.click();
     }
+  };
+  
+  // Reset the profile picture modal
+  const resetProfilePictureModal = () => {
+    setAvatarUrl('');
+    setImagePreview(null);
+    setUploadMethod('url');
   };
 
   // Password change form submit handler
@@ -571,63 +650,154 @@ export default function ProfilePage() {
       </div>
       
       {/* Profile Picture Edit Dialog */}
-      <Dialog open={showProfileImageModal} onOpenChange={setShowProfileImageModal}>
+      <Dialog 
+        open={showProfileImageModal} 
+        onOpenChange={(open) => {
+          setShowProfileImageModal(open);
+          if (!open) resetProfilePictureModal();
+        }}
+      >
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Update Profile Picture</DialogTitle>
             <DialogDescription>
-              Enter the URL of your new profile picture
+              Choose an image for your profile
             </DialogDescription>
           </DialogHeader>
+          
+          {/* Upload method tabs */}
+          <div className="border-b mb-4">
+            <div className="flex">
+              <button
+                type="button"
+                className={`px-4 py-2 text-sm font-medium border-b-2 ${
+                  uploadMethod === 'url'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => setUploadMethod('url')}
+              >
+                Image URL
+              </button>
+              <button
+                type="button"
+                className={`px-4 py-2 text-sm font-medium border-b-2 ${
+                  uploadMethod === 'file'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => setUploadMethod('file')}
+              >
+                Upload File
+              </button>
+            </div>
+          </div>
+          
           <div className="space-y-4 py-4">
+            {/* Profile picture preview */}
             <div className="flex items-center justify-center">
               <Avatar className="h-32 w-32">
-                <AvatarImage src={avatarUrl || user.avatarUrl || undefined} />
+                <AvatarImage 
+                  src={imagePreview || avatarUrl || user.avatarUrl || undefined} 
+                  alt={user.username}
+                />
                 <AvatarFallback className="text-2xl">
                   {user.username.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
             </div>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="picture-url">Picture URL</Label>
-                <Input
-                  id="picture-url"
-                  placeholder="https://example.com/your-picture.jpg"
-                  value={avatarUrl}
-                  onChange={(e) => setAvatarUrl(e.target.value)}
+            
+            {/* URL input method */}
+            {uploadMethod === 'url' && (
+              <div className="grid gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="picture-url">Picture URL</Label>
+                  <Input
+                    id="picture-url"
+                    placeholder="https://example.com/your-picture.jpg"
+                    value={avatarUrl}
+                    onChange={(e) => setAvatarUrl(e.target.value)}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Enter a direct link to an image (JPG, PNG, or GIF)
+                </p>
+              </div>
+            )}
+            
+            {/* File upload method */}
+            {uploadMethod === 'file' && (
+              <div className="grid gap-4">
+                <div 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-muted/50 transition-colors"
+                >
+                  <UploadCloud className="h-10 w-10 text-muted-foreground mb-2" />
+                  <p className="text-sm font-medium">Click to upload</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    PNG, JPG or WebP (max 5MB)
+                  </p>
+                </div>
+                <input
+                  type="file"
+                  id="file-upload"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
                 />
               </div>
-              <p className="text-xs text-muted-foreground">
-                Enter a direct link to an image (JPG, PNG, or GIF)
-              </p>
-            </div>
+            )}
           </div>
+          
           <DialogFooter className="sm:justify-between">
             <Button
               type="button"
               variant="outline"
-              onClick={() => setShowProfileImageModal(false)}
+              onClick={() => {
+                setShowProfileImageModal(false);
+                resetProfilePictureModal();
+              }}
             >
               Cancel
             </Button>
-            <Button
-              type="button"
-              disabled={!avatarUrl.trim() || updateProfilePictureMutation.isPending}
-              onClick={updateProfilePicture}
-            >
-              {updateProfilePictureMutation.isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Updating...
-                </>
-              ) : (
-                <>
-                  <Upload className="mr-2 h-4 w-4" />
-                  Update Picture
-                </>
-              )}
-            </Button>
+            {uploadMethod === 'url' ? (
+              <Button
+                type="button"
+                disabled={!avatarUrl.trim() || updateProfilePictureMutation.isPending}
+                onClick={updateProfilePicture}
+              >
+                {updateProfilePictureMutation.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Updating...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="mr-2 h-4 w-4" />
+                    Update Picture
+                  </>
+                )}
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploadProfilePictureMutation.isPending || isUploading}
+              >
+                {uploadProfilePictureMutation.isPending || isUploading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <UploadCloud className="mr-2 h-4 w-4" />
+                    Select File
+                  </>
+                )}
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
