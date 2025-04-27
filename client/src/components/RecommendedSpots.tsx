@@ -85,25 +85,42 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
     }
   };
 
-  // Calculate match percentage display (80-100%)
+  // Calculate match percentage display (more realistic range)
   const getMatchPercent = (score: number) => {
-    // Maximum possible score from server-side algorithm:
-    // Wind speed: 20, Wind quality: 15, Temperature: 15, Difficulty: 10, 
-    // Budget: 10, Region: 10, Kite Schools: 7, Waves: 7, Food: 5, Culture: 5
-    const maxPossibleScore = 94;
-    // Normalize the score to be between 0 and 1
-    const normalizedScore = Math.min(Math.max(score / maxPossibleScore, 0), 1);
-    // Convert to 80-100% range
-    return Math.round(80 + normalizedScore * 20);
+    // Maximum theoretical score from server-side algorithm:
+    // Wind speed: 20 (optimal), Wind quality: 15 (excellent), Temperature: 15 (perfect match)
+    // Difficulty: 10, Budget: 10 (exact match), Region: 10, Kite Schools: 7
+    // Waves: 7, Food: 5, Culture: 5
+    // Total max possible: 94
+    
+    // However, in practice it's nearly impossible to hit 94 points.
+    // We want the top matches to show as 90-98% and worst matches to show 60-75%
+    // So we'll use a more balanced approach:
+    
+    // Determine what 100% would be (about 85% of max theoretical score)
+    const realisticMaxScore = 80;
+    
+    // Calculate base percentage
+    let percentage = Math.round((score / realisticMaxScore) * 100);
+    
+    // Clamp percentage to realistic ranges
+    if (percentage > 98) percentage = 98; // Absolute max cap
+    if (percentage < 60 && percentage > 40) percentage = 60; // Min for recommended spots
+    
+    return percentage;
   };
 
   // Progress bar color based on match score
   const getMatchColor = (score: number) => {
     const percent = getMatchPercent(score);
-    if (percent >= 95) return "bg-blue-700";
-    if (percent >= 90) return "bg-blue-600";
-    if (percent >= 85) return "bg-blue-500";
-    return "bg-slate-500";
+    if (percent >= 95) return "bg-blue-700"; // Excellent match
+    if (percent >= 90) return "bg-blue-600"; // Great match
+    if (percent >= 85) return "bg-blue-500"; // Very good match
+    if (percent >= 80) return "bg-blue-400"; // Good match
+    if (percent >= 75) return "bg-emerald-500"; // Decent match
+    if (percent >= 70) return "bg-green-500"; // Okay match
+    if (percent >= 65) return "bg-amber-500"; // Fair match
+    return "bg-slate-500"; // Minimal match
   };
 
   return (

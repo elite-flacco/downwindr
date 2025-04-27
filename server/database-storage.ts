@@ -157,50 +157,98 @@ export class DatabaseStorage implements IStorage {
 
       if (!windCondition) continue; // Skip spots with no wind data for this month
 
-      // Match wind speed preferences
+      // Match wind speed preferences with more granularity
+      const idealWindRange = preferences.windSpeedMax - preferences.windSpeedMin;
+      const midPoint = (preferences.windSpeedMin + preferences.windSpeedMax) / 2;
+      
       if (
         windCondition.windSpeed >= preferences.windSpeedMin &&
         windCondition.windSpeed <= preferences.windSpeedMax
       ) {
-        score += 20;
+        // Perfect match - within range
+        // Calculate how close to the middle of the preferred range
+        const distanceFromMid = Math.abs(windCondition.windSpeed - midPoint);
+        const percentFromCenter = distanceFromMid / (idealWindRange / 2);
+        
+        // Score highest (20) if exactly at midpoint, down to 15 at the edges of the range
+        const windMatchScore = 20 - (5 * percentFromCenter);
+        score += windMatchScore;
+        
         reasons.push(
-          `Wind speed of ${windCondition.windSpeed} knots matches your preferences`,
+          `Wind speed of ${windCondition.windSpeed} knots is ideal for your preferences`,
         );
-      }
-
-      // Match wind quality
-      if (
-        windCondition.windQuality === WindQuality.Excellent ||
-        windCondition.windQuality === WindQuality.Good
-      ) {
-        score += 15;
-        reasons.push(`${windCondition.windQuality} wind quality`);
-      }
-
-      // Match temperature preferences
-      if (windCondition.airTemp) {
-        let tempMatch = false;
-
-        switch (preferences.temperature) {
-          case "cold":
-            tempMatch = windCondition.airTemp < 20;
-            break;
-          case "moderate":
-            tempMatch = windCondition.airTemp >= 20 && windCondition.airTemp < 25;
-            break;
-          case "warm":
-            tempMatch = windCondition.airTemp >= 25 && windCondition.airTemp < 30;
-            break;
-          case "hot":
-            tempMatch = windCondition.airTemp >= 30;
-            break;
-        }
-
-        if (tempMatch) {
-          score += 15;
+      } else {
+        // Outside preferred range - partial points based on how far outside
+        const distanceOutside = Math.min(
+          Math.abs(windCondition.windSpeed - preferences.windSpeedMin),
+          Math.abs(windCondition.windSpeed - preferences.windSpeedMax)
+        );
+        
+        // Give partial points for being close (max 10 points if just outside range)
+        if (distanceOutside <= 5) {
+          const partialScore = 10 * (1 - (distanceOutside / 5));
+          score += partialScore;
           reasons.push(
-            `${windCondition.airTemp}°C air temperature matches your '${preferences.temperature}' preference`,
+            `Wind speed of ${windCondition.windSpeed} knots is close to your preferred range`,
           );
+        }
+      }
+
+      // Match wind quality with more granularity
+      if (windCondition.windQuality === WindQuality.Excellent) {
+        score += 15;
+        reasons.push(`Excellent wind quality - consistent and ideal`);
+      } else if (windCondition.windQuality === WindQuality.Good) {
+        score += 10;
+        reasons.push(`Good wind quality - reliable for most sessions`);
+      } else if (windCondition.windQuality === WindQuality.Moderate) {
+        score += 5;
+        reasons.push(`Moderate wind quality - may have some variability`);
+      } else {
+        // Poor wind quality - no points
+        reasons.push(`Wind quality is below your preferences`);
+      }
+
+      // Match temperature preferences with more granularity
+      if (windCondition.airTemp) {
+        let tempMatchScore = 0;
+        let tempReason = "";
+        
+        // Define ideal temperature ranges for each preference
+        const tempRanges = {
+          cold: { min: 5, ideal: 15, max: 20 },
+          moderate: { min: 18, ideal: 22, max: 25 },
+          warm: { min: 23, ideal: 27, max: 30 },
+          hot: { min: 28, ideal: 33, max: 40 }
+        };
+        
+        const preferredRange = tempRanges[preferences.temperature];
+        
+        if (preferredRange) {
+          const airTemp = windCondition.airTemp;
+          
+          // Perfect match - within ideal range +/- 2 degrees
+          if (Math.abs(airTemp - preferredRange.ideal) <= 2) {
+            tempMatchScore = 15;
+            tempReason = `${airTemp}°C air temperature is ideal for your '${preferences.temperature}' preference`;
+          } 
+          // Good match - within the range
+          else if (airTemp >= preferredRange.min && airTemp <= preferredRange.max) {
+            tempMatchScore = 10;
+            tempReason = `${airTemp}°C air temperature is good for your '${preferences.temperature}' preference`;
+          }
+          // Close match - within 3 degrees outside the range
+          else if (
+            airTemp >= preferredRange.min - 3 && airTemp <= preferredRange.max + 3
+          ) {
+            tempMatchScore = 5;
+            tempReason = `${airTemp}°C air temperature is close to your '${preferences.temperature}' preference`;
+          }
+          
+          if (tempMatchScore > 0) {
+            score += tempMatchScore;
+            reasons.push(tempReason);
+          }
         }
       }
 
@@ -213,25 +261,76 @@ export class DatabaseStorage implements IStorage {
         reasons.push(`Difficulty level matches your preference`);
       }
 
-      // Match budget
-      if (preferences.budget === "budget") {
-        if (spot.averageAccommodationCost && spot.averageAccommodationCost < 70) {
-          score += 10;
-          reasons.push("Affordable accommodation options");
-        }
-      } else if (preferences.budget === "moderate") {
-        if (
-          spot.averageAccommodationCost &&
-          spot.averageAccommodationCost >= 70 &&
-          spot.averageAccommodationCost <= 120
-        ) {
-          score += 10;
-          reasons.push("Moderately priced accommodation options");
-        }
-      } else if (preferences.budget === "luxury") {
-        if (spot.averageAccommodationCost && spot.averageAccommodationCost > 120) {
-          score += 10;
-          reasons.push("Luxury accommodation options");
+      // Match budget with more granularity
+      if (spot.averageAccommodationCost) {
+        const cost = spot.averageAccommodationCost;
+        let budgetMatchScore = 0;
+        let budgetReason = "";
+        
+        // Budget ranges
+        const budgetRanges: {
+          budget: { ideal: number, max: number, min?: number },
+          moderate: { ideal: number, max: number, min: number },
+          luxury: { ideal: number, max: number, min: number }
+        } = {
+          budget: { ideal: 50, max: 70, min: 0 }, // Add min to fix type error
+          moderate: { min: 70, ideal: 95, max: 120 },
+          luxury: { min: 120, ideal: 180, max: 300 }
+        };
+        
+        const preferredBudget = budgetRanges[preferences.budget];
+        
+        if (preferredBudget) {
+          // Perfect budget match
+          if (preferences.budget === "budget" && cost <= preferredBudget.ideal) {
+            budgetMatchScore = 10;
+            budgetReason = `Very affordable accommodation at $${cost}/night`;
+          } 
+          else if (preferences.budget === "budget" && cost <= preferredBudget.max) {
+            budgetMatchScore = 7;
+            budgetReason = `Affordable accommodation at $${cost}/night`;
+          }
+          else if (preferences.budget === "moderate" && 
+                  cost >= preferredBudget.min && 
+                  cost <= preferredBudget.max) {
+            // Closer to ideal is better for moderate
+            const distFromIdeal = Math.abs(cost - preferredBudget.ideal);
+            if (distFromIdeal <= 10) {
+              budgetMatchScore = 10;
+              budgetReason = `Ideal mid-range accommodation at $${cost}/night`;
+            } else {
+              budgetMatchScore = 8;
+              budgetReason = `Good value accommodation at $${cost}/night`;
+            }
+          }
+          else if (preferences.budget === "luxury" && cost >= preferredBudget.min) {
+            if (cost <= preferredBudget.max) {
+              budgetMatchScore = 10;
+              budgetReason = `Premium accommodation options at $${cost}/night`;
+            } else {
+              budgetMatchScore = 7;
+              budgetReason = `Ultra-luxury accommodation at $${cost}/night`;
+            }
+          }
+          // Small partial match for close-but-not-quite budget match
+          else if (preferences.budget === "budget" && cost <= 90) {
+            budgetMatchScore = 3;
+            budgetReason = `Slightly above budget but still reasonable at $${cost}/night`;
+          }
+          else if (preferences.budget === "moderate" && 
+                  (cost >= preferredBudget.min - 15 || cost <= preferredBudget.max + 20)) {
+            budgetMatchScore = 3;
+            budgetReason = `Close to your preferred price range at $${cost}/night`;
+          }
+          else if (preferences.budget === "luxury" && cost >= 100) {
+            budgetMatchScore = 3;
+            budgetReason = `Upscale but below luxury level at $${cost}/night`;
+          }
+          
+          if (budgetMatchScore > 0) {
+            score += budgetMatchScore;
+            reasons.push(budgetReason);
+          }
         }
       }
 
