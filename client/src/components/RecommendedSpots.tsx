@@ -85,28 +85,16 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
     }
   };
 
-  // Calculate match percentage display (more realistic range)
+  // Calculate match percentage display (direct percentage)
   const getMatchPercent = (score: number) => {
-    // Maximum theoretical score from server-side algorithm:
-    // Wind speed: 20 (optimal), Wind quality: 15 (excellent)
-    // Air temp: 8 (perfect match), Water temp: 7 (perfect match)
-    // Difficulty: 10, Budget: 10 (exact match), Region: 10, Kite Schools: 7
-    // Waves: 7, Food: 5, Culture: 5
-    // Total max possible: 94
+    // Maximum theoretical score from server-side algorithm is now exactly 100 points
+    // This means the score directly represents the percentage match
     
-    // However, in practice it's nearly impossible to hit 94 points.
-    // We want the top matches to show as 90-98% and worst matches to show 60-75%
-    // So we'll use a more balanced approach:
+    // Simple direct percentage calculation
+    let percentage = Math.round(score);
     
-    // Determine what 100% would be (about 85% of max theoretical score)
-    const realisticMaxScore = 80;
-    
-    // Calculate base percentage
-    let percentage = Math.round((score / realisticMaxScore) * 100);
-    
-    // Clamp percentage to realistic ranges
-    if (percentage > 98) percentage = 98; // Absolute max cap
-    if (percentage < 60 && percentage > 40) percentage = 60; // Min for recommended spots
+    // Only minimum threshold to ensure recommended spots don't show too low
+    if (percentage < 40 && percentage > 0) percentage = 40;
     
     return percentage;
   };
