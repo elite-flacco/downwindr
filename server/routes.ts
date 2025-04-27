@@ -4,6 +4,8 @@ import { storage, UserPreferences } from "./storage";
 import { z } from "zod";
 import { MonthNames, insertReviewSchema, insertRatingSchema, WindQuality } from "@shared/schema";
 import { setupAuth, comparePasswords, hashPassword } from "./auth";
+import { upload, processProfileImage } from "./uploads";
+import path from "path";
 
 // Define user preferences schema for validation
 const userPreferencesSchema = z.object({
@@ -501,7 +503,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Update user profile picture (requires authentication)
+  // Update user profile picture with URL (requires authentication)
   app.post("/api/user/profile-picture", isAuthenticated, async (req, res) => {
     try {
       const userId = (req.user as Express.User).id;
@@ -532,6 +534,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Error updating profile picture" });
     }
   });
+  
+  // Update user profile picture with file upload (requires authentication)
+  app.post(
+    "/api/user/profile-picture-upload", 
+    isAuthenticated, 
+    upload.single('profileImage'), 
+    processProfileImage,
+    async (req, res) => {
+      try {
+        const userId = (req.user as Express.User).id;
+        
+        // Check if file was uploaded
+        if (!req.file) {
+          return res.status(400).json({ message: "No image file uploaded" });
+        }
+        
+        // Get the processed file URL (added by processProfileImage middleware)
+        const fileUrl = (req as any).fileUrl;
+        if (!fileUrl) {
+          return res.status(500).json({ message: "Error processing uploaded file" });
+        }
+        
+        // Get current user
+        const user = await storage.getUserById(userId);
+        if (!user) {
+          return res.status(404).json({ message: "User not found" });
+        }
+        
+        // Update user's avatar URL with the processed image path
+        user.avatarUrl = fileUrl;
+        
+        // Update session user data
+        (req.user as Express.User).avatarUrl = fileUrl;
+        
+        res.json({ 
+          message: "Profile picture uploaded successfully",
+          user: req.user,
+          avatarUrl: fileUrl
+        });
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
+        res.status(500).json({ message: "Error uploading profile picture" });
+      }
+    }
+  );
 
   return httpServer;
 }

@@ -80,6 +80,10 @@ export default function ProfilePage() {
   const [reviewContent, setReviewContent] = useState("");
   const [showProfileImageModal, setShowProfileImageModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploadMethod, setUploadMethod] = useState<"url" | "file">("url");
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch user reviews
   const {
@@ -162,7 +166,7 @@ export default function ProfilePage() {
     },
   });
   
-  // Profile picture update mutation
+  // Profile picture update mutation (URL based)
   const updateProfilePictureMutation = useMutation({
     mutationFn: async (url: string) => {
       const res = await apiRequest("POST", "/api/user/profile-picture", { avatarUrl: url });
