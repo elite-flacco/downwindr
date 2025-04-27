@@ -57,6 +57,7 @@ import {
   Upload,
   Camera,
   UploadCloud,
+  Trash,
 } from "lucide-react";
 
 // Password change form schema
@@ -782,54 +783,85 @@ export default function ProfilePage() {
             )}
           </div>
           
-          <DialogFooter className="sm:justify-between">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => {
-                setShowProfileImageModal(false);
-                resetProfilePictureModal();
-              }}
-            >
-              Cancel
-            </Button>
-            {uploadMethod === 'url' ? (
-              <Button
-                type="button"
-                disabled={!avatarUrl.trim() || updateProfilePictureMutation.isPending}
-                onClick={updateProfilePicture}
-              >
-                {updateProfilePictureMutation.isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Updating...
-                  </>
-                ) : (
-                  <>
-                    <Upload className="mr-2 h-4 w-4" />
-                    Update Picture
-                  </>
+          <DialogFooter>
+            <div className="flex flex-col-reverse sm:flex-row w-full sm:justify-between gap-2">
+              <div className="flex gap-2 flex-1 sm:flex-initial">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setShowProfileImageModal(false);
+                    resetProfilePictureModal();
+                  }}
+                >
+                  Cancel
+                </Button>
+                
+                {/* Only show the remove button if user has a profile picture */}
+                {user.avatarUrl && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={() => removeProfilePictureMutation.mutate()}
+                    disabled={removeProfilePictureMutation.isPending}
+                  >
+                    {removeProfilePictureMutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Removing...
+                      </>
+                    ) : (
+                      <>
+                        <Trash className="mr-2 h-4 w-4" />
+                        Remove
+                      </>
+                    )}
+                  </Button>
                 )}
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploadProfilePictureMutation.isPending || isUploading}
-              >
-                {uploadProfilePictureMutation.isPending || isUploading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Uploading...
-                  </>
+              </div>
+              
+              <div className="flex-1 sm:flex-initial">
+                {uploadMethod === 'url' ? (
+                  <Button
+                    type="button"
+                    disabled={!avatarUrl.trim() || updateProfilePictureMutation.isPending}
+                    onClick={updateProfilePicture}
+                    className="w-full sm:w-auto"
+                  >
+                    {updateProfilePictureMutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Updating...
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="mr-2 h-4 w-4" />
+                        Update Picture
+                      </>
+                    )}
+                  </Button>
                 ) : (
-                  <>
-                    <UploadCloud className="mr-2 h-4 w-4" />
-                    Select File
-                  </>
+                  <Button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploadProfilePictureMutation.isPending || isUploading}
+                    className="w-full sm:w-auto"
+                  >
+                    {uploadProfilePictureMutation.isPending || isUploading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <UploadCloud className="mr-2 h-4 w-4" />
+                        Select File
+                      </>
+                    )}
+                  </Button>
                 )}
-              </Button>
-            )}
+              </div>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
