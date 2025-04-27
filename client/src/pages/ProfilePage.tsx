@@ -198,10 +198,10 @@ export default function ProfilePage() {
       if (response && response.user) {
         // Update the user in the cache with the new data
         queryClient.setQueryData(["/api/user"], response.user);
-      } else {
-        // If no user data in response, just invalidate the cache
-        queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      }
+      } 
+      
+      // Always invalidate the cache to ensure all components reflect the change
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
     onError: (error) => {
       toast({
@@ -233,10 +233,10 @@ export default function ProfilePage() {
       if (response && response.user) {
         // Update the user in the cache with the new data
         queryClient.setQueryData(["/api/user"], response.user);
-      } else {
-        // If no user data in response, just invalidate the cache
-        queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      }
+      } 
+      
+      // Always invalidate the cache to ensure all components reflect the change
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
     onError: (error) => {
       toast({
@@ -281,10 +281,10 @@ export default function ProfilePage() {
       if (response && response.user) {
         // Update the user in the cache with the new data
         queryClient.setQueryData(["/api/user"], response.user);
-      } else {
-        // If no user data in response, just invalidate the cache
-        queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       }
+      
+      // Always invalidate the cache to ensure all components reflect the change
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
     onError: (error) => {
       toast({
@@ -770,7 +770,7 @@ export default function ProfilePage() {
             <div className="flex items-center justify-center">
               <Avatar className="h-32 w-32">
                 <AvatarImage 
-                  src={imagePreview || avatarUrl || user.avatarUrl || undefined} 
+                  src={imagePreview || avatarUrl || getTimestampedUrl(user.avatarUrl)} 
                   alt={user.username}
                 />
                 <AvatarFallback className="text-2xl">

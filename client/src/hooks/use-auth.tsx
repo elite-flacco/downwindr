@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     refetchOnWindowFocus: true,
     refetchOnMount: true,
     refetchInterval: 60 * 1000, // Refetch every minute
-    staleTime: 30 * 1000, // Consider data stale after 30 seconds
+    staleTime: 10 * 1000, // Consider data stale after 10 seconds (reduced for better profile picture updates)
   });
 
   const loginMutation = useMutation({
