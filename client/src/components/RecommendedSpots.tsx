@@ -87,8 +87,12 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
 
   // Calculate match percentage display (80-100%)
   const getMatchPercent = (score: number) => {
+    // Maximum possible score from server-side algorithm:
+    // Wind speed: 20, Wind quality: 15, Temperature: 15, Difficulty: 10, 
+    // Budget: 10, Region: 10, Kite Schools: 7, Waves: 7, Food: 5, Culture: 5
+    const maxPossibleScore = 94;
     // Normalize the score to be between 0 and 1
-    const normalizedScore = Math.min(Math.max(score, 0), 1);
+    const normalizedScore = Math.min(Math.max(score / maxPossibleScore, 0), 1);
     // Convert to 80-100% range
     return Math.round(80 + normalizedScore * 20);
   };

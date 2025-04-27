@@ -286,6 +286,12 @@ export class DatabaseStorage implements IStorage {
     // Sort by match score descending
     results.sort((a, b) => b.matchScore - a.matchScore);
 
+    // Log scores for debugging
+    console.log("Recommended spots with scores:");
+    results.forEach(spot => {
+      console.log(`${spot.name}: Score ${spot.matchScore} (${Math.round((spot.matchScore / 94) * 100)}%)`);
+    });
+    
     // Return top matches (limited to 8)
     return results.slice(0, 8);
   }
