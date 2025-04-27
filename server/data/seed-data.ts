@@ -1224,33 +1224,42 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Kalpitiya, Sri Lanka",
       country: "Sri Lanka",
-      latitude: 8.2295281,          // :contentReference[oaicite:0]{index=0}
-      longitude: 79.7596142,        // :contentReference[oaicite:1]{index=1}
+      latitude: 8.2295281, // :contentReference[oaicite:0]{index=0}
+      longitude: 79.7596142, // :contentReference[oaicite:1]{index=1}
       description:
-        "A world-class kitesurfing destination on Sri Lanka’s northwest coast, Kalpitiya features a vast shallow lagoon, reliable seasonal winds, and rich coastal wildlife including dolphins and turtles. Its mix of flat-water lagoons and nearby ocean waves, plus eco-lodges and cultural tours into mangroves and Dutch-era forts, make it ideal for kiters of all levels.",  // :contentReference[oaicite:2]{index=2}
-      bestMonths: "May–Oct (SW monsoon) & Dec–Feb (NE monsoon)",  // :contentReference[oaicite:3]{index=3}
-      tempRange: "25.5–28.1°C",    // :contentReference[oaicite:4]{index=4}
+        "A world-class kitesurfing destination on Sri Lanka’s northwest coast, Kalpitiya features a vast shallow lagoon, reliable seasonal winds, and rich coastal wildlife including dolphins and turtles. Its mix of flat-water lagoons and nearby ocean waves, plus eco-lodges and cultural tours into mangroves and Dutch-era forts, make it ideal for kiters of all levels.", // :contentReference[oaicite:2]{index=2}
+      bestMonths: "May–Oct (SW monsoon) & Dec–Feb (NE monsoon)", // :contentReference[oaicite:3]{index=3}
+      tempRange: "25.5–28.1°C", // :contentReference[oaicite:4]{index=4}
       waveSize: "Flat to Small Chop",
       difficultyLevel: "Beginner to Advanced",
       localAttractions:
         "Kalpitiya Lagoon, Dutch Bay, Alankuda dolphin-watching, Wilpattu National Park, mangrove tours",
-      tags: ["Kite Schools", "Eco-Lodges", "Wildlife Tours", "Lagoon Flatwater"],
-      windguruCode: "115722",       // :contentReference[oaicite:5]{index=5}
+      tags: [
+        "Kite Schools",
+        "Eco-Lodges",
+        "Wildlife Tours",
+        "Lagoon Flatwater",
+      ],
+      windguruCode: "115722", // :contentReference[oaicite:5]{index=5}
       kiteSchools: [
-        "Kite Center Sri Lanka|https://maps.google.com/?q=Kite+Center+Sri+Lanka|5.0|150",                 // :contentReference[oaicite:6]{index=6}
-        "Margarita Kite School Sri Lanka|https://maps.google.com/?q=Margarita+Kite+School+Sri+Lanka|5.0|89",  // :contentReference[oaicite:7]{index=7}
-        "Surfpoint Srilanka Kite Village|https://maps.google.com/?q=Surfpoint+Srilanka+Kite+Village|5.0|75",   // :contentReference[oaicite:8]{index=8}
-        "De Silva Kite School|https://maps.google.com/?q=De+Silva+Kite+School+Kalpitiya|5.0|80",            // :contentReference[oaicite:9]{index=9}
-        "Kitesurfing Lanka Resort|https://maps.google.com/?q=Kitesurfing+Lanka+Resort|5.0|98"             // :contentReference[oaicite:10]{index=10}
+        "Kite Center Sri Lanka|https://maps.google.com/?q=Kite+Center+Sri+Lanka|5.0|150", // :contentReference[oaicite:6]{index=6}
+        "Margarita Kite School Sri Lanka|https://maps.google.com/?q=Margarita+Kite+School+Sri+Lanka|5.0|89", // :contentReference[oaicite:7]{index=7}
+        "Surfpoint Srilanka Kite Village|https://maps.google.com/?q=Surfpoint+Srilanka+Kite+Village|5.0|75", // :contentReference[oaicite:8]{index=8}
+        "De Silva Kite School|https://maps.google.com/?q=De+Silva+Kite+School+Kalpitiya|5.0|80", // :contentReference[oaicite:9]{index=9}
+        "Kitesurfing Lanka Resort|https://maps.google.com/?q=Kitesurfing+Lanka+Resort|5.0|98", // :contentReference[oaicite:10]{index=10}
       ],
       conditions: ["Flat Lagoon", "Side-On Shore Wind", "Warm Water"],
-      accommodationOptions: ["Eco-Lodges", "Beachfront Camps", "Boutique Guesthouses"],
+      accommodationOptions: [
+        "Eco-Lodges",
+        "Beachfront Camps",
+        "Boutique Guesthouses",
+      ],
       foodOptions: ["Sri Lankan Seafood", "Local Spices", "International Café"],
       culture:
         "Blend of coastal Sinhala heritage, fishing-village life, and eco-tourism initiatives",
-      averageSchoolCost: 40,          // USD per hour (~€38/hr private lessons) :contentReference[oaicite:11]{index=11}
-      averageAccommodationCost: 20,   // USD per night (~€15–20) :contentReference[oaicite:12]{index=12}
-      numberOfSchools: 25             // approx. 25 kite-focused venues listed online :contentReference[oaicite:13]{index=13}
+      averageSchoolCost: 40, // USD per hour (~€38/hr private lessons) :contentReference[oaicite:11]{index=11}
+      averageAccommodationCost: 20, // USD per night (~€15–20) :contentReference[oaicite:12]{index=12}
+      numberOfSchools: 25, // approx. 25 kite-focused venues listed online :contentReference[oaicite:13]{index=13}
     },
     windConditions: [
       {
@@ -1260,7 +1269,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 25.5,
         waterTemp: 27.5,
         seasonalNotes:
-          "Winter NE-monsoon phase brings 15–20 kt winds; warm air and flat lagoon spots."  // :contentReference[oaicite:14]{index=14}
+          "Winter NE-monsoon phase brings 15–20 kt winds; warm air and flat lagoon spots.", // :contentReference[oaicite:14]{index=14}
       },
       {
         month: 2,
@@ -1269,7 +1278,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 26.5,
         waterTemp: 27.8,
         seasonalNotes:
-          "Steady NE winds and rising temperatures; ideal for learners."  // :contentReference[oaicite:15]{index=15}
+          "Steady NE winds and rising temperatures; ideal for learners.", // :contentReference[oaicite:15]{index=15}
       },
       {
         month: 3,
@@ -1278,7 +1287,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 27.8,
         waterTemp: 29.0,
         seasonalNotes:
-          "Transition to SW monsoon; afternoon breezes pick up around 18 kt."  // :contentReference[oaicite:16]{index=16}
+          "Transition to SW monsoon; afternoon breezes pick up around 18 kt.", // :contentReference[oaicite:16]{index=16}
       },
       {
         month: 4,
@@ -1287,7 +1296,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 28.0,
         waterTemp: 30.1,
         seasonalNotes:
-          "Early SW monsoon brings reliable 18–20 kt winds; fewer crowds."  // :contentReference[oaicite:17]{index=17}
+          "Early SW monsoon brings reliable 18–20 kt winds; fewer crowds.", // :contentReference[oaicite:17]{index=17}
       },
       {
         month: 5,
@@ -1296,7 +1305,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 28.1,
         waterTemp: 29.4,
         seasonalNotes:
-          "Peak SW monsoon strength 20–25 kt; perfect flatwater conditions."  // :contentReference[oaicite:18]{index=18}
+          "Peak SW monsoon strength 20–25 kt; perfect flatwater conditions.", // :contentReference[oaicite:18]{index=18}
       },
       {
         month: 6,
@@ -1305,7 +1314,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 27.6,
         waterTemp: 28.3,
         seasonalNotes:
-          "Strong thermal breezes of 20–25 kt; kite sizes 7–10 m common."  // :contentReference[oaicite:19]{index=19}
+          "Strong thermal breezes of 20–25 kt; kite sizes 7–10 m common.", // :contentReference[oaicite:19]{index=19}
       },
       {
         month: 7,
@@ -1313,8 +1322,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         windQuality: WindQuality.Excellent,
         airTemp: 27.4,
         waterTemp: 27.5,
-        seasonalNotes:
-          "Mid-season peak with 22–27 kt winds; very consistent."  // :contentReference[oaicite:20]{index=20}
+        seasonalNotes: "Mid-season peak with 22–27 kt winds; very consistent.", // :contentReference[oaicite:20]{index=20}
       },
       {
         month: 8,
@@ -1323,7 +1331,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 27.3,
         waterTemp: 27.3,
         seasonalNotes:
-          "Lagoons flush with steady SW trade winds; great for all levels."  // :contentReference[oaicite:21]{index=21}
+          "Lagoons flush with steady SW trade winds; great for all levels.", // :contentReference[oaicite:21]{index=21}
       },
       {
         month: 9,
@@ -1331,8 +1339,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         windQuality: WindQuality.Excellent,
         airTemp: 27.3,
         waterTemp: 27.7,
-        seasonalNotes:
-          "Late SW season winds taper to 20–25 kt; fewer crowds."  // :contentReference[oaicite:22]{index=22}
+        seasonalNotes: "Late SW season winds taper to 20–25 kt; fewer crowds.", // :contentReference[oaicite:22]{index=22}
       },
       {
         month: 10,
@@ -1341,7 +1348,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 26.7,
         waterTemp: 28.3,
         seasonalNotes:
-          "End of SW monsoon; winds around 18–22 kt still reliable."  // :contentReference[oaicite:23]{index=23}
+          "End of SW monsoon; winds around 18–22 kt still reliable.", // :contentReference[oaicite:23]{index=23}
       },
       {
         month: 11,
@@ -1350,7 +1357,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 26.1,
         waterTemp: 28.6,
         seasonalNotes:
-          "Transition month; 15–20 kt breezes return from NE monsoon."  // :contentReference[oaicite:24]{index=24}
+          "Transition month; 15–20 kt breezes return from NE monsoon.", // :contentReference[oaicite:24]{index=24}
       },
       {
         month: 12,
@@ -1358,10 +1365,9 @@ export const kiteSpotsData: SpotSeedData[] = [
         windQuality: WindQuality.Moderate,
         airTemp: 25.7,
         waterTemp: 28.0,
-        seasonalNotes:
-          "Early NE monsoon phase with moderate 15–18 kt winds."  // :contentReference[oaicite:25]{index=25}
-      }
-    ]
+        seasonalNotes: "Early NE monsoon phase with moderate 15–18 kt winds.", // :contentReference[oaicite:25]{index=25}
+      },
+    ],
   },
 
   // 10. Punta San Carlos, Mexico"
@@ -1382,31 +1388,119 @@ export const kiteSpotsData: SpotSeedData[] = [
       tags: ["Wave Riding", "Kitesurfing", "Camping", "Off-grid Adventures"],
       windguruCode: "208958",
       kiteSchools: [
-        "SoloSports Adventure Holidays|https://maps.google.com/?q=SoloSports+Adventure+Holidays|5.0|29"
+        "SoloSports Adventure Holidays|https://maps.google.com/?q=SoloSports+Adventure+Holidays|5.0|29",
       ],
-      conditions: ["Point Break", "Consistent Thermal Winds", "Desert Dunes Launch"],
+      conditions: [
+        "Point Break",
+        "Consistent Thermal Winds",
+        "Desert Dunes Launch",
+      ],
       accommodationOptions: ["Surf Camp Tents", "Basic Cabins"],
       foodOptions: ["Camp Mess Hall", "Self-catered BBQ"],
       culture:
         "Laid-back surf-camp community with an adventurous, off-grid vibe",
       averageSchoolCost: 65,
       averageAccommodationCost: 80,
-      numberOfSchools: 1
+      numberOfSchools: 1,
     },
     windConditions: [
-      { month: 1, windSpeed: 15, windQuality: WindQuality.Good, airTemp: 20, waterTemp: 16, seasonalNotes: "Cool winter breezes; quieter camps" },
-      { month: 2, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 22, waterTemp: 15, seasonalNotes: "Increasing winds; still cool water" },
-      { month: 3, windSpeed: 20, windQuality: WindQuality.Excellent, airTemp: 24, waterTemp: 17, seasonalNotes: "Start of peak wave & wind season" },
-      { month: 4, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 27, waterTemp: 18, seasonalNotes: "Strong south swells; warm air" },
-      { month: 5, windSpeed: 24, windQuality: WindQuality.Excellent, airTemp: 29, waterTemp: 19, seasonalNotes: "Prime conditions; long waves & steady wind" },
-      { month: 6, windSpeed: 23, windQuality: WindQuality.Good, airTemp: 31, waterTemp: 20, seasonalNotes: "Slight taper but still very reliable" },
-      { month: 7, windSpeed: 20, windQuality: WindQuality.Good, airTemp: 33, waterTemp: 21, seasonalNotes: "Hot summer months; afternoon onshores" },
-      { month: 8, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 32, waterTemp: 23, seasonalNotes: "Warm water; occasional calm mornings" },
-      { month: 9, windSpeed: 20, windQuality: WindQuality.Excellent, airTemp: 30, waterTemp: 23, seasonalNotes: "Renewed south swell season; excellent waves" },
-      { month: 10, windSpeed: 22, windQuality: WindQuality.Excellent, airTemp: 27, waterTemp: 21, seasonalNotes: "Steady wind & waves; ideal tie-ins" },
-      { month: 11, windSpeed: 20, windQuality: WindQuality.Good, airTemp: 24, waterTemp: 19, seasonalNotes: "End of season; fewer crowds" },
-      { month: 12, windSpeed: 18, windQuality: WindQuality.Good, airTemp: 21, waterTemp: 17, seasonalNotes: "Cooler temps; quieter vibe" }
-    ]
+      {
+        month: 1,
+        windSpeed: 15,
+        windQuality: WindQuality.Good,
+        airTemp: 20,
+        waterTemp: 16,
+        seasonalNotes: "Cool winter breezes; quieter camps",
+      },
+      {
+        month: 2,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 22,
+        waterTemp: 15,
+        seasonalNotes: "Increasing winds; still cool water",
+      },
+      {
+        month: 3,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 24,
+        waterTemp: 17,
+        seasonalNotes: "Start of peak wave & wind season",
+      },
+      {
+        month: 4,
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 27,
+        waterTemp: 18,
+        seasonalNotes: "Strong south swells; warm air",
+      },
+      {
+        month: 5,
+        windSpeed: 24,
+        windQuality: WindQuality.Excellent,
+        airTemp: 29,
+        waterTemp: 19,
+        seasonalNotes: "Prime conditions; long waves & steady wind",
+      },
+      {
+        month: 6,
+        windSpeed: 23,
+        windQuality: WindQuality.Good,
+        airTemp: 31,
+        waterTemp: 20,
+        seasonalNotes: "Slight taper but still very reliable",
+      },
+      {
+        month: 7,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 33,
+        waterTemp: 21,
+        seasonalNotes: "Hot summer months; afternoon onshores",
+      },
+      {
+        month: 8,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 32,
+        waterTemp: 23,
+        seasonalNotes: "Warm water; occasional calm mornings",
+      },
+      {
+        month: 9,
+        windSpeed: 20,
+        windQuality: WindQuality.Excellent,
+        airTemp: 30,
+        waterTemp: 23,
+        seasonalNotes: "Renewed south swell season; excellent waves",
+      },
+      {
+        month: 10,
+        windSpeed: 22,
+        windQuality: WindQuality.Excellent,
+        airTemp: 27,
+        waterTemp: 21,
+        seasonalNotes: "Steady wind & waves; ideal tie-ins",
+      },
+      {
+        month: 11,
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 24,
+        waterTemp: 19,
+        seasonalNotes: "End of season; fewer crowds",
+      },
+      {
+        month: 12,
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 21,
+        waterTemp: 17,
+        seasonalNotes: "Cooler temps; quieter vibe",
+      },
+    ],
   },
 
   // 11. Guincho, Portugal
@@ -1428,17 +1522,29 @@ export const kiteSpotsData: SpotSeedData[] = [
       windguruCode: "31",
       kiteSchools: [
         // Only schools with more than 25 reviews
-        "Kitesurf Adventures|https://maps.google.com/?q=Kitesurf+Adventures|4.5|237"
+        "Kitesurf Adventures|https://maps.google.com/?q=Kitesurf+Adventures|4.5|237",
       ],
-      conditions: ["Powerful Beach Break", "Consistent Nortada", "Strong Offshore Currents"],
-      accommodationOptions: ["Beachside Guesthouses", "Cascais Hotels", "Sintra Countryside Villas"],
-      foodOptions: ["Beach Bars (Chiringuitos)", "Seafood Restaurants in Cascais", "International Cafés"],
+      conditions: [
+        "Powerful Beach Break",
+        "Consistent Nortada",
+        "Strong Offshore Currents",
+      ],
+      accommodationOptions: [
+        "Beachside Guesthouses",
+        "Cascais Hotels",
+        "Sintra Countryside Villas",
+      ],
+      foodOptions: [
+        "Beach Bars (Chiringuitos)",
+        "Seafood Restaurants in Cascais",
+        "International Cafés",
+      ],
       culture:
         "Blend of Portuguese coastal heritage, surf culture, and protected-park ecotourism",
       averageSchoolCost: 80,
       averageAccommodationCost: 120,
       // Total number of kite schools in the Guincho/Cascais area, regardless of review counts
-      numberOfSchools: 6
+      numberOfSchools: 6,
     },
     windConditions: [
       {
@@ -1448,7 +1554,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 15,
         waterTemp: 15,
         seasonalNotes:
-          "Winter south-westerlies; cooler water and less consistent nortada winds."
+          "Winter south-westerlies; cooler water and less consistent nortada winds.",
       },
       {
         month: 2,
@@ -1457,7 +1563,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 16,
         waterTemp: 14,
         seasonalNotes:
-          "Still cool but with occasional strong nortada gusts in late afternoons."
+          "Still cool but with occasional strong nortada gusts in late afternoons.",
       },
       {
         month: 3,
@@ -1466,7 +1572,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 18,
         waterTemp: 15,
         seasonalNotes:
-          "Spring transition; winds build steadily—good for intermediate riders."
+          "Spring transition; winds build steadily—good for intermediate riders.",
       },
       {
         month: 4,
@@ -1475,7 +1581,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 20,
         waterTemp: 15,
         seasonalNotes:
-          "Winds pick up; wave size moderate—ideal for wave-riding progression."
+          "Winds pick up; wave size moderate—ideal for wave-riding progression.",
       },
       {
         month: 5,
@@ -1484,7 +1590,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 22,
         waterTemp: 16,
         seasonalNotes:
-          "Start of peak nortada season; strong, reliable winds by early afternoon."
+          "Start of peak nortada season; strong, reliable winds by early afternoon.",
       },
       {
         month: 6,
@@ -1493,7 +1599,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 24,
         waterTemp: 17,
         seasonalNotes:
-          "Midsummer north winds strengthen; kite sizes 7–9 m common."
+          "Midsummer north winds strengthen; kite sizes 7–9 m common.",
       },
       {
         month: 7,
@@ -1502,7 +1608,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 26,
         waterTemp: 18,
         seasonalNotes:
-          "Peak season—daily 20–30 kt nortada; intense waves for experienced riders."
+          "Peak season—daily 20–30 kt nortada; intense waves for experienced riders.",
       },
       {
         month: 8,
@@ -1511,7 +1617,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 26,
         waterTemp: 19,
         seasonalNotes:
-          "Consistent strong winds; popular but still plenty of space on the 800 m beach."
+          "Consistent strong winds; popular but still plenty of space on the 800 m beach.",
       },
       {
         month: 9,
@@ -1520,7 +1626,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 24,
         waterTemp: 19,
         seasonalNotes:
-          "Late-season nortada; waves mellow slightly with weaker currents."
+          "Late-season nortada; waves mellow slightly with weaker currents.",
       },
       {
         month: 10,
@@ -1529,7 +1635,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 22,
         waterTemp: 18,
         seasonalNotes:
-          "Autumn transition; winds taper off but remain dependable."
+          "Autumn transition; winds taper off but remain dependable.",
       },
       {
         month: 11,
@@ -1538,7 +1644,7 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 18,
         waterTemp: 17,
         seasonalNotes:
-          "Increasing swells from Atlantic storms; choppier conditions."
+          "Increasing swells from Atlantic storms; choppier conditions.",
       },
       {
         month: 12,
@@ -1547,145 +1653,153 @@ export const kiteSpotsData: SpotSeedData[] = [
         airTemp: 15,
         waterTemp: 15,
         seasonalNotes:
-          "Cooler temps; occasional nortada days but overall less consistent."
-      }
-    ]
-  }
-,
+          "Cooler temps; occasional nortada days but overall less consistent.",
+      },
+    ],
+  },
 
   // 12. Lefkada, Greece
   {
     spot: {
       name: "Lefkada, Greece",
       country: "Greece",
-      latitude: 38.7069,
-      longitude: 20.64,
+      latitude: 38.717, // :contentReference[oaicite:3]{index=3}
+      longitude: 20.65, // :contentReference[oaicite:4]{index=4}
       description:
-        "Lefkada is a stunning Ionian island with several kite beaches like Agios Nikolaos and Milos Beach, offering flat to choppy conditions and thermal winds. Ideal for summer sessions.",
-      bestMonths: "May–September",
-      tempRange: "22–32°C",
-      waveSize: "Flat to Choppy",
-      difficultyLevel: "All levels",
-      localAttractions: "Lefkada Town, Porto Katsiki Beach, island hopping",
-      tags: ["thermal winds", "crystal water", "scenic"],
-      windguruCode: "498",
+        "Lefkada features a trio of kitesurf spots—Milos Beach, Cleopatra (Wooden Bridge), and Agios Nikolaos—set against dramatic cliffs and turquoise waters. Reliable afternoon thermal winds (‘Maistro’) blow daily in summer, offering flat-water lagoons for learners and long downwind runs for advanced riders.", // :contentReference[oaicite:5]{index=5}
+      bestMonths: "May–Sep", // :contentReference[oaicite:6]{index=6}
+      tempRange: "20–30°C",
+      waveSize: "Flat to Small Chop",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions:
+        "Lefkada Town Old Harbour, Milos Beach Cliffs, Agios Ioannis Castle, Downwind run to Kathisma Beach",
+      tags: ["Kite Schools", "Lagoon Flatwater", "Downwind Runs"],
+      windguruCode: "35", // :contentReference[oaicite:7]{index=7}
       kiteSchools: [
-        "Lefkada Kite Center|https://maps.google.com/?q=Lefkada+Kite+Center|4.9|136",
-        "Surf Club Lefkada|https://maps.google.com/?q=Surf+Club+Lefkada|4.8|101",
+        "Kite Club IDAS|https://maps.google.com/?q=Kite+Club+IDAS+Lefkada|4.8|136",
+        "Kite Club Lefkada|https://maps.google.com/?q=Kite+Club+Lefkada|4.7|89",
+        "Cleopatra Kite Resort|https://maps.google.com/?q=Cleopatra+Beach+Kite+Resort|4.9|113",
+        "Agios Ioannis Kite Center|https://maps.google.com/?q=Agios+Ioannis+Kitesurf+Center|4.6|58",
+        "Vassiliki Kite Club|https://maps.google.com/?q=Vassiliki+Kite+Club|4.5|47",
       ],
-      conditions: ["Thermal Winds", "Flat Water", "Chop"],
-      accommodationOptions: ["Beach Villas", "Apartments", "Kite Hotels"],
-      foodOptions: ["Greek Taverns", "Beach Bars", "Seafood Restaurants"],
+      conditions: ["Flat Lagoon", "Side-On Shore Wind", "Choppy Wave Sections"],
+      accommodationOptions: [
+        "Lagoon-Front Villas",
+        "Beach Bungalows",
+        "Town Apartments",
+      ],
+      foodOptions: ["Greek Taverna", "Seafood Mezes", "Beach Bars"],
       culture:
-        "Greek island lifestyle with relaxed vibes and strong hospitality",
-      averageSchoolCost: 70,
-      averageAccommodationCost: 95,
-      numberOfSchools: 4,
+        "Ionian island hospitality, local wine taverns, and lively summer festivals",
+      averageSchoolCost: 55, // USD per hour (approx.)
+      averageAccommodationCost: 90, // USD per night (approx.)
+      numberOfSchools: 8, // All kitesurf schools in the Lefkada area
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 13,
+        windSpeed: 6,
         windQuality: WindQuality.Moderate,
-        airTemp: 13,
-        waterTemp: 15,
+        airTemp: 15,
+        waterTemp: 16,
         seasonalNotes:
-          "Winter with weak wind and cooler temps. Not recommended.",
+          "Off-season with sporadic thermal breezes; quieter beaches.",
       },
       {
         month: 2,
-        windSpeed: 14,
+        windSpeed: 8,
         windQuality: WindQuality.Moderate,
-        airTemp: 14,
+        airTemp: 15,
         waterTemp: 15,
         seasonalNotes:
-          "Light winds continue. Early season kiters may find some days.",
+          "Building spring thermals; good for early-season sessions.",
       },
       {
         month: 3,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 16,
-        waterTemp: 16,
-        seasonalNotes: "Season slowly begins with occasional thermals.",
+        windSpeed: 12,
+        windQuality: WindQuality.Good,
+        airTemp: 17,
+        waterTemp: 15,
+        seasonalNotes:
+          "Temperatures rise; more consistent Maistro kicks in by midday.",
       },
       {
         month: 4,
-        windSpeed: 18,
+        windSpeed: 15,
         windQuality: WindQuality.Good,
-        airTemp: 18,
-        waterTemp: 17,
+        airTemp: 20,
+        waterTemp: 16,
         seasonalNotes:
-          "Thermal winds becoming more consistent. Great for early season trips.",
+          "Pre-season wind ramps up; ideal conditions for progression.",
       },
       {
         month: 5,
-        windSpeed: 20,
+        windSpeed: 18,
         windQuality: WindQuality.Excellent,
-        airTemp: 21,
-        waterTemp: 19,
+        airTemp: 24,
+        waterTemp: 18,
         seasonalNotes:
-          "Reliable thermal winds, warm weather, and flat water. Peak season starts.",
+          "Start of peak season—daily 15–20 kt winds and warm water.",
       },
       {
         month: 6,
-        windSpeed: 21,
+        windSpeed: 20,
         windQuality: WindQuality.Excellent,
-        airTemp: 25,
-        waterTemp: 22,
+        airTemp: 27,
+        waterTemp: 20,
         seasonalNotes:
-          "Ideal kiting with strong thermals and lively beach scene.",
+          "Strong thermals and flat lagoons; prime kitesurfing conditions.",
       },
       {
         month: 7,
         windSpeed: 22,
         windQuality: WindQuality.Excellent,
-        airTemp: 28,
-        waterTemp: 24,
+        airTemp: 29,
+        waterTemp: 22,
         seasonalNotes:
-          "Prime conditions for all levels. Consistent thermal winds daily.",
+          "Hot summer days; reliable 18–22 kt breezes for all levels.",
       },
       {
         month: 8,
-        windSpeed: 22,
+        windSpeed: 21,
         windQuality: WindQuality.Excellent,
         airTemp: 29,
-        waterTemp: 25,
+        waterTemp: 23,
         seasonalNotes:
-          "Still excellent conditions. Slightly more crowded beaches.",
+          "Consistent thermals; slight afternoon chop in wave areas.",
       },
       {
         month: 9,
-        windSpeed: 20,
-        windQuality: WindQuality.Excellent,
-        airTemp: 27,
-        waterTemp: 24,
-        seasonalNotes: "Great winds and fewer crowds. Excellent time to visit.",
+        windSpeed: 19,
+        windQuality: WindQuality.Good,
+        airTemp: 26,
+        waterTemp: 22,
+        seasonalNotes:
+          "Late-season winds taper; still excellent flat-water rides.",
       },
       {
         month: 10,
-        windSpeed: 17,
+        windSpeed: 15,
         windQuality: WindQuality.Good,
         airTemp: 22,
-        waterTemp: 22,
-        seasonalNotes:
-          "Thermals begin fading. Still kitable with good planning.",
+        waterTemp: 20,
+        seasonalNotes: "Autumn transition; reliable breezes and fewer crowds.",
       },
       {
         month: 11,
-        windSpeed: 15,
+        windSpeed: 10,
         windQuality: WindQuality.Moderate,
         airTemp: 18,
-        waterTemp: 20,
-        seasonalNotes: "Unpredictable wind. Off-season for most kiters.",
+        waterTemp: 18,
+        seasonalNotes: "Milder thermals; occasional offshore winds.",
       },
       {
         month: 12,
-        windSpeed: 13,
+        windSpeed: 8,
         windQuality: WindQuality.Moderate,
-        airTemp: 14,
+        airTemp: 16,
         waterTemp: 17,
-        seasonalNotes: "Low wind and chilly. Not ideal for kiting.",
+        seasonalNotes: "Quieter season with light afternoon breezes.",
       },
     ],
   },
@@ -1695,164 +1809,148 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Le Morne, Mauritius",
       country: "Mauritius",
-      latitude: -20.4562,
-      longitude: 57.3082,
+      latitude: -20.45194, // from Wikipedia :contentReference[oaicite:4]{index=4}
+      longitude: 57.32833, // from Wikipedia :contentReference[oaicite:5]{index=5}
       description:
-        "Located on the southwest peninsula of Mauritius, Le Morne offers world-class kitesurfing with a massive shallow lagoon, flat water areas, and access to legendary wave spots including the famous One Eye wave. Protected by coral reefs and backed by the majestic Le Morne Brabant mountain (UNESCO World Heritage Site).",
-      bestMonths: "May-October",
-      tempRange: "20-32°C",
-      waveSize: "Flat to Large",
-      difficultyLevel: "All Levels",
+        "The Le Morne peninsula is a UNESCO World Heritage site, featuring a dramatic 556 m basalt monolith and a vast lagoon. Side-on south-east trade winds create perfect flat-water freeride conditions on the lagoon and powerful wave-riding on the reef, attracting kiters of all levels.", // :contentReference[oaicite:6]{index=6}
+      bestMonths: "May–October", // peak trade wind season :contentReference[oaicite:7]{index=7}
+      tempRange: "22–28°C", // average high temp range :contentReference[oaicite:8]{index=8}
+      waveSize: "Flat Lagoon to Reef Breaks",
+      difficultyLevel: "Beginner to Advanced",
       localAttractions:
-        "Le Morne Brabant mountain hiking, dolphin watching, Black River Gorges National Park, Seven Colored Earths of Chamarel",
+        "Le Morne Brabant Mountain, Underwater Waterfall illusion, Kite Lagoon, UNESCO Cultural Landscape",
       tags: [
-        "flat water",
-        "world-class waves",
-        "reliable wind",
-        "shallow lagoon",
-        "tropical",
+        "Kite Schools",
+        "Heritage Site",
+        "Lagoon Flatwater",
+        "Wave Riding",
       ],
-      windguruCode: "48",
+      windguruCode: "118", // Le Morne spot on Windguru :contentReference[oaicite:9]{index=9}
       kiteSchools: [
-        "Le Morne Kite School|https://maps.google.com/?q=Le+Morne+Kite+School|4.9|128",
-        "Airswitch Kitesurfing Mauritius|https://maps.google.com/?q=Airswitch+Kitesurfing+Mauritius|4.8|242",
-        "ION Club Le Morne|https://maps.google.com/?q=ION+Club+Le+Morne|4.7|165",
-        "Kite Camp Mauritius|https://maps.google.com/?q=Kite+Camp+Mauritius|4.8|95",
-        "Hang Loose Tours|https://maps.google.com/?q=Hang+Loose+Tours+Mauritius|4.7|82",
+        "Airswitch Kitesurfing Mauritius|https://maps.google.com/?q=Airswitch+Kitesurfing+Mauritius|5.0|267", // :contentReference[oaicite:10]{index=10}
+        "Le Morne Kite School|https://maps.google.com/?q=Le+Morne+Kite+School|4.9|221", // :contentReference[oaicite:11]{index=11}
+        "Ion Club Mauritius|https://maps.google.com/?q=Ion+Club+Mauritius|4.3|49", // :contentReference[oaicite:12]{index=12}
+        "Pryde Club Mauritius|https://maps.google.com/?q=Pryde+Club+Mauritius|4.9|75", // :contentReference[oaicite:13]{index=13} :contentReference[oaicite:14]{index=14}
+        "Hang Loose Tours|https://maps.google.com/?q=Hang+Loose+Tours+Le+Morne|5.0|32", // :contentReference[oaicite:15]{index=15}
       ],
-      conditions: [
-        "Shallow Lagoon",
-        "Flat Water",
-        "World-Class Waves",
-        "Coral Reef",
-      ],
+      conditions: ["Flat Lagoon", "Side-On Shore Wind", "Reef Waves"],
       accommodationOptions: [
-        "Luxury Beachfront Resorts",
-        "Guesthouses in La Gaulette",
-        "Vacation Rentals",
-        "Kite Camps",
+        "Beachfront Resorts",
+        "Eco-Lodges",
+        "Mountain-View Villas",
       ],
-      foodOptions: [
-        "Mauritian Creole Cuisine",
-        "Seafood Restaurants",
-        "Indian Food",
-        "Beach Bars",
-        "Resort Dining",
-      ],
+      foodOptions: ["Mauritian Creole Cuisine", "Beach Bars", "Fresh Seafood"],
       culture:
-        "Vibrant multicultural blend of Creole, French, Indian and Chinese influences with multiple languages spoken throughout the island",
-      averageSchoolCost: 70,
-      averageAccommodationCost: 95,
-      numberOfSchools: 10,
+        "Mauritian Creole heritage, French colonial influences, onboard cage diving excursions in turquoise lagoons",
+      averageSchoolCost: 65, // USD per hour (IKO average) :contentReference[oaicite:16]{index=16}
+      averageAccommodationCost: 259, // USD per night (mid-range average) :contentReference[oaicite:17]{index=17}
+      numberOfSchools: 15, // total kiting centers in Le Morne area :contentReference[oaicite:18]{index=18}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 16,
+        windSpeed: 12,
         windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
+        airTemp: 28,
+        waterTemp: 27,
         seasonalNotes:
-          "Summer season with lighter but consistent thermal winds. Less crowded beaches.",
+          "Summer with lighter trade winds; warm water; occasional thermal breezes.", // :contentReference[oaicite:19]{index=19}
       },
       {
         month: 2,
-        windSpeed: 15,
-        windQuality: WindQuality.Poor,
-        airTemp: 30,
-        waterTemp: 29,
-        seasonalNotes:
-          "Hottest month with inconsistent winds. Occasional rain and potential cyclone risk.",
+        windSpeed: 12,
+        windQuality: WindQuality.Moderate,
+        airTemp: 28,
+        waterTemp: 28,
+        seasonalNotes: "Hot and humid; sporadic strong winds for wave riding.", // :contentReference[oaicite:20]{index=20}
       },
       {
         month: 3,
-        windSpeed: 16,
+        windSpeed: 13,
         windQuality: WindQuality.Moderate,
-        airTemp: 29,
-        waterTemp: 28,
-        seasonalNotes:
-          "End of summer with improving conditions. Light thermal winds beginning to establish.",
+        airTemp: 28,
+        waterTemp: 27,
+        seasonalNotes: "Transition month; winds begin to steady by midday.", // :contentReference[oaicite:21]{index=21}
       },
       {
         month: 4,
-        windSpeed: 18,
+        windSpeed: 15,
         windQuality: WindQuality.Good,
         airTemp: 27,
         waterTemp: 27,
         seasonalNotes:
-          "Start of winter season with trade winds beginning. Conditions improving steadily.",
+          "Start of trade wind season; reliable winds by afternoon.", // :contentReference[oaicite:22]{index=22}
       },
       {
         month: 5,
-        windSpeed: 20,
-        windQuality: WindQuality.Good,
+        windSpeed: 18,
+        windQuality: WindQuality.Excellent,
         airTemp: 25,
         waterTemp: 26,
         seasonalNotes:
-          "Trade winds becoming more reliable with comfortable temperatures.",
+          "Peak trade winds; perfect for flat-water freeride sessions.", // :contentReference[oaicite:23]{index=23}
       },
       {
         month: 6,
         windSpeed: 22,
         windQuality: WindQuality.Excellent,
         airTemp: 23,
-        waterTemp: 24,
+        waterTemp: 25,
         seasonalNotes:
-          "Consistent strong southeast trade winds. Perfect conditions with fewer tourists.",
+          "Strong consistent winds; wetsuit recommended for early morning rides.", // :contentReference[oaicite:24]{index=24}
       },
       {
         month: 7,
-        windSpeed: 25,
-        windQuality: WindQuality.Excellent,
-        airTemp: 22,
-        waterTemp: 23,
-        seasonalNotes:
-          "Peak wind season with strongest and most reliable winds. Can reach 35 knots on some days.",
-      },
-      {
-        month: 8,
         windSpeed: 24,
         windQuality: WindQuality.Excellent,
         airTemp: 22,
-        waterTemp: 23,
+        waterTemp: 24,
         seasonalNotes:
-          "Continued excellent conditions with strong trade winds. Good wave conditions.",
+          "Wind peaks; ideal for experienced riders and wave-riding off the reef.", // :contentReference[oaicite:25]{index=25}
+      },
+      {
+        month: 8,
+        windSpeed: 23,
+        windQuality: WindQuality.Excellent,
+        airTemp: 22,
+        waterTemp: 23,
+        seasonalNotes: "Consistent strong breeze; fewer crowds in the lagoon.", // :contentReference[oaicite:26]{index=26}
       },
       {
         month: 9,
-        windSpeed: 21,
+        windSpeed: 20,
         windQuality: WindQuality.Excellent,
         airTemp: 23,
         waterTemp: 23,
         seasonalNotes:
-          "Strong reliable winds continue with best wave conditions. Great for wave riders.",
+          "Late-season trade winds taper slightly; still excellent conditions.", // :contentReference[oaicite:27]{index=27}
       },
       {
         month: 10,
-        windSpeed: 20,
+        windSpeed: 18,
         windQuality: WindQuality.Good,
-        airTemp: 25,
+        airTemp: 24,
         waterTemp: 24,
         seasonalNotes:
-          "End of peak season but still reliable winds and good conditions.",
+          "Winds ease but remain dependable; great flatwater blasts.", // :contentReference[oaicite:28]{index=28}
       },
       {
         month: 11,
-        windSpeed: 18,
+        windSpeed: 15,
         windQuality: WindQuality.Good,
-        airTemp: 27,
+        airTemp: 26,
         waterTemp: 25,
         seasonalNotes:
-          "Transition to summer with gradually decreasing wind reliability but still good sessions possible.",
+          "Pre-summer transition; a mix of thermals and residual trade winds.", // :contentReference[oaicite:29]{index=29}
       },
       {
         month: 12,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 29,
+        windSpeed: 14,
+        windQuality: WindQuality.Good,
+        airTemp: 27,
         waterTemp: 27,
         seasonalNotes:
-          "Beginning of summer with lighter thermal winds. Less consistent but still rideable on good days.",
+          "Warm with lighter winds; ideal for wave-riding and lagoon cruising.", // :contentReference[oaicite:30]{index=30}
       },
     ],
   },
@@ -1862,165 +1960,142 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Mui Ne, Vietnam",
       country: "Vietnam",
-      latitude: 10.9326,
-      longitude: 108.2893,
+      latitude: 10.933, // :contentReference[oaicite:8]{index=8}
+      longitude: 108.283, // :contentReference[oaicite:9]{index=9}
       description:
-        "Once a small fishing village, Mui Ne has become one of Southeast Asia's premier kitesurfing destinations with an average of 230 windy days per year. The area features a mix of flat water conditions in the mornings and chop/small waves in the afternoons, perfect for riders of all levels. The nearby red and white sand dunes create thermal effects that amplify wind conditions.",
-      bestMonths: "Nov-Mar",
-      tempRange: "22-30°C",
-      waveSize: "Small to Medium",
-      difficultyLevel: "Beginner to Advanced",
+        "A former fishing village turned Asia’s kiteboarding capital, Mui Ne features a long sandy bay, reliable northeast monsoon winds from November to April, and warm tropical waters ideal for learners and freestylers.",
+      bestMonths: "Nov–Apr",
+      tempRange: "25–29°C", // :contentReference[oaicite:10]{index=10}
+      waveSize: "Flat to Medium Chop",
+      difficultyLevel: "Beginner to Intermediate",
       localAttractions:
-        "Red Sand Dunes, White Sand Dunes, Fairy Stream, Mui Ne Fishing Village, Ta Cu Mountain, Poshanu Cham Towers",
-      tags: [
-        "budget friendly",
-        "consistent wind",
-        "thermal winds",
-        "beach break",
-        "warm water",
-      ],
-      windguruCode: "523",
+        "Red & White Sand Dunes, Fairy Stream (Suoi Tien), Tà Cú Mountain",
+      tags: ["Kite Schools", "Equipment Rental", "Beach Camps", "Sand Dunes"],
+      windguruCode: "206923", // :contentReference[oaicite:11]{index=11}
       kiteSchools: [
-        "C2Sky Kitecenter|https://maps.google.com/?q=C2Sky+Kitecenter+Mui+Ne|4.9|256",
-        "Vietnam Kiteboarding School (VKS)|https://maps.google.com/?q=Vietnam+Kiteboarding+School+Mui+Ne|4.8|210",
-        "Mui Ne Kitesurf School|https://maps.google.com/?q=Mui+Ne+Kitesurf+School|4.8|175",
-        "Surfpoint Vietnam|https://maps.google.com/?q=Surfpoint+Vietnam+Mui+Ne|4.7|124",
-        "KiteVietnam School|https://maps.google.com/?q=KiteVietnam+School+Mui+Ne|4.7|95",
+        "C2Sky Kitesurfing Vietnam|https://maps.google.com/?q=C2Sky+Kitesurfing+Vietnam|5.0|310", // :contentReference[oaicite:12]{index=12}
+        "Vietnam Kiteboarding School|https://maps.google.com/?q=Vietnam+Kiteboarding+School|5.0|129", // :contentReference[oaicite:13]{index=13}
+        "MANTA Sail Training Centre|https://maps.google.com/?q=MANTA+Sail+Training+Centre|5.0|60", // :contentReference[oaicite:14]{index=14}
+        "Jibe's Beach Club|https://maps.google.com/?q=Jibes+Beach+Club|5.0|176", // :contentReference[oaicite:15]{index=15}
+        "Africa Surf & Kite Test Center|https://maps.google.com/?q=Africa+Surf+%26+Kite+Test+Center|5.0|57", // :contentReference[oaicite:16]{index=16}
       ],
       conditions: [
-        "Side-shore Winds",
-        "Morning Flat Water",
-        "Afternoon Chop",
-        "Shore Break",
+        "Flat to Choppy Water",
+        "Onshore Cross Winds",
         "Sandy Bottom",
       ],
       accommodationOptions: [
         "Beachfront Resorts",
         "Budget Guesthouses",
-        "Boutique Hotels",
-        "Hostels",
+        "Homestays",
       ],
       foodOptions: [
-        "Vietnamese Cuisine",
         "Seafood Restaurants",
-        "International Dining",
-        "Street Food",
-        "Beach Bars",
+        "Vietnamese Street Food",
+        "Beach BBQ",
       ],
       culture:
-        "Blend of traditional Vietnamese fishing culture and growing international tourism scene with Russian and European influences",
-      averageSchoolCost: 45,
-      averageAccommodationCost: 40,
-      numberOfSchools: 8,
+        "Vietnamese coastal fishing-village charm blended with modern resort development and Cham heritage",
+      averageSchoolCost: 50, // :contentReference[oaicite:17]{index=17}
+      averageAccommodationCost: 40, // :contentReference[oaicite:18]{index=18}
+      numberOfSchools: 15, // :contentReference[oaicite:19]{index=19}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 25,
-        waterTemp: 25,
-        seasonalNotes:
-          "Peak season with strong, reliable Northeast monsoon winds. Perfect conditions for all levels.",
+        windSpeed: 20,
+        windQuality: WindQuality.Good,
+        airTemp: 24.8,
+        waterTemp: 26,
+        seasonalNotes: "Winter NE winds; warm water and clear skies.",
       },
       {
         month: 2,
-        windSpeed: 23,
+        windSpeed: 22,
         windQuality: WindQuality.Excellent,
-        airTemp: 26,
-        waterTemp: 25,
-        seasonalNotes:
-          "One of the best months with consistent strong winds (18-25 knots) and comfortable temperatures.",
+        airTemp: 25.4,
+        waterTemp: 26,
+        seasonalNotes: "Strong, steady thermals; peak season.",
       },
       {
         month: 3,
-        windSpeed: 20,
+        windSpeed: 24,
         windQuality: WindQuality.Excellent,
-        airTemp: 28,
-        waterTemp: 26,
-        seasonalNotes:
-          "End of high season with still reliable winds. Less crowded beaches and excellent conditions.",
+        airTemp: 26.6,
+        waterTemp: 27,
+        seasonalNotes: "Consistent high winds; ideal for freestylers.",
       },
       {
         month: 4,
-        windSpeed: 16,
+        windSpeed: 22,
         windQuality: WindQuality.Good,
-        airTemp: 29,
-        waterTemp: 27,
-        seasonalNotes:
-          "Transition month with decreasing winds. Morning sessions best before afternoon thermal winds.",
+        airTemp: 28.1,
+        waterTemp: 28,
+        seasonalNotes: "Trade winds easing slightly; still excellent.",
       },
       {
         month: 5,
-        windSpeed: 13,
-        windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
-        seasonalNotes:
-          "Beginning of summer season with lighter southerly winds. Good for beginners and foiling.",
+        windSpeed: 16,
+        windQuality: WindQuality.Good,
+        airTemp: 28.6,
+        waterTemp: 29,
+        seasonalNotes: "Start of SW season; lighter breezes for beginners.",
       },
       {
         month: 6,
-        windSpeed: 12,
+        windSpeed: 14,
         windQuality: WindQuality.Moderate,
-        airTemp: 30,
-        waterTemp: 28,
-        seasonalNotes:
-          "Summer season with consistent but lighter winds (10-14 knots). Afternoon thermal winds provide good sessions.",
+        airTemp: 27.8,
+        waterTemp: 29,
+        seasonalNotes: "Gentle southwest winds; occasional gusts.",
       },
       {
         month: 7,
         windSpeed: 12,
         windQuality: WindQuality.Moderate,
-        airTemp: 29,
-        waterTemp: 28,
-        seasonalNotes:
-          "Summer season continues with reliable afternoon thermal winds. Good for larger kites and beginners.",
+        airTemp: 27.1,
+        waterTemp: 29,
+        seasonalNotes: "Light winds; best for flat-water kits.",
       },
       {
         month: 8,
-        windSpeed: 13,
+        windSpeed: 10,
         windQuality: WindQuality.Moderate,
-        airTemp: 29,
-        waterTemp: 28,
-        seasonalNotes:
-          "Similar conditions to July with afternoon thermal winds. Less crowded than winter months.",
+        airTemp: 27.0,
+        waterTemp: 29,
+        seasonalNotes: "Quiet month; some afternoon thermals.",
       },
       {
         month: 9,
-        windSpeed: 14,
-        windQuality: WindQuality.Moderate,
-        airTemp: 28,
-        waterTemp: 28,
-        seasonalNotes:
-          "Last month of summer season with gradually improving wind conditions.",
+        windSpeed: 12,
+        windQuality: WindQuality.Good,
+        airTemp: 27.0,
+        waterTemp: 29,
+        seasonalNotes: "Transition to NE season; wind picking up.",
       },
       {
         month: 10,
-        windSpeed: 17,
+        windSpeed: 14,
         windQuality: WindQuality.Good,
-        airTemp: 27,
-        waterTemp: 27,
-        seasonalNotes:
-          "Transition to winter season with increasing Northeast winds. Good conditions with fewer tourists.",
+        airTemp: 26.9,
+        waterTemp: 28,
+        seasonalNotes: "First strong NE winds arrive.",
       },
       {
         month: 11,
-        windSpeed: 20,
-        windQuality: WindQuality.Excellent,
-        airTemp: 26,
-        waterTemp: 26,
-        seasonalNotes:
-          "Start of high season with strong Northeast monsoon winds. Excellent kitesurfing conditions beginning.",
+        windSpeed: 18,
+        windQuality: WindQuality.Moderate,
+        airTemp: 26.4,
+        waterTemp: 27,
+        seasonalNotes: "NE monsoon strengthening; fewer crowds.",
       },
       {
         month: 12,
-        windSpeed: 21,
-        windQuality: WindQuality.Excellent,
-        airTemp: 25,
-        waterTemp: 25,
-        seasonalNotes:
-          "High season with strong, consistent winds. Perfect conditions but beaches can be crowded.",
+        windSpeed: 20,
+        windQuality: WindQuality.Moderate,
+        airTemp: 25.5,
+        waterTemp: 26,
+        seasonalNotes: "Peak season returns; reliable winds.",
       },
     ],
   },
@@ -2030,166 +2105,140 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Lo Stagnone, Sicily",
       country: "Italy",
-      latitude: 37.8033,
-      longitude: 12.4389,
+      latitude: 37.86,
+      longitude: 12.47,
       description:
-        "Lo Stagnone in Marsala, Sicily is widely considered one of Europe's premier kitesurfing destinations. This vast, shallow lagoon offers perfect flat water conditions with consistent thermal winds, making it ideal for both beginners and advanced riders. The knee to waist-deep water allows for easy learning and practicing of freestyle tricks in a safe environment. Located just minutes from Trapani-Birgi Airport, this nature reserve combines perfect kitesurfing conditions with stunning Sicilian landscapes, historic sites, and Mediterranean culture.",
-      bestMonths: "Mar-Nov",
-      tempRange: "18-30°C",
+        "Lo Stagnone Lagoon, near Marsala on Sicily’s west coast, is one of Europe's premier kitesurfing destinations. The expansive, shallow lagoon offers flat waters ideal for beginners and freestylers alike. Protected by surrounding islands, it ensures safe and consistent conditions.",
+      bestMonths: "April–October",
+      tempRange: "18–30°C",
       waveSize: "Flat",
-      difficultyLevel: "All Levels (Perfect for Beginners)",
+      difficultyLevel: "Beginner to Intermediate",
       localAttractions:
-        "Marsala historic center, Trapani, Egadi Islands, Salt pans, Sicilian wine tasting, Erice medieval town, Segesta archaeological site",
-      tags: [
-        "shallow water",
-        "flat water",
-        "thermal winds",
-        "lagoon",
-        "beginner friendly",
-      ],
-      windguruCode: "257",
+        "Salt pans of Marsala, Mozia Island archaeological site, Egadi Islands, Erice hilltop town",
+      tags: ["Kite Schools", "Flatwater", "Thermal Winds", "Shallow Lagoon"],
+      windguruCode: "206923",
       kiteSchools: [
-        "Follow The Wind Kitesurf Sicily|https://maps.google.com/?q=Follow+The+Wind+Kitesurf+Sicily|4.9|187",
-        "Flow Kite School Sicily|https://maps.google.com/?q=Flow+Kite+School+Sicily|4.8|164",
-        "Sicily Kite School|https://maps.google.com/?q=Sicily+Kite+School+Lo+Stagnone|4.8|152",
-        "KiteLab Sicily|https://maps.google.com/?q=KiteLab+Sicily|4.9|143",
-        "Kite Me Up|https://maps.google.com/?q=Kite+Me+Up+Sicily|4.7|137",
+        "Kite Lab Sicily|https://maps.google.com/?q=Kite+Lab+Sicily|5.0|310",
+        "Flow Kite School|https://maps.google.com/?q=Flow+Kite+School|4.9|129",
+        "No Limits Kitesurfing|https://maps.google.com/?q=No+Limits+Kitesurfing|5.0|60",
+        "Duotone Pro Center Sicily|https://maps.google.com/?q=Duotone+Pro+Center+Sicily|4.9|176",
+        "KBC Sicily|https://maps.google.com/?q=KBC+Sicily|5.0|57",
       ],
-      conditions: [
-        "Flat Water",
-        "Shallow Lagoon",
-        "Thermal Winds",
-        "Standing Depth",
-        "No Obstacles",
-      ],
+      conditions: ["Flatwater", "Thermal Winds", "Shallow Lagoon"],
       accommodationOptions: [
         "Beachfront Resorts",
-        "B&Bs",
-        "Vacation Rentals",
-        "Kitesurfing Camps",
-        "Hotels in Marsala",
+        "Guesthouses",
+        "Agriturismos",
       ],
       foodOptions: [
         "Sicilian Cuisine",
-        "Fresh Seafood",
-        "Local Wines",
-        "Beach Bars",
-        "Traditional Trattorias",
+        "Seafood Restaurants",
+        "Local Wineries",
       ],
       culture:
-        "Traditional Sicilian with a mix of Arab, Norman, and Mediterranean influences. Famous for wine production, salt pans, and relaxed Mediterranean lifestyle",
-      averageSchoolCost: 60,
-      averageAccommodationCost: 70,
+        "Rich in history with nearby archaeological sites, traditional Sicilian villages, and renowned local wines.",
+      averageSchoolCost: 50,
+      averageAccommodationCost: 80,
       numberOfSchools: 15,
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 10,
-        windQuality: WindQuality.Poor,
-        airTemp: 14,
-        waterTemp: 15,
-        seasonalNotes:
-          "Off-season with inconsistent winds. Some schools closed. Can get occasional good days.",
+        windSpeed: 12,
+        windQuality: "Moderate",
+        airTemp: 15,
+        waterTemp: 14,
+        seasonalNotes: "Off-season with variable winds; cooler temperatures.",
       },
       {
         month: 2,
-        windSpeed: 12,
-        windQuality: WindQuality.Poor,
-        airTemp: 15,
-        waterTemp: 15,
-        seasonalNotes:
-          "Still off-season with improving conditions toward the end of month. Most schools still closed.",
+        windSpeed: 13,
+        windQuality: "Moderate",
+        airTemp: 16,
+        waterTemp: 14,
+        seasonalNotes: "Increasing wind consistency; still cool conditions.",
       },
       {
         month: 3,
-        windSpeed: 14,
-        windQuality: WindQuality.Moderate,
-        airTemp: 17,
-        waterTemp: 16,
+        windSpeed: 15,
+        windQuality: "Good",
+        airTemp: 18,
+        waterTemp: 15,
         seasonalNotes:
-          "Start of the kitesurfing season. Most schools open. Wind becoming more reliable.",
+          "Start of thermal winds; suitable for early-season riders.",
       },
       {
         month: 4,
-        windSpeed: 16,
-        windQuality: WindQuality.Good,
-        airTemp: 19,
-        waterTemp: 18,
-        seasonalNotes:
-          "Good conditions with reliable winds. Not crowded yet. Pleasant temperatures.",
+        windSpeed: 18,
+        windQuality: "Good",
+        airTemp: 20,
+        waterTemp: 17,
+        seasonalNotes: "Reliable thermals begin; comfortable temperatures.",
       },
       {
         month: 5,
-        windSpeed: 18,
-        windQuality: WindQuality.Good,
-        airTemp: 22,
+        windSpeed: 20,
+        windQuality: "Excellent",
+        airTemp: 24,
         waterTemp: 20,
         seasonalNotes:
-          "Excellent wind conditions with warm temperatures. Season in full swing.",
+          "Peak season starts; consistent winds and warm conditions.",
       },
       {
         month: 6,
         windSpeed: 22,
-        windQuality: WindQuality.Excellent,
-        airTemp: 26,
+        windQuality: "Excellent",
+        airTemp: 28,
         waterTemp: 23,
-        seasonalNotes:
-          "Peak season begins. Thermal winds very reliable. Perfect flat water conditions.",
+        seasonalNotes: "Strong thermals; ideal for all skill levels.",
       },
       {
         month: 7,
-        windSpeed: 23,
-        windQuality: WindQuality.Excellent,
-        airTemp: 29,
+        windSpeed: 20,
+        windQuality: "Excellent",
+        airTemp: 30,
         waterTemp: 25,
-        seasonalNotes:
-          "Strong, reliable thermal winds. Peak season with warm water. Can get crowded.",
+        seasonalNotes: "Warmest month; steady winds and vibrant atmosphere.",
       },
       {
         month: 8,
-        windSpeed: 22,
-        windQuality: WindQuality.Excellent,
+        windSpeed: 18,
+        windQuality: "Good",
         airTemp: 30,
         waterTemp: 26,
-        seasonalNotes:
-          "Busiest month with strongest thermal winds. Consistent 15-25 knots almost daily.",
+        seasonalNotes: "High temperatures; slightly lighter winds.",
       },
       {
         month: 9,
-        windSpeed: 19,
-        windQuality: WindQuality.Good,
+        windSpeed: 17,
+        windQuality: "Good",
         airTemp: 27,
-        waterTemp: 25,
-        seasonalNotes:
-          "Still excellent conditions with fewer crowds as peak season winds down.",
+        waterTemp: 24,
+        seasonalNotes: "Thermals persist; fewer crowds.",
       },
       {
         month: 10,
-        windSpeed: 16,
-        windQuality: WindQuality.Good,
+        windSpeed: 15,
+        windQuality: "Moderate",
         airTemp: 23,
         waterTemp: 22,
-        seasonalNotes:
-          "Good wind conditions continue. Pleasant temperatures and fewer tourists.",
+        seasonalNotes: "Season winds down; pleasant conditions.",
       },
       {
         month: 11,
         windSpeed: 13,
-        windQuality: WindQuality.Moderate,
-        airTemp: 19,
-        waterTemp: 19,
-        seasonalNotes:
-          "End of the regular season. Wind becoming less reliable but still kiteable days.",
+        windQuality: "Moderate",
+        airTemp: 18,
+        waterTemp: 18,
+        seasonalNotes: "Off-season begins; variable winds.",
       },
       {
         month: 12,
-        windSpeed: 11,
-        windQuality: WindQuality.Poor,
-        airTemp: 15,
-        waterTemp: 16,
-        seasonalNotes:
-          "Off-season. Many schools closed. Occasional good days possible.",
+        windSpeed: 12,
+        windQuality: "Moderate",
+        airTemp: 16,
+        waterTemp: 15,
+        seasonalNotes: "Cooler temperatures; less consistent winds.",
       },
     ],
   },
@@ -2199,140 +2248,144 @@ export const kiteSpotsData: SpotSeedData[] = [
     spot: {
       name: "Leucate, France",
       country: "France",
-      latitude: 42.9056,
-      longitude: 3.0333,
+      latitude: 42.9105, // :contentReference[oaicite:0]{index=0}
+      longitude: 3.0294, // :contentReference[oaicite:1]{index=1}
       description:
-        "Located on the French Mediterranean coast, Leucate is one of Europe's leading kitesurfing spots. Benefiting from steady winds and mild weather conditions, Leucate is a favorite spot for kitesurfers of all levels.",
-      bestMonths: "March–October",
-      tempRange: "15–28°C",
-      waveSize: "Flat to 1m",
-      difficultyLevel: "All levels",
-      localAttractions: "Wine tasting, local markets, Mediterranean beaches",
-      tags: ["steady wind", "flat water", "lagoons"],
-      windguruCode: "234",
+        "Leucate is one of France’s premier kitesurfing destinations, famed for its 300+ days of Tramontane wind, flat-water lagoon of the Étang de Leucate, and powerful beach break on the Mediterranean coast.", // :contentReference[oaicite:2]{index=2}
+      bestMonths: "April–October", // :contentReference[oaicite:3]{index=3}
+      tempRange: "7–29°C", // :contentReference[oaicite:4]{index=4}
+      waveSize: "Flat to Medium Breaks",
+      difficultyLevel: "Beginner to Advanced",
+      localAttractions:
+        "Mondial du Vent international kitesurf competition, Étang de Leucate lagoon, Cap Leucate cliffs & lighthouse, Salses‐Leucate salt pans", // :contentReference[oaicite:5]{index=5}
+      tags: ["Tramontane Winds", "Flatwater", "Lagoon", "Wave Riding"],
+      windguruCode: "258", // :contentReference[oaicite:6]{index=6}
       kiteSchools: [
-        "Leucate Kite Center|https://maps.google.com/?q=Leucate+Kite+Center|4.8|95",
-        "KSL Leucate|https://maps.google.com/?q=KSL+Leucate|4.7|88",
-        "Sky Fly Kiteschool|https://maps.google.com/?q=Sky+Fly+Kiteschool+Leucate|4.6|76",
+        "Unikite Leucate|https://maps.google.com/?q=Unikite+Leucate|4.5|2627", // :contentReference[oaicite:7]{index=7}
+        "Chinook École de Kitesurf|https://maps.google.com/?q=Chinook+École+de+Kitesurf+Leucate|4.8|60", // :contentReference[oaicite:8]{index=8}
+        "Kite Surf Leucate KSL|https://maps.google.com/?q=Kite+Surf+Leucate+KSL|4.5|237", // :contentReference[oaicite:9]{index=9}
+        "Adrenaline Direct Wind|https://maps.google.com/?q=Adrenaline+Direct+Wind+Leucate|4.6|87", // :contentReference[oaicite:10]{index=10}
+        "Skyclub|https://maps.google.com/?q=Skyclub+Leucate|4.4|53", // :contentReference[oaicite:11]{index=11}
       ],
-      conditions: [
-        "Tramontane Wind",
-        "Flat Water Lagoons",
-        "Chop and Small Waves",
+      conditions: ["Flatwater Lagoon", "Consistent Tramontane", "Beach Break"],
+      accommodationOptions: [
+        "Beachfront Hotels",
+        "Lagoon-side Campgrounds",
+        "Country Guesthouses",
       ],
-      accommodationOptions: ["Beach Resorts", "Camping Sites", "Guesthouses"],
-      foodOptions: ["French Cuisine", "Seafood Restaurants", "Local Bistros"],
+      foodOptions: ["Seafood Restaurants", "Beach Bars", "Local Wineries"],
       culture:
-        "Mediterranean charm with a mix of French culture and kitesurfing community",
-      averageSchoolCost: 75,
-      averageAccommodationCost: 85,
-      numberOfSchools: 3,
+        "French Mediterranean coastal lifestyle with wind-sport heritage and UNESCO-listed salt-marsh landscapes",
+      averageSchoolCost: 30, // USD per hour (approx. €105/4 hr) :contentReference[oaicite:12]{index=12}
+      averageAccommodationCost: 72, // USD per night (weeknight average) :contentReference[oaicite:13]{index=13}
+      numberOfSchools: 8, // total kitesurf operators in the area :contentReference[oaicite:14]{index=14}
     },
     windConditions: [
       {
         month: 1,
-        windSpeed: 14,
+        windSpeed: 16, // knots (18.9 mph →16 kt) :contentReference[oaicite:15]{index=15}
         windQuality: WindQuality.Moderate,
-        airTemp: 10,
-        waterTemp: 12,
-        seasonalNotes: "Off-season with occasional Tramontane winds.",
+        airTemp: 8, // avg high/low 11/5 °C →8 °C :contentReference[oaicite:16]{index=16}
+        waterTemp: 13, // avg water 13 °C :contentReference[oaicite:17]{index=17}
+        seasonalNotes:
+          "Cool winter Tramontane; safer flat-water sessions in the lagoon.",
       },
       {
         month: 2,
-        windSpeed: 15,
-        windQuality: WindQuality.Moderate,
-        airTemp: 12,
-        waterTemp: 12,
-        seasonalNotes: "Cold water but rideable when Tramontane picks up.",
+        windSpeed: 17, // knots (19.4 mph →17 kt) :contentReference[oaicite:18]{index=18}
+        windQuality: WindQuality.Good,
+        airTemp: 9, // (13+5)/2 °C :contentReference[oaicite:19]{index=19}
+        waterTemp: 11.5, // average 11.5 °C :contentReference[oaicite:20]{index=20}
+        seasonalNotes: "Building thermals; lagoon runs ideal for beginners.",
       },
       {
         month: 3,
-        windSpeed: 17,
+        windSpeed: 18, // average Tramontane build :contentReference[oaicite:21]{index=21}
         windQuality: WindQuality.Good,
-        airTemp: 15,
-        waterTemp: 13,
+        airTemp: 11, // (15+7)/2 °C :contentReference[oaicite:22]{index=22}
+        waterTemp: 12.5, // average 12.5 °C :contentReference[oaicite:23]{index=23}
         seasonalNotes:
-          "Start of kiting season; frequent Tramontane makes for good sessions.",
+          "Spring thermals begin by mid-day; perfect for progression.",
       },
       {
         month: 4,
-        windSpeed: 20,
+        windSpeed: 20, // Tramontane 15–25 kt peak season :contentReference[oaicite:24]{index=24}
         windQuality: WindQuality.Excellent,
-        airTemp: 18,
-        waterTemp: 15,
+        airTemp: 13.5, // (18+9)/2 °C :contentReference[oaicite:25]{index=25}
+        waterTemp: 14.5, // average 14.5 °C :contentReference[oaicite:26]{index=26}
         seasonalNotes:
-          "Reliable wind and pleasant temperatures; ideal for all levels.",
+          "Reliable winds from early afternoon; warm spring conditions.",
       },
       {
         month: 5,
         windSpeed: 22,
         windQuality: WindQuality.Excellent,
-        airTemp: 21,
-        waterTemp: 17,
+        airTemp: 17, // (21+13)/2 °C :contentReference[oaicite:27]{index=27}
+        waterTemp: 17, // average 17 °C :contentReference[oaicite:28]{index=28}
         seasonalNotes:
-          "One of the best months with steady winds and warm days.",
+          "Peak season begins—long lagoon runs and gentle wave riding.",
       },
       {
         month: 6,
-        windSpeed: 22,
+        windSpeed: 24,
         windQuality: WindQuality.Excellent,
-        airTemp: 24,
-        waterTemp: 19,
+        airTemp: 21.5, // (26+17)/2 °C :contentReference[oaicite:29]{index=29}
+        waterTemp: 20, // average 20 °C :contentReference[oaicite:30]{index=30}
         seasonalNotes:
-          "Strong Tramontane continues; perfect for flat water freestyle.",
+          "Strong midsummer Tramontane; reef-break conditions for advanced riders.",
       },
       {
         month: 7,
-        windSpeed: 20,
-        windQuality: WindQuality.Good,
-        airTemp: 27,
-        waterTemp: 22,
+        windSpeed: 26,
+        windQuality: WindQuality.Excellent,
+        airTemp: 24, // (29+19)/2 °C :contentReference[oaicite:31]{index=31}
+        waterTemp: 23, // average 23 °C :contentReference[oaicite:32]{index=32}
         seasonalNotes:
-          "Peak season with lighter winds but still many rideable days.",
+          "Hottest month; consistent 20–30 kt winds off the beach.",
       },
       {
         month: 8,
-        windSpeed: 19,
-        windQuality: WindQuality.Good,
-        airTemp: 28,
-        waterTemp: 24,
+        windSpeed: 25,
+        windQuality: WindQuality.Excellent,
+        airTemp: 24.5, // (29+20)/2 °C :contentReference[oaicite:33]{index=33}
+        waterTemp: 22.5, // average 22.5 °C :contentReference[oaicite:34]{index=34}
         seasonalNotes:
-          "Crowded beaches but consistent sessions in the mornings.",
+          "Busy but spacious 800 m beach; afternoon onshore winds.",
       },
       {
         month: 9,
-        windSpeed: 21,
+        windSpeed: 23,
         windQuality: WindQuality.Excellent,
-        airTemp: 25,
-        waterTemp: 22,
+        airTemp: 21, // (25+17)/2 °C :contentReference[oaicite:35]{index=35}
+        waterTemp: 21.5, // average 21.5 °C :contentReference[oaicite:36]{index=36}
         seasonalNotes:
-          "Reliable wind returns; excellent for kiting with fewer tourists.",
+          "Late-season thermals; slightly calmer lagoon conditions.",
       },
       {
         month: 10,
-        windSpeed: 18,
+        windSpeed: 20,
         windQuality: WindQuality.Good,
-        airTemp: 20,
-        waterTemp: 20,
+        airTemp: 17, // (21+13)/2 °C :contentReference[oaicite:37]{index=37}
+        waterTemp: 20.5, // average 20.5 °C :contentReference[oaicite:38]{index=38}
         seasonalNotes:
-          "End of season with crisp air and good Tramontane spells.",
+          "Autumn transition; dependable winds and mild temperatures.",
       },
       {
         month: 11,
-        windSpeed: 16,
-        windQuality: WindQuality.Moderate,
-        airTemp: 14,
-        waterTemp: 17,
-        seasonalNotes: "Fewer rideable days; wetsuit essential.",
+        windSpeed: 18,
+        windQuality: WindQuality.Good,
+        airTemp: 12.5, // (16+9)/2 °C :contentReference[oaicite:39]{index=39}
+        waterTemp: 17.5, // average 17.5 °C :contentReference[oaicite:40]{index=40}
+        seasonalNotes: "Tramontane eases; good for wave-riding off the reef.",
       },
       {
         month: 12,
-        windSpeed: 15,
+        windSpeed: 17,
         windQuality: WindQuality.Moderate,
-        airTemp: 11,
-        waterTemp: 13,
+        airTemp: 9.5, // (13+6)/2 °C :contentReference[oaicite:41]{index=41}
+        waterTemp: 13.5, // average 13.5 °C :contentReference[oaicite:42]{index=42}
         seasonalNotes:
-          "Cold but still kiteable during strong Tramontane episodes.",
+          "Cooler winter days; lagoon still protected for safe learning.",
       },
     ],
   },
