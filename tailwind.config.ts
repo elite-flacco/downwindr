@@ -7,7 +7,7 @@ export default {
     fontFamily: {
       // Define fonts using the Tailwind config instead of CSS variables
       'title': ['Permanent Marker', 'cursive'],
-      'heading': ['Permanent Marker', 'cursive'], // Bangers
+      'heading': ['Indie Flower', 'cursive'], // Bangers
       'body': ['Quicksand', 'sans-serif'],
       'fun': ['Kalam', 'cursive'],
     },
