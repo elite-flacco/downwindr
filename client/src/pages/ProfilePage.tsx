@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,17 @@ import { format } from "date-fns";
 import { Link } from "wouter";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 // UI Components
 import {
@@ -41,6 +52,9 @@ import {
   Calendar,
   Loader2,
   ExternalLink,
+  X,
+  Upload,
+  Camera,
 } from "lucide-react";
 
 // Password change form schema
@@ -61,6 +75,10 @@ export default function ProfilePage() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("reviews");
+  const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
+  const [reviewContent, setReviewContent] = useState("");
+  const [showProfileImageModal, setShowProfileImageModal] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   // Fetch user reviews
   const {
@@ -108,6 +126,84 @@ export default function ProfilePage() {
     },
   });
 
+  // Review update mutation
+  const updateReviewMutation = useMutation({
+    mutationFn: async ({ id, content }: { id: number, content: string }) => {
+      const res = await apiRequest("PUT", `/api/reviews/${id}`, { content });
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Review updated",
+        description: "Your review has been successfully updated.",
+      });
+      setEditingReviewId(null);
+      // Refetch reviews
+      queryClient.invalidateQueries({ queryKey: ["/api/user/reviews"] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description:
+          error.message || "Failed to update review. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Profile picture update mutation
+  const updateProfilePictureMutation = useMutation({
+    mutationFn: async (url: string) => {
+      const res = await apiRequest("POST", "/api/user/profile-picture", { avatarUrl: url });
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Profile picture updated",
+        description: "Your profile picture has been successfully updated.",
+      });
+      setShowProfileImageModal(false);
+      // Refresh user data
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description:
+          error.message || "Failed to update profile picture. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Handle edit review
+  const startEditingReview = (review: any) => {
+    setEditingReviewId(review.id);
+    setReviewContent(review.content);
+  };
+
+  // Handle save review
+  const saveReview = () => {
+    if (editingReviewId && reviewContent.trim()) {
+      updateReviewMutation.mutate({
+        id: editingReviewId,
+        content: reviewContent,
+      });
+    }
+  };
+
+  // Handle cancel edit
+  const cancelEditReview = () => {
+    setEditingReviewId(null);
+  };
+
+  // Handle update profile picture
+  const updateProfilePicture = () => {
+    if (avatarUrl.trim()) {
+      updateProfilePictureMutation.mutate(avatarUrl);
+    }
+  };
+
   // Password change form submit handler
   const onPasswordSubmit = (data: PasswordFormValues) => {
     const { confirmPassword, ...passwordData } = data;
@@ -128,6 +224,15 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto py-10 px-4 md:px-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Your Profile</h1>
+        <Link href="/">
+          <Button variant="outline" className="flex items-center gap-2">
+            <X className="h-4 w-4" />
+            Close
+          </Button>
+        </Link>
+      </div>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left sidebar - Profile info */}
         <div className="md:w-1/3">
@@ -140,15 +245,23 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="pt-4">
               <div className="flex flex-col items-center mb-6">
-                <Avatar className="h-24 w-24 mb-3">
-                  <AvatarImage
-                    src={user.avatarUrl || undefined}
-                    alt={user.username}
-                  />
-                  <AvatarFallback className="text-lg bg-primary text-primary-foreground">
-                    {user.username.substring(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
+                <div className="relative group">
+                  <Avatar className="h-24 w-24 mb-3">
+                    <AvatarImage
+                      src={user.avatarUrl || undefined}
+                      alt={user.username}
+                    />
+                    <AvatarFallback className="text-lg bg-primary text-primary-foreground">
+                      {user.username.substring(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <button 
+                    onClick={() => setShowProfileImageModal(true)}
+                    className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-full"
+                  >
+                    <Camera className="h-8 w-8 text-white" />
+                  </button>
+                </div>
                 <h2 className="text-xl font-bold">{user.displayName || user.username}</h2>
                 <p className="text-sm text-muted-foreground">{user.email}</p>
                 {user.experience && (
@@ -181,8 +294,13 @@ export default function ProfilePage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="w-full" disabled>
-                Edit Profile
+              <Button 
+                variant="outline" 
+                className="w-full flex items-center gap-2"
+                onClick={() => setShowProfileImageModal(true)}
+              >
+                <Camera className="h-4 w-4" />
+                Change Profile Picture
               </Button>
             </CardFooter>
           </Card>
@@ -249,15 +367,54 @@ export default function ProfilePage() {
                               {format(new Date(review.createdAt), "MMM d, yyyy")}
                             </div>
                           </div>
-                          <p className="text-sm">{review.content}</p>
-                          <div className="flex justify-end">
-                            <Link href={`/spots/${review.spotId}`}>
-                              <Button variant="outline" size="sm">
-                                <Edit className="h-3.5 w-3.5 mr-1.5" />
-                                Edit
-                              </Button>
-                            </Link>
-                          </div>
+                          
+                          {editingReviewId === review.id ? (
+                            <div className="space-y-3">
+                              <Textarea
+                                value={reviewContent}
+                                onChange={(e) => setReviewContent(e.target.value)}
+                                className="min-h-[100px]"
+                                placeholder="Share your experience at this spot..."
+                              />
+                              <div className="flex justify-end space-x-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={cancelEditReview}
+                                >
+                                  Cancel
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  onClick={saveReview}
+                                  disabled={!reviewContent.trim() || updateReviewMutation.isPending}
+                                >
+                                  {updateReviewMutation.isPending ? (
+                                    <>
+                                      <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
+                                      Saving...
+                                    </>
+                                  ) : (
+                                    "Save"
+                                  )}
+                                </Button>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <p className="text-sm">{review.content}</p>
+                              <div className="flex justify-end">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => startEditingReview(review)}
+                                >
+                                  <Edit className="h-3.5 w-3.5 mr-1.5" />
+                                  Edit
+                                </Button>
+                              </div>
+                            </>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -363,6 +520,68 @@ export default function ProfilePage() {
           </Tabs>
         </div>
       </div>
+      
+      {/* Profile Picture Edit Dialog */}
+      <Dialog open={showProfileImageModal} onOpenChange={setShowProfileImageModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Update Profile Picture</DialogTitle>
+            <DialogDescription>
+              Enter the URL of your new profile picture
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="flex items-center justify-center">
+              <Avatar className="h-32 w-32">
+                <AvatarImage src={avatarUrl || user.avatarUrl || undefined} />
+                <AvatarFallback className="text-2xl">
+                  {user.username.substring(0, 2).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </div>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="picture-url">Picture URL</Label>
+                <Input
+                  id="picture-url"
+                  placeholder="https://example.com/your-picture.jpg"
+                  value={avatarUrl}
+                  onChange={(e) => setAvatarUrl(e.target.value)}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Enter a direct link to an image (JPG, PNG, or GIF)
+              </p>
+            </div>
+          </div>
+          <DialogFooter className="sm:justify-between">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowProfileImageModal(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              disabled={!avatarUrl.trim() || updateProfilePictureMutation.isPending}
+              onClick={updateProfilePicture}
+            >
+              {updateProfilePictureMutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Updating...
+                </>
+              ) : (
+                <>
+                  <Upload className="mr-2 h-4 w-4" />
+                  Update Picture
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
