@@ -187,12 +187,8 @@ export default function ProfilePage() {
       // Close the modal
       setShowProfileImageModal(false);
       
-      // Force refresh user data by removing the entry completely and fetching fresh data
-      queryClient.removeQueries({ queryKey: ["/api/user"] });
-      queryClient.refetchQueries({ queryKey: ["/api/user"] });
-      
-      // Refresh the entire window to guarantee a fresh state
-      window.location.reload();
+      // Force fetch fresh user data
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
     onError: (error) => {
       toast({
@@ -221,11 +217,7 @@ export default function ProfilePage() {
       setImagePreview(null);
       
       // Force refresh user data
-      queryClient.removeQueries({ queryKey: ["/api/user"] });
-      queryClient.refetchQueries({ queryKey: ["/api/user"] });
-      
-      // Reload the window to ensure fresh state and clear any cached images
-      window.location.reload();
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
     onError: (error) => {
       toast({
@@ -266,12 +258,8 @@ export default function ProfilePage() {
       setImagePreview(null);
       setIsUploading(false);
       
-      // Force refresh all user data
-      queryClient.removeQueries({ queryKey: ["/api/user"] });
-      queryClient.refetchQueries({ queryKey: ["/api/user"] });
-      
-      // Reload the window to ensure fresh state and clear image caches
-      window.location.reload();
+      // Force refresh user data
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
     onError: (error) => {
       toast({
