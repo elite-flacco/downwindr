@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Loader2, Mail, Lock, User, ArrowRight } from "lucide-react";
+import KitesurferIllustration from "@/components/KitesurferIllustration";
 
 // Authentication Form Schemas
 const loginFormSchema = z.object({
@@ -91,272 +92,292 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen justify-center items-center bg-gray-50">
-      <div className="w-full max-w-md p-8">
-        {authMode === "login" ? (
-          // Login Form
-          <>
-            <div className="text-center mb-8">
-              <h1 className="text-2xl font-bold">Welcome back</h1>
-              <p className="text-gray-500 mt-2">Sign in to your account to continue</p>
-            </div>
-            
-            <Form {...loginForm}>
-              <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
-                <FormField
-                  control={loginForm.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input 
-                            type="email" 
-                            placeholder="you@example.com" 
-                            className="pl-10"
-                            {...field} 
-                          />
-                          <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+    <div className="flex min-h-screen">
+      {/* Left side: Auth forms */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-gray-50">
+        <div className="w-full max-w-md">
+          {authMode === "login" ? (
+            // Login Form
+            <>
+              <div className="text-center mb-8">
+                <h1 className="text-2xl font-bold">Welcome back</h1>
+                <p className="text-gray-500 mt-2">Sign in to your account to continue</p>
+              </div>
+              
+              <Form {...loginForm}>
+                <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
+                  <FormField
+                    control={loginForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              type="email" 
+                              placeholder="you@example.com" 
+                              className="pl-10"
+                              {...field} 
+                            />
+                            <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={loginForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <div className="flex items-center justify-between">
+                          <FormLabel>Password</FormLabel>
+                          <Link 
+                            href="#" 
+                            className="text-sm text-primary hover:underline"
+                            onClick={(e: React.MouseEvent) => e.preventDefault()}
+                          >
+                            Forgot password?
+                          </Link>
                         </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={loginForm.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center justify-between">
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              type="password" 
+                              placeholder="••••••••" 
+                              className="pl-10"
+                              {...field} 
+                            />
+                            <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={loginForm.control}
+                    name="rememberMe"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-2 space-y-0">
+                        <FormControl>
+                          <Checkbox 
+                            checked={field.value} 
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-sm font-normal">
+                            Remember me
+                          </FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  <Button 
+                    type="submit" 
+                    className="w-full"
+                    disabled={loginMutation.isPending}
+                  >
+                    {loginMutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Signing in...
+                      </>
+                    ) : (
+                      <>
+                        Sign in <ArrowRight className="ml-2 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Form>
+              
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-500">
+                  Don't have an account?{" "}
+                  <button
+                    type="button"
+                    className="text-primary font-medium hover:underline"
+                    onClick={() => setAuthMode("register")}
+                  >
+                    Sign up
+                  </button>
+                </p>
+              </div>
+            </>
+          ) : (
+            // Register Form
+            <>
+              <div className="text-center mb-8">
+                <h1 className="text-2xl font-bold">Create your account</h1>
+                <p className="text-gray-500 mt-2">Sign up to start managing your tasks</p>
+              </div>
+              
+              <Form {...registerForm}>
+                <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
+                  <FormField
+                    control={registerForm.control}
+                    name="username"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Username</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              placeholder="johndoe" 
+                              className="pl-10"
+                              {...field} 
+                            />
+                            <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              type="email" 
+                              placeholder="you@example.com" 
+                              className="pl-10"
+                              {...field} 
+                            />
+                            <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
                         <FormLabel>Password</FormLabel>
-                        <Link 
-                          href="#" 
-                          className="text-sm text-primary hover:underline"
-                          onClick={(e: React.MouseEvent) => e.preventDefault()}
-                        >
-                          Forgot password?
-                        </Link>
-                      </div>
-                      <FormControl>
-                        <div className="relative">
-                          <Input 
-                            type="password" 
-                            placeholder="••••••••" 
-                            className="pl-10"
-                            {...field} 
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              type="password" 
+                              placeholder="••••••••" 
+                              className="pl-10"
+                              {...field} 
+                            />
+                            <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Confirm Password</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              type="password" 
+                              placeholder="••••••••" 
+                              className="pl-10"
+                              {...field} 
+                            />
+                            <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="agreeToTerms"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-2 space-y-0">
+                        <FormControl>
+                          <Checkbox 
+                            checked={field.value} 
+                            onCheckedChange={field.onChange}
                           />
-                          <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-sm font-normal">
+                            I agree to the{" "}
+                            <Link href="#" className="text-primary hover:underline" onClick={(e: React.MouseEvent) => e.preventDefault()}>
+                              Terms of Service
+                            </Link>
+                            {" "}and{" "}
+                            <Link href="#" className="text-primary hover:underline" onClick={(e: React.MouseEvent) => e.preventDefault()}>
+                              Privacy Policy
+                            </Link>
+                          </FormLabel>
                         </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={loginForm.control}
-                  name="rememberMe"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center space-x-2 space-y-0">
-                      <FormControl>
-                        <Checkbox 
-                          checked={field.value} 
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-sm font-normal">
-                          Remember me
-                        </FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={loginMutation.isPending}
-                >
-                  {loginMutation.isPending ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    <>
-                      Sign in <ArrowRight className="ml-2 h-4 w-4" />
-                    </>
-                  )}
-                </Button>
-              </form>
-            </Form>
-            
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-500">
-                Don't have an account?{" "}
-                <button
-                  type="button"
-                  className="text-primary font-medium hover:underline"
-                  onClick={() => setAuthMode("register")}
-                >
-                  Sign up
-                </button>
-              </p>
-            </div>
-          </>
-        ) : (
-          // Register Form
-          <>
-            <div className="text-center mb-8">
-              <h1 className="text-2xl font-bold">Create your account</h1>
-              <p className="text-gray-500 mt-2">Sign up to start managing your tasks</p>
-            </div>
-            
-            <Form {...registerForm}>
-              <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
-                <FormField
-                  control={registerForm.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Username</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input 
-                            placeholder="johndoe" 
-                            className="pl-10"
-                            {...field} 
-                          />
-                          <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={registerForm.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input 
-                            type="email" 
-                            placeholder="you@example.com" 
-                            className="pl-10"
-                            {...field} 
-                          />
-                          <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={registerForm.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input 
-                            type="password" 
-                            placeholder="••••••••" 
-                            className="pl-10"
-                            {...field} 
-                          />
-                          <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={registerForm.control}
-                  name="confirmPassword"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input 
-                            type="password" 
-                            placeholder="••••••••" 
-                            className="pl-10"
-                            {...field} 
-                          />
-                          <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={registerForm.control}
-                  name="agreeToTerms"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-2 space-y-0">
-                      <FormControl>
-                        <Checkbox 
-                          checked={field.value} 
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-sm font-normal">
-                          I agree to the{" "}
-                          <Link href="#" className="text-primary hover:underline" onClick={(e: React.MouseEvent) => e.preventDefault()}>
-                            Terms of Service
-                          </Link>
-                          {" "}and{" "}
-                          <Link href="#" className="text-primary hover:underline" onClick={(e: React.MouseEvent) => e.preventDefault()}>
-                            Privacy Policy
-                          </Link>
-                        </FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={registerMutation.isPending}
-                >
-                  {registerMutation.isPending ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating account...
-                    </>
-                  ) : (
-                    <>
-                      Create account <ArrowRight className="ml-2 h-4 w-4" />
-                    </>
-                  )}
-                </Button>
-              </form>
-            </Form>
-            
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-500">
-                Already have an account?{" "}
-                <button
-                  type="button"
-                  className="text-primary font-medium hover:underline"
-                  onClick={() => setAuthMode("login")}
-                >
-                  Sign in
-                </button>
-              </p>
-            </div>
-          </>
-        )}
+                      </FormItem>
+                    )}
+                  />
+                  <Button 
+                    type="submit" 
+                    className="w-full"
+                    disabled={registerMutation.isPending}
+                  >
+                    {registerMutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Creating account...
+                      </>
+                    ) : (
+                      <>
+                        Create account <ArrowRight className="ml-2 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Form>
+              
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-500">
+                  Already have an account?{" "}
+                  <button
+                    type="button"
+                    className="text-primary font-medium hover:underline"
+                    onClick={() => setAuthMode("login")}
+                  >
+                    Sign in
+                  </button>
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      
+      {/* Right side: Hero/Illustration */}
+      <div className="hidden md:flex md:flex-1 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-primary/10" />
+        
+        <div className="relative z-10 max-w-lg p-12 m-auto flex flex-col h-full justify-center text-center">
+          <h2 className="text-4xl font-bold mb-6">Find Your Perfect Kitesurfing Spot</h2>
+          <p className="text-lg mb-8">
+            Join our community of kitesurfers to discover, rate, and review the best spots around the world.
+            Share your experiences and get personalized recommendations.
+          </p>
+          <div className="mt-6">
+            <KitesurferIllustration className="max-w-xs mx-auto" />
+          </div>
+        </div>
       </div>
     </div>
   );
