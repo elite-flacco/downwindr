@@ -33,6 +33,9 @@ export class DatabaseStorage implements IStorage {
   sessionStore: any; // Using any for SessionStore type to avoid import complexities
   private regions: Map<string, string[]>;
 
+  // Static property to ensure we only initialize the database once across all instances
+  private static initializationPromise: Promise<void> | null = null;
+  
   constructor() {
     // Set up session store for user authentication
     this.sessionStore = new PostgresSessionStore({
@@ -85,48 +88,51 @@ export class DatabaseStorage implements IStorage {
       ["oceania", ["Australia", "New Zealand", "Fiji", "French Polynesia"]],
     ]);
 
-    // Initialize data if spots table is empty
-    // Using setTimeout to ensure this runs asynchronously after constructor completes
-    // Only check once during construction
-    this.checkAndInitializeData();
+    // Initialize data if needed, but ensure it only happens once class-wide
+    if (DatabaseStorage.initializationPromise === null) {
+      DatabaseStorage.initializationPromise = this.checkAndInitializeData();
+    }
   }
 
   private initializationInProgress = false;
   private initialized = false;
 
-  private async checkAndInitializeData() {
+  private async checkAndInitializeData(): Promise<void> {
     if (this.initialized || this.initializationInProgress) return;
     
     try {
       this.initializationInProgress = true;
       
-      // Check if we have any spots
-      const spotsResult = await db.select().from(spots).limit(1);
+      // Use a database transaction to ensure atomicity
+      await db.transaction(async (tx) => {
+        // Check if we have any spots
+        const spotsResult = await tx.select().from(spots).limit(1);
 
-      if (spotsResult.length === 0) {
-        console.log(
-          "No spots found in database. Initializing with sample data...",
-        );
-        
-        // Insert spots and their wind conditions
-        for (const data of kiteSpotsData) {
-          // Insert the spot
-          const [spot] = await db.insert(spots).values(data.spot).returning();
+        if (spotsResult.length === 0) {
+          console.log(
+            "No spots found in database. Initializing with sample data...",
+          );
           
-          // Insert wind conditions for this spot
-          const windConditionsWithSpotId = data.windConditions.map(wc => ({
-            ...wc,
-            spotId: spot.id
-          }));
-          await db.insert(windConditions).values(windConditionsWithSpotId);
+          // Insert spots and their wind conditions
+          for (const data of kiteSpotsData) {
+            // Insert the spot
+            const [spot] = await tx.insert(spots).values(data.spot).returning();
+            
+            // Insert wind conditions for this spot
+            const windConditionsWithSpotId = data.windConditions.map(wc => ({
+              ...wc,
+              spotId: spot.id
+            }));
+            await tx.insert(windConditions).values(windConditionsWithSpotId);
+          }
+          
+          console.log("Sample data initialization completed successfully");
         }
-        
-        console.log("Sample data initialization completed successfully");
-      }
+      });
       
       this.initialized = true;
     } catch (error) {
-      console.error("Error checking database for spots:", error);
+      console.error("Error initializing database with seed data:", error);
     } finally {
       this.initializationInProgress = false;
     }
