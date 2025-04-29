@@ -62,7 +62,24 @@ export default function SpotsList({
                 whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
               >
                 <div className="flex justify-between items-start mb-3 pt-4 px-3">
-                  <h4 className="text-theme-primary">{spot.name}</h4>
+                  <div className="flex">
+                    <span className="flex mr-2 items-center gap-1">
+                      {
+                        (() => {
+                          const flag = getCountryFlag(spot.country);
+                          return flag ? (
+                            <img 
+                              src={flag.url} 
+                              alt={`${spot.country} flag`} 
+                              title={spot.country}
+                              className="h-3.5 inline-block"
+                            />
+                          ) : null
+                        })()
+                      }
+                    </span>
+                  <h3>{spot.name}</h3>
+                    </div>
                   <div className="px-3 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium">
                     <Wind className="w-3 h-3 inline mr-1" /> {spot.bestMonths}
                   </div>
@@ -83,29 +100,15 @@ export default function SpotsList({
                       <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.tempRange}
                     </div>
                     <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center gap-1.5">
-                      <span className="flex items-center gap-1">
-                        {
-                          (() => {
-                            const flag = getCountryFlag(spot.country);
-                            return flag ? (
-                              <img 
-                                src={flag.url} 
-                                alt={`${spot.country} flag`} 
-                                title={spot.country}
-                                className="h-3.5 inline-block"
-                              />
-                            ) : null
-                          })()
-                        }
-                      </span>
+                      <Wind className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.localAttractions}
                     </div>
                   </div>
                   
                   <div className="flex items-center justify-between mt-2">
                     <Button 
-                      variant="ghost"
+                      variant="accent"
                       size="sm"
-                      className="font-medium flex items-center justify-start transition-all duration-300"
+                      className="flex items-center justify-start transition-all duration-300 ml-4"
                       onClick={() => onSpotSelect(spot.id)}
                     >
                       See details <ChevronRight className="ml-1 w-4 h-4" />
@@ -117,7 +120,7 @@ export default function SpotsList({
                         pressed={isInCompare}
                         onPressedChange={() => onToggleCompare(spot)}
                         disabled={!isInCompare && spotsToCompare.length >= 3}
-                        className={`h-8 text-xs ${
+                        className={`h-8 text-xs mr-2 ${
                           isInCompare 
                             ? "bg-theme-accent-warning/30 text-theme-accent-warning hover:bg-theme-accent-warning/40" 
                             : "text-theme-text-light hover:text-theme-primary hover:bg-theme-primary/5"

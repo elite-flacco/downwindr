@@ -140,7 +140,7 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h3>Your Kitesurfing Preferences</h3>
+                <h3>Ride Settings</h3>
                 <Button
                   size="icon"
                   variant="outline"
@@ -413,10 +413,9 @@ export default function PreferencesModal({ onClose, onSavePreferences, currentMo
                 </Button>
                 <Button 
                   onClick={handleSave}
-                  className="bg-blue-700 hover:bg-blue-800 text-white"
                 >
                   <SendHorizonal className="mr-2 h-4 w-4" />
-                  Find Perfect Spots
+                  Find My Next Ride
                 </Button>
               </div>
             </div>
