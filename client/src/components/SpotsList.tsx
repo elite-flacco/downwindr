@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Spot, MonthNames } from "@shared/schema";
+import { Spot, MonthNames, WindQuality } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,7 +11,8 @@ import {
   MapPin, 
   Sparkles, 
   Plus,
-  Check
+  Check,
+  Droplets
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { getCountryFlag } from "@/lib/countryUtils";
@@ -19,8 +20,18 @@ import { Toggle } from "@/components/ui/toggle";
 
 
 
+interface SpotWithWindCondition extends Spot {
+  windCondition?: {
+    windQuality: WindQuality;
+    windSpeed: number;
+    airTemp: number;
+    waterTemp: number;
+    seasonalNotes?: string;
+  };
+}
+
 interface SpotsListProps {
-  spots: Spot[];
+  spots: SpotWithWindCondition[];
   onSpotSelect: (spotId: number) => void;
   isLoading: boolean;
   selectedMonth: number;
