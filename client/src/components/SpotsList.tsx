@@ -117,6 +117,29 @@ export default function SpotsList({
                     </div>
                   </div>
                   
+                  {/* Monthly Wind Conditions */}
+                  <div className="flex flex-wrap gap-2 mt-2 px-3 bg-theme-accent/5 py-2 rounded-lg">
+                    <h4 className="w-full text-xs font-medium mb-1 text-theme-text-light">{MonthNames[selectedMonth - 1]} Conditions:</h4>
+                    {spot.windCondition ? (
+                      <>
+                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full text-xs text-theme-primary flex items-center">
+                          <Wind className="w-3 h-3 inline text-theme-primary mr-1" /> 
+                          {spot.windCondition.windSpeed} knots
+                        </div>
+                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full text-xs text-theme-primary flex items-center">
+                          <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> 
+                          {spot.windCondition.airTemp}°C air
+                        </div>
+                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full text-xs text-theme-primary flex items-center">
+                          <Droplets className="w-3 h-3 inline text-theme-primary mr-1" /> 
+                          {spot.windCondition.waterTemp}°C water
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-xs text-theme-text-light italic">No data available for this month</div>
+                    )}
+                  </div>
+                  
                   <div className="flex items-center justify-between mt-2">
                     <Button 
                       variant="accent"
