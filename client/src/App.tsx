@@ -25,7 +25,7 @@ function AppContent() {
         <Route path="/" component={Home} />
         <Route path="/spots" component={Spots} />
         <Route path="/auth" component={AuthPage} />
-        <ProtectedRoute path="/community" component={Community} />
+        <Route path="/community" component={Community} />
         <ProtectedRoute path="/profile" component={ProfilePage} />
         <Route path="/learn" component={Learn} />
         <Route path="/about" component={NotFound} />
