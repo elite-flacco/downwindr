@@ -470,10 +470,20 @@ export class DatabaseStorage implements IStorage {
       .where(eq(windConditions.month, month));
       
     // Create a map for all wind conditions for this month
-    const allSpotWindConditions = new Map<number, { windQuality: WindQuality }>();
+    const allSpotWindConditions = new Map<number, {
+      windQuality: WindQuality;
+      windSpeed: number;
+      airTemp: number;
+      waterTemp: number;
+      seasonalNotes?: string;
+    }>();
     allWindConditions.forEach(condition => {
       allSpotWindConditions.set(condition.spotId, { 
-        windQuality: condition.windQuality as WindQuality 
+        windQuality: condition.windQuality as WindQuality,
+        windSpeed: condition.windSpeed,
+        airTemp: condition.airTemp || 0,
+        waterTemp: condition.waterTemp || 0,
+        seasonalNotes: condition.seasonalNotes || undefined
       });
     });
     

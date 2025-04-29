@@ -41,7 +41,15 @@ export interface IStorage {
   // Spot operations
   getAllSpots(): Promise<Spot[]>;
   getSpotById(id: number): Promise<Spot | undefined>;
-  getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { windCondition?: { windQuality: WindQuality }})[]>;
+  getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { 
+    windCondition?: {
+      windQuality: WindQuality;
+      windSpeed: number;
+      airTemp: number;
+      waterTemp: number;
+      seasonalNotes?: string;
+    }
+  })[]>;
   getSpotWithWindConditions(id: number): Promise<{spot: Spot, windConditions: WindCondition[]} | undefined>;
   searchSpots(query: string): Promise<Spot[]>;
   createSpot(spot: InsertSpot): Promise<Spot>;
@@ -324,10 +332,20 @@ export class MemStorage implements IStorage {
     );
     
     // Create a map of spot ID to wind condition for quick lookup
-    const allSpotWindConditions = new Map<number, { windQuality: WindQuality }>();
+    const allSpotWindConditions = new Map<number, {
+      windQuality: WindQuality;
+      windSpeed: number;
+      airTemp: number;
+      waterTemp: number;
+      seasonalNotes?: string;
+    }>();
     allMonthConditions.forEach(condition => {
       allSpotWindConditions.set(condition.spotId, { 
-        windQuality: condition.windQuality as WindQuality 
+        windQuality: condition.windQuality as WindQuality,
+        windSpeed: condition.windSpeed,
+        airTemp: condition.airTemp || 0,
+        waterTemp: condition.waterTemp || 0,
+        seasonalNotes: condition.seasonalNotes || undefined
       });
     });
     
