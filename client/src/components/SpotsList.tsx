@@ -17,10 +17,7 @@ import { motion } from "framer-motion";
 import { getCountryFlag } from "@/lib/countryUtils";
 import { Toggle } from "@/components/ui/toggle";
 
-// Enable proper HMR
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}
+
 
 interface SpotsListProps {
   spots: Spot[];

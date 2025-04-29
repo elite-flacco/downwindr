@@ -11,23 +11,3 @@ root.render(
     <App />
   </QueryClientProvider>
 );
-
-// Enable proper HMR with React Refresh and handle connection errors
-if (import.meta.hot) {
-  import.meta.hot.accept((err) => {
-    if (err) {
-      console.error('HMR update error:', err);
-      // Force a full page reload if hot update fails
-      window.location.reload();
-    }
-  });
-  
-  // Log connection status
-  import.meta.hot.on('vite:beforeUpdate', (payload) => {
-    console.log('vite:beforeUpdate', payload);
-  });
-  
-  import.meta.hot.on('vite:error', (err) => {
-    console.error('vite:error', err);
-  });
-}
