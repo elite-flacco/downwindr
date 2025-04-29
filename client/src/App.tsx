@@ -10,6 +10,11 @@ import ProfilePage from "@/pages/ProfilePage";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
+// Handle HMR for component updates
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
+
 function App() {
   return (
     <AuthProvider>

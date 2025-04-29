@@ -17,6 +17,11 @@ import { motion } from "framer-motion";
 import { getCountryFlag } from "@/lib/countryUtils";
 import { Toggle } from "@/components/ui/toggle";
 
+// Enable proper HMR
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
+
 interface SpotsListProps {
   spots: Spot[];
   onSpotSelect: (spotId: number) => void;
@@ -39,7 +44,7 @@ export default function SpotsList({
       <CardContent className="p-6">
         <h3 className="mb-4 flex items-center">
           <Sparkles className="w-6 h-6 mr-2 text-theme-accent" />
-          Best Spots in {MonthNames[selectedMonth - 1]}
+          Awesome Spots in {MonthNames[selectedMonth - 1]}
         </h3>
         
         {spots.length === 0 && !isLoading ? (
@@ -111,7 +116,7 @@ export default function SpotsList({
                       className="flex items-center justify-start transition-all duration-300 ml-4"
                       onClick={() => onSpotSelect(spot.id)}
                     >
-                      See details <ChevronRight className="ml-1 w-4 h-4" />
+                      View details <ChevronRight className="ml-1 w-4 h-4" />
                     </Button>
                     
                     {onToggleCompare && (
