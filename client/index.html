@@ -15,5 +15,33 @@
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+    
+    <!-- Auto refresh helper script -->
+    <script>
+      // Fallback polling mechanism for hot reload
+      if (window.location.hostname.includes('replit.dev')) {
+        const REFRESH_INTERVAL = 2000; // 2 seconds
+        let lastModified = Date.now();
+        
+        // Poll for changes
+        setInterval(async () => {
+          try {
+            // Fetch the main.tsx file to check if it's changed
+            const response = await fetch('/src/main.tsx?check=' + Date.now());
+            const serverLastModified = response.headers.get('last-modified');
+            const date = serverLastModified ? new Date(serverLastModified).getTime() : Date.now();
+            
+            // If the file has been modified, reload the page
+            if (date > lastModified + 1000) { // Add 1 second buffer
+              console.log('Change detected, reloading page...');
+              lastModified = date;
+              window.location.reload();
+            }
+          } catch (e) {
+            console.error('Error checking for updates:', e);
+          }
+        }, REFRESH_INTERVAL);
+      }
+    </script>
   </body>
 </html>
