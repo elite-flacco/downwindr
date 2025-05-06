@@ -52,7 +52,7 @@ export default function SpotsList({
       <CardContent className="p-6">
         <h3 className="mb-4 flex items-center">
           <Sparkles className="w-6 h-6 mr-2 text-theme-accent" />
-          top ffffKitesurfing Spots in {MonthNames[selectedMonth - 1]}
+          top Kitesurfing Spots in {MonthNames[selectedMonth - 1]}
         </h3>
         
         {spots.length === 0 && !isLoading ? (

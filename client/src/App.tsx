@@ -14,9 +14,7 @@ import { WebSocketProvider } from "@/components/WebSocketProvider";
 function App() {
   return (
     <AuthProvider>
-      <WebSocketProvider>
         <AppContent />
-      </WebSocketProvider>
     </AuthProvider>
   );
 }
