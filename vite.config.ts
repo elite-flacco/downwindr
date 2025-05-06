@@ -30,13 +30,4 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },
-  server: {
-    host: '0.0.0.0',
-    hmr: {
-      clientPort: 443,
-      protocol: 'wss',
-      overlay: true,
-      host: 'e197e0ef-4a9f-43cd-a368-d335531f4e25-00-1ak5wferdhyun.picard.replit.dev',
-    }
-  }
 });
