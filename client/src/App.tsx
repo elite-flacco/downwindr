@@ -9,12 +9,11 @@ import Learn from "@/pages/Learn";
 import ProfilePage from "@/pages/ProfilePage";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import { WebSocketProvider } from "@/components/WebSocketProvider";
 
 function App() {
   return (
     <AuthProvider>
-        <AppContent />
+      <AppContent />
     </AuthProvider>
   );
 }
