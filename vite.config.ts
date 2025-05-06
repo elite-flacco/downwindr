@@ -31,10 +31,9 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    host: true,
+    host: '0.0.0.0',
     hmr: {
       clientPort: 443,
-      host: process.env.REPL_SLUG + '.' + process.env.REPL_OWNER + '.repl.co',
       protocol: 'wss',
       overlay: true
     }
