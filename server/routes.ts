@@ -21,7 +21,7 @@ const userPreferencesSchema = z.object({
   foodOptions: z.boolean(),
   culture: z.boolean(),
   month: z.number().min(1).max(12),
-  waterTemperature: z.number().min(10).max(35)
+  waterTemperature: z.enum(["cold", "moderate", "warm", "hot"])
 });
 
 // Middleware to check if user is authenticated
