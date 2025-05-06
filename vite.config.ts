@@ -39,7 +39,7 @@ export default defineConfig({
     strictPort: true,
     hmr: {
       protocol: 'wss',
-      host: `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co`,
+      host: 'e197e0ef-4a9f-43cd-a368-d335531f4e25-00-1ak5wferdhyun.picard.repl.co',
       clientPort: 443,
     },
   },
