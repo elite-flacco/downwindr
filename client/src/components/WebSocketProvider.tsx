@@ -34,9 +34,8 @@ export function WebSocketProvider({ children }: WebSocketProviderProps) {
   
   // Initialize WebSocket connection
   useEffect(() => {
-    // Create WebSocket URL based on current protocol and host
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws`;
+    // Create WebSocket URL that matches the server port
+    const wsUrl = `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.hostname}:5000/ws`;
     
     // Create WebSocket connection
     console.log(`Connecting to WebSocket at ${wsUrl}`);
