@@ -31,11 +31,8 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    host: '0.0.0.0',
-    hmr: {
-      clientPort: 443,
-      protocol: 'wss',
-      overlay: true
-    }
+    host: true,
+    port: 5000,
+    hmr: true
   }
 });
