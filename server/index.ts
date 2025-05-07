@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from the public directory
-app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads')));
+app.use("/uploads", express.static(path.join(process.cwd(), "public/uploads")));
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -55,6 +55,7 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
+    console.log(`Current environment: ${app.get("env")}`);
     await setupVite(app, server);
   } else {
     serveStatic(app);
@@ -64,11 +65,14 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    },
+    () => {
+      log(`serving on port ${port}`);
+    },
+  );
 })();

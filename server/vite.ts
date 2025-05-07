@@ -20,12 +20,13 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  console.log("Setting up Vite in development mode...");
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
     allowedHosts: true,
   };
-
+  console.log("Server options:", serverOptions);
   const vite = await createViteServer({
     ...viteConfig,
     configFile: false,
