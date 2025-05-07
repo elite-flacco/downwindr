@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
@@ -9,6 +10,60 @@ app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from the public directory
 app.use("/uploads", express.static(path.join(process.cwd(), "public/uploads")));
+
+// Configure CORS for Replit environment
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+
+    // List of allowed origins
+    const allowedOrigins = [
+      /^https?:\/\/localhost/,
+      /\.repl\.co$/,
+      /\.replit\.dev$/,
+      /\.replit\.app$/,
+      /^https?:\/\/[a-zA-Z0-9-]+\.repl\.co$/,
+      /^https:\/\/[a-zA-Z0-9-]+--[a-zA-Z0-9-]+\.repl\.co$/
+    ];
+
+    // Check if the origin is allowed
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      if (typeof allowedOrigin === 'string') {
+        return allowedOrigin === origin;
+      } else if (allowedOrigin instanceof RegExp) {
+        return allowedOrigin.test(origin);
+      }
+      return false;
+    });
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      console.warn(`Origin ${origin} not allowed by CORS`);
+      callback(null, false);
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Add CORS headers for all responses
+app.use((req, res, next) => {
+  // Add headers to help with Replit webview and cross-origin issues
+  res.header('X-Content-Type-Options', 'nosniff');
+  res.header('Content-Security-Policy', "frame-ancestors 'self' *.replit.com *.repl.co *.replit.dev *.replit.app");
+  res.header('X-Frame-Options', 'ALLOWALL');
+  // Allow content to be embedded in iframe
+  res.removeHeader('Cross-Origin-Embedder-Policy');
+  res.removeHeader('Cross-Origin-Opener-Policy');
+
+  // Expose additional headers for the client
+  res.header('Access-Control-Expose-Headers', 'Content-Length, Content-Type, Authorization');
+
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
