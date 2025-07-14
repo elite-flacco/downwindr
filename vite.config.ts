@@ -34,13 +34,12 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
   },
-  // server: {
-  //   port: 5000,
-  //   strictPort: true,
-  //   hmr: {
-  //     protocol: 'wss',
-  //     host: 'e197e0ef-4a9f-43cd-a368-d335531f4e25-00-1ak5wferdhyun.picard.repl.co',
-  //     clientPort: 443,
-  //   },
-  // },
+  server: {
+    port: 5000,
+    host: "0.0.0.0",
+    strictPort: true,
+    hmr: {
+      port: 5000,
+    },
+  },
 });
