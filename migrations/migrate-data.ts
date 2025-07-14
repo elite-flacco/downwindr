@@ -2,9 +2,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { db } from "./server/db";
-import { spots, windConditions } from "./shared/schema";
-import { kiteSpotsData } from "./server/data/seed-data";
+import { db } from "../server/db";
+import { spots, windConditions } from "../shared/schema";
+import { kiteSpotsData } from "../server/data/seed-data";
 
 async function migrateData() {
   try {
