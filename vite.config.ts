@@ -35,16 +35,15 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    port: 5000,
-    host: "0.0.0.0",
+    host: true, // Listen on all network interfaces
+    port: process.env.PORT ? parseInt(process.env.PORT) : 5000, // Use PORT from environment or default to 3000
     strictPort: true,
     hmr: {
-      port: 5000,
-      host: "0.0.0.0",
-    },
-    watch: {
-      usePolling: true,
-      interval: 1000,
+      clientPort: 443, // Required for Replit's proxy
+      host: process.env.REPL_SLUG
+        ? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co`
+        : "localhost",
+      protocol: "wss",
     },
   },
 });
