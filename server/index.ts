@@ -4,7 +4,7 @@ dotenv.config();
 import express, { type Request, Response, NextFunction } from "express";
 import path from "path";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { serveStatic, log } from "./vite";
 import cors from "cors";
 
 const app = express();
@@ -117,13 +117,8 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    console.log(`Current environment: ${app.get("env")}`);
-    await setupVite(app, server);
-  } else {
+  // In production, serve static files
+  if (app.get("env") === "production") {
     serveStatic(app);
   }
 
@@ -135,10 +130,9 @@ app.use((req, res, next) => {
     {
       port,
       host: "0.0.0.0",
-      reusePort: true,
     },
     () => {
-      log(`serving on port ${port}`);
+      log(`serving on http://localhost:${port}`);
     },
   );
 })();
