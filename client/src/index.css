@@ -88,7 +88,7 @@
   }
 
   h1 {
-    @apply font-title text-theme-primary font-bold tracking-wide text-4xl md:text-5xl tracking-wider;
+    @apply font-title text-theme-primary font-bold text-4xl md:text-5xl;
   }
 
   h2 {
