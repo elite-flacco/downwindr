@@ -63,7 +63,7 @@ export default function Header() {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
           >
-            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md p-2 hand-drawn mr-3">
+            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/70 text-theme-background shadow-md p-2 hand-drawn mr-4">
               <Wind className="w-6 h-6 text-theme-background " />
             </div>
             <div>
@@ -75,7 +75,7 @@ export default function Header() {
           </motion.div>
         </Link>
         
-        <nav className="hidden md:flex space-x-2">
+        <nav className="hidden md:flex space-x-4">
           <Link href="/">
             <motion.div 
               className={`text-sm font-bold px-4 py-2 hand-drawn hand-drawn-nav transition-all duration-200 flex items-center cursor-pointer ${
@@ -131,7 +131,7 @@ export default function Header() {
         </nav>
         
         {/* Auth Section */}
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-4">
           {isLoading ? (
             <Button variant="ghost" className="h-8 w-8 p-0">
               <div className="h-8 w-8 flex items-center justify-center">
@@ -179,7 +179,7 @@ export default function Header() {
             <Link href="/auth">
               <Button 
                 variant="action" 
-                className="flex items-center gap-1.5 px-6 py-2 relative overflow-hidden group wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent_70%)]"
+                className="flex items-center gap-2 px-6 py-2 relative overflow-hidden group wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent_70%)]"
                 size="sm"
               >
                 <LogIn className="h-4 w-4 relative z-10" />
@@ -190,9 +190,9 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center space-x-2">
+        <div className="md:hidden flex items-center space-x-4">
           {isLoading ? (
-            <Button variant="ghost" className="h-8 w-8 p-0 mr-1">
+            <Button variant="ghost" className="h-8 w-8 p-0">
               <div className="h-8 w-8 flex items-center justify-center">
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
               </div>
@@ -200,7 +200,7 @@ export default function Header() {
           ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full mr-1">
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <AvatarWithRefresh 
                     userAvatarUrl={user.avatarUrl}
                     userName={user.username}
@@ -238,7 +238,7 @@ export default function Header() {
             <Link href="/auth">
               <Button 
                 variant="ghost" 
-                className="flex items-center gap-1 mr-1"
+                className="flex items-center gap-2"
                 size="icon"
               >
                 <LogIn className="h-5 w-5" />
@@ -272,7 +272,7 @@ export default function Header() {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <nav className="container mx-auto px-4 flex flex-col space-y-2 py-2">
+            <nav className="container mx-auto px-4 flex flex-col space-y-4 py-4">
               <Link href="/">
                 <motion.div 
                   className={`text-sm font-medium px-4 py-3 hand-drawn hand-drawn-nav transition-all duration-300 flex items-center cursor-pointer ${

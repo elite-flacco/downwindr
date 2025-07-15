@@ -101,24 +101,24 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                   </div>
                 </div>
                 <div className="p-6">
-                  <Skeleton className="h-8 w-64 mb-4" />
-                  <div className="flex flex-wrap gap-3 mb-4">
+                  <Skeleton className="h-8 w-64 mb-6" />
+                  <div className="flex flex-wrap gap-4 mb-6">
                     {Array(4).fill(0).map((_, i) => (
                       <Skeleton key={i} className="h-8 w-28" />
                     ))}
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
-                      <Skeleton className="h-6 w-40 mb-3" />
-                      <div className="space-y-3">
+                      <Skeleton className="h-6 w-40 mb-4" />
+                      <div className="space-y-4">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-full" />
                       </div>
                     </div>
                     <div>
-                      <Skeleton className="h-6 w-40 mb-3" />
-                      <div className="space-y-3">
+                      <Skeleton className="h-6 w-40 mb-4" />
+                      <div className="space-y-4">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-full" />
@@ -189,7 +189,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                 <div className="p-6">
                   {/* Info badges */}
                   <motion.div 
-                    className="flex flex-wrap gap-3 mb-5"
+                    className="flex flex-wrap gap-4 mb-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.05 }}
@@ -200,10 +200,10 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                       <Waves className="mr-2 h-4 w-4" /> {spotDetails.spot.waveSize} Waves 🌊
                     </div>
                     
-                    <div className="flex items-center text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">🌡️ {spotDetails.spot.tempRange} 
+                    <div className="flex items-center text-theme-text bg-theme-background px-4 py-2 rounded-full text-sm font-medium">🌡️ {spotDetails.spot.tempRange} 
                     </div>
                     
-                    <div className="flex items-center text-theme-text bg-theme-background px-2 py-2 rounded-full text-sm font-medium">📅 Best: {spotDetails.spot.bestMonths}
+                    <div className="flex items-center text-theme-text bg-theme-background px-4 py-2 rounded-full text-sm font-medium">📅 Best: {spotDetails.spot.bestMonths}
                     </div>
                     
                     {spotDetails.spot.windguruCode != null && spotDetails.spot.windguruCode !== '' && (

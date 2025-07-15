@@ -84,7 +84,7 @@ export default function AuthPage() {
       {/* Left side: Auth forms */}
       <div className="flex-1 flex flex-col justify-center p-8 sm:p-12 bg-background">
         <div className="mx-auto w-full max-w-md">
-          <h1 className="text-3xl font-bold text-center mb-6">Welcome to Downwindr</h1>
+          <h1 className="text-3xl font-bold text-center mb-8">Welcome to Downwindr</h1>
           
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">

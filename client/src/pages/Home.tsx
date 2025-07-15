@@ -29,7 +29,7 @@ export default function Home() {
 
       <main className="flex-grow">
         {/* Hero Section with kitesurfing image as full background */}
-        <section className="relative py-24 md:py-28 lg:py-32 overflow-hidden min-h-[80vh] flex items-center">
+        <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden min-h-[80vh] flex items-center">
           {/* Background image */}
           <div className="absolute inset-0 z-0">
             <img
@@ -46,7 +46,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col lg:flex-row items-center">
               {/* Hero content - Text area */}
-              <div className="w-full lg:w-3/5 mb-10 lg:mb-0 z-10 mx-auto lg:mx-0">
+              <div className="w-full lg:w-3/5 mb-12 lg:mb-0 z-10 mx-auto lg:mx-0">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white font-bold text-shadow-lg"
+                    className="text-4xl md:text-5xl lg:text-6xl mb-8 text-white font-bold text-shadow-lg"
                   >
                     Catch the Perfect Wind
                   </motion.h1>
@@ -66,7 +66,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="text-lg md:text-xl text-white/90 mb-16 leading-relaxed text-shadow"
+                    className="text-lg md:text-xl text-white/90 mb-12 leading-relaxed text-shadow"
                   >
                     Plan your next kitesurfing trip, discover epic spots, and
                     join a global wind fam.
