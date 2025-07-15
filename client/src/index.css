@@ -506,6 +506,39 @@
   .link-text {
     @apply text-sm font-medium font-body hover:font-semibold transition-all;
   }
+  
+  /* Filter Controls Styling */
+  .filter-group {
+    @apply bg-white/50 backdrop-blur-sm border border-slate-200/50 rounded-xl shadow-sm p-4;
+  }
+  
+  .filter-button-group {
+    @apply flex items-center gap-1 p-1 bg-slate-50/80 rounded-full shadow-inner;
+  }
+  
+  .filter-button {
+    @apply h-9 px-4 text-sm font-medium rounded-full transition-all duration-200;
+  }
+  
+  .filter-button.active {
+    @apply bg-white shadow-sm text-slate-800 border border-slate-200/50;
+  }
+  
+  .filter-button.inactive {
+    @apply text-slate-600 hover:text-slate-800 hover:bg-slate-100/50;
+  }
+  
+  .wind-filter-button {
+    @apply h-9 px-3 text-sm font-medium rounded-full transition-all duration-200;
+  }
+  
+  .wind-filter-button.selected {
+    @apply bg-primary/10 text-primary shadow-sm border border-primary/20;
+  }
+  
+  .wind-filter-button.unselected {
+    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-800 border border-transparent;
+  }
 
   /* Spot-specific Typography */
   .spot-name {

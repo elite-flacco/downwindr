@@ -10,50 +10,55 @@ interface MonthSelectorProps {
 
 export default function MonthSelector({ selectedMonth, onMonthChange }: MonthSelectorProps) {
   return (
-    <div className="flex items-center">
-      <div className="mr-4 whitespace-nowrap">
-        <Calendar className="w-4 h-4 inline mr-2 text-primary" />
-        <span className="text-sm font-bold">Season:</span>
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+      <div className="flex items-center gap-2 whitespace-nowrap">
+        <Calendar className="w-4 h-4 text-primary" />
       </div>
       
-      <Select
-        value={selectedMonth.toString()}
-        onValueChange={(value) => onMonthChange(parseInt(value))}
-      >
-        <SelectTrigger className="h-8 text-sm border-slate-200 min-w-[120px] py-2 px-4 focus:ring-primary/30 bg-white">
-          <SelectValue placeholder="Select month">
-            {MonthNames[selectedMonth - 1]}
-          </SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          {MonthNames.map((month, index) => (
-            <SelectItem key={index + 1} value={(index + 1).toString()} className="text-sm py-2">
-              {month}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      
-      {/* Quick navigation buttons for months */}
-      <div className="ml-4 hidden md:flex items-center space-x-2">
-        {[1, 4, 7, 10].map((month) => {
-          const quarterName = month === 1 ? "Winter" : month === 4 ? "Spring" : month === 7 ? "Summer" : "Autumn";
-          return (
-            <Button
-              key={month}
-              variant="ghost"
-              size="sm"
-              className={`px-4 py-2 h-8 text-xs ${
-                (selectedMonth >= month && selectedMonth < month + 3) || (month === 10 && (selectedMonth >= 10 || selectedMonth === 12))
-                  ? 'bg-primary/10 text-theme-text'
-                  : 'text-theme-text'
-              }`}
-              onClick={() => onMonthChange(month)}
-            >
-              {quarterName}
-            </Button>
-          );
-        })}
+      <div className="flex items-center gap-2">
+        <Select
+          value={selectedMonth.toString()}
+          onValueChange={(value) => onMonthChange(parseInt(value))}
+        >
+          <SelectTrigger className="h-8 text-sm border-slate-200 min-w-[120px] w-auto py-2 px-3 focus:ring-primary/30 bg-white">
+            <SelectValue placeholder="Select month">
+              {MonthNames[selectedMonth - 1]}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {MonthNames.map((month, index) => (
+              <SelectItem key={index + 1} value={(index + 1).toString()} className="text-sm py-2">
+                {month}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        
+        {/* Season Quick Buttons */}
+        <div className="flex items-center gap-1">
+          {[
+            { season: "Spring", emoji: "🌸", months: [3, 4, 5] },
+            { season: "Summer", emoji: "☀️", months: [6, 7, 8] },
+            { season: "Autumn", emoji: "🍂", months: [9, 10, 11] },
+            { season: "Winter", emoji: "❄️", months: [12, 1, 2] }
+          ].map(({ season, emoji, months }) => {
+            const isActive = months.includes(selectedMonth);
+            return (
+              <Button
+                key={season}
+                variant="outline"
+                size="sm"
+                className={`rounded-full transition-all ${
+                  isActive ? 'bg-primary text-white' : ''
+                }`}
+                onClick={() => onMonthChange(months[0])}
+                title={`${season} (${months.join(', ')})`}
+              >
+                <span className={`${isActive ? 'text-white' : 'text-slate-400'}`}>{emoji}</span>
+              </Button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

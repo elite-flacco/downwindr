@@ -1,30 +1,62 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Wind, Search, Filter } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ChevronDown, Search, Wind } from "lucide-react";
 import { motion } from "framer-motion";
+import MonthSelector from "@/components/MonthSelector";
 
 interface FilterControlsProps {
+  // Season/Month selection
+  selectedMonth: number;
+  onMonthChange: (month: number) => void;
+  // Wind quality filter
   windQualityFilter: string[];
   onWindQualityFilterChange: (filter: string) => void;
-  searchQuery: string;
-  onSearchChange: (query: string) => void;
+  // Region filter
   selectedRegion: string;
   onRegionChange: (region: string) => void;
+  // Search
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
 }
 
 export default function FilterControls({
+  selectedMonth,
+  onMonthChange,
   windQualityFilter,
   onWindQualityFilterChange,
-  searchQuery,
-  onSearchChange,
   selectedRegion,
-  onRegionChange
+  onRegionChange,
+  searchQuery,
+  onSearchChange
 }: FilterControlsProps) {
   
-  // Handle search input change
-  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSearchChange(e.target.value);
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const getCurrentSeason = (month: number) => {
+    if (month >= 3 && month <= 5) return "Spring";
+    if (month >= 6 && month <= 8) return "Summer";
+    if (month >= 9 && month <= 11) return "Autumn";
+    return "Winter";
+  };
+
+  const getSeasonMonths = (season: string) => {
+    switch (season) {
+      case "Spring": return [3, 4, 5];
+      case "Summer": return [6, 7, 8];
+      case "Autumn": return [9, 10, 11];
+      case "Winter": return [12, 1, 2];
+      default: return [selectedMonth];
+    }
+  };
+
+  const handleSeasonClick = (season: string) => {
+    const months = getSeasonMonths(season);
+    onMonthChange(months[0]); // Set to first month of season
   };
   
   const regions = [
@@ -37,81 +69,68 @@ export default function FilterControls({
   ];
 
   return (
-    <div className="mb-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-      {/* Wind Quality Filter */}
-      <div className="flex items-center flex-shrink-0 flex-nowrap">
-        <p className="filter-label mr-4 whitespace-nowrap">
-          <Filter className="w-4 h-4 inline mr-2 text-primary align-text-bottom" />
-          Wind:
-        </p>
-        <div className="flex flex-nowrap gap-2">
-          <Button
-            size="sm"
-            variant="outline"
-            className={`h-8 px-4 filter-button flex items-center gap-2 border ${
-              windQualityFilter.includes("Excellent") 
-                ? "bg-primary/10 text-primary border-primary/30" 
-                : "bg-white text-slate-600 border-slate-200 hover:bg-primary/5 hover:text-primary hover:border-primary/20"
-            }`}
-            onClick={() => onWindQualityFilterChange("Excellent")}
-          >
-            <Wind className="w-3 h-3" /> 🚀
-          </Button>
-          
-          <Button
-            size="sm"
-            variant="outline"
-            className={`h-8 px-4 filter-button flex items-center gap-2 border ${
-              windQualityFilter.includes("Good") 
-                ? "bg-primary/10 text-primary border-primary/30" 
-                : "bg-white text-slate-600 border-slate-200 hover:bg-primary/5 hover:text-primary hover:border-primary/20"
-            }`}
-            onClick={() => onWindQualityFilterChange("Good")}
-          >
-            <Wind className="w-3 h-3" /> 😎
-          </Button>
-          
-          <Button
-            size="sm"
-            variant="outline"
-            className={`h-8 px-4 filter-button flex items-center gap-2 border ${
-              windQualityFilter.includes("Fair") 
-                ? "bg-primary/10 text-primary border-primary/30" 
-                : "bg-white text-slate-600 border-slate-200 hover:bg-primary/5 hover:text-primary hover:border-primary/20"
-            }`}
-            onClick={() => onWindQualityFilterChange("Fair")}
-          >
-            <Wind className="w-3 h-3" /> 😊
-          </Button>
+    <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-6">
+      {/* First Row: Season and Wind filters */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 w-full lg:w-auto">
+        {/* Season Selector */}
+        <div className="flex items-center gap-3">
+          <MonthSelector
+            selectedMonth={selectedMonth}
+            onMonthChange={onMonthChange}
+          />
+        </div>
+
+        {/* Wind Quality Filter */}
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-slate-700">Wind:</span>
+          <div className="flex items-center gap-1">
+            {[
+              { key: "Excellent", label: "Strong", emoji: "💨💨💨", icon: "⬤" },
+              { key: "Good", label: "Medium", emoji: "💨💨", icon: "⬤" },
+              { key: "Fair", label: "Light", emoji: "💨", icon: "⬤" }
+            ].map(({ key, label, emoji, icon }) => {
+              const isSelected = windQualityFilter.includes(key);
+              return (
+                <Button
+                  key={key}
+                  variant="ghost"
+                  size="sm"
+                  className={`h-9 px-3 text-sm rounded-full transition-all ${
+                    isSelected
+                      ? 'bg-primary/10 text-primary font-medium shadow-sm' 
+                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                  }`}
+                  onClick={() => onWindQualityFilterChange(key)}
+                  title={`${label} wind conditions`}
+                >
+                  <span className={`${isSelected ? 'text-primary' : 'text-slate-400'}`}>{emoji}</span>
+                </Button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Region Filter */}
-      <div className="flex items-center flex-shrink-0">
-        <select
-          value={selectedRegion}
-          onChange={(e) => onRegionChange(e.target.value)}
-          className="h-8 rounded-md border border-slate-200 bg-white px-4 filter-input focus:outline-none focus:ring-1 focus:ring-primary"
-        >
-          {regions.map((region) => (
-            <option key={region.value} value={region.value}>
-              {region.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      
-      {/* Search Input */}
-      <div className="relative w-80">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-          <Search className="h-4 w-4 text-slate-400" />
+      {/* Second Row: Region and Search */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 w-full lg:w-auto">
+        {/* Region Filter */}
+        <div className="flex items-center gap-3">
+          <Select
+            value={selectedRegion}
+            onValueChange={onRegionChange}
+          >
+            <SelectTrigger className="h-9 min-w-[120px] rounded-full bg-white border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <SelectValue placeholder="Select region" />
+            </SelectTrigger>
+            <SelectContent>
+              {regions.map((region) => (
+                <SelectItem key={region.value} value={region.value}>
+                  {region.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <Input
-          className="pl-12 pr-4 py-2 h-8 filter-input bg-white border-slate-200 focus-visible:ring-primary/30"
-          placeholder="Search spots or locations..."
-          value={searchQuery}
-          onChange={handleSearchInputChange}
-        />
       </div>
     </div>
   );
