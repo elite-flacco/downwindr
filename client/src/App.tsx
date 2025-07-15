@@ -4,6 +4,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Spots from "@/pages/Spots";
 import AuthPage from "@/pages/auth-page";
+import ResetPasswordPage from "@/pages/ResetPasswordPage";
 import Community from "@/pages/Community";
 import Learn from "@/pages/Learn";
 import ProfilePage from "@/pages/ProfilePage";
@@ -25,6 +26,7 @@ function AppContent() {
         <Route path="/" component={Home} />
         <Route path="/spots" component={Spots} />
         <Route path="/auth" component={AuthPage} />
+        <Route path="/reset-password" component={ResetPasswordPage} />
         <Route path="/community" component={Community} />
         <ProtectedRoute path="/profile" component={ProfilePage} />
         <Route path="/learn" component={Learn} />
