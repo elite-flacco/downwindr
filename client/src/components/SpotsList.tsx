@@ -51,16 +51,16 @@ export default function SpotsList({
   return (
     <Card className="w-full rounded-xl border border-theme-border shadow-sm">
       <CardContent className="p-6">
-        <h3 className="mb-4 flex items-center">
-          <Sparkles className="w-6 h-6 mr-2 text-theme-accent" />
+        <h3 className="mb-6 flex items-center">
+          <Sparkles className="w-6 h-6 mr-4 text-theme-accent" />
           Top Kitesurfing Spots in {MonthNames[selectedMonth - 1]}
         </h3>
 
         {spots.length === 0 && !isLoading ? (
           <div className="text-center py-12 px-4">
-            <Wind className="w-16 h-16 mx-auto mb-4 text-theme-primary" />
+            <Wind className="w-16 h-16 mx-auto mb-6 text-theme-primary" />
             <p className="card-subtitle">No kitesurfing spots found for {MonthNames[selectedMonth - 1]}.</p>
-            <p className="card-caption mt-2">Wind conditions may be better in other months!</p>
+            <p className="card-caption mt-4">Wind conditions may be better in other months!</p>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

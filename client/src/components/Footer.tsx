@@ -36,17 +36,17 @@ export default function Footer() {
        */}
       <div className="container mx-auto px-4">
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-4 gap-10"
+          className="grid grid-cols-1 md:grid-cols-4 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div variants={itemVariants}>
-            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-md">
+            <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 shadow-md">
               <Wind className="w-8 h-8 text-theme-background" />
             </div>
-            <h3 className="text-2xl font-bold mb-2 text-theme-primary">Downwindr</h3>
+            <h3 className="text-2xl font-bold mb-4 text-theme-primary">Downwindr</h3>
             <p className="text-theme-text text-xs mb-4">Discover your dream kitesurfing experience worldwide.</p>
           </motion.div>
           
@@ -139,7 +139,7 @@ export default function Footer() {
           </motion.div>
         </motion.div>
         
-        <div className="mt-2 pt-2 text-center text-theme-text-light text-sm relative">
+        <div className="mt-8 pt-8 text-center text-theme-text-light text-sm relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-theme-border to-transparent"></div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
