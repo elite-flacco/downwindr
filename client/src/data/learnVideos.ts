@@ -15,8 +15,6 @@ export const videoCategories = [
   'equipment',
   'safety',
   'tricks',
-  'weather',
-  'travel'
 ];
 
 export const videoLevels = [
