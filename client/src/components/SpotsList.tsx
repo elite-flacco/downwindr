@@ -52,14 +52,14 @@ export default function SpotsList({
       <CardContent className="p-6">
         <h3 className="mb-4 flex items-center">
           <Sparkles className="w-6 h-6 mr-2 text-theme-accent" />
-          top ffffKitesurfing Spots in {MonthNames[selectedMonth - 1]}
+          Top Kitesurfing Spots in {MonthNames[selectedMonth - 1]}
         </h3>
         
         {spots.length === 0 && !isLoading ? (
           <div className="text-center py-12 px-4">
             <Wind className="w-16 h-16 mx-auto mb-4 text-theme-primary" />
-            <p className="text-theme-text font-medium">No kitesurfing spots found for {MonthNames[selectedMonth - 1]}.</p>
-            <p className="text-theme-text-light mt-2">Wind conditions may be better in other months!</p>
+            <p className="card-subtitle">No kitesurfing spots found for {MonthNames[selectedMonth - 1]}.</p>
+            <p className="card-caption mt-2">Wind conditions may be better in other months!</p>
           </div>
         ) : (
           // Spots list with fun animations
@@ -91,52 +91,52 @@ export default function SpotsList({
                         })()
                       }
                     </span>
-                  <h3>{spot.name}</h3>
+                  <h3 className="spot-name">{spot.name}</h3>
                     </div>
-                  <div className="px-3 py-1 rounded-full bg-theme-primary/10 text-xs text-theme-primary font-medium">
+                  <div className="px-3 py-1 rounded-full bg-theme-primary/10 tag-text text-theme-primary">
                     <Wind className="w-3 h-3 inline mr-1" /> {spot.bestMonths}
                   </div>
                 </div>
                 
                 <div className="flex flex-col gap-3">
-                  <p className="text-sm text-theme-text-light leading-relaxed px-3">
+                  <p className="card-body text-theme-text-light leading-relaxed px-3">
                     {spot.description.length > 300 
                       ? `${spot.description.substring(0, 300)}...` 
                       : spot.description}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mt-1 px-3">
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center">
+                    <div className="px-3 py-1 bg-theme-surface rounded-full tag-text text-theme-text flex items-center">
                       <Waves className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.waveSize}
                     </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center">
+                    <div className="px-3 py-1 bg-theme-surface rounded-full tag-text text-theme-text flex items-center">
                       <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.tempRange}
                     </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full text-xs text-theme-text flex items-center gap-1.5">
+                    <div className="px-3 py-1 bg-theme-surface rounded-full tag-text text-theme-text flex items-center gap-1.5">
                       <Wind className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.localAttractions}
                     </div>
                   </div>
                   
                   {/* Monthly Wind Conditions */}
                   <div className="flex flex-wrap gap-2 mt-2 px-3 bg-theme-accent/5 py-2 rounded-lg">
-                    <h4 className="w-full text-xs font-medium mb-1 text-theme-text-light">{MonthNames[selectedMonth - 1]} Conditions:</h4>
+                    <h4 className="w-full card-caption mb-1">{MonthNames[selectedMonth - 1]} Conditions:</h4>
                     {spot.windCondition ? (
                       <>
-                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full text-xs text-theme-primary flex items-center">
+                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full wind-quality-text text-theme-primary flex items-center">
                           <Wind className="w-3 h-3 inline text-theme-primary mr-1" /> 
                           {spot.windCondition.windSpeed} knots
                         </div>
-                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full text-xs text-theme-primary flex items-center">
+                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full wind-quality-text text-theme-primary flex items-center">
                           <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> 
                           {spot.windCondition.airTemp}°C air
                         </div>
-                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full text-xs text-theme-primary flex items-center">
+                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full wind-quality-text text-theme-primary flex items-center">
                           <Droplets className="w-3 h-3 inline text-theme-primary mr-1" /> 
                           {spot.windCondition.waterTemp}°C water
                         </div>
                       </>
                     ) : (
-                      <div className="text-xs text-theme-text-light italic">No data available for this month</div>
+                      <div className="card-caption italic">No data available for this month</div>
                     )}
                   </div>
                   
@@ -144,7 +144,7 @@ export default function SpotsList({
                     <Button 
                       variant="accent"
                       size="sm"
-                      className="flex items-center justify-start transition-all duration-300 ml-4"
+                      className="button-text flex items-center justify-start transition-all duration-300 ml-4"
                       onClick={() => onSpotSelect(spot.id)}
                     >
                       View details <ChevronRight className="ml-1 w-4 h-4" />
@@ -156,7 +156,7 @@ export default function SpotsList({
                         pressed={isInCompare}
                         onPressedChange={() => onToggleCompare(spot)}
                         disabled={!isInCompare && spotsToCompare.length >= 3}
-                        className={`h-8 text-xs mr-2 ${
+                        className={`h-8 button-text mr-2 ${
                           isInCompare 
                             ? "bg-theme-accent-warning/30 text-theme-accent-warning hover:bg-theme-accent-warning/40" 
                             : "text-theme-text-light hover:text-theme-primary hover:bg-theme-primary/5"

@@ -40,7 +40,7 @@ export default function FilterControls({
     <div className="mb-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
       {/* Wind Quality Filter */}
       <div className="flex items-center flex-shrink-0 flex-nowrap">
-        <p className="text-xs font-bold mr-3 text-theme-text mr-2 whitespace-nowrap">
+        <p className="filter-label mr-3 mr-2 whitespace-nowrap">
           <Filter className="w-3.5 h-3.5 inline mr-1 text-primary align-text-bottom" />
           Wind:
         </p>
@@ -48,7 +48,7 @@ export default function FilterControls({
           <Button
             size="sm"
             variant="outline"
-            className={`h-8 px-2 text-xs flex items-center gap-1 border ${
+            className={`h-8 px-2 filter-button flex items-center gap-1 border ${
               windQualityFilter.includes("Excellent") 
                 ? "bg-primary/10 text-primary border-primary/30" 
                 : "bg-white text-slate-600 border-slate-200 hover:bg-primary/5 hover:text-primary hover:border-primary/20"
@@ -61,7 +61,7 @@ export default function FilterControls({
           <Button
             size="sm"
             variant="outline"
-            className={`h-8 px-2 text-xs flex items-center gap-1 border ${
+            className={`h-8 px-2 filter-button flex items-center gap-1 border ${
               windQualityFilter.includes("Good") 
                 ? "bg-primary/10 text-primary border-primary/30" 
                 : "bg-white text-slate-600 border-slate-200 hover:bg-primary/5 hover:text-primary hover:border-primary/20"
@@ -74,7 +74,7 @@ export default function FilterControls({
           <Button
             size="sm"
             variant="outline"
-            className={`h-8 px-2 text-xs flex items-center gap-1 border ${
+            className={`h-8 px-2 filter-button flex items-center gap-1 border ${
               windQualityFilter.includes("Fair") 
                 ? "bg-primary/10 text-primary border-primary/30" 
                 : "bg-white text-slate-600 border-slate-200 hover:bg-primary/5 hover:text-primary hover:border-primary/20"
@@ -91,7 +91,7 @@ export default function FilterControls({
         <select
           value={selectedRegion}
           onChange={(e) => onRegionChange(e.target.value)}
-          className="h-8 rounded-md border border-slate-200 bg-white px-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+          className="h-8 rounded-md border border-slate-200 bg-white px-2 filter-input focus:outline-none focus:ring-1 focus:ring-primary"
         >
           {regions.map((region) => (
             <option key={region.value} value={region.value}>
@@ -107,7 +107,7 @@ export default function FilterControls({
           <Search className="h-3.5 w-3.5 text-slate-400" />
         </div>
         <Input
-          className="pl-8 pr-2 py-1 h-8 text-xs bg-white border-slate-200 focus-visible:ring-primary/30"
+          className="pl-8 pr-2 py-1 h-8 filter-input bg-white border-slate-200 focus-visible:ring-primary/30"
           placeholder="Search spots or locations..."
           value={searchQuery}
           onChange={handleSearchInputChange}

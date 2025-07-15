@@ -168,8 +168,8 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
           {/* Header overlay */}
           {/* <div className="absolute top-4 left-4 z-[9] bg-theme-background px-4 py-3 rounded-xl shadow-sm flex items-center space-x-3 border border-theme-border">
             <div>
-              <h3 className="font-heading text-theme-primary text-lg" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
-              <p className="text-xs text-theme-text-light">Find your perfect spot</p>
+              <h3 className="card-title" style={{ fontFamily: "'Permanent Marker', cursive" }}>Downwindr</h3>
+              <p className="card-caption">Find your perfect spot</p>
             </div>
           </div> */}
           
@@ -251,8 +251,8 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
               >
                 <div className="p-3 max-w-[380px]">
                   <div className="mb-3 pb-2 border-b border-theme-border">
-                    <h3 className="font-heading text-theme-primary text-lg">{popupInfo.spot.name}</h3>
-                    <div className="text-xs text-theme-text-light flex items-center">
+                    <h3 className="spot-name">{popupInfo.spot.name}</h3>
+                    <div className="spot-location flex items-center">
                       <MapPin className="w-3 h-3 mr-1" />
                       {popupInfo.spot.country} {
                         (() => {
@@ -276,11 +276,11 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                         className="w-4 h-4 rounded-full mr-2"
                         style={{ backgroundColor: getPinColor(popupInfo.quality) }}
                       ></div>
-                      <span className="text-xs font-medium mr-2" style={{ color: getPinColor(popupInfo.quality) }}>
+                      <span className="wind-quality-text mr-2" style={{ color: getPinColor(popupInfo.quality) }}>
                         {popupInfo.quality} wind
                       </span>
                     </div>
-                    <div className="flex items-center text-xs text-theme-text-light">
+                    <div className="flex items-center spot-condition">
                       <Waves className="w-3 h-3 mr-1 text-theme-primary" />
                       {popupInfo.spot.waveSize}
                     </div>
@@ -293,7 +293,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                   <div className="flex gap-2 mb-3 mt-8">
                     <Button 
                       size="sm"
-                      className="flex bg-theme-primary text-theme-background hover:bg-theme-primary-hover text-xs"
+                      className="button-text flex bg-theme-primary text-theme-background hover:bg-theme-primary-hover"
                       onClick={() => {
                         onSpotSelect(popupInfo.spot.id);
                         setPopupInfo(null);
@@ -307,7 +307,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                         href={`https://www.windguru.cz/${popupInfo.spot.windguruCode}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center bg-theme-surface text-theme-text px-3 py-1 rounded-md text-xs font-medium hover:bg-theme-primary/30 transition-colors"
+                        className="link-text flex items-center justify-center bg-theme-surface text-theme-text px-3 py-1 rounded-md hover:bg-theme-primary/30 transition-colors"
                       >
                         <ExternalLink className="w-2 h-2 mr-2" /> Windguru
                       </a>
@@ -318,23 +318,23 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
             )}
             
             {/* Legend */}
-            <div className="absolute bottom-8 left-4 z-[9] bg-theme-background p-4 rounded-xl shadow-sm text-xs border border-theme-border">
-              <div className="text-sm mb-2 text-theme-text font-medium">Wind Quality</div>
+            <div className="absolute bottom-8 left-4 z-[9] bg-theme-background p-4 rounded-xl shadow-sm border border-theme-border">
+              <div className="card-body mb-2">Wind Quality</div>
               <div className="flex items-center mb-2">
                 <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Excellent) }}></div>
-                <span className="text-theme-text-light">Excellent</span>
+                <span className="tag-text text-theme-text-light">Excellent</span>
               </div>
               <div className="flex items-center mb-2">
                 <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Good) }}></div>
-                <span className="text-theme-text-light">Good</span>
+                <span className="tag-text text-theme-text-light">Good</span>
               </div>
               <div className="flex items-center mb-2">
                 <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Moderate) }}></div>
-                <span className="text-theme-text-light">Moderate</span>
+                <span className="tag-text text-theme-text-light">Moderate</span>
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: getPinColor(WindQuality.Poor) }}></div>
-                <span className="text-theme-text-light">Poor</span>
+                <span className="tag-text text-theme-text-light">Poor</span>
               </div>
             </div>
           </Map>
