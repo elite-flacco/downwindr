@@ -5,27 +5,29 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium hand-drawn chalk-texture chalk-drawn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 relative",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-body font-semibold hand-drawn chalk-texture transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [\u0026_svg]:pointer-events-none [\u0026_svg]:size-4 [\u0026_svg]:shrink-0 relative overflow-hidden",
   {
     variants: {
       variant: {
-        default: "font-bold text-white bg-theme-primary hover:bg-theme-primary/90 shadow-md hover:shadow border-2 border-theme-secondary/20",
+        default: "text-theme-background bg-theme-primary hover:bg-theme-primary/90 active:bg-theme-primary/95 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-primary/30 hover:border-theme-primary/40 transform hover:scale-[1.02] active:scale-[0.98]",
         destructive:
-          "font-bold bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow border-2 border-destructive/20",
+          "text-theme-background bg-theme-action hover:bg-theme-action/90 active:bg-theme-action/95 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-action/30 hover:border-theme-action/40 transform hover:scale-[1.02] active:scale-[0.98]",
         outline:
-          "font-bold text-primary border-2 border-primary/30 bg-background hover:bg-secondary/30 hover:text-accent-foreground border-dashed",
+          "text-theme-primary border-2 border-theme-primary/40 bg-transparent hover:bg-theme-primary/10 active:bg-theme-primary/15 border-dashed hover:border-theme-primary/60 active:border-theme-primary/70 transform hover:scale-[1.02] active:scale-[0.98]",
         secondary:
-          "font-bold bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-md hover:shadow border-2 border-secondary/20",
-        ghost: "font-bold hover:bg-theme-surface hover:text-accent-foreground border-2 border-transparent hover:border-theme-surface/50",
-        link: "text-primary underline-offset-4 hover:underline",
-        action: "font-bold text-white bg-theme-action hover:bg-theme-action/90 shadow-md hover:shadow border-3 border-theme-action/20",
-        accent: "font-bold bg-theme-accent hover:bg-theme-accent/90 shadow-md hover:shadow border-2 border-theme-accent/20"
+          "text-theme-text bg-theme-surface hover:bg-theme-surface/80 active:bg-theme-surface/90 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-border hover:border-theme-border/60 transform hover:scale-[1.02] active:scale-[0.98]",
+        ghost: "text-theme-text hover:bg-theme-surface/60 active:bg-theme-surface/80 border-2 border-transparent hover:border-theme-surface/30 active:border-theme-surface/40 transform hover:scale-[1.02] active:scale-[0.98]",
+        link: "text-theme-primary underline-offset-4 hover:underline active:underline border-none shadow-none transform-none p-0 h-auto font-body font-medium",
+        wobbly: "wobbly-border text-theme-primary bg-theme-background hover:bg-theme-surface/50 active:bg-theme-surface/70 border-2 border-theme-primary/30 hover:border-theme-primary/50",
+        action: "text-theme-background bg-theme-action hover:bg-theme-action/90 active:bg-theme-action/95 shadow-lg hover:shadow-xl active:shadow-md border-2 border-theme-action/30 hover:border-theme-action/40 transform hover:scale-[1.02] active:scale-[0.98] wind-gust",
+        accent: "text-theme-text bg-theme-accent hover:bg-theme-accent/90 active:bg-theme-accent/95 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-accent/30 hover:border-theme-accent/40 transform hover:scale-[1.02] active:scale-[0.98]"
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-9 px-3 py-1 text-xs",
-        lg: "h-12 px-8 py-3",
-        icon: "h-11 w-11",
+        default: "h-10 px-5 py-2 text-sm",
+        sm: "h-8 px-3 py-1 text-xs",
+        lg: "h-12 px-8 py-3 text-base",
+        icon: "h-10 w-10 p-0",
+        xl: "h-14 px-10 py-4 text-lg",
       },
     },
     defaultVariants: {
