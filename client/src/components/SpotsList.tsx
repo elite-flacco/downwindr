@@ -63,7 +63,7 @@ export default function SpotsList({
             <p className="card-caption mt-4">Wind conditions may be better in other months!</p>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {spots.map((spot, index) => {
               const isInCompare = spotsToCompare.some(s => s.id === spot.id);
               return (
@@ -134,12 +134,12 @@ export default function SpotsList({
                       </div>
                     </div>
 
-                    <div className="mt-6 flex justify-end gap-4">
+                    <div className="mt-6 flex flex-col sm:flex-row justify-end gap-2 sm:gap-4">
                       <Button
                         variant="accent"
                         size="sm"
                         onClick={() => onSpotSelect(spot.id)}
-                        className="button-text flex items-center justify-start transition-all duration-300 ml-4"
+                        className="button-text flex items-center justify-center sm:justify-start transition-all duration-300 w-full sm:w-auto"
                       >
                         <ChevronRight className="w-4 h-4" />
                         View Details
@@ -148,7 +148,7 @@ export default function SpotsList({
                         <Toggle
                           pressed={isInCompare}
                           onClick={() => onToggleCompare(spot)}
-                          className="h-8 px-3 text-xs text-theme-text bg-theme-surface hover:bg-theme-surface/80 active:bg-theme-surface/90 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-border hover:border-theme-border/60 transform hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 hand-drawn chalk-texture chalk-drawn"
+                          className="h-8 px-3 text-xs text-theme-text bg-theme-surface hover:bg-theme-surface/80 active:bg-theme-surface/90 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-border hover:border-theme-border/60 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 hand-drawn chalk-texture chalk-drawn w-full sm:w-auto"
                         >
                           {isInCompare ? (
                             <Check className="w-4 h-4" />
