@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, real, json, timestamp, unique } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, real, json, timestamp, unique, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { relations } from "drizzle-orm";
@@ -95,23 +95,22 @@ export const MonthNames = [
   "September", "October", "November", "December"
 ];
 
-// User table for authentication and reviews
+// User profiles table (extends Supabase auth.users)
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
-  email: text("email").notNull().unique(),
-  password: text("password").notNull(),
+  id: uuid("id").primaryKey(), // References auth.users.id
+  username: text("username").unique(),
   displayName: text("display_name"),
   bio: text("bio"),
   experience: text("experience"), // Beginner, Intermediate, Advanced
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
   avatarUrl: text("avatar_url"),
 });
 
 // Reviews table for community spot reviews
 export const reviews = pgTable("reviews", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().references(() => users.id),
+  userId: uuid("user_id").notNull().references(() => users.id),
   spotId: integer("spot_id").notNull().references(() => spots.id),
   content: text("content").notNull(),
   visitDate: timestamp("visit_date"),
@@ -127,7 +126,7 @@ export const reviews = pgTable("reviews", {
 // Ratings table for community spot ratings
 export const ratings = pgTable("ratings", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().references(() => users.id),
+  userId: uuid("user_id").notNull().references(() => users.id),
   spotId: integer("spot_id").notNull().references(() => spots.id),
   windReliability: integer("wind_reliability").notNull(), // 1-5 stars
   beginnerFriendly: integer("beginner_friendly").notNull(), // 1-5 stars
@@ -192,9 +191,8 @@ export type SpotWithWindConditions = Spot & {
 
 // Define insert schemas for new tables
 export const insertUserSchema = createInsertSchema(users).pick({
+  id: true,
   username: true,
-  email: true,
-  password: true,
   displayName: true,
   bio: true,
   experience: true,

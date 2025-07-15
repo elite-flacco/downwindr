@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "@/contexts/AuthContext";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -76,7 +76,7 @@ const passwordFormSchema = z
 type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, userProfile } = useAuth();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("reviews");
   const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
@@ -399,8 +399,8 @@ export default function ProfilePage() {
               <div className="flex flex-col items-center mb-6">
                 <div className="relative group">
                   <AvatarWithRefresh
-                    userAvatarUrl={user.avatarUrl} 
-                    userName={user.username}
+                    userAvatarUrl={userProfile?.avatarUrl} 
+                    userName={userProfile?.username}
                     className="h-24 w-24 mb-3"
                     fallbackClassName="text-lg bg-primary text-primary-foreground"
                   />
@@ -411,11 +411,11 @@ export default function ProfilePage() {
                     <Camera className="h-8 w-8 text-white" />
                   </button>
                 </div>
-                <h2 className="text-xl font-bold">{user.displayName || user.username}</h2>
+                <h2 className="text-xl font-bold">{userProfile?.displayName || userProfile?.username}</h2>
                 <p className="text-sm text-muted-foreground">{user.email}</p>
-                {user.experience && (
+                {userProfile?.experience && (
                   <span className="inline-block mt-1 px-3 py-1 text-sm rounded-full bg-primary/10 text-primary">
-                    {user.experience}
+                    {userProfile?.experience}
                   </span>
                 )}
               </div>
@@ -426,7 +426,7 @@ export default function ProfilePage() {
                   <div>
                     <p className="text-sm font-medium">Username</p>
                     <p className="text-sm text-muted-foreground">
-                      {user.username}
+                      {userProfile?.username}
                     </p>
                   </div>
                 </div>
@@ -435,7 +435,7 @@ export default function ProfilePage() {
                   <div>
                     <p className="text-sm font-medium">Member Since</p>
                     <p className="text-sm text-muted-foreground">
-                      {format(new Date(user.createdAt), "MMMM yyyy")}
+                      {userProfile?.createdAt ? format(new Date(userProfile.createdAt), "MMMM yyyy") : "Recently"}
                     </p>
                   </div>
                 </div>
@@ -736,17 +736,17 @@ export default function ProfilePage() {
             <div className="flex items-center justify-center">
               <Avatar className="h-32 w-32">
                 {imagePreview ? (
-                  <AvatarImage src={imagePreview} alt={user.username} />
+                  <AvatarImage src={imagePreview} alt={userProfile?.username} />
                 ) : avatarUrl ? (
-                  <AvatarImage src={avatarUrl} alt={user.username} />
-                ) : user.avatarUrl ? (
+                  <AvatarImage src={avatarUrl} alt={userProfile?.username} />
+                ) : userProfile?.avatarUrl ? (
                   <AvatarImage 
-                    src={`${user.avatarUrl}?t=${Date.now()}`} 
-                    alt={user.username} 
+                    src={`${userProfile?.avatarUrl}?t=${Date.now()}`} 
+                    alt={userProfile?.username} 
                   />
                 ) : null}
                 <AvatarFallback className="text-2xl">
-                  {user.username.substring(0, 2).toUpperCase()}
+                  {userProfile?.username?.substring(0, 2).toUpperCase() || "??"}
                 </AvatarFallback>
               </Avatar>
             </div>
@@ -809,7 +809,7 @@ export default function ProfilePage() {
                 </Button>
                 
                 {/* Only show the remove button if user has a profile picture */}
-                {user.avatarUrl && (
+                {userProfile?.avatarUrl && (
                   <Button
                     type="button"
                     variant="destructive"

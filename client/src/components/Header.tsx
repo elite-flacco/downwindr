@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Wind, Menu, X, LogIn, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { AvatarWithRefresh } from '@/components/AvatarWithRefresh';
 import { 
@@ -18,14 +18,13 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
-  const { user, isLoading, logoutMutation } = useAuth();
+  const { user, loading, signOut } = useAuth();
   
   // Handle logout click
-  const handleLogout = (e: React.MouseEvent) => {
+  const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
     
-    // Just call the mutation - the auth hook handles all the navigation and state
-    logoutMutation.mutate();
+    await signOut();
     
     // Close mobile menu after logout click
     setMobileMenuOpen(false);
@@ -132,7 +131,7 @@ export default function Header() {
         
         {/* Auth Section */}
         <div className="hidden md:flex items-center space-x-4">
-          {isLoading ? (
+          {loading ? (
             <Button variant="ghost" className="h-8 w-8 p-0">
               <div className="h-8 w-8 flex items-center justify-center">
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
@@ -191,7 +190,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
-          {isLoading ? (
+          {loading ? (
             <Button variant="ghost" className="h-8 w-8 p-0">
               <div className="h-8 w-8 flex items-center justify-center">
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
