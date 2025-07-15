@@ -629,7 +629,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   // User operations
-  async getUserById(id: number): Promise<User | undefined> {
+  async getUserById(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user;
   }
@@ -642,17 +642,14 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async getUserByEmail(email: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
-    return user;
-  }
+  // Remove getUserByEmail since Supabase Auth handles email lookups
 
   async createUser(user: InsertUser): Promise<User> {
     const [newUser] = await db.insert(users).values(user).returning();
     return newUser;
   }
   
-  async updateUser(id: number, userData: Partial<User>): Promise<User | undefined> {
+  async updateUser(id: string, userData: Partial<User>): Promise<User | undefined> {
     // Create a new object without the updatedAt property to avoid SQL errors
     const { updatedAt, ...userDataWithoutTimestamp } = userData;
     
@@ -693,7 +690,7 @@ export class DatabaseStorage implements IStorage {
     }));
   }
   
-  async getReviewsByUserId(userId: number): Promise<ReviewWithUser[]> {
+  async getReviewsByUserId(userId: string): Promise<ReviewWithUser[]> {
     const reviewsWithDetails = await db
       .select({
         review: reviews,
@@ -720,7 +717,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getReviewByUserAndSpot(
-    userId: number,
+    userId: string,
     spotId: number
   ): Promise<Review | undefined> {
     const [review] = await db
@@ -758,7 +755,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getRatingByUserAndSpot(
-    userId: number,
+    userId: string,
     spotId: number
   ): Promise<Rating | undefined> {
     const [rating] = await db

@@ -1,9 +1,18 @@
 import type { Express, Request, Response, NextFunction } from "express";
+import type { User } from "@supabase/supabase-js";
+
+declare global {
+  namespace Express {
+    interface Request {
+      user: User;
+    }
+  }
+}
 import { createServer, type Server } from "http";
 import { storage, UserPreferences } from "./storage";
 import { z } from "zod";
 import { MonthNames, insertReviewSchema, insertRatingSchema, WindQuality } from "@shared/schema";
-import { setupAuth, comparePasswords, hashPassword } from "./auth";
+import { requireAuth, verifyAuth } from "./supabase";
 import { upload, processProfileImage } from "./uploads";
 import path from "path";
 import { WebSocketServer, WebSocket } from 'ws';
@@ -24,23 +33,72 @@ const userPreferencesSchema = z.object({
   waterTemperature: z.enum(["cold", "moderate", "warm", "hot"])
 });
 
-// Middleware to check if user is authenticated
+// Middleware to check if user is authenticated (using Supabase Auth)
 function isAuthenticated(req: Request, res: Response, next: NextFunction) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).json({ message: "Authentication required" });
+  const authHeader = req.headers.authorization;
+  
+  verifyAuth(authHeader).then(({ user, error }) => {
+    if (error || !user) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+    
+    req.user = user;
+    next();
+  });
 }
 
-// Password change schema for validation
-const passwordChangeSchema = z.object({
-  currentPassword: z.string().min(1, "Current password is required"),
-  newPassword: z.string().min(6, "New password must be at least 6 characters")
-});
+// Remove password change schema since Supabase handles authentication
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Set up authentication routes
-  setupAuth(app);
+  // User profile routes
+  app.get("/api/users/:id", async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const user = await storage.getUserById(userId);
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Error fetching user" });
+    }
+  });
+
+  app.post("/api/users", async (req, res) => {
+    try {
+      const user = await storage.createUser(req.body);
+      res.status(201).json(user);
+    } catch (error) {
+      console.error("Error creating user:", error);
+      res.status(500).json({ message: "Error creating user" });
+    }
+  });
+
+  app.put("/api/users/:id", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const updates = req.body;
+      
+      // Verify user can only update their own profile
+      if (req.user.id !== userId) {
+        return res.status(403).json({ message: "Forbidden" });
+      }
+      
+      const user = await storage.updateUser(userId, updates);
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      res.json(user);
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({ message: "Error updating user" });
+    }
+  });
   
   // HTTP server
   const httpServer = createServer(app);
@@ -67,7 +125,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Helper function to broadcast avatar updates to all connected clients
-  const broadcastAvatarUpdate = (userId: number) => {
+  const broadcastAvatarUpdate = (userId: string) => {
     const message = JSON.stringify({
       type: 'avatar_update',
       userId,
@@ -316,7 +374,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create a review (requires authentication)
   app.post("/api/reviews", isAuthenticated, async (req, res) => {
     try {
-      const userId = (req.user as Express.User).id;
+      const userId = req.user.id;
       
       // Create review schema with required userId
       const reviewSchema = insertReviewSchema.extend({
@@ -406,7 +464,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid spot ID" });
       }
       
-      const userId = (req.user as Express.User).id;
+      const userId = req.user.id;
       const rating = await storage.getRatingByUserAndSpot(userId, spotId);
       
       if (!rating) {
@@ -423,7 +481,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create or update a rating (requires authentication)
   app.post("/api/ratings", isAuthenticated, async (req, res) => {
     try {
-      const userId = (req.user as Express.User).id;
+      const userId = req.user.id;
       
       // Rating schema with required userId
       const ratingSchema = insertRatingSchema.extend({
@@ -491,7 +549,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get user's reviews (requires authentication)
   app.get("/api/user/reviews", isAuthenticated, async (req, res) => {
     try {
-      const userId = (req.user as Express.User).id;
+      const userId = req.user.id;
       const reviews = await storage.getReviewsByUserId(userId);
       res.json(reviews);
     } catch (error) {
@@ -500,60 +558,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Update user password (requires authentication)
-  app.post("/api/user/password", isAuthenticated, async (req, res) => {
-    try {
-      const userId = (req.user as Express.User).id;
-      
-      // Validate request body
-      const parseResult = passwordChangeSchema.safeParse(req.body);
-      if (!parseResult.success) {
-        return res.status(400).json({ 
-          message: "Invalid password data", 
-          errors: parseResult.error.errors 
-        });
-      }
-      
-      const { currentPassword, newPassword } = parseResult.data;
-      
-      // Get current user
-      const user = await storage.getUserById(userId);
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-      
-      // Verify current password
-      const isCorrectPassword = await comparePasswords(currentPassword, user.password);
-      if (!isCorrectPassword) {
-        return res.status(401).json({ message: "Current password is incorrect" });
-      }
-      
-      // Hash new password
-      const hashedPassword = await hashPassword(newPassword);
-      
-      // For now, let's update the user's password directly in storage
-      user.password = hashedPassword;
-      
-      res.json({ message: "Password updated successfully" });
-    } catch (error) {
-      console.error("Error updating password:", error);
-      res.status(500).json({ message: "Error updating password" });
-    }
-  });
+  // Password updates are handled by Supabase Auth on the client side
 
   // Delete user profile picture (requires authentication)
   app.delete("/api/user/profile-picture", isAuthenticated, async (req, res) => {
     try {
-      const userId = (req.user as Express.User).id;
+      const userId = req.user.id;
       
       // Set avatarUrl to null to remove profile picture
       const updatedUser = await storage.updateUser(userId, { avatarUrl: null });
       if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
       }
-      
-      // Update session user data
-      (req.user as Express.User).avatarUrl = null;
       
       // Broadcast profile picture update event to all connected clients
       broadcastAvatarUpdate(userId);
@@ -571,7 +587,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Update user profile picture with URL (requires authentication)
   app.post("/api/user/profile-picture", isAuthenticated, async (req, res) => {
     try {
-      const userId = (req.user as Express.User).id;
+      const userId = req.user.id;
       const { avatarUrl } = req.body;
       
       if (!avatarUrl || typeof avatarUrl !== 'string') {
@@ -583,9 +599,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
       }
-      
-      // Update session user data
-      (req.user as Express.User).avatarUrl = avatarUrl;
       
       // Broadcast profile picture update event to all connected clients
       broadcastAvatarUpdate(userId);
@@ -608,7 +621,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     processProfileImage,
     async (req, res) => {
       try {
-        const userId = (req.user as Express.User).id;
+        const userId = req.user.id;
         
         // Check if file was uploaded
         if (!req.file) {
@@ -626,9 +639,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (!updatedUser) {
           return res.status(404).json({ message: "User not found" });
         }
-        
-        // Update session user data
-        (req.user as Express.User).avatarUrl = fileUrl;
         
         // Broadcast profile picture update event to all connected clients
         broadcastAvatarUpdate(userId);
