@@ -63,23 +63,22 @@ export interface IStorage {
   getRecommendedSpots(preferences: UserPreferences): Promise<SpotWithMatchScore[]>;
   
   // User operations
-  getUserById(id: number): Promise<User | undefined>;
+  getUserById(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
-  getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  updateUser(id: number, userData: Partial<User>): Promise<User | undefined>;
+  updateUser(id: string, userData: Partial<User>): Promise<User | undefined>;
   
   // Review operations
   getReviewsForSpot(spotId: number): Promise<ReviewWithUser[]>;
-  getReviewsByUserId(userId: number): Promise<ReviewWithUser[]>;
-  getReviewByUserAndSpot(userId: number, spotId: number): Promise<Review | undefined>;
+  getReviewsByUserId(userId: string): Promise<ReviewWithUser[]>;
+  getReviewByUserAndSpot(userId: string, spotId: number): Promise<Review | undefined>;
   createReview(review: InsertReview): Promise<Review>;
   updateReview(id: number, content: string): Promise<Review | undefined>;
   deleteReview(id: number): Promise<boolean>;
   
   // Rating operations
   getRatingsForSpot(spotId: number): Promise<Rating[]>;
-  getRatingByUserAndSpot(userId: number, spotId: number): Promise<Rating | undefined>;
+  getRatingByUserAndSpot(userId: string, spotId: number): Promise<Rating | undefined>;
   createRating(rating: InsertRating): Promise<Rating>;
   updateRating(id: number, rating: Partial<InsertRating>): Promise<Rating | undefined>;
   deleteRating(id: number): Promise<boolean>;

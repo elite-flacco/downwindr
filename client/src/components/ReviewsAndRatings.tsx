@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "@/contexts/AuthContext";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Review, Rating, User } from "@shared/schema";
 import { apiRequest, queryClient } from "../lib/queryClient";
@@ -94,7 +94,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   // Fetch spot details with ratings and reviews
   const { 
     data: spotDetails, 
-    isLoading,
+    loading,
     error,
     refetch
   } = useQuery<SpotDetails>({
@@ -332,7 +332,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
   };
 
   // Loading state
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-48">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
