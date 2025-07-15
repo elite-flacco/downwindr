@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import React from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -7,13 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Eye, 
-  EyeOff, 
-  Mail, 
-  Lock, 
-  CheckCircle, 
-  XCircle, 
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  CheckCircle,
+  XCircle,
   Loader2,
   ArrowRight,
   ArrowLeft
@@ -41,7 +42,7 @@ export default function AuthForm() {
   const [message, setMessage] = useState('')
   const [emailTouched, setEmailTouched] = useState(false)
   const [passwordTouched, setPasswordTouched] = useState(false)
-  
+
   const { signIn, signUp, resetPassword } = useAuth()
 
   // Email validation
@@ -56,17 +57,17 @@ export default function AuthForm() {
     const hasLowercase = /[a-z]/.test(password)
     const hasNumber = /\d/.test(password)
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password)
-    
+
     const criteriaMet = [hasMinLength, hasUppercase, hasLowercase, hasNumber, hasSpecialChar].filter(Boolean).length
     const score = Math.min(criteriaMet * 20, 100)
-    
+
     const feedback = []
     if (!hasMinLength) feedback.push('At least 8 characters')
     if (!hasUppercase) feedback.push('One uppercase letter')
-    if (!hasLowercase) feedback.push('One lowercase letter')  
+    if (!hasLowercase) feedback.push('One lowercase letter')
     if (!hasNumber) feedback.push('One number')
     if (!hasSpecialChar) feedback.push('One special character')
-    
+
     return {
       score,
       feedback,
@@ -92,7 +93,7 @@ export default function AuthForm() {
       if (mode === 'signin') {
         const { error } = await signIn(email, password)
         if (error) {
-          setError(error.message === 'Invalid login credentials' 
+          setError(error.message === 'Invalid login credentials'
             ? 'Invalid email or password. Please try again.'
             : error.message
           )
@@ -110,7 +111,7 @@ export default function AuthForm() {
           setError('Passwords do not match')
           return
         }
-        
+
         const { error } = await signUp(email, password)
         if (error) {
           setError(error.message)
@@ -122,7 +123,7 @@ export default function AuthForm() {
           setError('Please enter a valid email address')
           return
         }
-        
+
         const { error } = await resetPassword(email)
         if (error) {
           setError(error.message)
@@ -154,18 +155,18 @@ export default function AuthForm() {
   return (
     <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/95 backdrop-blur-sm">
       <CardHeader className="space-y-1 pb-4">
-        <CardTitle className="text-2xl font-bold text-center">
-          {mode === 'signin' && 'Welcome back'}
-          {mode === 'signup' && 'Create account'}
+        <CardTitle className="text-xl font-bold text-center">
+          {mode === 'signin' && 'Welcome Back'}
+          {mode === 'signup' && 'Join the Fam'}
           {mode === 'reset' && 'Reset password'}
         </CardTitle>
-        <p className="text-sm text-muted-foreground text-center">
+        {/* <p className="text-sm text-muted-foreground text-center">
           {mode === 'signin' && 'Sign in to your account to continue'}
-          {mode === 'signup' && 'Join the kitesurfing community'}
+          {mode === 'signup' && 'Join the fam'}
           {mode === 'reset' && 'Enter your email to reset your password'}
-        </p>
+        </p> */}
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email Field */}
@@ -180,13 +181,12 @@ export default function AuthForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={() => setEmailTouched(true)}
-                className={`pl-10 h-11 transition-all duration-200 ${
-                  emailTouched && !isValidEmail(email) && email.length > 0
-                    ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                className={`pl-10 h-11 border ${emailTouched && !isValidEmail(email) && email.length > 0
+                    ? 'border-red-500'
                     : emailTouched && isValidEmail(email)
-                    ? 'border-green-300 focus:border-green-500 focus:ring-green-500/20'
-                    : 'focus:border-primary focus:ring-primary/20'
-                }`}
+                      ? 'border-primary'
+                      : 'border-muted-foreground/50'
+                  }`}
                 required
               />
               {emailTouched && email.length > 0 && (
@@ -217,13 +217,12 @@ export default function AuthForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onBlur={() => setPasswordTouched(true)}
-                  className={`pl-10 pr-10 h-11 transition-all duration-200 ${
-                    mode === 'signup' && passwordTouched && password.length > 0
+                  className={`pl-10 pr-10 h-11 transition-all duration-200 border ${mode === 'signup' && passwordTouched && password.length > 0
                       ? isPasswordValid
-                        ? 'border-green-300 focus:border-green-500 focus:ring-green-500/20'
-                        : 'border-orange-300 focus:border-orange-500 focus:ring-orange-500/20'
-                      : 'focus:border-primary focus:ring-primary/20'
-                  }`}
+                        ? 'border-green-500'
+                        : 'border-orange-500'
+                      : 'border-muted-foreground'
+                    }`}
                   required
                   minLength={mode === 'signup' ? 8 : undefined}
                 />
@@ -235,7 +234,7 @@ export default function AuthForm() {
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
-              
+
               {/* Password Strength Indicator for Signup */}
               {mode === 'signup' && passwordTouched && password.length > 0 && (
                 <motion.div
@@ -251,15 +250,14 @@ export default function AuthForm() {
                         style={{ width: `${passwordStrength.score}%` }}
                       />
                     </div>
-                    <span className={`text-xs font-medium ${
-                      passwordStrength.score < 40 ? 'text-red-600' :
-                      passwordStrength.score < 60 ? 'text-orange-600' :
-                      passwordStrength.score < 80 ? 'text-yellow-600' : 'text-green-600'
-                    }`}>
+                    <span className={`text-xs font-medium ${passwordStrength.score < 40 ? 'text-red-600' :
+                        passwordStrength.score < 60 ? 'text-orange-600' :
+                          passwordStrength.score < 80 ? 'text-yellow-600' : 'text-green-600'
+                      }`}>
                       {getPasswordStrengthText(passwordStrength.score)}
                     </span>
                   </div>
-                  
+
                   {passwordStrength.feedback.length > 0 && (
                     <div className="grid grid-cols-1 gap-1">
                       {passwordStrength.feedback.map((item, index) => (
@@ -287,13 +285,12 @@ export default function AuthForm() {
                   placeholder="Confirm your password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className={`pl-10 pr-10 h-11 transition-all duration-200 ${
-                    confirmPassword.length > 0
+                  className={`pl-10 pr-10 h-11 transition-all duration-200 border ${confirmPassword.length > 0
                       ? doPasswordsMatch
-                        ? 'border-green-300 focus:border-green-500 focus:ring-green-500/20'
-                        : 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
-                      : 'focus:border-primary focus:ring-primary/20'
-                  }`}
+                        ? 'border-green-500'
+                        : 'border-red-500'
+                      : 'border-muted-foreground'
+                    }`}
                   required
                 />
                 <button
@@ -336,7 +333,7 @@ export default function AuthForm() {
                 </Alert>
               </motion.div>
             )}
-            
+
             {message && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -352,8 +349,8 @@ export default function AuthForm() {
           </AnimatePresence>
 
           {/* Submit Button */}
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             disabled={loading || (mode === 'signup' && (!isPasswordValid || !doPasswordsMatch))}
             className="w-full h-11 text-base font-medium transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
           >
@@ -373,7 +370,7 @@ export default function AuthForm() {
         {/* Mode Switching */}
         <div className="space-y-4">
           <Separator />
-          
+
           {mode === 'signin' && (
             <div className="text-center space-y-2">
               <button
@@ -395,7 +392,7 @@ export default function AuthForm() {
               </p>
             </div>
           )}
-          
+
           {mode === 'signup' && (
             <div className="text-center">
               <p className="text-sm text-muted-foreground">
@@ -410,7 +407,7 @@ export default function AuthForm() {
               </p>
             </div>
           )}
-          
+
           {mode === 'reset' && (
             <div className="text-center">
               <button
