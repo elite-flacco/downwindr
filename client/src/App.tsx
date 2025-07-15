@@ -7,7 +7,7 @@ import AuthPage from "@/pages/auth-page";
 import Community from "@/pages/Community";
 import Learn from "@/pages/Learn";
 import ProfilePage from "@/pages/ProfilePage";
-import { AuthProvider } from "@/hooks/use-auth";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 function App() {
