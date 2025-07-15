@@ -3,13 +3,13 @@ import { Spot, MonthNames, WindQuality } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { 
-  Wind, 
-  Waves, 
-  Thermometer, 
-  ChevronRight, 
-  MapPin, 
-  Sparkles, 
+import {
+  Wind,
+  Waves,
+  Thermometer,
+  ChevronRight,
+  MapPin,
+  Sparkles,
   Plus,
   Check,
   Droplets
@@ -21,6 +21,7 @@ import { Toggle } from "@/components/ui/toggle";
 
 
 interface SpotWithWindCondition extends Spot {
+  waveHeight: number;
   windCondition?: {
     windQuality: WindQuality;
     windSpeed: number;
@@ -39,10 +40,10 @@ interface SpotsListProps {
   onToggleCompare?: (spot: Spot) => void;
 }
 
-export default function SpotsList({ 
-  spots, 
-  onSpotSelect, 
-  isLoading, 
+export default function SpotsList({
+  spots,
+  onSpotSelect,
+  isLoading,
   selectedMonth,
   spotsToCompare = [],
   onToggleCompare
@@ -54,7 +55,7 @@ export default function SpotsList({
           <Sparkles className="w-6 h-6 mr-2 text-theme-accent" />
           Top Kitesurfing Spots in {MonthNames[selectedMonth - 1]}
         </h3>
-        
+
         {spots.length === 0 && !isLoading ? (
           <div className="text-center py-12 px-4">
             <Wind className="w-16 h-16 mx-auto mb-4 text-theme-primary" />
@@ -62,119 +63,107 @@ export default function SpotsList({
             <p className="card-caption mt-2">Wind conditions may be better in other months!</p>
           </div>
         ) : (
-          // Spots list with fun animations
-          spots.map((spot, index) => {
-            const isInCompare = spotsToCompare.some(s => s.id === spot.id);
-            return (
-              <motion.div
-                key={spot.id}
-                className={`spot-card relative rounded-lg p-4 mb-4 ${index < spots.length - 1 ? 'border-b border-theme-border pb-6' : ''}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.1 }}
-                whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
-              >
-                <div className="flex justify-between items-start mb-3 pt-4 px-3">
-                  <div className="flex">
-                    <span className="flex mr-2 items-center gap-1">
-                      {
-                        (() => {
-                          const flag = getCountryFlag(spot.country);
-                          return flag ? (
-                            <img 
-                              src={flag.url} 
-                              alt={`${spot.country} flag`} 
-                              title={spot.country}
-                              className="h-3.5 inline-block"
-                            />
-                          ) : null
-                        })()
-                      }
-                    </span>
-                  <h3 className="spot-name">{spot.name}</h3>
-                    </div>
-                  <div className="px-3 py-1 rounded-full bg-theme-primary/10 tag-text text-theme-primary">
-                    <Wind className="w-3 h-3 inline mr-1" /> {spot.bestMonths}
-                  </div>
-                </div>
-                
-                <div className="flex flex-col gap-3">
-                  <p className="card-body text-theme-text-light leading-relaxed px-3">
-                    {spot.description.length > 300 
-                      ? `${spot.description.substring(0, 300)}...` 
-                      : spot.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mt-1 px-3">
-                    <div className="px-3 py-1 bg-theme-surface rounded-full tag-text text-theme-text flex items-center">
-                      <Waves className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.waveSize}
-                    </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full tag-text text-theme-text flex items-center">
-                      <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.tempRange}
-                    </div>
-                    <div className="px-3 py-1 bg-theme-surface rounded-full tag-text text-theme-text flex items-center gap-1.5">
-                      <Wind className="w-3 h-3 inline text-theme-primary mr-1" /> {spot.localAttractions}
-                    </div>
-                  </div>
-                  
-                  {/* Monthly Wind Conditions */}
-                  <div className="flex flex-wrap gap-2 mt-2 px-3 bg-theme-accent/5 py-2 rounded-lg">
-                    <h4 className="w-full card-caption mb-1">{MonthNames[selectedMonth - 1]} Conditions:</h4>
-                    {spot.windCondition ? (
-                      <>
-                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full wind-quality-text text-theme-primary flex items-center">
-                          <Wind className="w-3 h-3 inline text-theme-primary mr-1" /> 
-                          {spot.windCondition.windSpeed} knots
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {spots.map((spot, index) => {
+              const isInCompare = spotsToCompare.some(s => s.id === spot.id);
+              return (
+                <motion.div
+                  key={spot.id}
+                  className="spot-card relative rounded-lg overflow-hidden group"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.1 }}
+                  whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-theme-background/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                  <div className="relative flex flex-col h-full p-6">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="flex items-center gap-2">
+                          {
+                            (() => {
+                              const flag = getCountryFlag(spot.country);
+                              return flag ? (
+                                <img
+                                  src={flag.url}
+                                  alt={`${spot.country} flag`}
+                                  title={spot.country}
+                                  className="w-6 h-6 rounded-full border-2 border-theme-primary/20"
+                                />
+                              ) : null
+                            })()
+                          }
+                          <h3 className="spot-name text-lg font-semibold text-theme-primary">{spot.name}</h3>
                         </div>
-                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full wind-quality-text text-theme-primary flex items-center">
-                          <Thermometer className="w-3 h-3 inline text-theme-primary mr-1" /> 
-                          {spot.windCondition.airTemp}°C air
+                        <div className="flex items-center gap-2 ml-auto">
+                          <Wind className="w-4 h-4 text-theme-primary" />
+                          <span className="text-sm text-theme-text-light/70">{spot.bestMonths}</span>
                         </div>
-                        <div className="px-3 py-1 bg-theme-primary/10 rounded-full wind-quality-text text-theme-primary flex items-center">
-                          <Droplets className="w-3 h-3 inline text-theme-primary mr-1" /> 
-                          {spot.windCondition.waterTemp}°C water
+                      </div>
+
+                      <div className="mb-4">
+                        <p className="card-body text-sm text-theme-text-light/80 leading-relaxed">
+                        {spot.description.length > 200
+                          ? `${spot.description.substring(0, 200)}...`
+                          : spot.description}
+                        </p>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2">
+                            <Wind className="w-5 h-5 text-theme-primary" />
+                            <span className="text-sm font-medium text-theme-text-light/90">{spot.windCondition?.windSpeed} knots</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Waves className="w-5 h-5 text-theme-primary" />
+                            <span className="text-sm font-medium text-theme-text-light/90">{spot.waveSize}</span>
+                          </div>
                         </div>
-                      </>
-                    ) : (
-                      <div className="card-caption italic">No data available for this month</div>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center justify-between mt-2">
-                    <Button 
-                      variant="accent"
-                      size="sm"
-                      className="button-text flex items-center justify-start transition-all duration-300 ml-4"
-                      onClick={() => onSpotSelect(spot.id)}
-                    >
-                      View details <ChevronRight className="ml-1 w-4 h-4" />
-                    </Button>
-                    
-                    {onToggleCompare && (
-                      <Toggle
-                        aria-label={isInCompare ? "Remove from comparison" : "Add to comparison"}
-                        pressed={isInCompare}
-                        onPressedChange={() => onToggleCompare(spot)}
-                        disabled={!isInCompare && spotsToCompare.length >= 3}
-                        className={`h-8 button-text mr-2 ${
-                          isInCompare 
-                            ? "bg-theme-accent-warning/30 text-theme-accent-warning hover:bg-theme-accent-warning/40" 
-                            : "text-theme-text-light hover:text-theme-primary hover:bg-theme-primary/5"
-                        }`}
+
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2">
+                            <Thermometer className="w-5 h-5 text-theme-primary" />
+                            <span className="text-sm font-medium text-theme-text-light/90">{spot.windCondition?.airTemp}°C</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Droplets className="w-5 h-5 text-theme-primary" />
+                            <span className="text-sm font-medium text-theme-text-light/90">{spot.windCondition?.waterTemp}°C</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex justify-end gap-4">
+                      <Button
+                        variant="accent"
+                        size="sm"
+                        onClick={() => onSpotSelect(spot.id)}
+                        className="button-text flex items-center justify-start transition-all duration-300 ml-4"
                       >
-                        {isInCompare ? (
-                          <Check className="w-4 h-4 mr-1" />
-                        ) : (
-                          <Plus className="w-4 h-4 mr-1" />
-                        )}
-                        {isInCompare ? "Selected" : "Compare"}
-                      </Toggle>
-                    )}
+                        <ChevronRight className="w-4 h-4" />
+                        View Details
+                      </Button>
+                      {onToggleCompare && (
+                        <Toggle
+                          pressed={isInCompare}
+                          onClick={() => onToggleCompare(spot)}
+                          className="h-8 px-3 text-xs text-theme-text bg-theme-surface hover:bg-theme-surface/80 active:bg-theme-surface/90 shadow-md hover:shadow-lg active:shadow-sm border-2 border-theme-border hover:border-theme-border/60 transform hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 hand-drawn chalk-texture chalk-drawn"
+                        >
+                          {isInCompare ? (
+                            <Check className="w-4 h-4" />
+                          ) : (
+                            <Plus className="w-4 h-4" />
+                          )}
+                          Compare
+                        </Toggle>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })
+                </motion.div>
+              );
+            })}
+          </div>
         )}
       </CardContent>
     </Card>
