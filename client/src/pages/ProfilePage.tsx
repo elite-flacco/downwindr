@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { z } from "zod";
 import { format } from "date-fns";
 import { Link } from "wouter";
 import { apiRequest, queryClient } from "../lib/queryClient";
+import { supabase } from "../lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 import { AvatarWithRefresh } from "@/components/AvatarWithRefresh";
@@ -61,12 +62,46 @@ import {
   Trash,
 } from "lucide-react";
 
+// Password strength calculation
+const calculatePasswordStrength = (password: string) => {
+  const hasMinLength = password.length >= 8
+  const hasUppercase = /[A-Z]/.test(password)
+  const hasLowercase = /[a-z]/.test(password)
+  const hasNumber = /\d/.test(password)
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password)
+
+  const criteriaMet = [hasMinLength, hasUppercase, hasLowercase, hasNumber, hasSpecialChar].filter(Boolean).length
+  const score = Math.min(criteriaMet * 20, 100)
+
+  const feedback = []
+  if (!hasMinLength) feedback.push('At least 8 characters')
+  if (!hasUppercase) feedback.push('One uppercase letter')
+  if (!hasLowercase) feedback.push('One lowercase letter')
+  if (!hasNumber) feedback.push('One number')
+  if (!hasSpecialChar) feedback.push('One special character')
+
+  return {
+    score,
+    feedback,
+    hasMinLength,
+    hasUppercase,
+    hasLowercase,
+    hasNumber,
+    hasSpecialChar
+  }
+}
+
 // Password change form schema
 const passwordFormSchema = z
   .object({
     currentPassword: z.string().min(1, "Current password is required"),
-    newPassword: z.string().min(6, "New password must be at least 6 characters"),
-    confirmPassword: z.string().min(6, "Confirm your new password"),
+    newPassword: z.string().min(8, "New password must be at least 8 characters").refine((password) => {
+      const strength = calculatePasswordStrength(password)
+      return strength.score >= 80
+    }, {
+      message: "Password must be stronger (include uppercase, lowercase, number, and special character)"
+    }),
+    confirmPassword: z.string().min(8, "Confirm your new password"),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords don't match",
@@ -75,8 +110,18 @@ const passwordFormSchema = z
 
 type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 
+// Username update form schema
+const usernameFormSchema = z.object({
+  username: z.string()
+    .min(3, "Username must be at least 3 characters")
+    .max(30, "Username must be at most 30 characters")
+    .regex(/^[a-zA-Z0-9_-]+$/, "Username can only contain letters, numbers, hyphens, and underscores"),
+});
+
+type UsernameFormValues = z.infer<typeof usernameFormSchema>;
+
 export default function ProfilePage() {
-  const { user, userProfile } = useAuth();
+  const { user, userProfile, refreshUserProfile } = useAuth();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("reviews");
   const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
@@ -84,8 +129,10 @@ export default function ProfilePage() {
   const [showProfileImageModal, setShowProfileImageModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadMethod, setUploadMethod] = useState<"url" | "file">("url");
   const [isUploading, setIsUploading] = useState(false);
+  const [newPasswordTouched, setNewPasswordTouched] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   // Force a complete refetch on profile picture changes
@@ -94,8 +141,8 @@ export default function ProfilePage() {
     setUpdateCounter(prev => prev + 1);
     // Force cache invalidation
     queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-    // Force a hard refetch
-    window.location.reload();
+    // Refresh user profile instead of hard reload
+    refreshUserProfile();
   };
 
   // Fetch user reviews
@@ -121,6 +168,21 @@ export default function ProfilePage() {
     },
   });
 
+  // Username update form
+  const usernameForm = useForm<UsernameFormValues>({
+    resolver: zodResolver(usernameFormSchema),
+    defaultValues: {
+      username: userProfile?.username || "",
+    },
+  });
+
+  // Update form default when userProfile changes
+  useEffect(() => {
+    if (userProfile?.username) {
+      usernameForm.reset({ username: userProfile.username });
+    }
+  }, [userProfile?.username, usernameForm]);
+
   // Password change mutation
   const passwordMutation = useMutation({
     mutationFn: async (data: Omit<PasswordFormValues, "confirmPassword">) => {
@@ -142,6 +204,32 @@ export default function ProfilePage() {
         title: "Error",
         description:
           error.message || "Failed to update password. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Username update mutation
+  const usernameMutation = useMutation({
+    mutationFn: async (data: UsernameFormValues) => {
+      const res = await apiRequest("PUT", "/api/user/username", {
+        username: data.username,
+      });
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Username updated",
+        description: "Your username has been successfully updated.",
+      });
+      // Refresh user profile data
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description:
+          error.message || "Failed to update username. Please try again.",
         variant: "destructive",
       });
     },
@@ -198,7 +286,7 @@ export default function ProfilePage() {
       // Close the modal
       setShowProfileImageModal(false);
       
-      // Hard reload the page to ensure all components reflect the change
+      // Refresh user profile to reflect the change
       forceReload();
     },
     onError: (error) => {
@@ -245,9 +333,19 @@ export default function ProfilePage() {
       const formData = new FormData();
       formData.append('profileImage', file);
       
+      // Get the current session to include auth token
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const headers: Record<string, string> = {};
+      
+      if (session?.access_token) {
+        headers["Authorization"] = `Bearer ${session.access_token}`;
+      }
+      
       const response = await fetch('/api/user/profile-picture-upload', {
         method: 'POST',
         credentials: 'include',
+        headers,
         body: formData,
       });
       
@@ -267,6 +365,7 @@ export default function ProfilePage() {
       // Close modal and reset state
       setShowProfileImageModal(false);
       setImagePreview(null);
+      setSelectedFile(null);
       setIsUploading(false);
       
       // Hard reload the page to ensure all components reflect the change
@@ -303,7 +402,7 @@ export default function ProfilePage() {
     setEditingReviewId(null);
   };
 
-  // Handle file selection
+  // Handle file selection (preview only, no instant upload)
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -335,15 +434,17 @@ export default function ProfilePage() {
     };
     reader.readAsDataURL(file);
     
-    // Set file for upload
-    setIsUploading(true);
-    uploadProfilePictureMutation.mutate(file);
+    // Store the file for later upload
+    setSelectedFile(file);
   };
   
   // Handle update profile picture
   const updateProfilePicture = () => {
     if (uploadMethod === 'url' && avatarUrl.trim()) {
       updateProfilePictureMutation.mutate(avatarUrl);
+    } else if (uploadMethod === 'file' && selectedFile) {
+      setIsUploading(true);
+      uploadProfilePictureMutation.mutate(selectedFile);
     } else if (uploadMethod === 'file') {
       fileInputRef.current?.click();
     }
@@ -353,6 +454,7 @@ export default function ProfilePage() {
   const resetProfilePictureModal = () => {
     setAvatarUrl('');
     setImagePreview(null);
+    setSelectedFile(null);
     setUploadMethod('url');
   };
 
@@ -360,6 +462,11 @@ export default function ProfilePage() {
   const onPasswordSubmit = (data: PasswordFormValues) => {
     const { confirmPassword, ...passwordData } = data;
     passwordMutation.mutate(passwordData);
+  };
+
+  // Username update form submit handler
+  const onUsernameSubmit = (data: UsernameFormValues) => {
+    usernameMutation.mutate(data);
   };
 
   if (!user) {
@@ -377,11 +484,10 @@ export default function ProfilePage() {
   return (
     <div className="container mx-auto py-10 px-4 md:px-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Your Profile</h1>
+        <h2>Profile & Settings</h2>
         <Link href="/">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center p-2">
             <X className="h-4 w-4" />
-            Close
           </Button>
         </Link>
       </div>
@@ -397,11 +503,11 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="pt-4">
               <div className="flex flex-col items-center mb-6">
-                <div className="relative group">
+                <div className="relative group mb-3">
                   <AvatarWithRefresh
                     userAvatarUrl={userProfile?.avatarUrl} 
                     userName={userProfile?.username}
-                    className="h-24 w-24 mb-3"
+                    className="h-24 w-24"
                     fallbackClassName="text-lg bg-primary text-primary-foreground"
                   />
                   <button 
@@ -411,7 +517,7 @@ export default function ProfilePage() {
                     <Camera className="h-8 w-8 text-white" />
                   </button>
                 </div>
-                <h2 className="text-xl font-bold">{userProfile?.displayName || userProfile?.username}</h2>
+                <h2 className="text-xl font-bold">{userProfile?.displayName && userProfile?.displayName !== 'New User' ? userProfile?.displayName : userProfile?.username}</h2>
                 <p className="text-sm text-muted-foreground">{user.email}</p>
                 {userProfile?.experience && (
                   <span className="inline-block mt-1 px-3 py-1 text-sm rounded-full bg-primary/10 text-primary">
@@ -443,14 +549,6 @@ export default function ProfilePage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button 
-                variant="outline" 
-                className="w-full flex items-center gap-2"
-                onClick={() => setShowProfileImageModal(true)}
-              >
-                <Camera className="h-4 w-4" />
-                Change Profile Picture
-              </Button>
             </CardFooter>
           </Card>
         </div>
@@ -458,8 +556,9 @@ export default function ProfilePage() {
         {/* Right content area - Tabs for reviews and settings */}
         <div className="flex-1">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="reviews">Your Reviews</TabsTrigger>
+              <TabsTrigger value="profile">Profile</TabsTrigger>
               <TabsTrigger value="security">Security</TabsTrigger>
             </TabsList>
 
@@ -494,14 +593,13 @@ export default function ProfilePage() {
                           strokeWidth="2" 
                           strokeLinecap="round" 
                           strokeLinejoin="round" 
-                          className="mr-1.5"
+                          className=""
                         >
                           <path d="M21 2v6h-6"></path>
                           <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
                           <path d="M3 12a9 9 0 0 0 6.7 15L13 21"></path>
                           <path d="M13 21h6v-6"></path>
                         </svg>
-                        Refresh
                       </span>
                     )}
                   </Button>
@@ -521,8 +619,8 @@ export default function ProfilePage() {
                         You haven't written any reviews yet
                       </p>
                       <Link href="/spots">
-                        <Button variant="outline" className="mt-2">
-                          Explore Spots to Review
+                        <Button variant="action" className="mt-2">
+                          Go write your first one!
                         </Button>
                       </Link>
                     </div>
@@ -606,6 +704,64 @@ export default function ProfilePage() {
               </Card>
             </TabsContent>
 
+            {/* Profile Tab */}
+            <TabsContent value="profile" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <User className="h-5 w-5 mr-2" />
+                    Profile Settings
+                  </CardTitle>
+                  <CardDescription>
+                    Update your profile information
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Form {...usernameForm}>
+                    <form
+                      onSubmit={usernameForm.handleSubmit(onUsernameSubmit)}
+                      className="space-y-4"
+                    >
+                      <FormField
+                        control={usernameForm.control}
+                        name="username"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Username</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Your username"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormDescription>
+                              3-30 characters, letters, numbers, hyphens, and underscores only
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        className="mt-2"
+                        disabled={usernameMutation.isPending || usernameForm.getValues("username") === userProfile?.username}
+                      >
+                        {usernameMutation.isPending ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Updating...
+                          </>
+                        ) : (
+                          "Update Username"
+                        )}
+                      </Button>
+                    </form>
+                  </Form>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
             {/* Security Tab */}
             <TabsContent value="security" className="mt-6">
               <Card>
@@ -653,11 +809,47 @@ export default function ProfilePage() {
                                 type="password"
                                 placeholder="Create a new password"
                                 {...field}
+                                onBlur={() => setNewPasswordTouched(true)}
                               />
                             </FormControl>
                             <FormDescription>
-                              At least 6 characters
+                              Must include uppercase, lowercase, number, and special character (min 8 chars)
                             </FormDescription>
+                            {newPasswordTouched && field.value && (
+                              <div className="space-y-2 mt-2">
+                                <div className="flex items-center space-x-2">
+                                  <div className="flex-1 bg-gray-200 rounded-full h-1.5">
+                                    <div
+                                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                                        calculatePasswordStrength(field.value).score < 40 ? 'bg-red-500' :
+                                        calculatePasswordStrength(field.value).score < 60 ? 'bg-orange-500' :
+                                        calculatePasswordStrength(field.value).score < 80 ? 'bg-yellow-500' : 'bg-green-500'
+                                      }`}
+                                      style={{ width: `${calculatePasswordStrength(field.value).score}%` }}
+                                    />
+                                  </div>
+                                  <span className={`text-xs font-medium ${
+                                    calculatePasswordStrength(field.value).score < 40 ? 'text-red-600' :
+                                    calculatePasswordStrength(field.value).score < 60 ? 'text-orange-600' :
+                                    calculatePasswordStrength(field.value).score < 80 ? 'text-yellow-600' : 'text-green-600'
+                                  }`}>
+                                    {calculatePasswordStrength(field.value).score < 40 ? 'Weak' :
+                                     calculatePasswordStrength(field.value).score < 60 ? 'Fair' :
+                                     calculatePasswordStrength(field.value).score < 80 ? 'Good' : 'Strong'}
+                                  </span>
+                                </div>
+                                {calculatePasswordStrength(field.value).feedback.length > 0 && (
+                                  <div className="grid grid-cols-1 gap-1">
+                                    {calculatePasswordStrength(field.value).feedback.map((item, index) => (
+                                      <div key={index} className="flex items-center space-x-1 text-xs text-muted-foreground">
+                                        <X className="h-3 w-3 text-red-400" />
+                                        <span>{item}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
                             <FormMessage />
                           </FormItem>
                         )}
@@ -854,7 +1046,7 @@ export default function ProfilePage() {
                 ) : (
                   <Button
                     type="button"
-                    onClick={() => fileInputRef.current?.click()}
+                    onClick={selectedFile ? updateProfilePicture : () => fileInputRef.current?.click()}
                     disabled={uploadProfilePictureMutation.isPending || isUploading}
                     className="w-full sm:w-auto"
                   >
@@ -862,6 +1054,11 @@ export default function ProfilePage() {
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Uploading...
+                      </>
+                    ) : selectedFile ? (
+                      <>
+                        <Upload className="mr-2 h-4 w-4" />
+                        Upload Picture
                       </>
                     ) : (
                       <>
