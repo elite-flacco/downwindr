@@ -345,7 +345,7 @@ export default function SpotDetailModal({ spotDetails, isLoading, onClose }: Spo
                           {spotDetails.spot.tags.map((tag: string, index: number) => (
                             <div
                               key={index}
-                              className="text-xs border border-theme-primary/40 px-4 py-2 rounded-full bg-theme-primary/15 text-theme-primary font-medium hover:bg-theme-primary/25 transition-colors duration-200 shadow-sm"
+                              className="text-xs font-semibold border border-theme-primary/40 px-2 py-1 rounded-full bg-theme-primary/15 text-theme-primary font-medium hover:bg-theme-primary/25 transition-colors duration-200 shadow-sm"
                             >
                               {tag}
                             </div>
