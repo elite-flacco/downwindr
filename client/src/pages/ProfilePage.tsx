@@ -485,11 +485,6 @@ export default function ProfilePage() {
     <div className="container mx-auto py-10 px-4 md:px-6">
       <div className="flex justify-between items-center mb-6">
         <h2>Profile & Settings</h2>
-        <Link href="/">
-          <Button variant="outline" className="flex items-center p-2">
-            <X className="h-4 w-4" />
-          </Button>
-        </Link>
       </div>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left sidebar - Profile info */}

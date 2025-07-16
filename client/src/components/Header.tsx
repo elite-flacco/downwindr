@@ -18,7 +18,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
-  const { user, loading, signOut } = useAuth();
+  const { user, userProfile, loading, signOut } = useAuth();
   
   // Handle logout click
   const handleLogout = async (e: React.MouseEvent) => {
@@ -142,8 +142,8 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <AvatarWithRefresh 
-                    userAvatarUrl={user.avatarUrl}
-                    userName={user.username}
+                    userAvatarUrl={userProfile?.avatarUrl}
+                    userName={userProfile?.username}
                     className="h-8 w-8"
                     fallbackClassName="bg-theme-primary text-theme-background"
                   />
@@ -152,7 +152,7 @@ export default function Header() {
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{user.displayName || user.username}</p>
+                    <p className="text-sm font-medium leading-none">{userProfile?.displayName && userProfile?.displayName !== 'New User' ? userProfile?.displayName : userProfile?.username}</p>
                     <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                   </div>
                 </DropdownMenuLabel>
@@ -201,8 +201,8 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <AvatarWithRefresh 
-                    userAvatarUrl={user.avatarUrl}
-                    userName={user.username}
+                    userAvatarUrl={userProfile?.avatarUrl}
+                    userName={userProfile?.username}
                     className="h-8 w-8"
                     fallbackClassName="bg-theme-primary text-theme-background"
                   />
@@ -211,7 +211,7 @@ export default function Header() {
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{user.displayName || user.username}</p>
+                    <p className="text-sm font-medium leading-none">{userProfile?.displayName && userProfile?.displayName !== 'New User' ? userProfile?.displayName : userProfile?.username}</p>
                     <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                   </div>
                 </DropdownMenuLabel>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { User } from "lucide-react";
 
@@ -13,22 +13,17 @@ interface AvatarWithRefreshProps {
  * A simple component that displays an avatar with cache-busting.
  * This implementation uses a very straightforward approach to ensure fresh image loading.
  */
-export function AvatarWithRefresh({
+export const AvatarWithRefresh = memo(function AvatarWithRefresh({
   userAvatarUrl,
   userName,
   className = "h-8 w-8",
   fallbackClassName = ""
 }: AvatarWithRefreshProps) {
   const [imageError, setImageError] = useState(false);
-  const [stableTimestamp, setStableTimestamp] = useState(() => Date.now());
   
-  // Create a timestamp-based URL to bust browser cache (but stable per component instance)
-  const imageUrl = userAvatarUrl ? `${userAvatarUrl}?t=${stableTimestamp}` : null;
-  
-  // Reset error state and update timestamp when userAvatarUrl changes
+  // Reset error state when userAvatarUrl changes
   useEffect(() => {
     setImageError(false);
-    setStableTimestamp(Date.now());
   }, [userAvatarUrl]);
   
   // Extract initials for fallback, or use a default icon
@@ -36,9 +31,9 @@ export function AvatarWithRefresh({
   
   return (
     <Avatar className={className}>
-      {imageUrl && !imageError && (
+      {userAvatarUrl && !imageError && (
         <AvatarImage 
-          src={imageUrl} 
+          src={userAvatarUrl} 
           alt={userName || "User"}
           onError={() => setImageError(true)}
         />
@@ -48,4 +43,4 @@ export function AvatarWithRefresh({
       </AvatarFallback>
     </Avatar>
   );
-}
+});

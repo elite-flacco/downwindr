@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { getSpotRegion } from "@/lib/countryUtils";
 import { motion, AnimatePresence } from "framer-motion";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MonthSelector from "@/components/MonthSelector";
 import FilterControls from "@/components/FilterControls";
@@ -215,7 +214,6 @@ export default function Spots() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
 
       <main className="container mx-auto px-4 pt-4 pb-20 flex-grow">
         <motion.div

@@ -15,7 +15,6 @@ import {
   ShieldCheck,
   Star,
 } from "lucide-react";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
 import { Button } from "@/components/ui/button";
@@ -25,8 +24,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
-
       <main className="flex-grow">
         {/* Hero Section with kitesurfing image as full background */}
         <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden min-h-[80vh] flex items-center">
