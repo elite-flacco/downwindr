@@ -1,4 +1,5 @@
 import { Link } from 'wouter';
+import { useState } from 'react';
 import { 
   Wind, 
   Mail, 
@@ -11,8 +12,11 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ContactModal from './ContactModal';
 
 export default function Footer() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -111,16 +115,15 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4 font-semibold">
               <li>
-                <Link href="/contact">
-                  <motion.div 
-                    className="text-theme-text text-sm hover:text-theme-primary group flex items-center cursor-pointer"
-                    whileHover={{ x: 5 }}
-                  >
-                    <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
-                    Send Us a Message
-                    <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </motion.div>
-                </Link>
+                <motion.div 
+                  className="text-theme-text text-sm hover:text-theme-primary group flex items-center cursor-pointer"
+                  whileHover={{ x: 5 }}
+                  onClick={() => setIsContactModalOpen(true)}
+                >
+                  <span className="h-0.5 w-4 bg-theme-primary-hover/40 mr-3 group-hover:bg-theme-primary transition-colors"></span>
+                  Send Us a Message
+                  <ArrowUpRight className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.div>
               </li>
               {/* <li>
                 <Link href="/about">
@@ -152,6 +155,11 @@ export default function Footer() {
           </motion.div>
         </div>
       </div>
+      
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </footer>
   );
 }
