@@ -119,7 +119,7 @@ export default function FilterControls({
             value={selectedRegion}
             onValueChange={onRegionChange}
           >
-            <SelectTrigger className="h-9 min-w-[120px] rounded-full bg-white border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <SelectTrigger className="h-9 min-w-[120px] rounded-md bg-white border-slate-200 shadow-sm hover:shadow-md transition-shadow">
               <SelectValue placeholder="Select region" />
             </SelectTrigger>
             <SelectContent>

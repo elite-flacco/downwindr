@@ -270,7 +270,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex flex-col items-start justify-between mb-3">
                       <div className="flex items-center">
                         <div
                           className="w-3 h-3 rounded-full mr-2"
@@ -281,7 +281,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                         </span>
                       </div>
                       <div className="flex items-center spot-condition text-xs">
-                        <Waves className="w-3 h-3 mr-1 text-theme-primary" />
+                        <Waves className="w-3 h-3 mr-2 text-theme-primary" />
                         {popupInfo.spot.waveSize}
                       </div>
                     </div>
@@ -303,14 +303,15 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
                       </Button>
 
                       {popupInfo.spot.windguruCode && (
-                        <a
-                          href={`https://www.windguru.cz/${popupInfo.spot.windguruCode}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="link-text flex items-center justify-center bg-theme-surface text-theme-text px-3 py-1 rounded-md hover:bg-theme-primary/30 transition-colors"
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="flex items-center justify-center gap-2"
+                          onClick={() => window.open(`https://www.windguru.cz/${popupInfo.spot.windguruCode}`, '_blank')}
                         >
-                          <ExternalLink className="w-2 h-2 mr-2" /> Windguru
-                        </a>
+                          <ExternalLink className="w-2 h-2" />
+                          Windguru
+                        </Button>
                       )}
                     </div>
                   </div>
