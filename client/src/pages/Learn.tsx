@@ -67,10 +67,10 @@ export default function Learn() {
           <div className="mb-8">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="mb-3 flex items-center gap-2">
+                <h3 className="mb-3 flex items-center gap-2">
                   <GraduationCap className="h-6 w-6 md:h-8 md:w-8 text-theme-primary" />
                   From Zero to Hero
-                </h2>
+                </h3>
                 <p className="text-theme-text-light">Curated videos and resources to help you improve your kitesurfing skills</p>
               </div>
 

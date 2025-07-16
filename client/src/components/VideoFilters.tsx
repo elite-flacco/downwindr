@@ -29,26 +29,26 @@ export default function VideoFilters({
       <CardContent className="p-4">
         <div className="flex flex-col gap-4">
           {/* Search Bar */}
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+          <div className="relative w-auto max-w-xs">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="h-4 w-4 text-theme-text-light" />
             </div>
             <Input
               placeholder="Search videos..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-10 pr-4 py-2 h-9 text-sm bg-white border-slate-200 rounded-full shadow-sm hover:shadow-md transition-shadow focus-visible:ring-primary/30 w-full"
+              className="pl-9 pr-4 py-2 h-8 text-sm bg-white border-slate-200 rounded-full shadow-sm hover:shadow-md transition-shadow focus-visible:ring-primary/30 w-full"
             />
           </div>
 
-          <div className="flex justify-start">
+          <div className="flex flex-wrap items-center gap-4">
             {/* Categories */}
-            <div className="mr-4">
-              <p className="text-xs font-medium text-theme-text-light mb-2 flex items-center">
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-medium text-theme-text-light flex items-center whitespace-nowrap">
                 <Tag className="h-3 w-3 mr-1 text-theme-primary" />
                 Categories
               </p>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
                 <Badge
                   key="all"
                   variant={selectedCategory === "" ? "default" : "outline"}
@@ -78,12 +78,12 @@ export default function VideoFilters({
             </div>
 
             {/* Experience Level */}
-            <div className="flex-shrink-0">
-              <p className="text-xs font-medium text-theme-text-light mb-2 flex items-center">
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-medium text-theme-text-light flex items-center whitespace-nowrap">
                 <Tag className="h-3 w-3 mr-1 text-theme-primary" />
                 Level
               </p>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
                 <Badge
                   key="all-levels"
                   variant={selectedLevel === "" ? "default" : "outline"}

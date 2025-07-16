@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Clock, AlertCircle } from "lucide-react";
+import { Play, AlertCircle, Clock } from "lucide-react";
 import { SiYoutube } from "react-icons/si";
 import type { LearnVideo } from "@/data/learnVideos";
-import thumbnailImage from "@/assets/thumbnail.png";
 
 interface VideoPlayerProps {
   video: LearnVideo;
@@ -49,46 +48,14 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="overflow-hidden">
-              {/* Custom styled thumbnail design with consistent appearance */}
-              <div className="relative aspect-video w-full bg-contain bg-center bg-no-repeat">
-                {/* Clean custom background with minimal thumbnail */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-full h-full overflow-hidden bg-white">
-                    {/* Kitesurfer illustration background */}
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage: `url(${thumbnailImage})`,
-                        backgroundSize: "contain",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                    ></div>
-
-                    {/* Small YouTube thumbnail in circle with decorated border - in bottom right */}
-                    <div className="absolute bottom-4 right-4">
-                      {/* Decorative outer ring */}
-                      <div className="w-[60px] h-[60px] rounded-full bg-gradient-to-tr from-theme-primary/30 to-white p-[2px] shadow-lg">
-                        {/* White inner ring */}
-                        <div className="w-full h-full rounded-full p-[2px] bg-white">
-                          {/* Actual thumbnail container */}
-                          <div className="w-full h-full rounded-full overflow-hidden">
-                            {/* Loading placeholder */}
-                            <div className="absolute inset-0 bg-slate-200 animate-pulse"></div>
-
-                            {/* Cropped thumbnail */}
-                            <img
-                              src={video.thumbnailUrl}
-                              alt=""
-                              className="absolute inset-0 w-full h-full object-cover"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="overflow-hidden rounded-t-lg">
+              {/* YouTube thumbnail as primary visual */}
+              <div className="relative aspect-video w-full bg-red-500">
+                <img
+                  src={video.thumbnailUrl}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
 
                 {/* Interactive overlay */}
                 <div
