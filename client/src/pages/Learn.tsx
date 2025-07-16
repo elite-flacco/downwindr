@@ -1,5 +1,4 @@
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import VideoFilters from "@/components/VideoFilters";
 import VideoPlayer from "@/components/VideoPlayer";
 import { learnVideos } from "@/data/learnVideos";
@@ -55,8 +54,6 @@ export default function Learn() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      <Header />
-
       <main className="container mx-auto px-4 py-8 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

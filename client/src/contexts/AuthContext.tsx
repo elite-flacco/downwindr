@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react'
 import { Session, User as SupabaseUser } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 import { User } from '@shared/schema'
@@ -55,22 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe()
   }, [])
 
-  const fetchUserProfile = async (userId: string) => {
-    try {
-      const response = await fetch(`/api/users/${userId}`)
-      if (response.ok) {
-        const profile = await response.json()
-        setUserProfile(profile)
-      } else if (response.status === 404) {
-        // User profile doesn't exist, create one
-        await createUserProfile(userId)
-      }
-    } catch (error) {
-      console.error('Error fetching user profile:', error)
-    }
-  }
-
-  const createUserProfile = async (userId: string) => {
+  const createUserProfile = useCallback(async (userId: string) => {
     try {
       const response = await fetch('/api/users', {
         method: 'POST',
@@ -91,17 +76,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.error('Error creating user profile:', error)
     }
-  }
+  }, [user])
 
-  const signIn = async (email: string, password: string) => {
+  const fetchUserProfile = useCallback(async (userId: string) => {
+    try {
+      const response = await fetch(`/api/users/${userId}`)
+      if (response.ok) {
+        const profile = await response.json()
+        // Only update if the profile data has actually changed
+        setUserProfile(prevProfile => {
+          if (!prevProfile || JSON.stringify(prevProfile) !== JSON.stringify(profile)) {
+            return profile;
+          }
+          return prevProfile;
+        });
+      } else if (response.status === 404) {
+        // User profile doesn't exist, create one
+        await createUserProfile(userId)
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error)
+    }
+  }, [createUserProfile])
+
+  const signIn = useCallback(async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
     return { error }
-  }
+  }, [])
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = useCallback(async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -118,26 +124,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     
     return { error }
-  }
+  }, [])
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     await supabase.auth.signOut()
-  }
+  }, [])
 
-  const resetPassword = async (email: string) => {
+  const resetPassword = useCallback(async (email: string) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     })
     return { error }
-  }
+  }, [])
 
-  const refreshUserProfile = async () => {
+  const refreshUserProfile = useCallback(async () => {
     if (user) {
       await fetchUserProfile(user.id)
     }
-  }
+  }, [user, fetchUserProfile])
 
-  const value = {
+  const value = useMemo(() => ({
     session,
     user,
     userProfile,
@@ -147,7 +153,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signOut,
     resetPassword,
     refreshUserProfile,
-  }
+  }), [session, user, userProfile, loading, signIn, signUp, signOut, resetPassword, refreshUserProfile])
 
   return (
     <AuthContext.Provider value={value}>

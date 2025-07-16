@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Mail, UserPlus, Users } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,8 +7,6 @@ import { motion } from "framer-motion";
 export default function Community() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
-      
       <main className="container mx-auto px-4 pt-12 pb-20 flex-grow flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
