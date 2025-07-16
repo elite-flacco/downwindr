@@ -560,6 +560,87 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Password updates are handled by Supabase Auth on the client side
 
+  // Get current user profile (requires authentication)
+  app.get("/api/user", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.user.id;
+      let user = await storage.getUserById(userId);
+      
+      // If user doesn't exist in our database, create them
+      if (!user) {
+        user = await storage.createUser({
+          id: userId,
+          username: req.user.email?.split('@')[0] || `user_${userId.substring(0, 8)}`,
+          displayName: req.user.user_metadata?.full_name || req.user.email?.split('@')[0] || null,
+          bio: null,
+          experience: null,
+          avatarUrl: null,
+        });
+      }
+      
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      res.status(500).json({ message: "Error fetching user profile" });
+    }
+  });
+
+  // Update username (requires authentication)
+  app.put("/api/user/username", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const { username } = req.body;
+      
+      if (!username || typeof username !== 'string') {
+        return res.status(400).json({ message: "Username is required" });
+      }
+      
+      // Validate username format
+      if (username.length < 3 || username.length > 30) {
+        return res.status(400).json({ message: "Username must be between 3 and 30 characters" });
+      }
+      
+      if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
+        return res.status(400).json({ message: "Username can only contain letters, numbers, hyphens, and underscores" });
+      }
+      
+      // Check if username is already taken
+      const existingUser = await storage.getUserByUsername(username);
+      if (existingUser && existingUser.id !== userId) {
+        return res.status(400).json({ message: "Username is already taken" });
+      }
+      
+      // Check if user exists in our database, create if not
+      let user = await storage.getUserById(userId);
+      if (!user) {
+        // Create user if they don't exist in our internal database
+        user = await storage.createUser({
+          id: userId,
+          username: username,
+          displayName: req.user.user_metadata?.full_name || username,
+          bio: null,
+          experience: null,
+          avatarUrl: null,
+        });
+      } else {
+        // Update existing user
+        user = await storage.updateUser(userId, { username });
+      }
+      
+      if (!user) {
+        return res.status(500).json({ message: "Failed to update user" });
+      }
+      
+      res.json({ 
+        message: "Username updated successfully",
+        user: user
+      });
+    } catch (error) {
+      console.error("Error updating username:", error);
+      res.status(500).json({ message: "Error updating username" });
+    }
+  });
+
   // Delete user profile picture (requires authentication)
   app.delete("/api/user/profile-picture", isAuthenticated, async (req, res) => {
     try {

@@ -12,6 +12,7 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<{ error: any }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: any }>
+  refreshUserProfile: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -79,7 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({
           id: userId,
           username: user?.email?.split('@')[0] || 'user', // Use email prefix as default username
-          displayName: user?.email?.split('@')[0] || 'New User',
+          displayName: user?.email?.split('@')[0] || null,
         }),
       })
       
@@ -130,6 +131,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error }
   }
 
+  const refreshUserProfile = async () => {
+    if (user) {
+      await fetchUserProfile(user.id)
+    }
+  }
+
   const value = {
     session,
     user,
@@ -139,6 +146,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signOut,
     resetPassword,
+    refreshUserProfile,
   }
 
   return (
