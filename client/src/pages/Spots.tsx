@@ -13,11 +13,12 @@ import SpotComparison from "@/components/SpotComparison";
 import PreferencesModal from "@/components/PreferencesModal";
 import RecommendedSpots from "@/components/RecommendedSpots";
 import { MonthNames } from "@shared/schema";
-import type { Spot, SpotWithWindConditions } from "@shared/schema";
+import type { Spot } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { compareDesc } from "date-fns";
-import { BarChart, ChevronDown, List, Map, Search, SplitSquareVertical, Navigation, Sparkles } from "lucide-react";
+import { ChevronDown, List, Map, Search, Sparkles } from "lucide-react";
+import SEOHelmet from "@/components/SEOHelmet";
 
 export default function Spots() {
   // State for selected month (1-12)
@@ -212,8 +213,42 @@ export default function Spots() {
     setShowRecommendations(false);
   };
 
+  const currentMonth = MonthNames[selectedMonth - 1];
+  const hasFilters = searchQuery || windQualityFilter.length > 0 || selectedRegion !== "all";
+  
+  const spotsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Best Kitesurfing Spots for ${currentMonth}`,
+    "description": `Discover the best kitesurfing spots worldwide for ${currentMonth}. Filter by wind conditions, location, and more.`,
+    "numberOfItems": spots?.length || 0,
+    "itemListElement": spots?.slice(0, 10).map((spot, index) => ({
+      "@type": "Place",
+      "position": index + 1,
+      "name": spot.name,
+      "description": spot.description,
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": spot.latitude,
+        "longitude": spot.longitude
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": spot.country
+      }
+    })) || []
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <SEOHelmet
+        title={`Best Kitesurfing Spots for ${currentMonth} - Downwindr`}
+        description={`Discover the best kitesurfing spots worldwide for ${currentMonth}. Find perfect wind conditions, read reviews, and plan your next kiting adventure.`}
+        keywords={`kitesurfing spots ${currentMonth}, kiteboarding locations ${currentMonth}, wind conditions, kite surfing spots, ${currentMonth} kitesurfing, seasonal kiting`}
+        ogTitle={`Best Kitesurfing Spots for ${currentMonth} | Downwindr`}
+        ogDescription={`Explore top-rated kitesurfing spots perfect for ${currentMonth}. Get real-time conditions, reviews, and detailed information for your next kiting trip.`}
+        structuredData={spotsStructuredData}
+      />
 
       <main className="container mx-auto px-4 pt-4 pb-20 flex-grow">
         <motion.div

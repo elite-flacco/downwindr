@@ -1,20 +1,21 @@
-import { useState, useEffect, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import Footer from "@/components/Footer";
+import SEOHelmet from "@/components/SEOHelmet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { motion } from "framer-motion";
-import { Calendar, MessageCircle, Users, Star, MapPin, Clock, ArrowRight, Search, Filter, X } from "lucide-react";
-import { format } from "date-fns";
-import { Link } from "wouter";
+import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/contexts/AuthContext";
-import Footer from "@/components/Footer";
-import { apiRequest } from "@/lib/queryClient";
 import { getCountryFlag } from "@/lib/countryUtils";
+import { apiRequest } from "@/lib/queryClient";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { motion } from "framer-motion";
+import { ArrowRight, Calendar, Clock, Filter, MapPin, MessageCircle, Search, Star, Users, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "wouter";
 
 type ReviewWithUser = {
   id: number;
@@ -81,8 +82,32 @@ export default function Community() {
     });
   }, [recentReviews, searchTerm, selectedSpot]);
 
+  const communityStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Downwindr Community",
+    "description": "Join the global kitesurfing community. Share experiences, read reviews, and connect with fellow kiters worldwide.",
+    "url": "https://downwindr.com/community",
+    "sameAs": [
+      "https://downwindr.com"
+    ],
+    "aggregateRating": recentReviews && recentReviews.length > 0 ? {
+      "@type": "AggregateRating",
+      "ratingCount": recentReviews.length,
+      "reviewCount": recentReviews.length
+    } : undefined
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <SEOHelmet
+        title="Kitesurfing Community - Reviews, Tips & Connections | Downwindr"
+        description="Join the global kitesurfing community on Downwindr. Share experiences, read authentic reviews, and connect with fellow kiters from around the world."
+        keywords="kitesurfing community, kiteboarding reviews, kite surfing forum, water sports community, surfing connections, kite spots reviews"
+        ogTitle="Join the Global Kitesurfing Community | Downwindr"
+        ogDescription="Connect with kiters worldwide, share your experiences, and discover amazing spots through our community reviews and discussions."
+        structuredData={communityStructuredData}
+      />
       <main className="container mx-auto px-4 pt-8 pb-20 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
