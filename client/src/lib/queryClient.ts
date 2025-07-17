@@ -1,5 +1,6 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 import { supabase } from "./supabase";
+import { buildApiUrl } from "@/config/api";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -26,7 +27,8 @@ export async function apiRequest(
     headers["Authorization"] = `Bearer ${session.access_token}`;
   }
 
-  const res = await fetch(url, {
+  const fullUrl = url.startsWith('http') ? url : buildApiUrl(url);
+  const res = await fetch(fullUrl, {
     method,
     headers,
     body: data ? JSON.stringify(data) : undefined,
@@ -52,7 +54,9 @@ export const getQueryFn: <T>(options: {
       headers["Authorization"] = `Bearer ${session.access_token}`;
     }
 
-    const res = await fetch(queryKey[0] as string, {
+    const url = queryKey[0] as string;
+    const fullUrl = url.startsWith('http') ? url : buildApiUrl(url);
+    const res = await fetch(fullUrl, {
       credentials: "include",
       headers,
     });
