@@ -22,26 +22,16 @@ import {
 import { db } from "./db";
 import { eq, and, desc, avg, count, sql, like, or, inArray } from "drizzle-orm";
 import { pool } from "./db";
-import connectPg from "connect-pg-simple";
-import session from "express-session";
 import { IStorage, UserPreferences, SpotWithMatchScore } from "./storage";
 import { kiteSpotsData } from "./data/seed-data";
 
-const PostgresSessionStore = connectPg(session);
-
 export class DatabaseStorage implements IStorage {
-  sessionStore: any; // Using any for SessionStore type to avoid import complexities
   private regions: Map<string, string[]>;
 
   // Static property to ensure we only initialize the database once across all instances
   private static initializationPromise: Promise<void> | null = null;
   
   constructor() {
-    // Set up session store for user authentication
-    this.sessionStore = new PostgresSessionStore({
-      pool,
-      createTableIfMissing: true,
-    });
 
     // Define regions for filtering (same as MemStorage)
     this.regions = new Map([
