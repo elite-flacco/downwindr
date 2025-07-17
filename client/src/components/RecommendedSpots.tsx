@@ -27,7 +27,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
     return (
       <Card className="w-full shadow-lg border-slate-200 p-0">
         <CardHeader className="bg-gradient-to-r from-theme-primary to-theme-primary-hover text-white rounded-t-lg">
-          <CardTitle className="text-xl text-center flex items-center justify-center">
+          <CardTitle className="text-xl text-center flex items-center justify-center text-white">
             <Navigation className="mr-2 h-5 w-5 text-white" /> Finding your perfect spots...
           </CardTitle>
         </CardHeader>
