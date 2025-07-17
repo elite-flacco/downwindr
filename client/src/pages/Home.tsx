@@ -88,7 +88,7 @@ export default function Home() {
                       <Button
                         variant="outline"
                         size="lg"
-                        className="text-white border-2 border-white bg-white/5 backdrop-blur-sm font-bold hover:bg-white/80"
+                        className="text-white border-2 border-white bg-white/40 backdrop-blur-sm font-bold hover:bg-white hover:text-cyan-900 hover:border-white transition-all duration-300"
                       >
                         Join the Ride <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
