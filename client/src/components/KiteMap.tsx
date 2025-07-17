@@ -46,10 +46,7 @@ export default function KiteMap({ spots, onSpotSelect, isLoading }: KiteMapProps
   const { data: mapboxData, isLoading: isTokenLoading } = useQuery({
     queryKey: ['mapbox-token'],
     queryFn: async () => {
-      const response = await fetch('/api/mapbox-token');
-      if (!response.ok) {
-        throw new Error('Failed to fetch Mapbox token');
-      }
+      const response = await apiRequest('GET', '/api/mapbox-token');
       return response.json();
     }
   });

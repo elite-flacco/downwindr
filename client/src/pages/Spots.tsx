@@ -74,14 +74,8 @@ export default function Spots() {
     queryKey: [`/api/spots/details`, spotsToCompare.map(s => s.id)],
     enabled: showComparison && spotsToCompare.length > 0,
     queryFn: async () => {
-      const response = await fetch(`/api/spots/details`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ids: spotsToCompare.map(spot => spot.id)
-        }),
+      const response = await apiRequest('POST', '/api/spots/details', {
+        ids: spotsToCompare.map(spot => spot.id)
       });
 
       if (!response.ok) {
@@ -187,13 +181,7 @@ export default function Spots() {
     setShowRecommendations(true);
 
     try {
-      const response = await fetch('/api/spots/recommendations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(preferences),
-      });
+      const response = await apiRequest('POST', '/api/spots/recommendations', preferences);
 
       if (!response.ok) {
         throw new Error('Failed to get recommendations');
