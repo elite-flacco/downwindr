@@ -711,8 +711,8 @@ export class DatabaseStorage implements IStorage {
     }));
   }
 
-  async getRecentReviews(limit: number = 20): Promise<ReviewWithUser[]> {
-    const reviewsWithDetails = await db
+  async getRecentReviews(limit?: number): Promise<ReviewWithUser[]> {
+    let query = db
       .select({
         review: reviews,
         user: {
@@ -727,8 +727,13 @@ export class DatabaseStorage implements IStorage {
       .from(reviews)
       .innerJoin(users, eq(reviews.userId, users.id))
       .innerJoin(spots, eq(reviews.spotId, spots.id))
-      .orderBy(desc(reviews.createdAt))
-      .limit(limit);
+      .orderBy(desc(reviews.createdAt));
+
+    if (limit) {
+      query = query.limit(limit);
+    }
+
+    const reviewsWithDetails = await query;
 
     return reviewsWithDetails.map(({ review, user, spot }) => ({
       ...review,

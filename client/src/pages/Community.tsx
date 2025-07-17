@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion } from "framer-motion";
-import { Calendar, MessageCircle, Users, Star, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Calendar, MessageCircle, Users, Star, MapPin, Clock, ArrowRight, Search, Filter } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "wouter";
 import { useAuth } from "@/contexts/AuthContext";
@@ -38,15 +40,46 @@ type ReviewWithUser = {
 
 export default function Community() {
   const { user } = useAuth();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedSpot, setSelectedSpot] = useState('all');
   
   const { data: recentReviews, isLoading } = useQuery({
     queryKey: ['recent-reviews'],
     queryFn: async () => {
-      const response = await apiRequest('GET', '/api/reviews/recent?limit=10');
+      const response = await apiRequest('GET', '/api/reviews/recent');
       const data = await response.json();
       return data as ReviewWithUser[];
     }
   });
+
+  // Get unique spots for filter dropdown
+  const uniqueSpots = useMemo(() => {
+    if (!recentReviews) return [];
+    const spots = recentReviews.map(review => review.spot);
+    const uniqueSpots = spots.filter((spot, index, self) => 
+      index === self.findIndex(s => s.id === spot.id)
+    );
+    return uniqueSpots.sort((a, b) => a.name.localeCompare(b.name));
+  }, [recentReviews]);
+
+  // Filter reviews based on search and spot selection
+  const filteredReviews = useMemo(() => {
+    if (!recentReviews) return [];
+    
+    return recentReviews.filter(review => {
+      const matchesSearch = searchTerm === '' || 
+        review.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.spot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.spot.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (review.user.displayName && review.user.displayName !== 'New User' 
+          ? review.user.displayName.toLowerCase().includes(searchTerm.toLowerCase())
+          : review.user.username.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      const matchesSpot = selectedSpot === '' || selectedSpot === 'all' || review.spot.id.toString() === selectedSpot;
+      
+      return matchesSearch && matchesSpot;
+    });
+  }, [recentReviews, searchTerm, selectedSpot]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -70,7 +103,7 @@ export default function Community() {
                 <div className="text-2xl font-bold text-theme-primary">
                   {recentReviews?.length || 0}+
                 </div>
-                <div className="text-sm text-theme-text/60">Recent Reviews</div>
+                <div className="text-sm text-theme-text/60">Reviews</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-theme-primary">🌍</div>
@@ -87,7 +120,7 @@ export default function Community() {
             {/* Recent Reviews - Takes up 2 columns */}
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold">Recent Community Reviews</h2>
+                <h2 className="text-xl font-semibold">Community Reviews</h2>
                 {user && (
                   <Link href="/spots">
                     <Button variant="outline" size="sm">
@@ -96,6 +129,64 @@ export default function Community() {
                   </Link>
                 )}
               </div>
+
+              {/* Search and Filter Controls */}
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search reviews, spots, or users..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+                <Select value={selectedSpot} onValueChange={setSelectedSpot}>
+                  <SelectTrigger className="w-full sm:w-64">
+                    <div className="flex items-center gap-2">
+                      <Filter className="w-4 h-4" />
+                      <SelectValue placeholder="Filter by spot" />
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Spots</SelectItem>
+                    {uniqueSpots.map((spot) => (
+                      <SelectItem key={spot.id} value={spot.id.toString()}>
+                        <div className="flex items-center gap-2">
+                          {getCountryFlag(spot.country) && (
+                            <img 
+                              src={getCountryFlag(spot.country)?.url} 
+                              alt={`${spot.country} flag`}
+                              className="w-4 h-3 object-cover rounded-sm"
+                            />
+                          )}
+                          <span>{spot.name}</span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Results count */}
+              {recentReviews && (
+                <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
+                  <span>Showing {filteredReviews.length} of {recentReviews.length} reviews</span>
+                  {(searchTerm || (selectedSpot && selectedSpot !== 'all')) && (
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={() => {
+                        setSearchTerm('');
+                        setSelectedSpot('all');
+                      }}
+                      className="h-auto p-1 text-xs"
+                    >
+                      Clear filters
+                    </Button>
+                  )}
+                </div>
+              )}
               
               {isLoading ? (
                 <div className="space-y-4">
@@ -116,9 +207,9 @@ export default function Community() {
                     </Card>
                   ))}
                 </div>
-              ) : recentReviews && recentReviews.length > 0 ? (
+              ) : filteredReviews && filteredReviews.length > 0 ? (
                 <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
-                  {recentReviews.map((review) => (
+                  {filteredReviews.map((review) => (
                     <Card key={review.id} className="hover:shadow-md transition-shadow">
                       <CardHeader className="pb-3">
                         <div className="flex items-center justify-between">
