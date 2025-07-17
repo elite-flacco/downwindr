@@ -126,7 +126,7 @@ export class DatabaseStorage implements IStorage {
             await tx.insert(windConditions).values(windConditionsWithSpotId);
           }
           
-          console.log("Sample data initialization completed successfully");
+          // Sample data initialization completed
         }
       });
       
@@ -148,14 +148,7 @@ export class DatabaseStorage implements IStorage {
     // Helper function to determine if a country is in a region
     const isInRegion = (country: string, regionName: string): boolean => {
       const region = this.regions.get(regionName.toLowerCase());
-      console.log(`\n=== isInRegion Debug ===`);
-      console.log(`Country: "${country}"`);
-      console.log(`Region: "${regionName}"`);
-      console.log(`Region map lookup: "${regionName.toLowerCase()}"`);
-      console.log(`Found region countries:`, region);
       const result = region ? region.includes(country) : false;
-      console.log(`Final result: ${result}`);
-      console.log(`========================\n`);
       return result;
     };
 
@@ -166,10 +159,8 @@ export class DatabaseStorage implements IStorage {
       // Binary filter for region preference - skip spots outside preferred region
       if (preferences.preferredRegion !== "any") {
         const spotInRegion = isInRegion(spot.country, preferences.preferredRegion);
-        console.log(`Checking spot ${spot.name} (${spot.country}) for region ${preferences.preferredRegion}: ${spotInRegion}`);
         
         if (!spotInRegion) {
-          console.log(`Skipping ${spot.name} - not in preferred region ${preferences.preferredRegion}`);
           continue; // Skip this spot entirely if it's not in the preferred region
         }
       }
@@ -448,12 +439,6 @@ export class DatabaseStorage implements IStorage {
     results.sort((a, b) => b.matchScore - a.matchScore);
 
     // No score normalization - we want the raw scores exactly as calculated
-    // Log scores for debugging
-    console.log("Recommended spots with scores:");
-    results.forEach(spot => {
-      // Log the pure scores without any conversion - these will match exactly what the user sees
-      console.log(`${spot.name}: Score ${spot.matchScore} (raw score)`);
-    });
     
     // Return top matches (limited to 8)
     return results.slice(0, 8);
@@ -470,11 +455,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getSpotsByMonth(month: number, windQualityFilter?: WindQuality[]): Promise<(Spot & { windCondition?: { windQuality: WindQuality }})[]> {
-    console.log(`Getting spots for month: ${month}, filter: ${windQualityFilter ? windQualityFilter.join(',') : 'none'}`);
-    
     // First, get all spots to ensure we don't lose any due to our filtering
     const allSpots = await this.getAllSpots();
-    console.log(`Total spots in database: ${allSpots.length}`);
     
     // Get all spots first
     const allWindConditions = await db
@@ -554,10 +536,10 @@ export class DatabaseStorage implements IStorage {
         spot.windCondition && 
         windQualityFilter.includes(spot.windCondition.windQuality)
       );
-      console.log(`After applying wind quality filter: ${filteredSpots.length} spots remaining`);
+      // Applied wind quality filter
     }
     
-    console.log(`Found ${filteredSpots.length} spots for month ${month}`);
+    // Found spots for the month
     
     return filteredSpots;
   }

@@ -111,7 +111,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Handle WebSocket connections
   wss.on('connection', (ws) => {
-    console.log('WebSocket client connected');
+    // WebSocket client connected
     clients.add(ws);
     
     // Send initial connection message
@@ -119,7 +119,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     // Handle client disconnection
     ws.on('close', () => {
-      console.log('WebSocket client disconnected');
+      // WebSocket client disconnected
       clients.delete(ws);
     });
   });
@@ -195,9 +195,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
       
-      console.log(`Getting spots for month: ${monthNumber}`);
       const spots = await storage.getSpotsByMonth(monthNumber, windQualityFilter);
-      console.log(`Found ${spots.length} spots for month ${monthNumber}`);
       
       return res.json(spots);
     } catch (error) {
