@@ -555,6 +555,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Error fetching your reviews" });
     }
   });
+
+  // Get recent reviews from all users for community page
+  app.get("/api/reviews/recent", async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 20;
+      const reviews = await storage.getRecentReviews(limit);
+      res.json(reviews);
+    } catch (error) {
+      console.error("Error fetching recent reviews:", error);
+      res.status(500).json({ message: "Error fetching recent reviews" });
+    }
+  });
+
+  // Get top contributors (users with most reviews)
+  app.get("/api/contributors/top", async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 5;
+      const contributors = await storage.getTopContributors(limit);
+      res.json(contributors);
+    } catch (error) {
+      console.error("Error fetching top contributors:", error);
+      res.status(500).json({ message: "Error fetching top contributors" });
+    }
+  });
   
   // Password updates are handled by Supabase Auth on the client side
 

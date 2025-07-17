@@ -90,7 +90,7 @@ export default function Home() {
                         size="lg"
                         className="text-white border-2 border-white bg-white/40 backdrop-blur-sm font-bold hover:bg-white hover:text-cyan-900 hover:border-white transition-all duration-300"
                       >
-                        Join the Ride <ArrowRight className="w-4 h-4 ml-2" />
+                        Join the Community <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </Link>
                   </motion.div>
