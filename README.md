@@ -1,6 +1,8 @@
-# Downwindr
+# 🌊 Downwindr
 
 A kitesurfing community platform that helps kitesurfers discover the best spots, connect with other riders, and learn new techniques.
+
+Check us out here: https://downwindr.vercel.app!
 
 ## Features
 
