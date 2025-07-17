@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 // Serve static files from the public directory
 app.use("/uploads", express.static(path.join(process.cwd(), "public/uploads")));
 
-// Configure CORS for Replit environment
+// Configure CORS for production deployment
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -29,6 +29,12 @@ app.use(
         /\.replit\.app$/,
         /^https?:\/\/[a-zA-Z0-9-]+\.repl\.co$/,
         /^https:\/\/[a-zA-Z0-9-]+--[a-zA-Z0-9-]+\.repl\.co$/,
+        // Add Vercel domains
+        /\.vercel\.app$/,
+        /^https:\/\/[a-zA-Z0-9-]+\.vercel\.app$/,
+        /^https:\/\/[a-zA-Z0-9-]+-[a-zA-Z0-9-]+-[a-zA-Z0-9-]+\.vercel\.app$/,
+        // Add production domain if you have one
+        /^https:\/\/downwindr\.com$/,
       ];
 
       // Check if the origin is allowed
