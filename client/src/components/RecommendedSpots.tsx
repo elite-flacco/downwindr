@@ -26,9 +26,9 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   if (isLoading) {
     return (
       <Card className="w-full shadow-lg border-slate-200 p-0">
-        <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-to-r from-theme-primary to-theme-primary-hover text-white rounded-t-lg">
           <CardTitle className="text-xl text-center flex items-center justify-center">
-            <Navigation className="mr-2 h-5 w-5" /> Finding your perfect spots...
+            <Navigation className="mr-2 h-5 w-5 text-white" /> Finding your perfect spots...
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4">
@@ -58,12 +58,12 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   if (!spots || spots.length === 0) {
     return (
       <Card className="w-full shadow-lg border-slate-200 p-0">
-        <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-to-r from-theme-primary to-theme-primary-hover text-white rounded-t-lg">
           <CardTitle className="text-xl text-center">No Matching Spots Found</CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-center">
           <p className="mb-4">We couldn't find any spots matching your preferences. Try adjusting your criteria.</p>
-          <Button onClick={onClose} variant="outline">Back to Map</Button>
+          <Button onClick={onClose} variant="outline">Go Back</Button>
         </CardContent>
       </Card>
     );
@@ -73,13 +73,13 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   const getWindBadgeClass = (quality: WindQuality) => {
     switch (quality) {
       case WindQuality.Excellent:
-        return "bg-blue-700 text-white";
+        return "bg-theme-wind-excellent text-white";
       case WindQuality.Good:
-        return "bg-blue-600 text-white";
+        return "bg-theme-wind-good text-white";
       case WindQuality.Moderate:
-        return "bg-slate-600 text-white";
+        return "bg-theme-wind-moderate text-white";
       case WindQuality.Poor:
-        return "bg-slate-500 text-white";
+        return "bg-theme-wind-poor text-theme-text";
       default:
         return "bg-slate-500 text-white";
     }
@@ -94,68 +94,56 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
   // Progress bar color based on match score
   const getMatchColor = (score: number) => {
     const percent = getMatchPercent(score);
-    if (percent >= 95) return "bg-blue-700"; // Excellent match
-    if (percent >= 90) return "bg-blue-600"; // Great match
-    if (percent >= 85) return "bg-blue-500"; // Very good match
-    if (percent >= 80) return "bg-blue-400"; // Good match
-    if (percent >= 75) return "bg-emerald-500"; // Decent match
-    if (percent >= 70) return "bg-green-500"; // Okay match
-    if (percent >= 65) return "bg-amber-500"; // Fair match
-    return "bg-slate-500"; // Minimal match
+    if (percent >= 90) return "bg-green-600"; // Excellent match
+    if (percent >= 80) return "bg-green-500"; // Great match
+    if (percent >= 70) return "bg-slate-600"; // Good match
+    if (percent >= 60) return "bg-slate-500"; // Decent match
+    return "bg-slate-400"; // Minimal match
   };
 
   return (
     <Card className="w-full shadow-lg border-slate-200 p-0 max-w-full">
-      <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-t-lg">
-        <CardTitle className="text-xl text-center flex items-center justify-center">
+      <CardHeader className="bg-gradient-to-r from-theme-primary to-theme-primary-hover text-white rounded-t-lg">
+        <CardTitle className="text-xl text-center flex items-center justify-center text-white">
           <Navigation className="mr-2 h-5 w-5" /> Recommended Spots For You
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-4">
-        <div className="divide-y divide-slate-100">
+      <CardContent className="px-6 py-4">
+        <div className="space-y-4">
           {spots.map((spot, index) => (
-            <div 
+            <Card 
               key={spot.id} 
-              className={`py-4 ${index === spots.length - 1 ? 'pb-0' : ''}`}
+              className="border-slate-200 hover:border-slate-300 transition-all duration-200 shadow-md hover:shadow-lg"
             >
-              <div className="flex flex-col md:flex-row gap-4 w-full">
-                {/* Spot Image/Preview Section */}
-                <div className="relative rounded-lg overflow-hidden h-40 md:w-48 flex-shrink-0 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-bold">
-                  {/* Match Percentage Circle */}
-                  <div className="absolute top-2 right-2 bg-blue-900 bg-opacity-80 rounded-full h-14 w-14 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-xl font-bold">{getMatchPercent(spot.matchScore)}%</div>
-                      <div className="text-xs -mt-1">match</div>
-                    </div>
-                  </div>
-                  
-                  {/* Spot Image Placeholder */}
-                  <div className="text-center px-2">
-                    <div>{spot.name.split(',')[0]}</div>
-                  </div>
-                </div>
-                
-                {/* Spot Details Section */}
-                <div className="flex-1 min-w-0">
+              <CardContent className="p-4">
+                <div className="flex flex-col gap-4 w-full">
+                  {/* Header: Title, Country, Match Badge */}
                   <div className="flex flex-wrap justify-between items-start gap-2">
-                    <h3 className="text-xl font-bold text-slate-800 mb-2 break-words">{spot.name}</h3>
-                    <Badge variant="outline" className="text-xs bg-slate-50 border-slate-200 text-slate-600 flex-shrink-0">
-                      {spot.country} {
-                        (() => {
-                          const flag = getCountryFlag(spot.country);
-                          return flag ? (
-                            <img 
-                              src={flag.url} 
-                              alt={`${spot.country} flag`}
-                              title={spot.country}
-                              className="h-3.5 inline-block ml-1"
-                            />
-                          ) : null
-                        })()
-                      }
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3 className="text-xl font-bold text-slate-800 break-words">{spot.name}</h3>
+                        <Badge variant="outline" className="text-xs bg-slate-50 border-slate-200 text-slate-600 flex-shrink-0">
+                          {spot.country} {
+                            (() => {
+                              const flag = getCountryFlag(spot.country);
+                              return flag ? (
+                                <img 
+                                  src={flag.url} 
+                                  alt={`${spot.country} flag`}
+                                  title={spot.country}
+                                  className="h-3.5 inline-block ml-1"
+                                />
+                              ) : null
+                            })()
+                          }
+                        </Badge>
+                      </div>
+                    </div>
+                    <Badge className="bg-slate-700 text-white font-bold flex-shrink-0">
+                      {getMatchPercent(spot.matchScore)}% match
                     </Badge>
                   </div>
-                  
+                
                   {/* Spot Features */}
                   <div className="flex flex-wrap gap-2 mb-3">
                     {spot.windCondition && (
@@ -166,14 +154,14 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                     )}
                     
                     {spot.difficultyLevel && (
-                      <Badge className="bg-slate-600 text-white flex-shrink-0">
+                      <Badge variant="outline" className="border-slate-300 bg-white text-slate-700 flex-shrink-0">
                         <Award className="mr-1 h-3 w-3" /> 
                         {spot.difficultyLevel}
                       </Badge>
                     )}
                     
                     {spot.waveSize && (
-                      <Badge className="bg-slate-500 text-white flex-shrink-0">
+                      <Badge variant="outline" className="border-slate-300 bg-white text-slate-700 flex-shrink-0">
                         <Waves className="mr-1 h-3 w-3" /> 
                         {spot.waveSize}
                       </Badge>
@@ -187,7 +175,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                     )}
                     
                     {spot.bestMonths && (
-                      <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700 flex-shrink-0">
+                      <Badge variant="outline" className="border-slate-300 bg-slate-50 text-slate-700 flex-shrink-0">
                         <Calendar className="mr-1 h-3 w-3" />
                         Best: {spot.bestMonths}
                       </Badge>
@@ -201,61 +189,56 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
                     )}
                   </div>
                   
-                  {/* Match Score Bar */}
-                  <div className="w-full h-2 bg-slate-100 rounded-full mb-2">
-                    <div 
-                      className={`rounded-full ${getMatchColor(spot.matchScore)}`}
-                      style={{ width: `${getMatchPercent(spot.matchScore)}%` }}
-                    ></div>
-                  </div>
-                  
-                  {/* Match Reasons */}
-                  <div className="mb-3">
-                    <button 
-                      onClick={() => setSelectedMatchIndex(selectedMatchIndex === index ? null : index)}
-                      className="text-sm text-blue-700 hover:text-blue-900 font-medium flex items-center"
-                    >
-                      {selectedMatchIndex === index ? 'Hide match details' : 'Why this matches you'} 
-                      <svg 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className={`ml-1 transform transition-transform ${selectedMatchIndex === index ? 'rotate-180' : ''}`}
+                  {/* Bottom Section: Match Reasons & Action Button */}
+                  <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
+                    {/* Match Reasons */}
+                    <div className="flex-1">
+                      <button 
+                        onClick={() => setSelectedMatchIndex(selectedMatchIndex === index ? null : index)}
+                        className="text-sm text-slate-600 hover:text-slate-800 font-medium flex items-center"
                       >
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
+                        {selectedMatchIndex === index ? 'Hide details' : 'Why this is a good choice'} 
+                        <svg 
+                          width="20" 
+                          height="20" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          className={`ml-1 transform transition-transform ${selectedMatchIndex === index ? 'rotate-180' : ''}`}
+                        >
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                      
+                      {selectedMatchIndex === index && (
+                        <div className="mt-2 pl-3 border-l-2 border-slate-200 text-sm text-slate-700 space-y-1">
+                          {spot.reasons.map((reason, idx) => (
+                            <div key={idx} className="flex items-start">
+                              <span className="text-green-600 mr-2 flex-shrink-0">✓</span>
+                              <span className="break-words break-all whitespace-normal overflow-wrap-anywhere">{reason}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                     
-                    {selectedMatchIndex === index && (
-                      <div className="mt-2 pl-3 border-l-2 border-blue-200 text-sm text-slate-700 space-y-1">
-                        {spot.reasons.map((reason, idx) => (
-                          <div key={idx} className="flex items-start">
-                            <span className="text-blue-700 mr-2 flex-shrink-0">✓</span>
-                            <span className="break-words break-all whitespace-normal overflow-wrap-anywhere">{reason}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Action Button */}
-                  <div className="flex justify-end">
-                    <Button 
-                      onClick={() => onSpotSelect(spot.id)}
-                      className="bg-blue-700 hover:bg-blue-800 text-white"
-                      size="sm"
-                    >
-                      View Details
-                    </Button>
+                    {/* Action Button */}
+                    <div className="flex-shrink-0">
+                      <Button 
+                        onClick={() => onSpotSelect(spot.id)}
+                        className="bg-theme-primary hover:bg-theme-primary-hover text-white"
+                        size="sm"
+                      >
+                        View Details
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
         
@@ -265,7 +248,7 @@ export default function RecommendedSpots({ spots, isLoading, onSpotSelect, onClo
             variant="outline"
             onClick={onClose}
           >
-            Back to Map
+            Go Back
           </Button>
         </div>
       </CardContent>
