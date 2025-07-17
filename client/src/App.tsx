@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/Header";
 import NotFound from "@/pages/not-found";
@@ -21,9 +21,15 @@ function App() {
 }
 
 function AppContent() {
+  const [location] = useLocation();
+  
+  // Pages where header should be hidden
+  const hideHeaderPages = ['/auth', '/reset-password'];
+  const shouldHideHeader = hideHeaderPages.includes(location);
+
   return (
     <>
-      <Header />
+      {!shouldHideHeader && <Header />}
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/spots" component={Spots} />
