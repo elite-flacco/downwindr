@@ -47,9 +47,9 @@ export class DatabaseStorage implements IStorage {
     this.regions = new Map([
       [
         "caribbean",
-        ["Dominican Republic", "Cuba", "Aruba", "Jamaica", "Puerto Rico"],
+        ["Dominican Republic", "Cuba", "Aruba", "Jamaica", "Puerto Rico", "Caribbean Netherlands"],
       ],
-      ["north-america", ["USA", "Canada", "Mexico"]],
+      ["north-america", ["United States", "Canada", "Mexico"]],
       [
         "south-america",
         ["Brazil", "Venezuela", "Colombia", "Peru", "Chile", "Argentina"],
@@ -71,7 +71,7 @@ export class DatabaseStorage implements IStorage {
       ],
       [
         "africa",
-        ["South Africa", "Morocco", "Egypt", "Tanzania", "Kenya", "Cape Verde"],
+        ["South Africa", "Morocco", "Egypt", "Tanzania", "Kenya", "Cape Verde", "Mauritius"],
       ],
       [
         "asia",
@@ -148,12 +148,31 @@ export class DatabaseStorage implements IStorage {
     // Helper function to determine if a country is in a region
     const isInRegion = (country: string, regionName: string): boolean => {
       const region = this.regions.get(regionName.toLowerCase());
-      return region ? region.includes(country) : false;
+      console.log(`\n=== isInRegion Debug ===`);
+      console.log(`Country: "${country}"`);
+      console.log(`Region: "${regionName}"`);
+      console.log(`Region map lookup: "${regionName.toLowerCase()}"`);
+      console.log(`Found region countries:`, region);
+      const result = region ? region.includes(country) : false;
+      console.log(`Final result: ${result}`);
+      console.log(`========================\n`);
+      return result;
     };
 
     for (const spot of allSpots) {
       let score = 0;
       const reasons: string[] = [];
+
+      // Binary filter for region preference - skip spots outside preferred region
+      if (preferences.preferredRegion !== "any") {
+        const spotInRegion = isInRegion(spot.country, preferences.preferredRegion);
+        console.log(`Checking spot ${spot.name} (${spot.country}) for region ${preferences.preferredRegion}: ${spotInRegion}`);
+        
+        if (!spotInRegion) {
+          console.log(`Skipping ${spot.name} - not in preferred region ${preferences.preferredRegion}`);
+          continue; // Skip this spot entirely if it's not in the preferred region
+        }
+      }
 
       // Get wind conditions for the selected month
       const windCondition = await this.getWindConditionBySpotAndMonth(
@@ -176,8 +195,8 @@ export class DatabaseStorage implements IStorage {
         const distanceFromMid = Math.abs(windCondition.windSpeed - midPoint);
         const percentFromCenter = distanceFromMid / (idealWindRange / 2);
         
-        // Score highest (20) if exactly at midpoint, down to 15 at the edges of the range
-        const windMatchScore = 20 - (5 * percentFromCenter);
+        // Score highest (25) if exactly at midpoint, down to 20 at the edges of the range
+        const windMatchScore = 25 - (5 * percentFromCenter);
         score += windMatchScore;
         
         reasons.push(
@@ -190,9 +209,9 @@ export class DatabaseStorage implements IStorage {
           Math.abs(windCondition.windSpeed - preferences.windSpeedMax)
         );
         
-        // Give partial points for being close (max 10 points if just outside range)
+        // Give partial points for being close (max 12 points if just outside range)
         if (distanceOutside <= 5) {
-          const partialScore = 10 * (1 - (distanceOutside / 5));
+          const partialScore = 12 * (1 - (distanceOutside / 5));
           score += partialScore;
           reasons.push(
             `Wind speed of ${windCondition.windSpeed} knots is close to your preferred range`,
@@ -202,13 +221,13 @@ export class DatabaseStorage implements IStorage {
 
       // Match wind quality with more granularity
       if (windCondition.windQuality === WindQuality.Excellent) {
-        score += 15;
+        score += 20;
         reasons.push(`Excellent wind quality - consistent and ideal`);
       } else if (windCondition.windQuality === WindQuality.Good) {
-        score += 10;
+        score += 15;
         reasons.push(`Good wind quality - reliable for most sessions`);
       } else if (windCondition.windQuality === WindQuality.Moderate) {
-        score += 5;
+        score += 8;
         reasons.push(`Moderate wind quality - may have some variability`);
       } else {
         // Poor wind quality - no points
@@ -235,19 +254,19 @@ export class DatabaseStorage implements IStorage {
           
           // Perfect match - within ideal range +/- 2 degrees
           if (Math.abs(airTemp - preferredAirRange.ideal) <= 2) {
-            tempMatchScore = 8; // Reduced from 15 to account for water temp
+            tempMatchScore = 10;
             tempReason = `${airTemp}°C air temperature is ideal for your '${preferences.temperature}' preference`;
           } 
           // Good match - within the range
           else if (airTemp >= preferredAirRange.min && airTemp <= preferredAirRange.max) {
-            tempMatchScore = 5; // Reduced from 10 to account for water temp
+            tempMatchScore = 7;
             tempReason = `${airTemp}°C air temperature is good for your '${preferences.temperature}' preference`;
           }
           // Close match - within 3 degrees outside the range
           else if (
             airTemp >= preferredAirRange.min - 3 && airTemp <= preferredAirRange.max + 3
           ) {
-            tempMatchScore = 3; // Reduced from 5 to account for water temp
+            tempMatchScore = 3;
             tempReason = `${airTemp}°C air temperature is close to your '${preferences.temperature}' preference`;
           }
           
@@ -278,19 +297,19 @@ export class DatabaseStorage implements IStorage {
           
           // Perfect match - within ideal range +/- 1 degrees
           if (Math.abs(waterTemp - preferredWaterRange.ideal) <= 1) {
-            waterTempMatchScore = 7;
+            waterTempMatchScore = 10;
             waterTempReason = `${waterTemp}°C water temperature is ideal for your '${preferences.waterTemperature}' preference`;
           } 
           // Good match - within the range
           else if (waterTemp >= preferredWaterRange.min && waterTemp <= preferredWaterRange.max) {
-            waterTempMatchScore = 5;
+            waterTempMatchScore = 7;
             waterTempReason = `${waterTemp}°C water temperature is good for your '${preferences.waterTemperature}' preference`;
           }
           // Close match - within 2 degrees outside the range
           else if (
             waterTemp >= preferredWaterRange.min - 2 && waterTemp <= preferredWaterRange.max + 2
           ) {
-            waterTempMatchScore = 2;
+            waterTempMatchScore = 3;
             waterTempReason = `${waterTemp}°C water temperature is close to your '${preferences.waterTemperature}' preference`;
           }
           
@@ -383,14 +402,8 @@ export class DatabaseStorage implements IStorage {
         }
       }
 
-      // Match region preference
-      if (
-        preferences.preferredRegion !== "any" &&
-        isInRegion(spot.country, preferences.preferredRegion)
-      ) {
-        score += 10;
-        reasons.push(`Located in your preferred region (${preferences.preferredRegion})`);
-      }
+      // Region preference is now handled as a binary filter above
+      // All spots at this point are guaranteed to be in the preferred region (or region is "any")
 
       // Match kite schools preference
       if (
@@ -398,25 +411,25 @@ export class DatabaseStorage implements IStorage {
         spot.numberOfSchools &&
         spot.numberOfSchools > 0
       ) {
-        score += 7;
+        score += 5;
         reasons.push(`Has ${spot.numberOfSchools} kite schools`);
       }
 
       // Match wave preference
       if (preferences.preferWaves && spot.waveSize && !spot.waveSize.includes("Flat")) {
-        score += 7;
+        score += 5;
         reasons.push("Offers wave riding conditions");
       }
 
       // Match food options preference
       if (preferences.foodOptions && spot.foodOptions && spot.foodOptions.length > 0) {
-        score += 5;
+        score += 3;
         reasons.push("Good food options available");
       }
 
       // Match cultural experience preference
       if (preferences.culture && spot.culture && spot.culture.length > 10) {
-        score += 5;
+        score += 2;
         reasons.push("Rich cultural experience");
       }
 
