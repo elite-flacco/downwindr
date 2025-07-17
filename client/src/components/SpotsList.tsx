@@ -94,7 +94,7 @@ export default function SpotsList({
                               ) : null
                             })()
                           }
-                          <h3 className="spot-name text-lg font-semibold text-theme-primary">{spot.name}</h3>
+                          <h3 className="spot-name">{spot.name}</h3>
                         </div>
                         <div className="flex items-center gap-2 ml-auto">
                           <Wind className="w-4 h-4 text-theme-primary" />
@@ -112,23 +112,23 @@ export default function SpotsList({
                       <div className="space-y-3">
                         <div className="flex items-center gap-4">
                           <div className="flex items-center gap-2">
-                            <Wind className="w-5 h-5 text-theme-primary" />
-                            <span className="text-sm font-medium text-theme-text-light/90">{spot.windCondition?.windSpeed} knots</span>
+                            <Wind className="w-4 h-4 text-theme-primary" />
+                            <span className="text-xs font-semibold text-theme-text-light/90">{spot.windCondition?.windSpeed} knots</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Waves className="w-5 h-5 text-theme-primary" />
-                            <span className="text-sm font-medium text-theme-text-light/90">{spot.waveSize}</span>
+                            <Waves className="w-4 h-4 text-theme-primary" />
+                            <span className="text-xs font-semibold text-theme-text-light/90">{spot.waveSize}</span>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-4">
                           <div className="flex items-center gap-2">
-                            <Thermometer className="w-5 h-5 text-theme-primary" />
-                            <span className="text-sm font-medium text-theme-text-light/90">{spot.windCondition?.airTemp}°C</span>
+                            <Thermometer className="w-4 h-4 text-theme-primary" />
+                            <span className="text-xs font-semibold text-theme-text-light/90">{spot.windCondition?.airTemp}°C</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Droplets className="w-5 h-5 text-theme-primary" />
-                            <span className="text-sm font-medium text-theme-text-light/90">{spot.windCondition?.waterTemp}°C</span>
+                            <Droplets className="w-4 h-4 text-theme-primary" />
+                            <span className="text-xs font-semibold text-theme-text-light/90">{spot.windCondition?.waterTemp}°C</span>
                           </div>
                         </div>
                       </div>

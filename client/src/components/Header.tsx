@@ -66,10 +66,10 @@ export default function Header() {
               <Wind className="w-6 h-6 text-theme-background " />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-theme-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+              <p className="text-xl font-bold text-theme-primary" style={{ fontFamily: "'Permanent Marker', cursive" }}>
                 Downwindr <span className="inline-block animate-bounce">🏄‍♂️</span>
-              </h1>
-              <p className="text-xs text-theme-text font-medium">Ride the perfect breeze 💨</p>
+              </p>
+              <p className="text-xs text-theme-text font-semibold">Ride the perfect breeze 💨</p>
             </div>
           </motion.div>
         </Link>

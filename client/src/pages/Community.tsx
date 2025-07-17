@@ -43,7 +43,7 @@ export default function Community() {
                   <div className="mx-auto mb-4 p-4 bg-theme-primary/10 rounded-full group-hover:bg-theme-primary/20 transition-colors duration-300">
                     <MessageCircle className="h-8 w-8 text-theme-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <CardTitle className="font-heading text-xl text-theme-primary mb-2">Connect & Share</CardTitle>
+                  <CardTitle className="font-heading mb-2">Connect & Share</CardTitle>
                   <CardDescription className="font-body text-theme-text/80 text-sm leading-relaxed">
                     Discuss gear, techniques, and travel destinations with fellow kiters from around the globe
                   </CardDescription>
@@ -61,7 +61,7 @@ export default function Community() {
                   <div className="mx-auto mb-4 p-4 bg-theme-accent/15 rounded-full group-hover:bg-theme-accent/25 transition-colors duration-300">
                     <Users className="h-8 w-8 text-theme-accent group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <CardTitle className="font-heading text-xl text-theme-accent mb-2">Find Kite Buddies</CardTitle>
+                  <CardTitle className="font-heading mb-2">Find Kite Buddies</CardTitle>
                   <CardDescription className="font-body text-theme-text/80 text-sm leading-relaxed">
                     Connect with local kiters, meet new friends, plan sessions, and explore new spots together
                   </CardDescription>
@@ -79,7 +79,7 @@ export default function Community() {
                   <div className="mx-auto mb-4 p-4 bg-theme-action/15 rounded-full group-hover:bg-theme-action/25 transition-colors duration-300">
                     <Calendar className="h-8 w-8 text-theme-action group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <CardTitle className="font-heading text-xl text-theme-action mb-2">Events & Meetups</CardTitle>
+                  <CardTitle className="font-heading mb-2">Events & Meetups</CardTitle>
                   <CardDescription className="font-body text-theme-text/80 text-sm leading-relaxed">
                     Get notified about local meetups, competitions, and events worldwide
                   </CardDescription>
@@ -96,7 +96,7 @@ export default function Community() {
           >
             <Card className="border-theme-primary/20 shadow-xl bg-gradient-to-br from-white to-theme-surface/30 overflow-hidden">
               <CardHeader className="text-center pb-6 relative">
-                <CardTitle className="font-heading text-xl text-theme-primary mb-4">🌊  Want to ride the wave early?</CardTitle>
+                <CardTitle className="font-heading mb-4">🌊  Want to ride the wave early?</CardTitle>
                 <CardDescription className="font-body text-sm text-theme-text max-w-2xl mx-auto leading-relaxed">
                   Help us shape the future of this community. Share your ideas and get early access.
                 </CardDescription>

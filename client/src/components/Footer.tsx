@@ -50,15 +50,15 @@ export default function Footer() {
             <div className="bg-gradient-to-r from-theme-secondary to-theme-secondary/60 text-theme-background shadow-lg p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 shadow-md">
               <Wind className="w-8 h-8 text-theme-background" />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-theme-primary">Downwindr</h3>
+            <h4 className="mb-4">Downwindr</h4>
             <p className="text-theme-text text-xs mb-4">Discover your dream kitesurfing experience worldwide.</p>
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="mb-6 flex items-center">
+            <h5 className="mb-6 flex items-center">
               <Compass className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Explore
-            </h4>
+            </h5>
             <ul className="space-y-4 font-semibold">
               <li>
                 <Link href="/spots">
@@ -88,10 +88,10 @@ export default function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="mb-6 flex items-center">
+            <h5 className="mb-6 flex items-center">
               <Info className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Resources
-            </h4>
+            </h5>
             <ul className="space-y-4 font-semibold">
               <li>
                 <Link href="/learn">
@@ -109,10 +109,10 @@ export default function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h4 className="mb-6 flex items-center">
+            <h5 className="mb-6 flex items-center">
               <Mail className="w-5 h-5 mr-2 text-theme-primary-hover" />
               Get in Touch
-            </h4>
+            </h5>
             <ul className="space-y-4 font-semibold">
               <li>
                 <motion.div 
@@ -142,7 +142,7 @@ export default function Footer() {
           </motion.div>
         </motion.div>
         
-        <div className="mt-8 pt-8 text-center text-theme-text-light text-sm relative">
+        <div className="mt-2 pt-2 text-center text-theme-text-light text-sm relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-theme-border to-transparent"></div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
