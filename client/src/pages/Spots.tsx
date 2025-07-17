@@ -286,7 +286,7 @@ export default function Spots() {
                   <Search className="h-4 w-4 text-slate-400" />
                 </div>
                 <Input
-                  className="pl-10 pr-4 py-2 h-9 text-sm bg-white border-slate-200 rounded-full shadow-sm hover:shadow-md transition-shadow focus-visible:ring-primary/30 w-full"
+                  className="pl-10 pr-4 py-2 h-9 text-sm bg-white"
                   placeholder="Search spots..."
                   value={searchQuery}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearchChange(e.target.value)}
