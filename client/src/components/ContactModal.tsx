@@ -15,7 +15,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // You can update this logic later
-    console.log('Message submitted:', message);
+    // TODO: Implement actual message submission logic
     onClose();
   };
 
