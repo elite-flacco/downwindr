@@ -1,4 +1,5 @@
 import { Switch, Route, useLocation } from "wouter";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/Header";
 import NotFound from "@/pages/not-found";
@@ -14,9 +15,11 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 

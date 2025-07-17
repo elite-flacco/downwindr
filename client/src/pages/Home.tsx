@@ -1,29 +1,38 @@
+import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
+import Footer from "@/components/Footer";
+import SEOHelmet from "@/components/SEOHelmet";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
-import {
-  Wind,
-  Map,
-  Users,
-  Info,
-  ArrowRight,
-  Sun,
-  Cloud,
-  Waves,
-  Compass,
-  Anchor,
-  ShieldCheck,
-  Star,
-} from "lucide-react";
-import Footer from "@/components/Footer";
-import kitesurfingHeroImage from "@/assets/kitesurfing-hero.jpg";
-import { Button } from "@/components/ui/button";
 
 export default function Home() {
   // We'll use regular Link instead of motion(Link)
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Downwindr",
+    "url": "https://downwindr.com",
+    "description": "Discover the world's best kitesurfing spots with real-time conditions, community reviews, and personalized recommendations.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://downwindr.com/spots?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <SEOHelmet
+        title="Downwindr - Discover the World's Best Kitesurfing Spots"
+        description="Find and explore the best kitesurfing spots worldwide. Get real-time wind conditions, community reviews, and personalized recommendations for your perfect kiting adventure."
+        keywords="kitesurfing spots, kiteboarding locations, wind conditions, kite surfing, water sports, surf spots, travel, adventure sports"
+        ogTitle="Downwindr - Your Guide to the World's Best Kitesurfing Spots"
+        ogDescription="Join thousands of kiters discovering amazing spots worldwide. Get real-time conditions, read community reviews, and find your perfect kiting destination."
+        structuredData={structuredData}
+      />
       <main className="flex-grow">
         {/* Hero Section with kitesurfing image as full background */}
         <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden min-h-[80vh] flex items-center">

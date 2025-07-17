@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import SEOHelmet from "@/components/SEOHelmet";
 import VideoFilters from "@/components/VideoFilters";
 import VideoPlayer from "@/components/VideoPlayer";
 import { learnVideos } from "@/data/learnVideos";
@@ -52,8 +53,33 @@ export default function Learn() {
     };
   }, []);
 
+  const learnStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Downwindr Learn",
+    "description": "Comprehensive kitesurfing education with video tutorials, techniques, and tips for all skill levels.",
+    "url": "https://downwindr.com/learn",
+    "offers": {
+      "@type": "Course",
+      "name": "Kitesurfing Video Tutorials",
+      "description": "Learn kitesurfing through comprehensive video tutorials covering basics to advanced techniques.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Downwindr"
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <SEOHelmet
+        title="Learn Kitesurfing - Video Tutorials & Techniques | Downwindr"
+        description="Master kitesurfing with our comprehensive video tutorials. Learn techniques, safety, and tips from beginner to advanced levels."
+        keywords="kitesurfing lessons, kiteboarding tutorials, learn kitesurfing, kite surfing techniques, water sports education, kitesurfing safety"
+        ogTitle="Learn Kitesurfing Online | Downwindr"
+        ogDescription="Comprehensive kitesurfing education with video tutorials, techniques, and safety tips for all skill levels."
+        structuredData={learnStructuredData}
+      />
       <main className="container mx-auto px-4 py-8 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
