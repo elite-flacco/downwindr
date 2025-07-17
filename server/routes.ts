@@ -559,7 +559,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get recent reviews from all users for community page
   app.get("/api/reviews/recent", async (req, res) => {
     try {
-      const limit = parseInt(req.query.limit as string) || 20;
+      const limitParam = req.query.limit as string;
+      const limit = limitParam ? parseInt(limitParam) : undefined;
       const reviews = await storage.getRecentReviews(limit);
       res.json(reviews);
     } catch (error) {
