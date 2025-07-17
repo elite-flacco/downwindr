@@ -711,6 +711,54 @@ export class DatabaseStorage implements IStorage {
     }));
   }
 
+  async getRecentReviews(limit: number = 20): Promise<ReviewWithUser[]> {
+    const reviewsWithDetails = await db
+      .select({
+        review: reviews,
+        user: {
+          id: users.id,
+          username: users.username,
+          displayName: users.displayName,
+          avatarUrl: users.avatarUrl,
+          experience: users.experience,
+        },
+        spot: spots,
+      })
+      .from(reviews)
+      .innerJoin(users, eq(reviews.userId, users.id))
+      .innerJoin(spots, eq(reviews.spotId, spots.id))
+      .orderBy(desc(reviews.createdAt))
+      .limit(limit);
+
+    return reviewsWithDetails.map(({ review, user, spot }) => ({
+      ...review,
+      user,
+      spot,
+    }));
+  }
+
+  async getTopContributors(limit: number = 5): Promise<{ user: any; reviewCount: number }[]> {
+    const contributorsWithCounts = await db
+      .select({
+        user: {
+          id: users.id,
+          username: users.username,
+          displayName: users.displayName,
+          avatarUrl: users.avatarUrl,
+          experience: users.experience,
+        },
+        reviewCount: sql<number>`cast(count(${reviews.id}) as integer)`,
+      })
+      .from(users)
+      .leftJoin(reviews, eq(users.id, reviews.userId))
+      .groupBy(users.id)
+      .having(sql`count(${reviews.id}) > 0`)
+      .orderBy(desc(sql`count(${reviews.id})`))
+      .limit(limit);
+
+    return contributorsWithCounts;
+  }
+
   async getReviewByUserAndSpot(
     userId: string,
     spotId: number
