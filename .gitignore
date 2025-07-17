@@ -8,3 +8,6 @@ vite.config.ts.*
 .env.local
 .env.*.local
 public/uploads
+
+# Claude AI settings
+.claude/
