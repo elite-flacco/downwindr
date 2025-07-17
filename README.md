@@ -27,9 +27,8 @@ A kitesurfing community platform that helps kitesurfers discover the best spots,
 - **Node.js** with Express
 - **TypeScript**
 - **PostgreSQL** with Drizzle ORM
-- **Passport.js** for authentication
-- **Supabase** for database and storage
-- **Session-based authentication**
+- **Supabase** for authentication and database
+- **WebSocket** for real-time features
 
 ## Getting Started
 
@@ -59,7 +58,11 @@ cp server/.env.example server/.env
 
 4. Set up the database:
 ```bash
-npm run db:push
+# Initialize database tables
+psql -d your_database -f server/scripts/init-db.sql
+
+# Or reset if needed
+psql -d your_database -f server/scripts/reset-db.sql
 ```
 
 ### Development
@@ -91,7 +94,7 @@ npm start
 - `npm run check` - Type check with TypeScript
 - `npm run lint` - Lint code with ESLint
 - `npm run preview` - Preview production build
-- `npm run db:push` - Push database schema changes
+- `npm run db:reset` - Reset database (if script exists)
 
 ## Project Structure
 
@@ -105,13 +108,17 @@ downwindr/
 │   │   ├── lib/           # Utility functions
 │   │   └── data/          # Static data and types
 ├── server/                # Backend Express application
-│   ├── auth.ts           # Authentication logic
-│   ├── db.ts             # Database connection
-│   ├── routes.ts         # API routes
-│   └── index.ts          # Server entry point
-├── shared/               # Shared types and schemas
-├── migrations/           # Database migrations
-└── public/              # Static assets
+│   ├── migrations/       # Database migrations
+│   ├── scripts/         # Database setup and maintenance scripts
+│   ├── data/            # Seed data
+│   ├── auth.ts          # Authentication logic
+│   ├── db.ts            # Database connection
+│   ├── routes.ts        # API routes
+│   ├── storage.ts       # Database storage interface
+│   ├── database-storage.ts # Database implementation
+│   └── index.ts         # Server entry point
+├── shared/              # Shared types and schemas
+└── public/             # Static assets
 ```
 
 ## Contributing
