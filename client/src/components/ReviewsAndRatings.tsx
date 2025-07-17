@@ -443,7 +443,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
               </CardContent>
             </Card>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
               {spotDetails.reviews.map((review, index) => (
                 <Card key={review.id} className="overflow-hidden">
                   <CardHeader className="pb-3">
@@ -460,7 +460,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
                         </Avatar>
                         <div>
                           <div className="font-semibold leading-none">
-                            {review.user.displayName || review.user.username}
+                            {review.user.displayName && review.user.displayName !== 'New User' ? review.user.displayName : review.user.username}
                           </div>
                           <div className="text-sm text-muted-foreground">
                             {review.user.experience && (
