@@ -105,7 +105,7 @@ export default function Learn() {
                 <div className="bg-gradient-to-r from-theme-surface/30 to-theme-surface/60 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                   <PlayCircle className="h-8 w-8 text-theme-text-light" />
                 </div>
-                <h3 className="text-xl font-semibold text-theme-text mb-2">No videos found</h3>
+                <h3 className="mb-2">No videos found</h3>
                 <p className="text-theme-text-light mb-6">Try adjusting your filters or search terms to find the perfect learning content.</p>
                 <button
                   onClick={() => {

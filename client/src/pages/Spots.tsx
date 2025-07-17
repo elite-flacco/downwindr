@@ -225,7 +225,7 @@ export default function Spots() {
           <div className="flex items-center justify-between mb-2 pt-2">
             <div>
               <h3 className="mb-3 flex items-center gap-2">
-                <Search className="h-6 w-6 md:h-8 md:w-8 text-theme-primary"/>
+                <Search className="h-4 w-4 md:h-6 md:w-6 text-theme-primary"/>
                 Find your dream spots</h3>
             </div>
             {/* Map/List View Toggle */}

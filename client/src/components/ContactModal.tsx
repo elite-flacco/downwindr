@@ -43,7 +43,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <Card className="shadow-xl border-theme-primary/20">
               <CardHeader className="text-center pb-4">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="font-heading text-lg text-theme-primary flex items-center gap-2">
+                  <CardTitle className="font-heading flex items-center gap-2">
                     💌 Get in Touch
                   </CardTitle>
                   <Button
