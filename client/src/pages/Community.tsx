@@ -12,6 +12,7 @@ import { Link } from "wouter";
 import { useAuth } from "@/contexts/AuthContext";
 import Footer from "@/components/Footer";
 import { apiRequest } from "@/lib/queryClient";
+import { getCountryFlag } from "@/lib/countryUtils";
 
 type ReviewWithUser = {
   id: number;
@@ -41,8 +42,9 @@ export default function Community() {
   const { data: recentReviews, isLoading } = useQuery({
     queryKey: ['recent-reviews'],
     queryFn: async () => {
-      const response = await apiRequest('/api/reviews/recent?limit=10');
-      return response as ReviewWithUser[];
+      const response = await apiRequest('GET', '/api/reviews/recent?limit=10');
+      const data = await response.json();
+      return data as ReviewWithUser[];
     }
   });
 
@@ -151,7 +153,16 @@ export default function Community() {
                               <MapPin className="w-4 h-4" />
                               <span className="font-medium">{review.spot.name}</span>
                             </div>
-                            <div className="text-xs text-muted-foreground">{review.spot.country}</div>
+                            <div className="flex items-center justify-end gap-1 text-xs text-muted-foreground">
+                              <span>{review.spot.country}</span>
+                              {getCountryFlag(review.spot.country) && (
+                                <img 
+                                  src={getCountryFlag(review.spot.country)?.url} 
+                                  alt={`${review.spot.country} flag`}
+                                  className="w-4 h-3 object-cover rounded-sm"
+                                />
+                              )}
+                            </div>
                           </div>
                         </div>
                       </CardHeader>
