@@ -59,13 +59,13 @@ export default function AuthPage() {
           
           {/* Clean content */}
           <div className="relative z-10 text-center text-white px-12">
-            <h2 className="text-3xl font-light mb-6 leading-relaxed">
-              <span className="text-white">Discover the world's best</span>
-              <span className="block font-bold text-theme-primary mt-[-0.25rem]">
+            <h2 className="leading-relaxed">
+              <span className="text-white font-bold">Discover the world's best</span>
+              <span className="block font-bold text-theme-accent mt-[-0.25rem]">
                 kitesurfing spots
               </span>
             </h2>
-            <p className="text-blue-100 max-w-md mx-auto leading-relaxed">
+            <p className="text-white max-w-md mx-auto leading-relaxed mt-4">
               Join our community to find epic spots, share experiences, 
               and get personalized recommendations.
             </p>

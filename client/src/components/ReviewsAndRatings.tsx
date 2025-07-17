@@ -660,7 +660,7 @@ export default function ReviewsAndRatings({ spotId }: { spotId: number }) {
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center">
           <div className="bg-background border rounded-lg shadow-lg max-w-md w-full p-6 space-y-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-semibold">Write Your Review</h3>
+              <h5>Write Your Review</h5>
               <Button 
                 variant="ghost" 
                 size="sm" 

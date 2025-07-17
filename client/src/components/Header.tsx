@@ -178,7 +178,7 @@ export default function Header() {
             <Link href="/auth">
               <Button 
                 variant="action" 
-                className="flex items-center gap-2 px-6 py-2 relative overflow-hidden group wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent_70%)]"
+                className="flex items-center gap-2 px-2 py-2 relative overflow-hidden group wind-gust relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent_70%)]"
                 size="sm"
               >
                 <LogIn className="h-4 w-4 relative z-10" />
